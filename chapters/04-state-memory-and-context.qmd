@@ -56,6 +56,20 @@ In the triage case study, the same file content has multiple roles. As a tool re
 
 The system gets cleaner when each role is explicit. The file content does not magically become memory just because the runtime read it.
 
+## Durable State vs Runtime State
+
+Durable state survives the run. Runtime state exists only while the run executes. Confusing them creates failure modes. If a model summary is stored as durable memory without provenance, future runs may treat it as fact. If a trace is lost after a run, incident review becomes weaker. If prompt context is the only place evidence exists, the system cannot be audited after completion.
+
+In this repo, durable artifacts include sample reports, fixture files, tests, and committed source. Runtime artifacts include generated traces and local report outputs. The distinction is visible in `.gitignore`: traces are generated, while sample reports are committed. That split is a design choice. It keeps volatile run evidence out of version control while preserving stable examples.
+
+Production systems need a more mature version of the same distinction. Some traces should be retained. Some tool outputs should be redacted. Some summaries should be durable only after validation. Some memory should expire. The exact policy depends on the domain, but the categories are general.
+
+## Context Selection Policy
+
+Context selection should be explicit enough to test. A policy might say: include system instructions, include tool schemas, include the user task, include at most five evidence snippets, include no raw log file above a threshold, and include summaries only if they cite source IDs.
+
+The local repo does not implement a full prompt assembler, but the `ContextTracker` points in that direction. It gives every segment a name and a cacheability flag. That is the minimum structure needed to ask whether context is growing safely.
+
 ## The Lab
 
 ```bash

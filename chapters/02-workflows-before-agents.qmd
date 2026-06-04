@@ -68,6 +68,22 @@ For `buggy_calc`, the deterministic workflow does not need to "understand" the r
 
 That baseline gives the agent chapter a concrete question: can an agent-shaped runtime turn the same evidence into a structured diagnosis without losing traceability?
 
+## Designing the Baseline Artifact
+
+A useful workflow baseline should return structured output, even if that structure is simple. In this repo, the baseline returns file names and grep matches. That is enough to compare against the agent. A richer production baseline might return ranked files, candidate evidence spans, or known-error signatures.
+
+The baseline should also be cheap to run. If the baseline takes longer than the agent, costs more than the agent, or requires more operational complexity, it may not be a useful control. The local workflow is deliberately simple: one file listing and one grep. Its purpose is to make the evidence surface explicit, not to solve every triage problem.
+
+When adapting this pattern, define the baseline artifact before writing the agent prompt. For a customer-support agent, the baseline might retrieve relevant knowledge-base articles and return their IDs. For a data-analysis agent, it might validate schema and compute summary statistics. For an infrastructure agent, it might collect logs and metrics without proposing remediation.
+
+The agent then has to justify itself. It should improve diagnosis, prioritization, summarization, or decision quality in a way that can be measured against the baseline.
+
+## Anti-Pattern: Autonomy as a Requirement Shortcut
+
+An agent is sometimes introduced because the product requirement is vague: "look around and figure it out." That can be valid when the task genuinely involves open-ended investigation. It can also be a sign that the system boundary has not been designed.
+
+Before accepting such a requirement, ask what a competent human would inspect first. If the answer is stable, encode that as a workflow. If the answer depends on observations, encode the decision points and trace them. The goal is not to eliminate agent behavior; the goal is to know where it starts.
+
 ## The Lab
 
 ```bash

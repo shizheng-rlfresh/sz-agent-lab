@@ -67,6 +67,27 @@ On `buggy_calc`, the agent reads the same evidence surfaced by the workflow and 
 
 The case study remains deterministic because the book is still teaching runtime shape. Once the runtime is solid, a model can be introduced as one replaceable decision component.
 
+## Failure Result Design
+
+The current schema assumes the agent returns at least one finding. A production version should also define failure results. Examples:
+
+- no files visible under policy,
+- expected files missing,
+- output cap prevented diagnosis,
+- policy violation blocked required evidence,
+- diagnosis confidence below threshold,
+- schema validation failed.
+
+Those conditions should not be collapsed into vague prose. They should be structured because they drive different actions. Missing files may indicate the wrong repository path. Output caps may indicate the need for summarization. Low confidence may require human review. Schema failure may indicate a prompt or model issue.
+
+Adding explicit failure results is one of the easiest ways to make an agentic runtime more supportable.
+
+## Confidence and Calibration
+
+The deterministic agent returns a confidence value, but the value is a rule confidence, not a calibrated probability. That distinction matters. A model-backed agent may output confidence text that feels precise but has not been calibrated against observed outcomes.
+
+For this lab, confidence is used only as a structured field. It should not be interpreted as a reliable probability. A production version would need calibration data or would need to replace confidence with more concrete status fields such as `requires_human_review`, `evidence_complete`, or `diagnosis_blocked`.
+
 ## The Lab
 
 ```bash

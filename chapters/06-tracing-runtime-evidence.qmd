@@ -51,6 +51,14 @@ If the trace cannot answer those questions, add fields before the next incident.
 
 The `buggy_calc` trace proves that the agent inspected `calculator.py` and `test_calculator.py` through policy-controlled tools. The trace does not prove the diagnosis is correct; the eval handles a different slice of evidence. This separation is useful. Trace answers "what happened?" Eval answers "did the observed behavior satisfy the check?"
 
+## Trace Anti-Patterns
+
+Avoid traces that are merely transcripts in JSON. A useful trace should not only record model messages. It should record tool calls, policy checks, context size, failures, retries, and output validation. Otherwise the trace recreates the weakness of the transcript.
+
+Also avoid traces that are too noisy to inspect. If every internal helper call becomes an event, the signal can disappear. The event set should be chosen around review questions. For this repo, the review questions are: what did the agent start with, what policy applied, what tools ran, what context was observed, and how did the run finish?
+
+As systems mature, trace granularity can increase. The first requirement is not completeness in the abstract. It is enough evidence for the failures you expect to debug.
+
 ## The Lab
 
 ```bash

@@ -54,6 +54,25 @@ The tool contract should make those abuse cases testable. A test should fail whe
 
 The repo triage system only needs read tools. That design choice removes whole classes of risk from the first version. There is no `write_file`, no `delete_file`, no shell, and no network call. That constraint may look limiting, but it clarifies the lesson: once read-only tools are safe and observable, mutation can be designed deliberately instead of accidentally.
 
+## Tool Output as an API
+
+Tool output is an API to the runtime and, in model-backed systems, to the model. That means output shape matters. `grep` returns file name, line number, and line text rather than a formatted blob. `list_files` returns relative paths rather than absolute local paths. `read_file` returns capped text with a truncation marker. These choices make downstream behavior easier to test.
+
+Production tools should be equally intentional. A database query tool should not return arbitrary raw tables if the agent only needs a few fields. A ticket-search tool should include source IDs and confidence metadata. A log-search tool should include time ranges and truncation status. A browser tool should separate visible text from hidden markup. The more structured the output, the easier it is to trace, evaluate, and summarize.
+
+This does not mean every tool needs a heavy schema framework. It means the output should be designed, not improvised.
+
+## Mutating Tools
+
+The core repo omits mutating tools, but a real agentic system often needs them. The moment a tool can mutate state, the design bar rises. You need authorization, dry-run behavior, idempotence, confirmation, rollback, and audit logs. You also need a way to distinguish proposal from execution.
+
+A useful pattern is two-phase operation:
+
+1. produce a proposed action,
+2. require an approval or deterministic validator before execution.
+
+For example, a repo agent might propose a patch but not apply it. A deployment agent might propose a rollback but require human approval. A support agent might draft a reply but not send it. The runtime can still be agentic while the dangerous side effect remains gated.
+
 ## The Lab
 
 ```bash

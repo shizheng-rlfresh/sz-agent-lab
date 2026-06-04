@@ -60,6 +60,18 @@ For production, add links rather than copying everything. Link to raw traces, ev
 
 The sample production report is deliberately not all green. The evals pass, but the report still requires human review because large dynamic context appears. That is the desired lesson. Production evidence should be capable of saying, "the task succeeded, but rollout still needs review."
 
+## Report Status Vocabulary
+
+A report should avoid vague labels. Useful statuses include:
+
+- `passed`: all required gates passed,
+- `human_review_required`: no automatic approval because a warning exceeded threshold,
+- `blocked`: a release gate failed,
+- `not_evaluated`: required evidence is missing,
+- `invalid`: the report itself could not be generated reliably.
+
+The local report currently uses human-review language rather than a formal enum. A production version should make the status machine explicit. The status should be machine-readable, but the report should also explain why.
+
 ## The Lab
 
 ```bash

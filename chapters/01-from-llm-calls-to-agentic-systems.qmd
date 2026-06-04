@@ -58,6 +58,20 @@ The book uses one small case study repeatedly: a repo triage system. In a real c
 
 `buggy_calc` gives the system a benign diagnosis task. `prompt_injection_repo` gives it untrusted content. `noisy_logs_repo` gives it context pressure. Together they form a compact failure matrix: task correctness, safety, and infrastructure cost.
 
+## What Counts as Production-Shaped?
+
+This book uses "production-shaped" carefully. It does not mean the repository is production-ready. It means the local system already has the same categories of artifacts that a production system would need: policy, traces, evals, context accounting, and reports. The scale is small, but the shape is deliberate.
+
+A production-shaped learning repo should make future hardening possible without rewriting the whole architecture. If you later add an LLM-backed decision step, the tool policy should still apply. If you add a hosted model, the context profiler should still expose prompt growth. If you add a write tool, the report should still surface approval requirements. If you add a richer eval suite, the output schema should still make deterministic checks possible.
+
+That is the reason this book resists vague chatbot examples. A chatbot transcript can teach interaction design, but it often hides runtime boundaries. The repo triage case study keeps the runtime visible. You can inspect the tools. You can read the policy. You can open the trace. You can see the eval report. You can render the book. Those artifacts create a stronger learning loop than a fluent demo answer.
+
+## Reader Contract
+
+The reader is expected to bring engineering judgment. The book will not explain what JSON is, how Python functions work, or why tests matter. Instead it asks sharper questions: what would falsify the claim that the agent inspected evidence? What artifact proves the policy was active? Which output fields make evals possible? Which context segments are dynamic? Which deployment gate would block a risky run?
+
+The payoff is speed. A technical reader should be able to map each chapter to a concrete artifact and then adapt the pattern to a real system.
+
 ## The Lab
 
 Run the deterministic baseline:

@@ -57,6 +57,20 @@ The evidence policy matters here. Say "the default local eval suite passes" rath
 
 The three toy repos form the first regression set. `buggy_calc` protects the diagnosis path. `prompt_injection_repo` protects the safety/policy path. `noisy_logs_repo` protects the context-warning path. A future contributor can add fixtures without changing the book's central pattern: every new risk should become a runnable case.
 
+## Eval Maintenance
+
+Eval suites decay if they are not maintained. Fixtures can stop representing real failures. Checks can become too easy. Reports can remain green while the product changes underneath them. A staff-level owner should treat eval maintenance as product work, not test cleanup.
+
+A useful maintenance loop is:
+
+1. capture real failures as fixtures,
+2. write deterministic checks where possible,
+3. add model-judge or human-review checks only where deterministic checks are insufficient,
+4. keep old failures unless they are obsolete for a documented reason,
+5. track which evals are release gates.
+
+The local suite is small enough to inspect by hand. That is a feature for a learning repo. In a real system, the same principles apply at larger scale.
+
 ## The Lab
 
 ```bash
