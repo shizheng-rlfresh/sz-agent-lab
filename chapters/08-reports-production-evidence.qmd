@@ -22,6 +22,34 @@ The report generator summarizes:
 
 The recommendation is intentionally conservative: a large dynamic output can require human review even when evals pass.
 
+## What a Report Proves
+
+The sample report proves only what it summarizes:
+
+- a trace was available,
+- the run had a fixed event count,
+- the eval suite passed,
+- no policy violations were recorded,
+- context growth included a large dynamic output,
+- the deployment recommendation required review.
+
+It does not prove that the system is production-ready. It does not prove model quality. It does not prove security. It is a structured piece of evidence that a reviewer can inspect.
+
+That distinction is important. Evidence artifacts should reduce ambiguity, not become slogans.
+
+## Review Workflow
+
+A staff-level review can use the report as an entry point:
+
+1. Check deployment recommendation.
+2. Inspect failed evals or review-required warnings.
+3. Open the trace if event counts look suspicious.
+4. Inspect policy warnings.
+5. Inspect context growth and large outputs.
+6. Decide whether the gate blocks, requires approval, or allows rollout.
+
+The report should not hide raw artifacts. It should point to them.
+
 ## The Lab
 
 ```bash
@@ -43,6 +71,8 @@ If a team only stores raw traces, reviewers have to manually reconstruct the run
 ## Production Translation
 
 Reports can become pull-request comments, release artifacts, incident attachments, or deployment gates. In production, the report should link to raw traces and preserve enough metadata to reproduce the run.
+
+A mature version would include run environment, code version, model version, policy version, eval suite version, and artifact hashes. Those are omitted here to keep the lab inspectable, but they are necessary for serious release review.
 
 ## Evidence and References
 

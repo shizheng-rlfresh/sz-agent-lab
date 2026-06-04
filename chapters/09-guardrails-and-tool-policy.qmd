@@ -21,6 +21,20 @@ Prompt instructions are not a capability boundary. If a tool can read arbitrary 
 
 Policy is checked before tools access files or shell-like capabilities.
 
+## Prompt Guardrails vs Runtime Guardrails
+
+Prompt guardrails can be useful. They can state intent, label tool output, and remind the model of constraints. But they are not sufficient for capability control. Runtime guardrails decide what the process can actually do.
+
+In this repo, the model is absent from the core path, so the distinction is visible. A path outside the allowed root fails because `resolve_path` rejects it. Shell execution fails because `check_shell` rejects it. Those outcomes do not depend on model cooperation.
+
+The design principle is simple: use prompts to guide behavior, but use code to enforce boundaries.
+
+## Policy as Audit Evidence
+
+The policy is logged in the trace with `policy_check`. That makes the run reviewable. If a future run allowed shell execution, the trace would show a different policy. If a path traversal was attempted, the policy would record a violation.
+
+Policy evidence is especially important when capabilities change over time. A production incident review needs to know not only what the agent did, but what it was allowed to do at the time.
+
 ## The Lab
 
 ```bash
@@ -42,6 +56,8 @@ If path checks are only prompt instructions, malicious or confused model behavio
 ## Production Translation
 
 Production guardrails should include policy enforcement, not just model instructions. Risky tools need explicit approval semantics, audit logs, and narrower capability scopes.
+
+Approval is not binary. A low-risk read may be automatic. A write may require user confirmation. A delete may require maintainer approval. A network call may require tenant-aware egress policy. The local policy schema is small, but it is designed so those distinctions can be added rather than bolted on later.
 
 ## Evidence and References
 

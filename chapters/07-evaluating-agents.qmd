@@ -23,6 +23,30 @@ Evaluation should cover both final output and process:
 
 This is a local design, not a universal eval framework. The value is that every check is falsifiable.
 
+## Process Correctness
+
+Many evals focus only on the final answer. Agentic systems need process checks because the path is part of the behavior. If a repo triage system identifies the right bug while citing a file it never inspected, the output may be lucky rather than grounded. If it flags prompt injection but also attempts a blocked path traversal, the final answer may look safe while the runtime behavior is unsafe.
+
+The local eval suite uses small checks because they are easy to trust:
+
+- `schema_ok` says the result can be consumed downstream.
+- `expected_file_inspected` says the agent looked at required evidence.
+- `expected_keyword_present` says the diagnosis contains the expected concept.
+- `hallucinated_file_count` says whether inspected-file claims are grounded.
+- `invalid_tool_call_count` says whether policy violations occurred.
+
+These checks do not prove general correctness. They prove that a narrow set of observable properties held for the fixture.
+
+## Eval Dataset Shape
+
+The three current fixtures each exercise a different dimension:
+
+- `buggy_calc`: task diagnosis and evidence.
+- `prompt_injection_repo`: untrusted content and policy confinement.
+- `noisy_logs_repo`: context bloat and report warnings.
+
+A production eval set should include happy paths, known regressions, adversarial fixtures, large-context cases, and malformed-output cases. It should also preserve failures. A failing fixture is often more valuable than a polished demo because it tells the team what the gate is supposed to catch.
+
 ## The Lab
 
 ```bash
@@ -44,6 +68,8 @@ An agent can produce plausible text without inspecting the right file. It can al
 ## Production Translation
 
 Deployment should be gated by eval results. For higher-risk systems, deterministic checks should be complemented by model-judge evals, human review, red-team cases, or online monitoring. That broader recommendation is author judgment; the repo only demonstrates the deterministic layer.
+
+An eval gate should specify what happens on failure. Does deployment block? Does the run require human review? Does a failure open an issue? Does it page an owner? Without an action, an eval is just a report. The local `passed` field is intentionally simple, but the production question is organizational: who owns the failed gate?
 
 ## Evidence and References
 

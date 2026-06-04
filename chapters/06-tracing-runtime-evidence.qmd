@@ -21,6 +21,26 @@ This repo uses JSONL events rather than a full tracing backend. The point is to 
 
 Each event has a `run_id` and timestamp. Tool calls also record latency and success.
 
+## Transcript vs Trace
+
+A transcript is optimized for human conversation. A trace is optimized for reconstruction. If the final answer says "the bug is in `calculator.py`," the trace should show whether `calculator.py` was read, whether the read succeeded, how much content was observed, and whether any policy warnings occurred.
+
+This difference matters when multiple explanations are plausible. Suppose the agent misses a bug. Did it fail because the file was absent? Did `list_files` hide it? Did the file read fail? Did context caps truncate the relevant line? Did the diagnosis rule fail after observing the right evidence? A transcript usually cannot answer those questions. A trace can if the runtime records the right events.
+
+The local trace is intentionally not a distributed tracing system. It has no service graph, sampling policy, baggage, or backend exporter. But it still teaches the central habit: record the path, not just the conclusion.
+
+## Trace Review Procedure
+
+For each agent run, inspect:
+
+1. `agent_start`: Was the task and target repository correct?
+2. `policy_check`: What was the runtime allowed to do?
+3. `tool_call`: Which tools ran, with which arguments, and did they succeed?
+4. `context_observation`: Which outputs entered the context budget?
+5. `agent_finish`: Did the runtime finish normally?
+
+Then compare the trace to the eval result. A passing eval with a bad trace can still indicate risk. A failing eval with a good trace can identify a diagnosis or output-schema problem.
+
 ## The Lab
 
 ```bash
@@ -43,6 +63,8 @@ Without traces, failures become anecdotal. A team cannot distinguish "the model 
 ## Production Translation
 
 Production systems need telemetry that can be inspected during development and incident response. This lab does not claim its JSONL format is enough for every deployment; it is the minimal local artifact that teaches the contract.
+
+In production, trace retention and privacy become first-class concerns. Tool arguments may contain internal paths, customer identifiers, or secrets. Tool outputs may contain proprietary code or user data. A trace strategy therefore needs redaction, retention windows, access controls, and incident procedures. The local repo does not implement those controls; it makes the evidence surface explicit so those questions can be asked.
 
 ## Evidence and References
 
