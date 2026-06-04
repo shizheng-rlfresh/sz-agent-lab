@@ -49,3 +49,7 @@ format:
     theme: cosmo
     toc: true
     number-sections: true
+  pdf:
+    toc: true
+    number-sections: true
+    pdf-engine: xelatex

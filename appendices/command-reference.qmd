@@ -5,18 +5,37 @@
 ```bash
 pytest
 python scripts/run_all_examples.py
-quarto render
+make html
+make pdf
 ```
 
-Run these commands in this order when preparing a release or publishing a rendered version of the book. `pytest` should fail fast on broken runtime behavior. `python scripts/run_all_examples.py` should then prove that deterministic examples still produce trace, eval, and report artifacts. `quarto render` should run last because manuscript rendering depends on the files and references that the implementation describes.
+Run these commands in this order when preparing a release or publishing rendered versions of the book. `pytest` should fail fast on broken runtime behavior. `python scripts/run_all_examples.py` should then prove that deterministic examples still produce trace, eval, and report artifacts. `make html` and `make pdf` should run last because manuscript rendering depends on the files and references that the implementation describes.
 
 With the local virtual environment used during development:
 
 ```bash
 .venv/bin/pytest
 .venv/bin/python scripts/run_all_examples.py
-quarto render
+make html
+make pdf
 ```
+
+## Book Build Commands
+
+```bash
+make html
+make pdf
+make book
+make check
+```
+
+`make html` runs `quarto render --to html --no-clean` and produces `_book/index.html`.
+
+`make pdf` runs `quarto render --to pdf --no-clean` and produces `_book/Agentic-Systems-Lab.pdf`. PDF rendering uses Quarto's native PDF/LaTeX pipeline and requires a working PDF toolchain such as TinyTeX.
+
+`make book` renders both HTML and PDF.
+
+`make check` runs tests, deterministic examples, and both book renders.
 
 ## Module Commands
 
@@ -64,6 +83,7 @@ The examples are deliberately deterministic. If an example begins depending on c
 - `reports/sample_eval_report.md`
 - `reports/sample_production_report.md`
 - `_book/index.html`
+- `_book/Agentic-Systems-Lab.pdf`
 
 Generated artifacts fall into two categories. Runtime artifacts such as traces can contain local latency or timestamps, but committed sample reports should be stable. Book artifacts under `_book/` prove renderability but are not the source manuscript. When a generated artifact changes unexpectedly, ask which category it belongs to before deciding whether to commit it.
 
@@ -87,7 +107,8 @@ The repository's final acceptance path should run:
 ```bash
 pytest
 python scripts/run_all_examples.py
-quarto render
+make html
+make pdf
 ```
 
 If `python` is not available globally, create and activate a virtual environment first, or use the `.venv/bin/python` form shown above. The command reference describes intended commands; the exact executable path can differ by environment.
@@ -98,7 +119,7 @@ If `python` is not available globally, create and activate a virtual environment
 
 `python scripts/run_all_examples.py` proves the deterministic lab path still runs and regenerates core reports. It does not prove optional MLX behavior.
 
-`quarto render` proves the book builds. It does not prove every claim is sufficiently sourced.
+`make html` proves the HTML book builds. `make pdf` proves the PDF book builds through Quarto's PDF toolchain. Neither command proves every claim is sufficiently sourced.
 
 Use all three together. Treat them as different evidence types.
 
@@ -108,7 +129,7 @@ When a command fails, diagnose by artifact boundary rather than by guessing:
 
 - If `pytest` fails, inspect the smallest failing test first. A manuscript change should rarely break tests; a code or sample-artifact change might.
 - If `python scripts/run_all_examples.py` fails, identify whether the failure is in a fixture, trace path, eval, or report generation. Re-run with `--example` when available.
-- If `quarto render` fails, inspect the first `.qmd` file named in the render log. Common failures are malformed fenced code blocks, broken citation keys, or invalid Quarto structure.
+- If `make html` or `make pdf` fails, inspect the first `.qmd` file named in the render log. Common failures are malformed fenced code blocks, broken citation keys, invalid Quarto structure, or missing PDF toolchain dependencies.
 - If a module command fails but the full example runner passes, check whether the module's `main()` function has diverged from reusable library code.
 - If committed reports churn after a runtime change, separate deterministic fields from runtime-local fields such as timestamps and latency.
 
@@ -123,8 +144,9 @@ Do not paper over a failed command by editing expected output first. The correct
 | `pytest` fails in `test_tracer.py` | trace schema | inspect event names, required fields, JSONL writing, and summary counts |
 | `pytest` fails in `test_evals.py` | eval contract | inspect expected files, keywords, allowed files, and invalid tool counts |
 | sample report changed unexpectedly | report determinism | inspect runtime-local fields, ordering, warning logic, and fixture output |
-| `quarto render` fails on citation | reference discipline | inspect `references.bib` keys and chapter citation syntax |
-| `quarto render` fails on structure | manuscript syntax | inspect the first failing `.qmd` and nearby fenced blocks or headings |
+| `make html` fails on citation | reference discipline | inspect `references.bib` keys and chapter citation syntax |
+| `make html` fails on structure | manuscript syntax | inspect the first failing `.qmd` and nearby fenced blocks or headings |
+| `make pdf` fails on toolchain | PDF dependency | inspect Quarto/TinyTeX availability and missing LaTeX package messages |
 | `run_all_examples.py` fails | artifact pipeline | isolate with `--example`, then inspect fixture, trace, eval, or report stage |
 
 Use the matrix as a routing table, not a substitute for debugging. It helps you start at the right boundary. Once you identify the boundary, prefer the smallest focused command that reproduces the issue.
@@ -137,7 +159,7 @@ When implementation behavior changes, regenerate artifacts in this order:
 2. Run the affected module command.
 3. Run `python scripts/run_all_examples.py`.
 4. Inspect report diffs.
-5. Run `quarto render`.
+5. Run `make html` and `make pdf`.
 
 Do not regenerate reports before tests explain the new behavior. Otherwise sample artifacts can accidentally bless a regression. Reports should follow tested behavior; they should not define it.
 
@@ -152,4 +174,4 @@ For code-facing changes, use a TDD slice:
 5. Run broader checks when shared behavior changed.
 6. Commit only after the relevant checks pass.
 
-For manuscript-only changes, the minimum check is `quarto render`. If the prose references commands, schemas, sample output, or generated reports, also run the corresponding command or test. A chapter can be editorial, but command claims are still executable claims.
+For manuscript-only changes, the minimum check is `make html`. If the prose affects PDF-sensitive structure, references, or generated book artifacts, also run `make pdf`. If the prose references commands, schemas, sample output, or generated reports, also run the corresponding command or test. A chapter can be editorial, but command claims are still executable claims.

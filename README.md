@@ -28,7 +28,8 @@ source .venv/bin/activate
 python -m pip install -e ".[dev]"
 pytest
 python scripts/run_all_examples.py
-quarto render
+make html
+make pdf
 ```
 
 With `uv`:
@@ -36,8 +37,20 @@ With `uv`:
 ```bash
 uv run --extra dev pytest
 uv run python scripts/run_all_examples.py
-quarto render
+make html
+make pdf
 ```
+
+Book build targets:
+
+```bash
+make html   # render _book/index.html
+make pdf    # render _book/Agentic-Systems-Lab.pdf
+make book   # render both HTML and PDF
+make check  # run tests, examples, and both book renders
+```
+
+PDF rendering uses Quarto's native PDF/LaTeX pipeline and requires a working PDF toolchain such as TinyTeX.
 
 ## Learning Path
 
