@@ -114,6 +114,8 @@ The output should be read as a contract instance. `summary` is a short diagnosis
 
 The result is intentionally not a conversational paragraph. A paragraph may be nicer to read, but structured JSON gives the eval runner and report generator something concrete to inspect.
 
+Check the `evidence` field with a skeptical eye. It should be specific enough to explain the finding, but not so large that it becomes a hidden context dump. In production, evidence should help a human verify the result quickly and help an eval distinguish grounded output from plausible narration.
+
 ## Code Walkthrough
 
 `run_repo_triage` first creates `ToolPolicy`, then uses traced tool calls for `list_files` and `read_file`. Diagnosis is rule-based: `buggy_calc` is flagged when implementation returns `a / b` while tests/documentation describe different zero-division behavior.

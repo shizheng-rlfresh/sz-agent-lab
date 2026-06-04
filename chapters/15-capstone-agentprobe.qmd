@@ -111,6 +111,8 @@ The example runner prints all core artifacts in one JSON object: workflow eviden
 
 The answer should start with trace and report contracts, not a dashboard.
 
+The combined output also reveals the extraction order. Trace and eval readers come first because they define evidence. Report generation comes next because it turns evidence into a review artifact. UI, integrations, and orchestration should wait until the evidence contract is stable.
+
 ## Code Walkthrough
 
 The capstone seed already exists: trace logger, eval runner, context profiler, policy object, and report generator. A real `agentprobe` would generalize those APIs beyond toy repos.

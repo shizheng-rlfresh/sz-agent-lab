@@ -85,6 +85,8 @@ The policy JSON is a capability summary. `read_only: true` means write helpers s
 
 If this output changes, the system's authority changed. Treat that as a security-relevant diff.
 
+The most important policy output is often the one you do not see in a happy path: violations. A production report should make denied actions visible because they show pressure against the boundary. A quiet run is not necessarily safer than a run with blocked attempts; it may simply have exercised less of the system.
+
 ## Code Walkthrough
 
 `resolve_path` permits only paths under allowed roots. `check_write` blocks mutation under read-only mode. `check_shell` blocks shell execution unless explicitly enabled.

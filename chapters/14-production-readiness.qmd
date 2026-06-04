@@ -110,6 +110,8 @@ The command writes the report path. The report's deployment recommendation shoul
 
 A production version should make that status machine-readable and tie it to ownership.
 
+When reading the recommendation, ask what deployment mode it permits. A warning may still allow local advisory use while blocking automatic comments. A failed eval may block all rollout. A missing trace may permit no claim at all. Readiness is scoped, not absolute.
+
 ## Code Walkthrough
 
 The report generator produces a deployment recommendation. It requires human review when evals fail, policy violations exist, or large dynamic outputs appear.

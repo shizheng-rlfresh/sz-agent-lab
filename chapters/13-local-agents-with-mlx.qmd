@@ -112,6 +112,8 @@ If you run the optional command, the generated text is not the main artifact. Th
 
 For this book, optional means optional. The deterministic acceptance path remains independent of MLX.
 
+If you do run MLX locally, compare the result against the same schema and eval expectations used elsewhere in the book. A local model that produces interesting prose but cannot satisfy the structured result contract is not yet a drop-in strategy for this lab.
+
 ## Code Walkthrough
 
 There is no required MLX code in the repo. The deterministic context profiler is the bridge: it shows how agent loops accumulate observations before any local model is introduced.

@@ -98,6 +98,8 @@ The report command prints the path of the generated Markdown report. Open the re
 
 The sample recommendation requires human review because large dynamic context appears. That is not a failure of the report. It is the report doing its job.
 
+A report should be read from decision to evidence. Start with the deployment recommendation, then inspect the reasons, then follow links or paths back to raw artifacts. If the report cannot support that navigation, it is a summary without auditability.
+
 ## Code Walkthrough
 
 `generate_report` accepts trace summary, eval results, context summary, and policy violations. It creates Markdown sections and derives a deployment recommendation. This is intentionally simple so the reader can alter the gate logic.

@@ -93,6 +93,8 @@ Find the `prompt_injection_repo` row. The important fields are `expected_file_in
 
 That is a narrow result. It is useful because the narrowness is clear.
 
+Do not over-interpret the row. It does not prove comprehensive prompt-injection robustness. It proves that one fixture was inspected, one concept was identified, and policy violations were absent for this deterministic path. That is exactly the level of claim a good lab artifact should support.
+
 ## Code Walkthrough
 
 The deterministic agent flags prompt-injection text when it sees `ignore all previous instructions`. The eval checks that `README.md` was inspected and that the result contains `prompt-injection`. `ToolPolicy` prevents the fixture from expanding file access.

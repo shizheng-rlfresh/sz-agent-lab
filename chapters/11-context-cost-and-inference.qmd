@@ -98,6 +98,8 @@ The context output separates `cacheable_tokens` from `dynamic_tokens`. In the de
 
 Do not treat the token estimate as billing truth. Treat it as an alarm that the context shape deserves inspection.
 
+A large dynamic segment is a design smell, not automatically a defect. Incident logs, long diffs, and retrieved documents can be necessary. The question is whether the runtime transformed them intentionally and whether the report gives a reviewer enough information to decide what to do next.
+
 ## Code Walkthrough
 
 `ContextTracker` records segments with `name`, `chars`, `tokens`, and `cacheable`. It reports cumulative growth, cacheable tokens, dynamic tokens, and large dynamic outputs.

@@ -105,6 +105,8 @@ The cache demo reports `first_changed_segment`, `shared_prefix_tokens`, and `cac
 
 The recommendation list should be read as prompt-layout guidance, not as a provider guarantee.
 
+Inspect the first changed segment before looking at aggregate token counts. The first changed segment tells you where the stable prefix broke. If that segment is a timestamp, UUID, or randomized schema, the fix is likely prompt assembly. If it is the user request, the layout may already be reasonable.
+
 ## Code Walkthrough
 
 `analyze_prompt_cache_layouts` compares two segment lists. It reports candidate tokens, shared prefix tokens, first changed segment, dynamic tokens, cache breakers, and recommendations.

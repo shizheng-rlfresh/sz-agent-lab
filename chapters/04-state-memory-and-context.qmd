@@ -98,6 +98,8 @@ The command prints the final structured result. The state lesson appears when yo
 
 When adapting the pattern, resist the urge to store the final answer as memory by default. First decide what should be remembered, why it should persist, and how it can be corrected.
 
+A useful review exercise is to draw arrows between artifacts. Files feed tool output. Tool output feeds context observations. Context observations feed diagnosis. Diagnosis feeds final JSON and eval checks. Trace records the path. Report summarizes it. If any arrow is implicit, the system will be harder to debug.
+
 ## Code Walkthrough
 
 `run_repo_triage` records `context_observation` events after reading files. It does not persist those observations as memory. It writes trace events and returns a structured final result.

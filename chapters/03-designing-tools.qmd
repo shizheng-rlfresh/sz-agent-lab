@@ -101,6 +101,8 @@ The command prints visible files under `buggy_calc`. The output is intentionally
 
 The stronger evidence lives in the tests. `tests/test_tools.py` verifies deterministic ordering, capped reads, structured grep matches, and path blocking. For a tool boundary, tests are more convincing than a pretty demo.
 
+If the demo output surprises you, do not fix the display first. Inspect the tool contract. Are paths relative to the allowed root? Are directories sorted? Are long outputs capped with a visible marker? Are errors structured enough for an agent runtime to handle? A confusing tool demo usually means the interface is underspecified.
+
 ## Code Walkthrough
 
 The important boundary is not the filesystem call. It is policy resolution:

@@ -112,6 +112,8 @@ The baseline returns a small JSON object. The important field is not only the li
 
 This makes the workflow a useful test harness. When the agent is introduced later, you can ask whether it preserved the same evidence while adding diagnosis. If the agent misses `test_calculator.py`, the workflow proves the file was available.
 
+The output should also be read as a cost and latency baseline. A deterministic workflow has a known number of tool calls and no model invocation. When an agent path is added, every extra file read, retry, context segment, or model call should justify itself against this floor.
+
 ## Code Walkthrough
 
 `run_workflow_baseline` in `scripts/run_all_examples.py` creates a `ToolPolicy`, lists files under `buggy_calc`, and greps for `divide|division`. The policy still matters even though there is no agent. A deterministic workflow can still leak data if its tools are unsafe.
