@@ -173,3 +173,35 @@ A limited rollout to a small slice of traffic or users. Canary rollout should ha
 ## Schema Version
 
 An explicit version marker for durable data formats. Schema versions become important when traces, eval results, or reports need to remain readable across releases.
+
+## Deployment Status
+
+A machine-readable release recommendation such as `ready`, `human_review_required`, or `blocked`. The exact vocabulary can vary by organization, but it should be stable enough for automation and explicit enough for human review.
+
+## Reason Code
+
+A structured explanation for a deployment status. Examples include `failed_eval`, `policy_violation`, `large_dynamic_context`, `missing_trace`, or `missing_report`. Reason codes make release decisions debuggable.
+
+## Evidence Bundle
+
+The set of artifacts needed to review one run or release: trace, eval results, policy summary, context profile, generated report, fixture inputs, and command output. The capstone chapter treats this bundle as the reusable unit for `agentprobe`.
+
+## Strategy
+
+The component that produces a diagnosis or decision behind a stable runtime contract. A deterministic rule, hosted model, local model, or human reviewer can all be strategies if they return the same schema and preserve trace/eval/report behavior.
+
+## Adapter
+
+A boundary that normalizes an external implementation to the repo's expected contract. An MLX adapter, trace adapter, or model adapter should translate inputs and outputs without forcing the rest of the runtime to know provider-specific details.
+
+## Evidence Gap
+
+A missing artifact, field, source, or measurement that prevents a claim from being reviewed. Evidence gaps should narrow deployment status or appear as TODOs; they should not be hidden behind confident prose.
+
+## Rollout Stage
+
+A named deployment boundary such as local, CI, shadow, advisory, automatic, or mutating. Each stage should have its own evidence requirements because a system can be safe for local review while still unsafe for user-visible automation.
+
+## Shadow Evaluation
+
+Evaluation performed while the system observes real or realistic inputs without taking user-visible action. Shadow evaluation is useful for collecting traces, context profiles, and failure cases before granting broader authority.

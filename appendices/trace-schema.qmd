@@ -161,6 +161,20 @@ Avoid these patterns:
 
 The strongest trace is not the largest trace. The strongest trace is the smallest artifact that can answer the review questions with high confidence.
 
+## Schema Evolution
+
+Trace schemas should evolve with explicit compatibility rules. Adding an optional field is usually safe. Renaming `type`, changing `run_id` semantics, or changing event payload shape can break readers, reports, and historical artifacts. When in doubt, add `schema_version` before making incompatible changes.
+
+A migration should answer:
+
+- Can old traces still be summarized?
+- Can reports distinguish old and new fields?
+- Do eval fixtures need new expected artifacts?
+- Does the command reference need updated output?
+- Does the evidence policy need a new claim or source?
+
+For this repo, backward compatibility is mostly a teaching concern. For production systems, it becomes an incident-response concern: old traces may be needed months later.
+
 ## Example
 
 ```json

@@ -195,9 +195,21 @@ A reasonable local experiment would run the same three fixtures with a local mod
 
 If the local model passes `buggy_calc` but fails `prompt_injection_repo`, the issue may be prompt design or model instruction following. If it passes both but cannot handle `noisy_logs_repo`, the issue may be context strategy. This fixture-level diagnosis is more useful than a generic "local model good/bad" conclusion.
 
+## Chapter Synthesis
+
+Local inference is treated as an extension, not a prerequisite. That choice preserves the deterministic lab while giving advanced readers a realistic path to experiment with MLX. Optionality keeps the core book runnable and the local path honest.
+
+The main lesson is workload realism. A local model should be evaluated against the same schemas, fixtures, traces, and context sizes as any other strategy. Hardware enthusiasm is not evidence; fixture-level behavior and measurement are evidence.
+
 ## Evidence and References
 
 MLX and MLX-LM claims cite their project documentation [@mlx_docs; @mlx_lm_docs]. KV-cache context uses Hugging Face documentation [@huggingface_kv_cache].
+
+## Takeaways
+
+- Local inference is optional until workload-specific evidence supports it.
+- Local, hosted, and deterministic strategies should satisfy the same schema.
+- Hardware claims need measurements tied to representative prompts and fixtures.
 
 ## Exercises
 

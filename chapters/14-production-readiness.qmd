@@ -193,9 +193,21 @@ Imagine a release review for the triage bot. The eval report passes. The trace i
 
 The release decision should not be "ship" or "do not ship" by instinct. It should be scoped. Maybe the system can run as a local advisory tool but not post PR comments automatically. Maybe it can inspect small repos but not logs. Maybe it can run in shadow mode. Production readiness is often about choosing the right rollout boundary.
 
+## Chapter Synthesis
+
+Production readiness combines the book's surfaces into a deployment decision. Evals, traces, policy, context, reports, ownership, and rollback all matter because real systems fail across boundaries. A correct answer is necessary but not sufficient.
+
+The chapter's practical contribution is scoped readiness. A system can be ready for local advisory use and not ready for automatic mutation. It can be ready for shadow mode and not ready for broad rollout. Mature deployment decisions preserve those distinctions.
+
 ## Evidence and References
 
 Risk-management framing cites NIST AI RMF [@nist_ai_rmf]. Local readiness behavior is repo evidence from the generated report.
+
+## Takeaways
+
+- Readiness is scoped by rollout mode and supported by artifacts.
+- Missing evidence should produce conservative status, not implicit approval.
+- Rollback and ownership are part of the deployment contract.
 
 ## Exercises
 

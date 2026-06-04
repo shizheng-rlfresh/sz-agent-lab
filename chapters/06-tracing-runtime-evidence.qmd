@@ -170,9 +170,21 @@ Suppose the agent returns: "The bug is in `calculator.py`." Without a trace, you
 
 If the answer is right but the trace shows the wrong path, the run is not trustworthy. It may have succeeded accidentally. That is why traces are not just debugging tools. They are evidence of process quality.
 
+## Chapter Synthesis
+
+Tracing turns an agent run from an anecdote into an artifact. The final answer tells you what the system said. The trace tells you what the system did. For tool-using systems, that distinction is central to debugging and deployment review.
+
+The chapter also narrows ambition deliberately. JSONL is not a universal observability solution, but it makes the evidence contract visible. Once the contract is clear, richer tracing systems can implement the same semantics with spans, attributes, retention, and redaction.
+
 ## Evidence and References
 
 Tracing concepts are grounded in OpenAI Agents SDK tracing and OpenTelemetry GenAI conventions [@openai_agents_tracing; @otel_genai]. Local behavior is verified by `tests/test_tracer.py`.
+
+## Takeaways
+
+- A trace records what the system did, not only what it said.
+- Useful traces answer incident questions with structured events.
+- Redaction, retention, and artifact links are part of trace design.
 
 ## Exercises
 

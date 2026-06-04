@@ -170,9 +170,21 @@ The policy review should force that change into the open. Is shell needed in pro
 
 The point is not that shell is always forbidden. The point is that shell is too broad to appear accidentally.
 
+## Chapter Synthesis
+
+Policy is the runtime answer to a security question: what can the system actually do? Prompt instructions may guide model behavior, but policy constrains tool authority. This chapter makes that distinction executable through path roots, read-only mode, shell blocking, output caps, and violation records.
+
+The chapter also reframes blocked actions as evidence. A violation is not just an error; it is proof that the boundary was exercised. Production systems should preserve that proof because it tells reviewers where pressure against the boundary appeared.
+
 ## Evidence and References
 
 Security risk categories are grounded in OWASP [@owasp_llm_top10]. Local enforcement is tested in `tests/test_policy.py`.
+
+## Takeaways
+
+- Prompt guidance is not runtime enforcement.
+- Policy should fail closed, serialize active authority, and record violations.
+- Approval is an artifact for a specific risky action, not a general feeling of permission.
 
 ## Exercises
 

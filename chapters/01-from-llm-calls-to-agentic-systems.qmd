@@ -194,9 +194,21 @@ In design review, the difference is stark. For the weak version, the reviewer as
 
 That is the central argument of the book in one scenario. A model can produce a useful sentence. A system produces a reviewable run.
 
+## Chapter Synthesis
+
+The chapter's core move is to replace vague agent language with operational surfaces. A system is not mature because it produces fluent language; it is mature when its decisions, authority, evidence, and gates can be inspected. The deterministic baseline is intentionally small because the first lesson is not intelligence. It is reviewability.
+
+Carry this synthesis forward: every later chapter adds one surface to that reviewable system. Tools add capabilities. Policy constrains them. Traces record behavior. Evals measure contracts. Context profiling exposes inference pressure. Reports turn evidence into deployment decisions. The book is cumulative by design.
+
 ## Evidence and References
 
 Agent/workflow distinctions are grounded in Anthropic and OpenAI documentation [@anthropic_effective_agents; @openai_agents_sdk]. The repo behavior is grounded in the command above and its generated JSON.
+
+## Takeaways
+
+- Treat "agent" as a runtime claim, not a branding claim.
+- Require artifacts for authority, evidence, measurement, and rollout.
+- Start with the smallest system whose behavior can be falsified.
 
 ## Exercises
 

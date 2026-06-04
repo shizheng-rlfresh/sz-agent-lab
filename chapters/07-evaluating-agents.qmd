@@ -180,9 +180,21 @@ An agent might output the correct diagnosis for `buggy_calc` without inspecting 
 
 This is not pedantry. In a larger repo, a lucky answer may fail on the next case. Grounding checks are a way to prevent final-answer fluency from hiding weak evidence. They do not prove complete correctness, but they raise the floor.
 
+## Chapter Synthesis
+
+Agent evals should measure contracts, not vibes. The local suite checks schema, expected evidence, keyword presence, hallucinated files, and invalid tool calls because those dimensions map to concrete failure modes. This makes failures actionable rather than merely disappointing.
+
+The broader lesson is that evals are part of system design. They define what the team cares about, what regressions are unacceptable, and what evidence is required for rollout. A demo can impress; an eval can block.
+
 ## Evidence and References
 
 The eval behavior is repo evidence from `tests/test_evals.py` and `reports/sample_eval_report.md`. NIST AI RMF frames measurement and risk management as part of AI governance [@nist_ai_rmf].
+
+## Takeaways
+
+- Agent evals should test process and evidence, not only final text.
+- Small regression fixtures are valuable when each maps to a concrete failure mode.
+- A failed eval should point to the next subsystem to inspect.
 
 ## Exercises
 

@@ -202,9 +202,21 @@ If the LLM version inspects more files and finds a better issue, the trace and e
 
 That is how deterministic scaffolding makes model experimentation safer. It gives the experiment a harness.
 
+## Chapter Synthesis
+
+The repo triage agent is deterministic because the runtime contract matters more than model novelty at this stage. It shows that an agent-shaped system can have tools, policy, trace evidence, context observations, structured output, and eval hooks before any external model is introduced.
+
+That is the right order for serious experimentation. Once the harness exists, a model-backed diagnosis strategy can be evaluated inside it. Without the harness, every model result has to be judged manually, and every failure becomes ambiguous.
+
 ## Evidence and References
 
 The agent architecture is repo evidence. The idea that agent SDKs can coordinate tools, guardrails, handoffs, and traces is supported by OpenAI's Agents SDK docs [@openai_agents_sdk].
+
+## Takeaways
+
+- The deterministic agent is a harness for later model experiments.
+- Strategy internals can vary only if schema, policy, trace, and eval contracts stay stable.
+- Read-only behavior keeps the first agent reproducible and reviewable.
 
 ## Exercises
 

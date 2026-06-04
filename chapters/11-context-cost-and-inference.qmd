@@ -181,9 +181,21 @@ Implement the gate before adding provider-specific tokenizers. A crude estimate 
 
 In a production incident agent, logs are often necessary. But raw logs should rarely enter prompt context in bulk. A better pipeline extracts time windows, error signatures, counters, or representative samples. The context profiler is the alarm that tells you when raw observation has become prompt debt.
 
+## Chapter Synthesis
+
+Context is a systems budget, not a text bucket. The same tool output that helps diagnosis can inflate prompt cost, latency, memory pressure, and cache instability. The context profiler gives those pressures a visible artifact before they become production surprises.
+
+The key lesson is to separate correctness from deployability. A run can answer correctly while carrying too much dynamic context for automatic rollout. That distinction prepares the reader for prompt caching, local inference, and production readiness in the following chapters.
+
 ## Evidence and References
 
 KV-cache and inference framing are grounded in Hugging Face documentation and the PagedAttention paper [@huggingface_kv_cache; @pagedattention]. The token estimator is explicitly a local approximation.
+
+## Takeaways
+
+- Context growth is an application architecture issue, not only a model limit.
+- Large dynamic observations should trigger explicit actions before model calls.
+- Estimates are useful alarms when their limitations are stated clearly.
 
 ## Exercises
 

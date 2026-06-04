@@ -183,9 +183,21 @@ The fix is not "never use memory." The fix is to treat memory as a state surface
 
 The local repo avoids this problem by not implementing memory. That is a conservative teaching choice. It lets the reader see state surfaces before adding a persistent one.
 
+## Chapter Synthesis
+
+State is not one thing. Prompt context, traces, reports, durable memory, and tool output serve different purposes and should not be collapsed into a single text stream. The chapter makes that separation explicit before introducing more complicated agent behavior.
+
+The most transferable habit is provenance. Before using a piece of state, ask where it came from, how fresh it is, whether it is trusted, and whether it belongs in the prompt. That habit is more valuable than any particular memory implementation.
+
 ## Evidence and References
 
 The state taxonomy is design judgment. The trace shape is repo evidence and aligns with tracing concepts described by OpenAI Agents SDK docs [@openai_agents_tracing].
+
+## Takeaways
+
+- State surfaces have different authority and should be labeled before use.
+- Memory without provenance and freshness can be worse than no memory.
+- Prompt context, traces, reports, and durable storage serve different purposes.
 
 ## Exercises
 

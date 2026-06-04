@@ -114,6 +114,33 @@ When a command fails, diagnose by artifact boundary rather than by guessing:
 
 Do not paper over a failed command by editing expected output first. The correct order is to understand whether behavior changed intentionally, update tests or docs to express that intent, then regenerate artifacts.
 
+## Troubleshooting Matrix
+
+| Symptom | Likely Boundary | First Check |
+|---|---|---|
+| `pytest` fails in `test_tools.py` | tool contract | inspect path policy, ordering, output caps, and grep shape |
+| `pytest` fails in `test_policy.py` | authority boundary | inspect allowed roots, read-only mode, shell blocking, and violation records |
+| `pytest` fails in `test_tracer.py` | trace schema | inspect event names, required fields, JSONL writing, and summary counts |
+| `pytest` fails in `test_evals.py` | eval contract | inspect expected files, keywords, allowed files, and invalid tool counts |
+| sample report changed unexpectedly | report determinism | inspect runtime-local fields, ordering, warning logic, and fixture output |
+| `quarto render` fails on citation | reference discipline | inspect `references.bib` keys and chapter citation syntax |
+| `quarto render` fails on structure | manuscript syntax | inspect the first failing `.qmd` and nearby fenced blocks or headings |
+| `run_all_examples.py` fails | artifact pipeline | isolate with `--example`, then inspect fixture, trace, eval, or report stage |
+
+Use the matrix as a routing table, not a substitute for debugging. It helps you start at the right boundary. Once you identify the boundary, prefer the smallest focused command that reproduces the issue.
+
+## Artifact Freshness
+
+When implementation behavior changes, regenerate artifacts in this order:
+
+1. Run focused tests for the changed behavior.
+2. Run the affected module command.
+3. Run `python scripts/run_all_examples.py`.
+4. Inspect report diffs.
+5. Run `quarto render`.
+
+Do not regenerate reports before tests explain the new behavior. Otherwise sample artifacts can accidentally bless a regression. Reports should follow tested behavior; they should not define it.
+
 ## Commit-Level Expectations
 
 For code-facing changes, use a TDD slice:

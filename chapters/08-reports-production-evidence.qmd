@@ -181,9 +181,21 @@ The current sample report is intentionally mixed. All evals pass. No policy viol
 
 This is a realistic outcome. Many systems are correct on task behavior but still not ready for broader rollout. Maybe the next step is summarization. Maybe the output cap should be lower. Maybe log retrieval should be indexed. The report does not decide the architecture. It makes the decision unavoidable.
 
+## Chapter Synthesis
+
+Reports exist because raw artifacts are not enough for decisions. A trace can be complete, evals can be detailed, and policy can be serialized, yet a reviewer still needs a concise statement of status and reasons. The report is that decision layer.
+
+The important nuance is that a report should not weaken evidence into prose. It should preserve links back to trace, eval, policy, and context artifacts. Good reports make decisions faster without making them less auditable.
+
 ## Evidence and References
 
 Report behavior is local evidence from `reports/sample_production_report.md` and `tests/test_report.py`. Risk-gating language is aligned with the measurement and management posture in NIST AI RMF [@nist_ai_rmf].
+
+## Takeaways
+
+- Reports turn runtime artifacts into release decisions.
+- A passing eval suite can still produce a human-review deployment status.
+- Human-readable and machine-readable reports should share one data model.
 
 ## Exercises
 

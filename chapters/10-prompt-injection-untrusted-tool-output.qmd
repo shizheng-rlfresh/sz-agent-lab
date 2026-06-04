@@ -187,9 +187,21 @@ The malicious README is a useful teaching artifact because it asks for a specifi
 
 The distinction matters. Refusing to read suspicious files would make the agent less useful for security review. Reading them without boundaries would make the agent unsafe. Controlled observation is the middle path.
 
+## Chapter Synthesis
+
+Prompt injection is not handled by asking the model to be careful. The chapter's narrower claim is that untrusted tool output should be observed as data, labeled as untrusted, traced when suspicious, and confined by runtime policy. That claim is small enough to demonstrate locally.
+
+This framing avoids two weak extremes. Refusing to read suspicious content makes agents less useful for review. Trusting suspicious content as instruction makes them unsafe. Controlled observation is the practical middle: read evidence, label it, constrain its effects, and test the boundary.
+
 ## Evidence and References
 
 Prompt-injection risk framing is grounded in OWASP [@owasp_llm_top10]. The local fixture and eval demonstrate the narrower claim made in this chapter.
+
+## Takeaways
+
+- Tool output is untrusted data even when it contains imperative language.
+- Detection is useful evidence, but confinement is the stronger boundary.
+- Review propagation paths from untrusted content to future tool calls.
 
 ## Exercises
 

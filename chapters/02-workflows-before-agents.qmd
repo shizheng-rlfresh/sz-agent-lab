@@ -206,9 +206,21 @@ Now suppose the task changes: "Find why the latest CI run failed across an unfam
 
 That level of specificity keeps autonomy honest.
 
+## Chapter Synthesis
+
+The workflow baseline is the book's control group. It prevents the agent discussion from floating above engineering reality. If a fixed path solves the task, the fixed path should be respected. If a dynamic path is needed, the baseline clarifies exactly where the dynamic boundary begins.
+
+This is also a cultural lesson. Teams often adopt autonomy because requirements feel unclear. A staff-level review reverses that pressure: clarify the deterministic path first, then add autonomy only where uncertainty remains. That discipline makes later evals and rollout decisions much sharper.
+
 ## Evidence and References
 
 The workflow/agent distinction is cited from Anthropic's engineering guidance [@anthropic_effective_agents]. The local evidence is the `workflow_baseline` output.
+
+## Takeaways
+
+- A workflow is the control group for autonomy.
+- Dynamic behavior should own a named decision, not the whole task by default.
+- Keep the deterministic path callable for fallback, CI, and comparison.
 
 ## Exercises
 

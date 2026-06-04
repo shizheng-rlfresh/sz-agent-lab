@@ -115,3 +115,19 @@ Avoid:
 - granting write access before dry-run artifacts exist.
 
 The policy should make dangerous behavior boringly explicit.
+
+## Policy Review Record
+
+For any policy expansion, write a short review record:
+
+- previous authority,
+- new authority,
+- reason for expansion,
+- affected tools,
+- abuse case,
+- tests added,
+- trace fields affected,
+- report warning or gate,
+- rollback path.
+
+This record is more useful than a generic approval comment. It turns authority expansion into a reviewable engineering change. If the expansion later causes an incident, the team can inspect why it was approved and which assumptions failed.

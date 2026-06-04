@@ -107,6 +107,19 @@ If a failure does not imply a next action, reconsider whether it belongs in the 
 
 This eval suite is not a public leaderboard. It is closer to a production regression test. Benchmarks can compare models or systems across broad distributions. Regression evals protect known contracts, known incidents, and known release gates. A staff-level system usually needs both, but the book focuses on regression evals because they are directly tied to operational readiness.
 
+## Eval Lifecycle
+
+An eval should have a lifecycle:
+
+1. **Created** from a requirement, fixture, bug, or incident.
+2. **Validated** by failing against the broken behavior.
+3. **Implemented** until the system passes for the intended reason.
+4. **Owned** by a person or team that understands the failure mode.
+5. **Reviewed** when product behavior, tools, policy, or schemas change.
+6. **Retired** only when the failure mode is no longer relevant and the retirement is documented.
+
+This lifecycle prevents eval suites from becoming either theater or archaeology. A test that no one understands may still pass, but it no longer provides strong release evidence.
+
 ## Example Failure Interpretation
 
 If `schema_ok` is false, fix output construction or validation before debugging task reasoning.

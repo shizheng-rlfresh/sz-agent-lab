@@ -221,3 +221,16 @@ Use different evidence types where they fit:
 - Capstone: repo artifacts and clearly labeled author interpretation.
 
 This mapping prevents accidental over-citation and accidental under-citation. Not every sentence needs a citation, but every external or performance-sensitive claim needs support.
+
+## Final Evidence Audit
+
+Before publishing, run a final audit:
+
+1. Search for broad claims such as "always," "never," "dramatically," "best," and "production systems require."
+2. For each result, either cite a source, narrow the claim, or label it as author judgment.
+3. Run every command named in the command reference.
+4. Confirm sample reports match generated behavior.
+5. Confirm optional MLX language remains optional.
+6. Confirm every TODO is either resolved or intentionally listed as future work.
+
+This audit is intentionally mechanical. Mechanical checks catch the kinds of unsupported certainty that technical authors often miss after spending too much time inside a draft.

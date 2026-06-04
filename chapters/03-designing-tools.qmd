@@ -204,9 +204,21 @@ Only after the proposal path is reliable should the system add an apply step. Ev
 
 The lesson generalizes beyond files. For tickets, propose a reply before sending it. For infrastructure, propose a rollback before executing it. For databases, propose a migration before applying it.
 
+## Chapter Synthesis
+
+Tool design is where agent architecture becomes concrete. A prompt can describe good behavior, but tools define what the runtime can actually observe or change. That makes tool interfaces security boundaries, reliability boundaries, and context boundaries at the same time.
+
+The chapter's reusable lesson is to design tools for audit before power. Narrow authority, deterministic output, structured errors, and policy mediation are not constraints on intelligence. They are the conditions that let intelligent behavior be safely evaluated.
+
 ## Evidence and References
 
 Security framing is grounded in OWASP's LLM risk taxonomy [@owasp_llm_top10]. Tool behavior is grounded in `tests/test_tools.py` and `tests/test_policy.py`.
+
+## Takeaways
+
+- Tools are capability boundaries and should be reviewed as such.
+- Bounded, structured, deterministic output makes later evals and reports stronger.
+- Mutation should arrive through proposal, approval, execution, and verification stages.
 
 ## Exercises
 

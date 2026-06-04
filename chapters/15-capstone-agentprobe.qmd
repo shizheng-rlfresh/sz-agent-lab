@@ -193,9 +193,21 @@ The first external user of `agentprobe` might have a trace from a different agen
 
 That suggests a narrow onboarding path: map their trace into the schema, define one eval, generate one report. If that path works, the project has value. If it requires adopting a whole framework, the project has lost the book's central discipline.
 
+## Chapter Synthesis
+
+The capstone turns the book's evidence pattern into a possible public tool. The goal is not to build a grand agent framework. The goal is to make agent runs easier to inspect, validate, summarize, and discuss across projects.
+
+The strongest first release would be narrow: load traces, validate schemas, summarize evals and policy, report context risk, and generate a review artifact. That narrowness is not lack of ambition. It is how the project preserves the book's core discipline.
+
 ## Evidence and References
 
 The project framing is author interpretation. The technical pieces are repo evidence. Tracing and risk-management references are OpenAI Agents SDK tracing, OpenTelemetry, and NIST AI RMF [@openai_agents_tracing; @otel_genai; @nist_ai_rmf].
+
+## Takeaways
+
+- The reusable capstone value is evidence infrastructure, not another broad framework.
+- Start with trace loading, schema validation, and report generation.
+- External users should gain value without migrating orchestration.
 
 ## Exercises
 

@@ -187,9 +187,21 @@ The cache demo puts a timestamp before stable instructions. That one choice make
 
 The fix is not clever prompt wording. It is prompt assembly discipline. Put stable text first. Move timestamps later. Sort schemas. Keep dynamic retrieval out of the prefix. The optimization begins as software architecture, not prose.
 
+## Chapter Synthesis
+
+Prompt caching turns prompt assembly into an engineering surface. Stable prefixes, deterministic schemas, and dynamic suffixes are not merely prompt-writing preferences. They are serialization properties that can be tested and reviewed.
+
+The chapter keeps the claim local: the demo identifies cache breakers; it does not promise provider savings. That discipline is the evidence policy in action. Optimization claims should either be sourced, measured, or narrowed to what the local artifact proves.
+
 ## Evidence and References
 
 OpenAI and vLLM documentation support the prefix-match framing [@openai_prompt_caching; @vllm_prefix_caching]. The local demo supports the cache-breaker analysis.
+
+## Takeaways
+
+- Cache-friendly prompts require stable serialization, not just similar wording.
+- Dynamic metadata belongs after stable instructions and schemas when cacheability matters.
+- Cache optimization should be guarded by correctness and safety evals.
 
 ## Exercises
 
