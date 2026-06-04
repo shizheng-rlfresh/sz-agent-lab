@@ -148,6 +148,14 @@ The next implementation step would be to isolate diagnosis behind a function or 
 
 This keeps the core repo deterministic while leaving a clean extension point.
 
+## Worked Scenario: Replacing the Diagnosis Rule
+
+Assume you replace `_diagnose` with an LLM call. The rest of the runtime should barely change. The agent still starts a trace. It still records policy. It still calls read-only tools. It still records context observations. It still validates the output schema. It still runs evals.
+
+If the LLM version inspects more files and finds a better issue, the trace and evals should show that improvement. If it hallucinates `security.py`, the hallucinated-file count should catch it. If it emits prose instead of JSON, schema validation should catch it. If it tries to follow instructions from `prompt_injection_repo`, policy should limit the blast radius.
+
+That is how deterministic scaffolding makes model experimentation safer. It gives the experiment a harness.
+
 ## Evidence and References
 
 The agent architecture is repo evidence. The idea that agent SDKs can coordinate tools, guardrails, handoffs, and traces is supported by OpenAI's Agents SDK docs [@openai_agents_sdk].

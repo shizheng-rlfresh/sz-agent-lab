@@ -143,6 +143,12 @@ Keep local inference behind an optional adapter. The deterministic runtime shoul
 
 This lets the repo support local experiments without making every reader install local-inference tooling.
 
+## Worked Scenario: Local Triage Experiment
+
+A reasonable local experiment would run the same three fixtures with a local model. The output must use the same schema. The eval suite must be unchanged. The trace should record model metadata and prompt size. The report should include latency and memory notes if measured.
+
+If the local model passes `buggy_calc` but fails `prompt_injection_repo`, the issue may be prompt design or model instruction following. If it passes both but cannot handle `noisy_logs_repo`, the issue may be context strategy. This fixture-level diagnosis is more useful than a generic "local model good/bad" conclusion.
+
 ## Evidence and References
 
 MLX and MLX-LM claims cite their project documentation [@mlx_docs; @mlx_lm_docs]. KV-cache context uses Hugging Face documentation [@huggingface_kv_cache].

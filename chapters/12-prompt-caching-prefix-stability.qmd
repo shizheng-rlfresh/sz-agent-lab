@@ -135,6 +135,12 @@ The cache demo can evolve into a prompt assembler test. Given a task, the assemb
 
 This turns prompt optimization into testable software behavior.
 
+## Worked Scenario: Timestamp First
+
+The cache demo puts a timestamp before stable instructions. That one choice makes the first segment differ across requests. Even if the rest of the prompt is identical, the shared prefix is lost in the local analysis.
+
+The fix is not clever prompt wording. It is prompt assembly discipline. Put stable text first. Move timestamps later. Sort schemas. Keep dynamic retrieval out of the prefix. The optimization begins as software architecture, not prose.
+
 ## Evidence and References
 
 OpenAI and vLLM documentation support the prefix-match framing [@openai_prompt_caching; @vllm_prefix_caching]. The local demo supports the cache-breaker analysis.

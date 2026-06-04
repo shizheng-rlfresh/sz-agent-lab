@@ -141,6 +141,12 @@ The next readiness improvement is to encode deployment status as data. Instead o
 
 The enum should be conservative. Missing evidence should not become success by default.
 
+## Worked Scenario: Release Review
+
+Imagine a release review for the triage bot. The eval report passes. The trace is present. Policy is read-only. Prompt injection is detected without policy violations. Context growth still triggers human review.
+
+The release decision should not be "ship" or "do not ship" by instinct. It should be scoped. Maybe the system can run as a local advisory tool but not post PR comments automatically. Maybe it can inspect small repos but not logs. Maybe it can run in shadow mode. Production readiness is often about choosing the right rollout boundary.
+
 ## Evidence and References
 
 Risk-management framing cites NIST AI RMF [@nist_ai_rmf]. Local readiness behavior is repo evidence from the generated report.

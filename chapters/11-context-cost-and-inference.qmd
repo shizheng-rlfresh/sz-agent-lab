@@ -129,6 +129,12 @@ The next context improvement is a hard budget. The profiler currently warns abou
 
 Budget enforcement should happen before the model call, not after a costly failed run.
 
+## Worked Scenario: The Log Flood
+
+`noisy_logs_repo` contains repetitive log lines. The agent can read them safely. The eval can still pass. The report still warns. This is the difference between correctness and efficiency.
+
+In a production incident agent, logs are often necessary. But raw logs should rarely enter prompt context in bulk. A better pipeline extracts time windows, error signatures, counters, or representative samples. The context profiler is the alarm that tells you when raw observation has become prompt debt.
+
 ## Evidence and References
 
 KV-cache and inference framing are grounded in Hugging Face documentation and the PagedAttention paper [@huggingface_kv_cache; @pagedattention]. The token estimator is explicitly a local approximation.

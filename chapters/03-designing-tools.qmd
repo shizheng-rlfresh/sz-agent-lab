@@ -150,6 +150,14 @@ Add tools in three steps. First, write policy tests for what the tool must not d
 
 For high-risk tools, add a dry-run mode before execution mode. The dry-run output should be structured enough for approval and evals.
 
+## Worked Scenario: Adding a Patch Tool
+
+Assume the repo triage bot should eventually propose fixes. The tempting implementation is a `write_file` tool. The safer design starts with `propose_patch`. That tool returns a diff artifact but does not apply it. The report can include the diff, tests can validate the schema, and a human can approve before mutation.
+
+Only after the proposal path is reliable should the system add an apply step. Even then, the apply step should require an exact patch, target path, expected current content hash, and approval record. This separates reasoning from mutation. It also gives the runtime a rollback story: the proposed patch and applied patch are artifacts, not hidden side effects.
+
+The lesson generalizes beyond files. For tickets, propose a reply before sending it. For infrastructure, propose a rollback before executing it. For databases, propose a migration before applying it.
+
 ## Evidence and References
 
 Security framing is grounded in OWASP's LLM risk taxonomy [@owasp_llm_top10]. Tool behavior is grounded in `tests/test_tools.py` and `tests/test_policy.py`.

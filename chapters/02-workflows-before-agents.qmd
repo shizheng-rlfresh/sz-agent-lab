@@ -152,6 +152,14 @@ Keep the workflow callable even after the agent exists. It can run in CI as a sm
 
 If the workflow and agent share tools, the tool tests become more valuable. A bug in `read_file` affects both paths. A policy regression affects both paths. Shared deterministic components are leverage.
 
+## Worked Scenario: When the Workflow Wins
+
+Suppose the task is to detect whether a repository contains a division-by-zero contract mismatch. If the organization has a known signature, a deterministic workflow may be enough: inspect relevant files, search for expected phrases, and emit a structured finding. An agent may add prose, but it may not add operational value.
+
+Now suppose the task changes: "Find why the latest CI run failed across an unfamiliar repository." The relevant files might include tests, configuration, logs, or recent commits. The next step may depend on the first observation. This is a stronger case for agent-shaped behavior. The key is that the justification is specific. The agent is needed because file and evidence selection are uncertain at runtime, not because "agents are the future."
+
+That level of specificity keeps autonomy honest.
+
 ## Evidence and References
 
 The workflow/agent distinction is cited from Anthropic's engineering guidance [@anthropic_effective_agents]. The local evidence is the `workflow_baseline` output.

@@ -129,6 +129,14 @@ If you add memory later, do not put it directly into prompts. Add a retrieval bo
 
 Treat memory retrieval like a tool call. It observes a state surface and returns untrusted or partially trusted content.
 
+## Worked Scenario: A Stale Summary
+
+Imagine the triage bot stores a memory: "The calculator package expects division by zero to return `None`." Later, the project changes its contract and now expects `ZeroDivisionError`. If the agent retrieves the old memory without provenance or freshness checks, it may produce the wrong diagnosis even while reading the current code.
+
+The fix is not "never use memory." The fix is to treat memory as a state surface with metadata. When was it written? From what evidence? Does it apply to this repository version? Can the user correct it? Should it enter prompt context, or should the runtime prefer current file content?
+
+The local repo avoids this problem by not implementing memory. That is a conservative teaching choice. It lets the reader see state surfaces before adding a persistent one.
+
 ## Evidence and References
 
 The state taxonomy is design judgment. The trace shape is repo evidence and aligns with tracing concepts described by OpenAI Agents SDK docs [@openai_agents_tracing].

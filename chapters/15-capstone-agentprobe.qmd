@@ -141,6 +141,12 @@ If this repo becomes the seed for `agentprobe`, resist moving all code immediate
 
 Good extraction is boring. It should make the current repo simpler while creating a reusable package.
 
+## Worked Scenario: First External User
+
+The first external user of `agentprobe` might have a trace from a different agent framework. They do not need a new orchestration system. They need to know whether the trace contains enough evidence to review a run.
+
+That suggests a narrow onboarding path: map their trace into the schema, define one eval, generate one report. If that path works, the project has value. If it requires adopting a whole framework, the project has lost the book's central discipline.
+
 ## Evidence and References
 
 The project framing is author interpretation. The technical pieces are repo evidence. Tracing and risk-management references are OpenAI Agents SDK tracing, OpenTelemetry, and NIST AI RMF [@openai_agents_tracing; @otel_genai; @nist_ai_rmf].

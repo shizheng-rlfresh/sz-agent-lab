@@ -129,6 +129,12 @@ The next report improvement is dual output: Markdown for humans and JSON for aut
 
 Once a report has a machine-readable status, it can become a real gate.
 
+## Worked Scenario: Passing Evals, Review Required
+
+The current sample report is intentionally mixed. All evals pass. No policy violations are recorded. Yet the deployment recommendation requires human review because `noisy_logs` creates a large dynamic context segment.
+
+This is a realistic outcome. Many systems are correct on task behavior but still not ready for broader rollout. Maybe the next step is summarization. Maybe the output cap should be lower. Maybe log retrieval should be indexed. The report does not decide the architecture. It makes the decision unavoidable.
+
 ## Evidence and References
 
 Report behavior is local evidence from `reports/sample_production_report.md` and `tests/test_report.py`. Risk-gating language is aligned with the measurement and management posture in NIST AI RMF [@nist_ai_rmf].

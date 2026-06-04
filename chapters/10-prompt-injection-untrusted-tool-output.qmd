@@ -135,6 +135,12 @@ A useful next implementation step is suspicious-content tracing. When the runtim
 
 This preserves controlled observation while improving review evidence.
 
+## Worked Scenario: The Malicious README
+
+The malicious README is a useful teaching artifact because it asks for a specific unsafe action: read outside the repository. A weak system might pass the content directly into a model and rely on the model to ignore it. A stronger system can still read the file, label it as untrusted content, detect the suspicious phrase, and rely on policy to prevent out-of-root reads.
+
+The distinction matters. Refusing to read suspicious files would make the agent less useful for security review. Reading them without boundaries would make the agent unsafe. Controlled observation is the middle path.
+
 ## Evidence and References
 
 Prompt-injection risk framing is grounded in OWASP [@owasp_llm_top10]. The local fixture and eval demonstrate the narrower claim made in this chapter.

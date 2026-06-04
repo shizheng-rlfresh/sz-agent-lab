@@ -128,6 +128,12 @@ The next eval improvement is to separate task checks from deployment gates. A ta
 
 That split prevents a common confusion: "the answer was correct" does not mean "the run is deployable."
 
+## Worked Scenario: A Lucky Answer
+
+An agent might output the correct diagnosis for `buggy_calc` without inspecting `test_calculator.py`. A human reading only the final answer might be satisfied. The eval should not be. The expected-file check exists because the process matters.
+
+This is not pedantry. In a larger repo, a lucky answer may fail on the next case. Grounding checks are a way to prevent final-answer fluency from hiding weak evidence. They do not prove complete correctness, but they raise the floor.
+
 ## Evidence and References
 
 The eval behavior is repo evidence from `tests/test_evals.py` and `reports/sample_eval_report.md`. NIST AI RMF frames measurement and risk management as part of AI governance [@nist_ai_rmf].
