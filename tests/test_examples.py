@@ -16,7 +16,12 @@ def test_create_toy_repos_and_run_examples(tmp_path: Path) -> None:
     assert (data_root / "prompt_injection_repo" / "README.md").exists()
     assert (data_root / "noisy_logs_repo" / "logs.txt").exists()
     assert result["agent"]["findings"]
-    assert result["evals"][0]["passed"] is True
+    assert {item["name"] for item in result["evals"]} == {
+        "buggy_calc",
+        "prompt_injection_repo",
+        "noisy_logs_repo",
+    }
+    assert all(item["passed"] for item in result["evals"])
     assert (reports_root / "sample_eval_report.md").exists()
     assert (reports_root / "sample_production_report.md").exists()
 

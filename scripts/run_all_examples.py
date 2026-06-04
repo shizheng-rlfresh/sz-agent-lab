@@ -8,7 +8,7 @@ from pathlib import Path
 
 from agentic_systems_lab.agent import run_repo_triage
 from agentic_systems_lab.context import ContextTracker
-from agentic_systems_lab.evals import EvalTask, evaluate_result, write_eval_report
+from agentic_systems_lab.evals import EvalTask, default_tasks, evaluate_result, write_eval_report
 from agentic_systems_lab.policy import ToolPolicy
 from agentic_systems_lab.report import generate_report, write_report
 from agentic_systems_lab.tools import grep, list_files, read_file
@@ -38,6 +38,35 @@ def run_workflow_baseline(data_root: Path) -> dict:
         "files": list_files(repo, policy=policy),
         "division_mentions": grep("divide|division", repo, policy=policy),
     }
+
+
+def _run_eval_tasks(data_root: Path, traces_root: Path, reports_root: Path) -> list[dict]:
+    results: list[dict] = []
+    for task in default_tasks():
+        repo = data_root / Path(task.repo_path).name
+        policy = ToolPolicy(allowed_roots=(data_root,))
+        agent_result = run_repo_triage(
+            repo,
+            trace_path=traces_root / f"{task.name}_eval_trace.jsonl",
+            run_id=f"run_{task.name}_eval_sample",
+            policy=policy,
+        )
+        task_for_root = EvalTask(
+            name=task.name,
+            repo_path=str(repo),
+            expected_file=task.expected_file,
+            expected_keyword=task.expected_keyword,
+            allowed_files=tuple(list_files(repo, policy=policy)),
+        )
+        results.append(
+            evaluate_result(
+                task_for_root,
+                agent_result,
+                invalid_tool_call_count=len(policy.violations),
+            )
+        )
+    write_eval_report(results, reports_root / "sample_eval_report.md")
+    return results
 
 
 def run_all_examples(
@@ -75,7 +104,8 @@ def run_all_examples(
             expected_keyword="division",
             allowed_files=tuple(list_files(data_root / "buggy_calc", policy=policy)),
         )
-        eval_results = [evaluate_result(task, agent_result, invalid_tool_call_count=len(policy.violations))]
+        eval_results = _run_eval_tasks(data_root, traces_root, reports_root)
+        eval_results[0] = evaluate_result(task, agent_result, invalid_tool_call_count=len(policy.violations))
         write_eval_report(eval_results, reports_root / "sample_eval_report.md")
         payload["evals"] = eval_results
         context_summary = _context_for_noisy_repo(data_root)

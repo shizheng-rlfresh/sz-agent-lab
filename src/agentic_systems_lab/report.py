@@ -72,6 +72,20 @@ def generate_report(
 
     lines.extend(["", "## Production Readiness"])
     lines.extend(f"- {warning}" for warning in readiness_warnings)
+    failed = [result.get("name") for result in eval_results if not result.get("passed", False)]
+    if failed or policy_violations or context_summary.get("large_outputs"):
+        recommendation = "human review required before deployment"
+    else:
+        recommendation = "baseline deterministic gate passed"
+    lines.extend(
+        [
+            "",
+            "## Deployment Recommendation",
+            f"- status: {recommendation}",
+        ]
+    )
+    if failed:
+        lines.append(f"- failed_evals: {', '.join(str(name) for name in failed)}")
     lines.append("")
     return "\n".join(lines)
 

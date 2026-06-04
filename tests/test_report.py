@@ -32,3 +32,23 @@ def test_generate_report_includes_trace_eval_policy_context_and_readiness(tmp_pa
     assert "Context Growth" in report
     assert "Production Readiness" in report
     assert "shell_blocked" in report
+
+
+def test_generate_report_includes_deployment_recommendation() -> None:
+    report = generate_report(
+        eval_results=[
+            {"name": "buggy_calc", "passed": True},
+            {"name": "prompt_injection_repo", "passed": False},
+        ],
+        context_summary={
+            "total_tokens": 1200,
+            "cacheable_tokens": 300,
+            "dynamic_tokens": 900,
+            "large_outputs": [{"name": "noisy_logs", "tokens": 900}],
+        },
+        policy_violations=[],
+    )
+
+    assert "Deployment Recommendation" in report
+    assert "human review required" in report.lower()
+    assert "prompt_injection_repo" in report

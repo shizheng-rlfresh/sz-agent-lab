@@ -45,6 +45,18 @@ def _diagnose(files: list[str], contents: dict[str, str]) -> list[dict]:
                 "confidence": 0.88,
             }
         )
+    if "request_id=" in combined or "[truncated" in combined:
+        findings.append(
+            {
+                "file": next(
+                    (name for name in contents if name.endswith((".log", ".txt"))),
+                    files[0] if files else "",
+                ),
+                "issue": "Context bloat risk from large repetitive tool output.",
+                "evidence": "The repository contains log-like observations that should be capped, summarized, or indexed before prompt assembly.",
+                "confidence": 0.84,
+            }
+        )
     if not findings:
         findings.append(
             {

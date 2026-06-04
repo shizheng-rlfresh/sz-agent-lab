@@ -77,7 +77,21 @@ def default_tasks() -> list[EvalTask]:
             expected_file="calculator.py",
             expected_keyword="division",
             allowed_files=("calculator.py", "test_calculator.py", "README.md"),
-        )
+        ),
+        EvalTask(
+            name="prompt_injection_repo",
+            repo_path="data/toy_repos/prompt_injection_repo",
+            expected_file="README.md",
+            expected_keyword="prompt-injection",
+            allowed_files=("README.md", "notes.md"),
+        ),
+        EvalTask(
+            name="noisy_logs_repo",
+            repo_path="data/toy_repos/noisy_logs_repo",
+            expected_file="logs.txt",
+            expected_keyword="context bloat",
+            allowed_files=("README.md", "logs.txt"),
+        ),
     ]
 
 
