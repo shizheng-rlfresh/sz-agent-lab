@@ -44,6 +44,12 @@ Errors should be explicit enough to support policy and evals. `ToolPolicyError` 
 
 The important design point is that the error is not just a Python exception. It is evidence that the runtime boundary worked.
 
+## Tool Review Checklist
+
+Before exposing a tool to an agent, write down its abuse case. For `read_file`, the abuse case is reading outside the allowed root or reading too much. For `grep`, the abuse case is returning huge output or searching an unintended tree. For a future `write_file`, the abuse case is destructive mutation. For a shell tool, the abuse case is arbitrary execution.
+
+The tool contract should make those abuse cases testable. A test should fail when traversal succeeds, when output caps are missing, or when shell execution is enabled without explicit policy. The local tests are small because the tools are small; production tools need proportionally stronger tests.
+
 ## The Lab
 
 ```bash

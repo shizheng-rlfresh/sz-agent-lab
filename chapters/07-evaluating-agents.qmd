@@ -47,6 +47,12 @@ The three current fixtures each exercise a different dimension:
 
 A production eval set should include happy paths, known regressions, adversarial fixtures, large-context cases, and malformed-output cases. It should also preserve failures. A failing fixture is often more valuable than a polished demo because it tells the team what the gate is supposed to catch.
 
+## False Confidence
+
+Small eval suites are useful but dangerous if overinterpreted. Three fixtures cannot prove broad readiness. They can prove that three known contracts still hold. That is enough to catch regressions and teach evaluation structure, but not enough to claim general reliability.
+
+The evidence policy matters here. Say "the default local eval suite passes" rather than "the agent is reliable." The second claim is broader than the evidence.
+
 ## The Lab
 
 ```bash

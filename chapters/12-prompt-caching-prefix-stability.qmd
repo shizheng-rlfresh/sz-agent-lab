@@ -48,6 +48,12 @@ The local demo flags a timestamp before the static prefix. Other common breakers
 
 The fix is usually architectural: assemble stable text first, serialize deterministically, and push volatile content later.
 
+## Cacheability vs Personalization
+
+Personalization and cacheability often pull in opposite directions. User-specific memory, account state, and retrieved documents are dynamic. Stable instructions and tool schemas are reusable. A good prompt layout isolates those regions.
+
+This matters for agentic systems because tool schemas can be long and stable. If they appear after dynamic content, the system may waste an optimization opportunity. If they appear before dynamic content, they can remain in the stable prefix when provider behavior supports that.
+
 ## The Lab
 
 ```bash

@@ -52,6 +52,12 @@ A useful local experiment records:
 
 Without those fields, "it runs locally" is not enough evidence.
 
+## Local Failure Modes
+
+Local failures are not only out-of-memory errors. A local agent can fail because the model is too weak for the task, because prompt prefill is too slow, because long context degrades throughput, because concurrency is poor, or because operating model artifacts becomes a maintenance burden.
+
+The right comparison is workload-level. A hosted model may be operationally simpler. A local model may be better for privacy or offline work. The eval suite should decide whether quality is acceptable; measurement should decide whether latency and memory are acceptable.
+
 ## The Lab
 
 Optional:

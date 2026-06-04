@@ -50,6 +50,12 @@ A staff-level review can use the report as an entry point:
 
 The report should not hide raw artifacts. It should point to them.
 
+## Report Granularity
+
+Reports should be concise enough to read and specific enough to act on. A hundred-page dump of trace lines is not a report. A green checkmark without evidence is not a report either. The sample report chooses the middle: a small summary with enough structure to identify trace, eval, policy, and context signals.
+
+For production, add links rather than copying everything. Link to raw traces, eval task definitions, policy versions, and artifact hashes. A report is the table of contents for evidence.
+
 ## The Lab
 
 ```bash

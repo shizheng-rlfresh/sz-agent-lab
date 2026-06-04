@@ -55,6 +55,12 @@ The schema in this repo is small, but it encodes important questions:
 
 Those fields are enough for deterministic tests and a production report.
 
+## From Rules to Models
+
+The deterministic diagnosis rule is intentionally replaceable. A model-backed version could decide which files to inspect and how to summarize findings. The runtime should still validate the same output schema and run the same evals.
+
+That replacement boundary is useful. If the LLM version fails an eval that the deterministic version passes, the failure is not in tools, policy, or report generation. It is in model selection, prompt design, file selection, or output control. Good architecture narrows the search space for failures.
+
 ## The Lab
 
 ```bash

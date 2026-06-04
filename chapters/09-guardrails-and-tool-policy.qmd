@@ -35,6 +35,12 @@ The policy is logged in the trace with `policy_check`. That makes the run review
 
 Policy evidence is especially important when capabilities change over time. A production incident review needs to know not only what the agent did, but what it was allowed to do at the time.
 
+## Policy Drift
+
+Policy drift happens when capabilities expand faster than review. A path allowlist grows. Output caps increase. A write tool is added for convenience. A shell tool is enabled for debugging and never removed. Each change may look reasonable alone, while the combined system becomes much riskier.
+
+The mitigation is change review. Treat policy diffs like permission diffs. Require tests and sample traces for expanded authority.
+
 ## The Lab
 
 ```bash

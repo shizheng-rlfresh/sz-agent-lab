@@ -40,6 +40,12 @@ A practical agent runtime should define context budgets before deployment:
 
 The repo uses a crude `ceil(chars / 4)` estimator. That estimator should not be used for billing. Its purpose is to make growth visible in tests and reports.
 
+## When to Summarize
+
+Summarization is not automatically better than raw context. It can remove the evidence needed for diagnosis. Use summarization when the raw observation is too large, repetitive, or weakly relevant. Preserve links or references back to the raw artifact so a reviewer can inspect the source.
+
+For logs, a better strategy may be extraction rather than summarization: error lines, time windows, unique stack traces, or sampled clusters. The local lab does not implement those strategies, but it creates the warning that should trigger them.
+
 ## The Lab
 
 ```bash

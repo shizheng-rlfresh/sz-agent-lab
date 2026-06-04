@@ -44,6 +44,12 @@ The local `ContextTracker` makes a small part of that transition visible. It rec
 
 In an LLM-backed version, the runtime should label tool output. A file from `prompt_injection_repo` should be framed as untrusted repository content, not as an instruction. A trace event should be stored outside the prompt unless deliberately summarized. An eval result should normally inform deployment, not model reasoning.
 
+## Context Is a Lossy Interface
+
+Prompt context is a lossy interface between the runtime and the model. It has limited space, weak authority labels, and model-dependent interpretation. That does not make it useless. It means the runtime should preserve stronger artifacts outside the prompt.
+
+For example, the trace can store exact tool calls. The report can summarize context growth. The eval can record pass/fail checks. The prompt may contain only the subset needed for the next inference. This separation lets the system be debuggable even when the prompt is compressed.
+
 ## The Lab
 
 ```bash

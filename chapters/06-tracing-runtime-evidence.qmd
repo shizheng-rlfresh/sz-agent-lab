@@ -41,6 +41,12 @@ For each agent run, inspect:
 
 Then compare the trace to the eval result. A passing eval with a bad trace can still indicate risk. A failing eval with a good trace can identify a diagnosis or output-schema problem.
 
+## Trace Completeness
+
+Trace completeness is contextual. A local teaching repo can use a handful of events. A production system may need span IDs, parent IDs, model identifiers, prompt hashes, redaction status, token counts, retry attempts, and deployment version. The common principle is that the trace should answer the questions a reviewer will ask after a failure.
+
+If the trace cannot answer those questions, add fields before the next incident. Do not wait for the final observability architecture; improve the evidence contract incrementally.
+
 ## The Lab
 
 ```bash

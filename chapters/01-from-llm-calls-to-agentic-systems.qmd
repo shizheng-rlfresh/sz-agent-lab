@@ -46,6 +46,12 @@ The user/task contract defines what the system is trying to do. The runtime cont
 
 When a system fails, the useful question is not immediately "Did the model fail?" The useful question is: which contract failed? If the agent read the wrong file, the failure may be file selection. If it found the right evidence but returned malformed JSON, the failure may be output validation. If it attempted to read outside the repo, the policy should catch it. If the answer looks right but no trace exists, the failure is observability.
 
+## Review Heuristics
+
+When you review an agentic-system proposal, ask the proposer to draw the system without the model first. The diagram should still contain task intake, tools, state, context assembly, traces, evals, policy, reports, and deployment gates. If the diagram collapses into "call the model," the system is not yet designed.
+
+Then ask which parts are deterministic. Most production systems have more deterministic structure than their demos suggest. Authentication, data fetching, policy, validation, trace writing, report generation, and rollout checks should not depend on model creativity. The model can be central to interpretation, summarization, ranking, or planning, but the runtime should still own the contracts around it.
+
 ## The Lab
 
 Run the deterministic baseline:

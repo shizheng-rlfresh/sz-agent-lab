@@ -49,6 +49,12 @@ That is enough to be useful. It does not need to be an agent framework, a tracin
 
 Each issue should include a test and a sample artifact.
 
+## What Not to Build First
+
+Do not start with a dashboard. Do not start with a multi-agent orchestrator. Do not start with provider abstraction. Those may become useful later, but they distract from the first useful contract: given a run artifact, can the tool explain what happened and whether the run passed local gates?
+
+The strongest v0 is boring and inspectable. It should run locally, accept fixture traces, produce deterministic reports, and make failure cases easy to add.
+
 ## The Lab
 
 ```bash

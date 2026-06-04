@@ -44,6 +44,21 @@ Agentic systems can change through prompts, models, tool definitions, policy, re
 
 For a production system, version these surfaces separately and record their versions in traces or reports.
 
+## Incident Questions
+
+After a bad run, the incident review should ask:
+
+- What did the user request?
+- What tools were available?
+- What tools were called?
+- What evidence entered context?
+- What eval would have caught this?
+- What policy would have blocked it?
+- What version changed most recently?
+- What rollback is available?
+
+If the current artifacts cannot answer those questions, the readiness work is incomplete.
+
 ## The Lab
 
 ```bash

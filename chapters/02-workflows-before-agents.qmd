@@ -46,6 +46,22 @@ Consider an agent-shaped runtime when:
 
 These are design heuristics, not laws. The point is to make the autonomy decision explicit.
 
+## Baseline Comparison
+
+The deterministic workflow should not be discarded after the agent exists. It remains a regression baseline. If the agent cannot outperform the workflow on a defined dimension, the workflow may be the better production implementation.
+
+Useful comparison dimensions include:
+
+- evidence coverage,
+- output schema validity,
+- latency,
+- token estimate,
+- policy violations,
+- report status,
+- operational simplicity.
+
+This is where many agent demos become weaker under scrutiny. The agent may produce richer prose, but if it is slower, less grounded, harder to debug, and not measurably better, the deterministic path deserves priority.
+
 ## The Lab
 
 ```bash

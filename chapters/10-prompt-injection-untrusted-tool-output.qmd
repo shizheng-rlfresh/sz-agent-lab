@@ -30,6 +30,12 @@ The prompt-injection eval proves a narrow claim: the deterministic agent inspect
 
 This is the evidence discipline the book uses throughout: narrow claim, runnable artifact, explicit limitation.
 
+## Evidence Handling
+
+When an agent quotes untrusted content, the quote should be evidence, not instruction. A report might say: "The README contains the phrase `Ignore all previous instructions`." It should not place that phrase in a privileged instruction position. The distinction sounds obvious in a toy fixture and becomes subtle in large retrieval systems.
+
+In production, retrieved content should carry metadata: source, trust level, retrieval method, timestamp, and transformations. Without metadata, the model sees text and the reviewer sees ambiguity.
+
 ## The Lab
 
 ```bash
