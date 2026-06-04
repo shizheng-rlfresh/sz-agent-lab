@@ -102,6 +102,12 @@ The sample recommendation requires human review because large dynamic context ap
 
 If a team only stores raw traces, reviewers have to manually reconstruct the run. If a team only stores the final answer, they cannot reconstruct it at all.
 
+The symptom is review friction. A release reviewer asks whether the run is safe to deploy, and the answer is a directory of JSONL files, test logs, and hand-written notes. The data may be present, but the decision is still manual and inconsistent. Conversely, a single polished final answer hides the raw evidence entirely.
+
+The root cause is missing decision modeling. Reports should not be formatted log dumps. They should map evidence to decisions: task correctness, grounding, policy status, context budget, warnings, and deployment recommendation. A report can be concise only if the underlying artifacts are structured enough to summarize.
+
+The artifact that exposes the failure is a report that cannot explain its status. If the report says "human review required," it should name the warning. If it says "blocked," it should name the failed gate. If it says "ready," it should point to evals, traces, and policy evidence. Anything less leaves release decisions dependent on reviewer intuition.
+
 ## Production Translation
 
 Reports can become pull-request comments, release artifacts, incident attachments, or deployment gates. In production, the report should link to raw traces and preserve enough metadata to reproduce the run.

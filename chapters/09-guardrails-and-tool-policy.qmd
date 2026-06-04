@@ -89,6 +89,12 @@ The command prints JSON with the default allowed root, `read_only: true`, `allow
 
 If path checks are only prompt instructions, malicious or confused model behavior can still request unsafe paths. If shell access is exposed without approval, the blast radius becomes much larger than a read-only file lab.
 
+The symptom is misplaced trust. The prompt says "only read files in this repository," but the runtime accepts a path outside the root. The prompt says "do not run shell," but the tool exists and executes commands. The model may behave well during demos, yet the system has already granted authority it cannot justify.
+
+The root cause is confusing behavioral guidance with enforcement. Guardrail language can improve model behavior, but it does not replace runtime policy. A policy must run before the tool operation, record its decision, and fail closed when authority is unclear. The strongest prompt cannot make an unsafe tool safe if the runtime still executes it.
+
+The artifact that exposes the failure is a violation record. A blocked traversal or blocked shell attempt should be visible in trace and report data. That evidence proves the boundary exists and gives reviewers a chance to understand attempted behavior. Silent denial is better than unsafe execution, but recorded denial is better for operations.
+
 ## Production Translation
 
 Production guardrails should include policy enforcement, not just model instructions. Risky tools need explicit approval semantics, audit logs, and narrower capability scopes.

@@ -106,6 +106,12 @@ The output should include `README.md`, `calculator.py`, and `test_calculator.py`
 
 A transcript can look successful while the system is not debuggable, measurable, or safe. Without traces, evals, and policy, a team cannot reconstruct which evidence was used or which tool boundary mattered.
 
+The common symptom is a demo that produces a strong final paragraph but leaves no durable trail. The team can quote the answer, but it cannot answer basic review questions: which files were inspected, which tool calls failed, whether the output schema was validated, whether the model relied on stale memory, or whether the run crossed an authority boundary. The demo is persuasive to watch and weak to operate.
+
+The root cause is usually category error. The team evaluates a model call as if it were a system. A model response is one component; an agentic system also needs runtime control, tool confinement, context assembly, trace emission, evals, and rollout gates. If those pieces are absent, the system's quality cannot be inferred from a single successful answer.
+
+The artifact that exposes the failure is absence itself. No trace means no process evidence. No eval means no regression claim. No policy record means no capability boundary. No report means no release decision. A staff-level review should treat those missing artifacts as architectural facts, not as documentation tasks.
+
 ## Production Translation
 
 Before deployment, a team needs explicit answers to five questions:

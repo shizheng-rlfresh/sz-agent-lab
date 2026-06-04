@@ -114,6 +114,12 @@ The report generator produces a deployment recommendation. It requires human rev
 
 A system with no eval gate, no trace, and no rollback path can work in a demo and still be unsupportable. That is author judgment, but the repo demonstrates the evidence artifacts that reduce ambiguity.
 
+The symptom is a launch conversation driven by confidence rather than artifacts. The team has a strong demo, a few successful manual runs, and no clear answer to what blocks rollout, what requires human review, what changed since the last good run, or how to disable the system safely.
+
+The root cause is treating production readiness as a final checklist instead of a system property. Readiness emerges from the interaction of evals, traces, policy, context budgets, reports, ownership, rollout scope, monitoring, and rollback. Missing any one of those does not always block local experimentation, but it should narrow deployment authority.
+
+The artifact that exposes the failure is a production report with a conservative status. A report that can say "task passed, human review required because context budget warning exists" is more useful than a binary green check. Production readiness often means choosing the right rollout boundary, not declaring universal readiness.
+
 ## Production Translation
 
 For a real deployment, add ownership, monitoring, incident templates, escalation policy, data retention, and environment-specific security review. This book intentionally stops before cloud deployment.

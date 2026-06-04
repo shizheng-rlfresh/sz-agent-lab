@@ -102,6 +102,12 @@ The command prints a summary with `total_tokens`, `cacheable_tokens`, `dynamic_t
 
 `noisy_logs_repo` demonstrates the risk: each tool call is correct, but the observation is large enough to require caps, summarization, indexing, or human review before deployment.
 
+The symptom is a correct but inefficient run. The agent reads valid files, stays within policy, and may pass the task eval. Yet the prompt budget is dominated by repetitive dynamic output. The final answer can be right while the workload is not deployable at scale.
+
+The root cause is treating context as free evidence. More raw text is not automatically better. Tool output becomes prompt debt when it is copied wholesale into model context. The system needs caps, summaries, retrieval windows, token estimates, and pre-model budget gates before cost and latency become production incidents.
+
+The artifact that exposes the failure is a context profile. Estimated tokens, dynamic segment share, large-output warnings, and cacheable-vs-dynamic analysis make the problem visible before a model call. Even crude estimates are useful when clearly labeled because they catch order-of-magnitude mistakes early.
+
 ## Production Translation
 
 Context budget is a production constraint. Treat context as a scarce resource alongside latency, cost, memory, and reliability.

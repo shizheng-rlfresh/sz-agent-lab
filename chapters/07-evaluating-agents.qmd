@@ -101,6 +101,12 @@ The command prints three passing eval results and writes `reports/sample_eval_re
 
 An agent can produce plausible text without inspecting the right file. It can also cite a file that does not exist. Those failures are easy to miss in a transcript and easy to catch with deterministic checks.
 
+The symptom is a lucky answer. The final summary is correct enough for a quick demo, but the process was weak. The agent may have guessed from a filename, copied stale context, or relied on a generic pattern. If the eval only scores final text, the run passes despite poor evidence selection.
+
+The root cause is evaluating fluency instead of contract. Agent evals should check schema, expected evidence, unsupported file claims, invalid tool calls, and fixture-specific safety behavior. Natural-language quality matters, but it is not the first gate for a system that can inspect tools and produce artifacts.
+
+The artifact that exposes the failure is a process-aware eval result. `expected_file_inspected=false` has a different remediation path from `expected_keyword_present=false`. `hallucinated_file_count>0` points to grounding or validation. `invalid_tool_call_count>0` points to policy. A useful eval report should tell the engineer which subsystem to inspect next.
+
 ## Production Translation
 
 Deployment should be gated by eval results. For higher-risk systems, deterministic checks should be complemented by model-judge evals, human review, red-team cases, or online monitoring. That broader recommendation is author judgment; the repo only demonstrates the deterministic layer.

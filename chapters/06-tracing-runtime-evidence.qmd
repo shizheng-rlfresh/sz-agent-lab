@@ -90,6 +90,12 @@ The trace summary is a compression. When debugging a real failure, open the JSON
 
 Without traces, failures become anecdotal. A team cannot distinguish "the model reasoned badly" from "the wrong file was read," "a policy check failed," or "context was dominated by log noise."
 
+The symptom is an incident review that starts from memory. One engineer remembers the model answer. Another remembers the tool output. A third remembers a policy change. None of those memories are durable enough to reconstruct the run. The team can debate hypotheses, but it cannot replay the evidence path.
+
+The root cause is treating observability as log collection rather than runtime design. A useful trace is not just "print more things." It records typed events with run IDs, policy, tool calls, success and failure fields, latency, context observations, and finish status. It lets reviewers separate evidence selection from model behavior and model behavior from deployment gating.
+
+The artifact that exposes the failure is a trace completeness check. A run with a final answer but no `tool_call` events cannot prove evidence inspection. A run with tool calls but no `policy_check` cannot prove authority. A run with no finish event cannot prove whether output validation succeeded. The trace schema should make those gaps obvious.
+
 ## Production Translation
 
 Production systems need telemetry that can be inspected during development and incident response. This lab does not claim its JSONL format is enough for every deployment; it is the minimal local artifact that teaches the contract.

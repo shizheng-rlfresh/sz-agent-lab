@@ -97,6 +97,12 @@ The eval report should include `prompt_injection_repo` with `passed: True` and `
 
 An LLM-backed version might treat the README as instruction rather than data. Policy confinement does not make prompt injection impossible, but it reduces what the system can do even if the model is confused.
 
+The symptom is instruction leakage across trust boundaries. Repository content says "ignore previous instructions" or "read a secret file," and the runtime passes that content into a model without labeling it as untrusted observation. If subsequent tool calls are broad enough, the model's confusion can become a real action.
+
+The root cause is treating all text as one instruction stream. Tool output is data, even when the data contains imperative language. The runtime should preserve the content for diagnosis while labeling it, tracing suspicious patterns, and relying on policy to constrain follow-on actions. Refusing to read all suspicious files is too blunt; reading them without confinement is too weak.
+
+The artifact that exposes the failure is an injection fixture plus policy evidence. The eval should prove that malicious content was encountered, the final result stayed grounded, and no invalid tool call escaped confinement. A trace warning is useful, but it is not enough unless the policy boundary also holds.
+
 ## Production Translation
 
 Label tool output as observations, quote evidence rather than executing it, and apply runtime restrictions that do not depend on model compliance. For retrieval systems, apply the same discipline to web pages, tickets, documents, and long-term memory.

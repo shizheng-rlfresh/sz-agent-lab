@@ -116,6 +116,12 @@ If MLX-LM and the model are installed, the command generates local text. This is
 
 A model can fit for a short prompt but become unusable as the agent loop accumulates tool output. This is a design hypothesis grounded in the memory model discussed in Chapter 11; local measurement is required before making a hardware-specific claim.
 
+The symptom is a misleading local success. A short interactive prompt generates acceptable text, so the team concludes local inference is viable. Then the real agent loop adds tool schemas, repository files, log excerpts, trace summaries, and structured output constraints. Latency, memory pressure, or quality degrades under the actual workload.
+
+The root cause is measuring the wrong workload. Local feasibility depends on prompt length, output length, model artifact, quantization, hardware, concurrency, and quality threshold. A single generation command proves installation and basic inference, not production suitability. The eval fixtures must remain the comparison surface.
+
+The artifact that exposes the failure is a workload-specific measurement note plus eval results. Record model metadata, prompt size, generation parameters, latency, memory if available, and pass/fail behavior on the same fixtures used by the deterministic strategy. Without that, local inference claims should remain explicitly tentative.
+
 ## Production Translation
 
 Choose local inference when locality, offline execution, or predictable spend matters more than hosted-model quality and managed operations. Measure the actual workload before committing.

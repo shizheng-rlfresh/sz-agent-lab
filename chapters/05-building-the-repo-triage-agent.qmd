@@ -118,6 +118,12 @@ The result should identify `calculator.py` and report a division-by-zero contrac
 
 An LLM-backed version could inspect irrelevant files, hallucinate filenames, ignore evidence, over-read context, or emit malformed JSON. Those are not hypothetical claims about all LLMs; they are failure dimensions this repo can evaluate.
 
+The symptom is output that looks agentic but breaks the contract. The diagnosis may be plausible while `files_inspected` omits the decisive test file. The result may include a filename that does not exist. The answer may explain the bug in prose but fail the JSON schema. The run may read every file because selection logic is weak, turning a small task into unnecessary context growth.
+
+The root cause is putting model behavior before runtime shape. The agent contract should exist before the model strategy changes: schema, allowed tools, trace events, eval tasks, policy, and report status. Once those artifacts are fixed, a model-backed strategy can be evaluated as a strategy. Without them, every model failure becomes a bespoke debugging session.
+
+The artifact that exposes the failure is the combination of structured output and eval result. Schema checks catch malformed answers. Expected-file checks catch weak grounding. Hallucinated-file checks catch unsupported claims. Context warnings catch over-reading. The deterministic agent is intentionally simple because it gives all of those checks a stable target.
+
 ## Production Translation
 
 Before deploying an LLM version, the deterministic skeleton should already have tools, policy, tracing, evals, context accounting, and report generation. Model quality is not a substitute for runtime evidence.

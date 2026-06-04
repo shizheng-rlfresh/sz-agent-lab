@@ -102,6 +102,12 @@ The agent returns JSON with `summary`, `files_inspected`, `findings`, and `recom
 
 If prompt text is treated as authoritative state, a system can confuse instructions with observations. The `prompt_injection_repo` fixture later demonstrates why repository content should be treated as untrusted data.
 
+The symptom is state collapse. Tool output, memory, user instruction, developer instruction, trace summary, and report text all become undifferentiated prompt material. Once this happens, the runtime cannot explain why one statement outranked another. The model may follow repository prose as instruction, prefer stale memory over current files, or cite derived summaries as if they were primary evidence.
+
+The root cause is missing provenance. State surfaces need labels and freshness semantics. Current file content, retrieved memory, generated report summaries, and trace metadata can all be useful, but they should not have the same authority. A staff-level system should ask where each state item came from, when it was produced, whether it is trusted, and whether it belongs in prompt context.
+
+The artifact that exposes the failure is a context or trace record with source labels. If an observation entered the prompt, the system should know whether it came from a file, memory record, tool summary, or user request. If a later answer depends on stale or untrusted content, the review should be able to identify that dependency.
+
 ## Production Translation
 
 Production systems need ownership rules for state. Durable facts should live in durable stores. Runtime evidence should live in traces. Prompt context should be assembled intentionally and capped.

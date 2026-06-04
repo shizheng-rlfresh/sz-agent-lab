@@ -115,6 +115,12 @@ The command regenerates trace, eval, context, and production report artifacts th
 
 A capstone that tries to be a full agent framework will lose focus. A useful OSS project should have a narrow contract, test fixtures, and a measurable claim.
 
+The symptom is scope diffusion. The project begins as evidence tooling, then grows orchestration, chat UI, plugins, hosted integrations, dashboards, and model adapters before the first external user can validate a trace. The broader it becomes, the harder it is to explain why it exists.
+
+The root cause is confusing platform ambition with first-release value. The book's reusable contribution is not another way to call tools. It is a disciplined evidence contract around agent runs. A narrow `agentprobe` release can load traces, evaluate schema completeness, summarize policy and context risks, and generate a report. That is enough to be useful and testable.
+
+The artifact that exposes the failure is the first issue list. If the first seven issues are mostly infrastructure expansion and branding, the project is drifting. If they are trace loading, schema validation, fixture support, report generation, and documented limits, the project is preserving the book's thesis.
+
 ## Production Translation
 
 The reusable value is not "another agent." The reusable value is evidence around an agent run: what happened, whether it passed checks, and whether deployment gates should block.

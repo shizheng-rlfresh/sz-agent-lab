@@ -113,6 +113,12 @@ The command prints the visible files under `data/toy_repos/buggy_calc`. The orde
 
 If `read_file` accepted arbitrary paths, a malicious or confused agent could read outside the repository. If `grep` returned unbounded output, a noisy fixture could inflate context and cost.
 
+The symptom is not always an obvious exploit. It may appear as a harmless convenience: let the agent read any file so debugging is easier, return full grep results so the model has more evidence, or expose shell because it is faster than designing narrow tools. Each convenience expands authority and makes behavior harder to reason about.
+
+The root cause is treating tools as implementation details. When a model can call a tool, the tool becomes part of the runtime boundary. Path normalization, root confinement, output caps, structured errors, and trace fields are not polish. They are the mechanism that turns arbitrary code access into a reviewable capability.
+
+The artifact that exposes the failure is a policy or tool test that exercises the boundary. A traversal test proves path confinement. A max-output test proves context control. A blocked-shell test proves that broad execution is not accidentally available. If the only evidence is "the prompt told the model not to do that," the boundary is not enforceable.
+
 ## Production Translation
 
 Treat every tool as a production capability. If a tool can send email, delete files, run shell commands, or call internal services, it needs an authorization model, trace evidence, approval gates, and rollback semantics.

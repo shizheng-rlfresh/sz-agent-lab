@@ -124,6 +124,12 @@ The expected matches point to the contract mismatch: documentation and tests men
 
 Overbuilding a known path as an agent makes the system harder to test, harder to debug, and harder to cost. This is an author design judgment. The repo demonstrates the alternative: keep the deterministic floor and only add agent-shaped behavior where the runtime boundary is worth studying.
 
+The symptom is architectural inflation. A task with a stable decision path gains planning loops, dynamic tool selection, broad prompts, and model-dependent control flow. The resulting system may feel modern, but it loses useful invariants: step count, evidence order, cost, latency, and failure localization. The team then has to evaluate autonomy that was not required for the task.
+
+The root cause is skipping the baseline. Without a deterministic workflow, there is no control group. An agent is judged against the excitement of a blank page rather than against the simpler system that might have solved the same problem. This matters most when the task is operationally important, because unnecessary variance becomes a production burden.
+
+The artifact that exposes the failure is a baseline comparison. If the workflow and agent inspect the same evidence, return the same diagnosis, and differ mostly in cost and variance, the workflow should remain the default. If the agent handles cases where the workflow cannot choose evidence or next steps, then the autonomy boundary is justified and testable.
+
 ## Production Translation
 
 In production, deterministic paths are easier to review, cache, monitor, and roll back. Agentic behavior should be introduced where the task contains genuine runtime uncertainty.

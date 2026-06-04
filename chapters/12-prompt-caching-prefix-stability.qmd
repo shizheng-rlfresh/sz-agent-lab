@@ -109,6 +109,12 @@ The demo identifies `timestamp` as the first changed segment and reports `timest
 
 If a timestamp appears before stable instructions and schemas, the reusable prefix can shift every request. That makes caching less likely even though the semantic prompt looks similar.
 
+The symptom is an optimization that disappears in production. Prompt templates appear unchanged to humans, but byte-stable prefixes are broken by timestamps, UUIDs, random JSON key order, retrieval snippets, or user-specific metadata placed too early. The model still receives a reasonable prompt, but the runtime loses a caching opportunity.
+
+The root cause is treating prompt assembly as prose rather than serialization. Cache-sensitive prompt layout has invariants: stable instructions first, deterministic schemas, dynamic observations later, and no random fields before the stable prefix. These are software properties and should be tested like serializer behavior.
+
+The artifact that exposes the failure is a cache-demo comparison or prompt-assembler test. The analysis should identify the first changed segment, estimate cacheable and dynamic tokens, and name cache breakers. It should also state that cacheability is an optimization claim, not a correctness guarantee.
+
 ## Production Translation
 
 Prompt layout is infrastructure design. In a production agent, stable instructions, tool schemas, and structured output schemas should be kept stable and early when provider caching behavior makes that useful. Provider-specific claims must be checked against current provider docs.
