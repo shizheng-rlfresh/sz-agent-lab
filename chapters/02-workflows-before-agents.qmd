@@ -1,3 +1,66 @@
 # Workflows Before Agents
 
-Placeholder. This chapter will establish deterministic workflows as the baseline before autonomy.
+## Learning Objective
+
+After this chapter, you should be able to justify a deterministic workflow baseline before adding model autonomy.
+
+## Why This Matters
+
+Autonomy is not free. It increases the behavioral surface: file selection, stopping criteria, context growth, malformed outputs, and policy violations all become runtime concerns. Anthropic's guidance recommends workflows when the control path can be predefined and agents when the system needs flexible, model-directed behavior [@anthropic_effective_agents]. This lab turns that guidance into a reproducible baseline.
+
+## Core Concept
+
+A workflow has a known path. The workflow in this repo:
+
+1. lists repository files,
+2. searches for domain terms,
+3. returns structured observations.
+
+It does not infer intent, choose tools dynamically, or decide when to stop. That makes it easy to test and easy to falsify.
+
+## The Lab
+
+```bash
+python scripts/run_all_examples.py --example workflow_baseline
+```
+
+## Code Walkthrough
+
+`run_workflow_baseline` in `scripts/run_all_examples.py` creates a `ToolPolicy`, lists files under `buggy_calc`, and greps for `divide|division`. The policy still matters even though there is no agent. A deterministic workflow can still leak data if its tools are unsafe.
+
+## Expected Output
+
+The expected file set is stable:
+
+```text
+README.md
+calculator.py
+test_calculator.py
+```
+
+The expected matches point to the contract mismatch: documentation and tests mention division-by-zero behavior, while the implementation returns `a / b`.
+
+## Failure Mode
+
+Overbuilding a known path as an agent makes the system harder to test, harder to debug, and harder to cost. This is an author design judgment. The repo demonstrates the alternative: keep the deterministic floor and only add agent-shaped behavior where the runtime boundary is worth studying.
+
+## Production Translation
+
+In production, deterministic paths are easier to review, cache, monitor, and roll back. Agentic behavior should be introduced where the task contains genuine runtime uncertainty.
+
+## Evidence and References
+
+The workflow/agent distinction is cited from Anthropic's engineering guidance [@anthropic_effective_agents]. The local evidence is the `workflow_baseline` output.
+
+## Exercises
+
+1. Convert one agent idea into a deterministic workflow.
+2. Identify the first step that cannot be hard-coded cleanly.
+3. Add a success criterion before adding a model decision.
+4. Decide which workflow observations should be traced.
+
+## Checklist
+
+- Use workflows as the control group.
+- Do not add autonomy to hide unclear requirements.
+- Keep policy around deterministic tools too.

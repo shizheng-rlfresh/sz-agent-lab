@@ -1,3 +1,61 @@
 # State, Memory, and Context
 
-Placeholder. This chapter will separate prompt context, durable state, trace evidence, and eval artifacts.
+## Learning Objective
+
+After this chapter, you should be able to separate prompt context, tool observations, durable state, traces, eval results, and memory.
+
+## Why This Matters
+
+Agent discussions often collapse "memory," "state," and "context" into one word. That is operationally dangerous. A prompt instruction, a repository file, a JSONL trace, and an eval result have different authority.
+
+## Core Concept
+
+| State Type | Durable? | Trusted? | Goes Into Prompt? | Example |
+|---|---:|---:|---:|---|
+| User request | No | Partially | Yes | "Find the bug" |
+| Tool output | Maybe | More grounded than model text | Sometimes | File content |
+| Trace | Yes | Operational evidence | Usually no | JSONL event |
+| Eval result | Yes | Measurement artifact | No | pass/fail |
+| Summary memory | Maybe | Risky | Sometimes | compressed history |
+| External DB | Yes | Depends | Retrieved selectively | vector index |
+
+This table is author interpretation. The repo enforces part of it: traces and eval reports are artifacts, while tool output is bounded before it can become context.
+
+## The Lab
+
+```bash
+python -m agentic_systems_lab.agent
+```
+
+## Code Walkthrough
+
+`run_repo_triage` records `context_observation` events after reading files. It does not persist those observations as memory. It writes trace events and returns a structured final result.
+
+## Expected Output
+
+The agent returns JSON with `summary`, `files_inspected`, `findings`, and `recommended_next_step`. The trace contains `agent_start`, `policy_check`, `tool_call`, `context_observation`, and `agent_finish`.
+
+## Failure Mode
+
+If prompt text is treated as authoritative state, a system can confuse instructions with observations. The `prompt_injection_repo` fixture later demonstrates why repository content should be treated as untrusted data.
+
+## Production Translation
+
+Production systems need ownership rules for state. Durable facts should live in durable stores. Runtime evidence should live in traces. Prompt context should be assembled intentionally and capped.
+
+## Evidence and References
+
+The state taxonomy is design judgment. The trace shape is repo evidence and aligns with tracing concepts described by OpenAI Agents SDK docs [@openai_agents_tracing].
+
+## Exercises
+
+1. Identify every state surface in the repo triage agent.
+2. Mark each surface as authoritative or untrusted.
+3. Decide which observations would enter an LLM prompt.
+4. Add a trace field that would improve state auditability.
+
+## Checklist
+
+- Context is not memory.
+- Trace evidence is not prompt context.
+- Tool output is data, not authority.

@@ -1,3 +1,70 @@
 # Designing Tools
 
-Placeholder. This chapter will treat tool design as capability design.
+## Learning Objective
+
+After this chapter, you should be able to specify a tool contract that is deterministic, bounded, and safe by default.
+
+## Why This Matters
+
+Tools are capabilities. A file reader can expose secrets. A shell tool can become code execution. A write tool can mutate durable state. The OWASP LLM Top 10 treats excessive agency and prompt injection as relevant risks for LLM applications [@owasp_llm_top10]. This chapter narrows the claim to the repo: unsafe tools would make the lab unsafe even if the prompt says "be careful."
+
+## Core Concept
+
+A tool contract should specify:
+
+- input schema,
+- output schema,
+- allowed roots or resources,
+- mutability,
+- output caps,
+- error behavior,
+- trace fields.
+
+The lab implements three read-only tools: `list_files`, `read_file`, and `grep`.
+
+## The Lab
+
+```bash
+python -m agentic_systems_lab.tools
+```
+
+## Code Walkthrough
+
+The important boundary is not the filesystem call. It is policy resolution:
+
+```python
+file_path = active_policy.resolve_path(path)
+text = file_path.read_text(encoding="utf-8", errors="replace")
+return active_policy.cap_text(text, max_chars=max_chars)
+```
+
+The tool does not decide whether a path is safe; `ToolPolicy` does. That separation makes it possible to test path traversal, read-only behavior, and output caps independently.
+
+## Expected Output
+
+The command prints the visible files under `data/toy_repos/buggy_calc`. The ordering is deterministic so tests and traces do not churn.
+
+## Failure Mode
+
+If `read_file` accepted arbitrary paths, a malicious or confused agent could read outside the repository. If `grep` returned unbounded output, a noisy fixture could inflate context and cost.
+
+## Production Translation
+
+Treat every tool as a production capability. If a tool can send email, delete files, run shell commands, or call internal services, it needs an authorization model, trace evidence, approval gates, and rollback semantics.
+
+## Evidence and References
+
+Security framing is grounded in OWASP's LLM risk taxonomy [@owasp_llm_top10]. Tool behavior is grounded in `tests/test_tools.py` and `tests/test_policy.py`.
+
+## Exercises
+
+1. Add a blocked traversal test for `../`.
+2. Add a max-output-size test for `grep`.
+3. Design a `write_file` schema but keep it approval-gated.
+4. Define the trace fields required for a tool call.
+
+## Checklist
+
+- Tools are capabilities, not helpers.
+- Read-only should be the default.
+- Output size is part of the safety contract.
