@@ -6,7 +6,7 @@ from pathlib import Path
 
 from agentic_systems_lab.context import ContextTracker
 from agentic_systems_lab.agent import run_repo_triage
-from agentic_systems_lab.evals import EvalTask, evaluate_result
+from agentic_systems_lab.evals import EvalTask, default_tasks, evaluate_result, write_eval_report
 from agentic_systems_lab.policy import ToolPolicy
 from agentic_systems_lab.tools import list_files, read_file
 from agentic_systems_lab.tracer import summarize_trace
@@ -108,6 +108,30 @@ def _sample_context_summary(data_root: Path) -> dict:
     return tracker.summary()
 
 
+def _sample_eval_results(data_root: Path, traces_root: Path) -> list[dict]:
+    results: list[dict] = []
+    for task in default_tasks():
+        repo_path = data_root / Path(task.repo_path).name
+        policy = ToolPolicy(allowed_roots=(data_root,))
+        agent_result = run_repo_triage(
+            repo_path,
+            trace_path=traces_root / f"{task.name}_report_eval_trace.jsonl",
+            run_id=f"run_{task.name}_report_eval_sample",
+            policy=policy,
+        )
+        rooted_task = EvalTask(
+            name=task.name,
+            repo_path=str(repo_path),
+            expected_file=task.expected_file,
+            expected_keyword=task.expected_keyword,
+            allowed_files=tuple(list_files(repo_path, policy=policy)),
+        )
+        results.append(
+            evaluate_result(rooted_task, agent_result, invalid_tool_call_count=len(policy.violations))
+        )
+    return results
+
+
 def main() -> None:
     trace_path = Path("traces/buggy_calc_trace.jsonl")
     data_root = Path("data/toy_repos")
@@ -126,7 +150,9 @@ def main() -> None:
         expected_keyword="division",
         allowed_files=tuple(list_files(repo_path, policy=policy)),
     )
-    eval_results = [evaluate_result(task, agent_result, invalid_tool_call_count=len(policy.violations))]
+    eval_results = _sample_eval_results(data_root, Path("traces"))
+    eval_results[0] = evaluate_result(task, agent_result, invalid_tool_call_count=len(policy.violations))
+    write_eval_report(eval_results, "reports/sample_eval_report.md")
     report = generate_report(
         trace_path=trace_path,
         eval_results=eval_results,
