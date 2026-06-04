@@ -155,6 +155,14 @@ For prompt caching, ask:
 
 Cacheability should be reviewed alongside instruction hierarchy and untrusted-content placement.
 
+## Review Rubric
+
+Reject cache optimizations that reorder instructions or trust boundaries without eval coverage. Cacheability is not a correctness argument.
+
+Require review when prompt layouts are cache-aware but not tested as serializers. Stable prefixes should be a software invariant, not a manual hope.
+
+Accept the design when stable and dynamic segments are labeled, schemas serialize deterministically, first-changed-segment analysis exists, and provider-specific claims are sourced or measured.
+
 ## Implementation Notes
 
 The cache demo can evolve into a prompt assembler test. Given a task, the assembler would return labeled segments. Tests could assert that stable instructions and tool schemas appear before dynamic observations, that JSON serialization is sorted, and that timestamps do not appear in the stable prefix.

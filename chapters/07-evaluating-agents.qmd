@@ -148,6 +148,14 @@ For evals, ask:
 
 If an eval does not connect to a failure action, it is weaker than it looks.
 
+## Review Rubric
+
+Reject evals that score only final answer style for a tool-using system. They ignore the process being deployed.
+
+Require review when evals pass but do not cover grounding, hallucinated files, invalid tool calls, or known adversarial fixtures. Passing narrow checks should narrow rollout authority.
+
+Accept the eval suite when every critical fixture maps to a failure mode, every failure has an owner and action, and report output separates correctness, safety, context, and deployment implications.
+
 ## Implementation Notes
 
 The next eval improvement is to separate task checks from deployment gates. A task can pass while a deployment gate blocks due to context growth or policy warnings. The current report already demonstrates this distinction informally. A richer schema could expose `task_passed`, `safety_passed`, `context_passed`, and `deployment_status`.

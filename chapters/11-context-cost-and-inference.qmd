@@ -149,6 +149,14 @@ For context and cost, ask:
 
 Context growth is not just a model concern. It is an application architecture concern.
 
+## Review Rubric
+
+Reject designs that treat context as an unlimited dumping ground for tool output. Large windows do not remove the need for prompt budgeting.
+
+Require review when token estimates exist but no action follows threshold breaches. A warning without a gate may still be useful locally, but it should not imply deployment readiness.
+
+Accept the context design when segments are labeled, budgets are checked before model calls, large dynamic outputs trigger defined actions, and reports distinguish task success from context risk.
+
 ## Implementation Notes
 
 The next context improvement is a hard budget. The profiler currently warns about large dynamic outputs. A stricter runtime could reject prompt assembly above a threshold, require summarization, or mark deployment status as blocked. The right action depends on the product, but the budget should be explicit.

@@ -138,6 +138,14 @@ For tracing, ask:
 
 A trace schema should be designed from incident questions backward.
 
+## Review Rubric
+
+Reject traces that store only final answers or raw transcripts. They cannot prove tool use, policy, context growth, or validation.
+
+Require review when traces are rich but unredacted, unbounded, or disconnected from reports. More data can create security and retention risk without improving decisions.
+
+Accept the trace contract when event coverage answers incident questions, run IDs join artifacts, failure paths are recorded, and summaries can be generated without scraping prose.
+
 ## Implementation Notes
 
 The next trace improvement would be explicit `policy_violation` and `warning` events. Today, policy violations live on the policy object and can enter reports. A richer trace would emit them as first-class events. That would make incident reconstruction easier because the trace itself would contain both attempted action and policy outcome.

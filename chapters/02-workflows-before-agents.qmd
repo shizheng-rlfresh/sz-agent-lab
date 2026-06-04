@@ -172,6 +172,14 @@ Before replacing a workflow with an agent, ask:
 
 An agent proposal should identify the first dynamic decision, not simply assert that the whole task is dynamic.
 
+## Review Rubric
+
+Reject an agent proposal that cannot describe the deterministic baseline. If the team cannot write the fixed path, it cannot prove that dynamic behavior is necessary.
+
+Require review when the agent adds dynamic behavior but no comparison metrics. The proposal should state which metric improves: evidence coverage, task success, latency, cost, review time, or failure handling.
+
+Accept the agent path only when the first dynamic decision is named and the workflow remains available as baseline, fallback, and regression harness.
+
 ## Implementation Notes
 
 Keep the workflow callable even after the agent exists. It can run in CI as a smoke test. It can provide fallback behavior when model access is unavailable. It can produce diagnostic artifacts when the agent fails. Removing the baseline too early makes future regressions harder to localize.

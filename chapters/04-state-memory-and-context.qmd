@@ -149,6 +149,14 @@ For each state surface, ask:
 
 This review often reveals that a proposed "memory" feature is actually several different systems: retrieval, summarization, persistence, consent, deletion, and prompt assembly.
 
+## Review Rubric
+
+Reject designs that collapse user instructions, tool output, memory, and trace summaries into one unlabeled prompt blob. That design cannot explain authority or provenance.
+
+Require review when persistent memory exists without freshness, correction, deletion, or source metadata. The system may still be useful, but memory should not be trusted as current evidence.
+
+Accept the state design when each surface has a label, owner, retention rule, prompt-entry rule, and trace evidence showing when it influenced a run.
+
 ## Implementation Notes
 
 If you add memory later, do not put it directly into prompts. Add a retrieval boundary. Add metadata. Add a trust label. Add tests showing that unrelated or malicious memory is not injected into privileged instructions. Add a deletion path. Add a trace event that records which memory entries were used.

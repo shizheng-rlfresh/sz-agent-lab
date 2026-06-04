@@ -161,6 +161,14 @@ For production readiness, ask:
 
 Readiness is a living system, not a slide.
 
+## Review Rubric
+
+Reject readiness claims that lack rollback, ownership, trace evidence, or eval gates. A demo can work while the system remains unsupportable.
+
+Require review when the system is ready for local advisory use but not for automatic or mutating actions. The correct response is scoped rollout, not binary approval.
+
+Accept readiness when deployment status is data, reason codes are explicit, warnings have owners, rollback is tested, and each rollout stage has evidence requirements.
+
 ## Implementation Notes
 
 The next readiness improvement is to encode deployment status as data. Instead of prose-only `human review required`, define a status enum and reason list. Reports can still render prose, but CI can read the enum.

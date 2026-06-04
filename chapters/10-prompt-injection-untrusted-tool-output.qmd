@@ -155,6 +155,14 @@ For untrusted tool output, ask:
 
 Prompt-injection review should include both security and task-performance questions.
 
+## Review Rubric
+
+Reject designs that pass tool output into prompts as if it were instruction, especially when follow-on tool calls can be influenced by that output.
+
+Require review when suspicious-content detection exists without policy confinement. Detection improves evidence, but enforcement still needs to limit authority.
+
+Accept the design when untrusted content is labeled, suspicious patterns are traced, policy blocks escalation, eval fixtures cover known attacks, and mutating actions require stronger gates.
+
 ## Implementation Notes
 
 A useful next implementation step is suspicious-content tracing. When the runtime sees phrases such as "ignore previous instructions," it can emit a `warning` event. That warning should not block the read by itself; reading adversarial content may be necessary. It should make the risk visible in the trace and report.

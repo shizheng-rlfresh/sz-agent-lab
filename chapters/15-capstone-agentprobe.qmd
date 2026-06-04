@@ -161,6 +161,14 @@ For the capstone project, ask:
 
 A focused capstone should make the book's evidence standard reusable.
 
+## Review Rubric
+
+Reject a capstone plan that starts by building a broad framework, dashboard, or orchestration layer before the evidence contract is stable.
+
+Require review when the project is useful only for this repo's toy traces. The first external contract should be narrow but not repo-locked.
+
+Accept the project direction when it can load a trace, validate schema, summarize eval and policy evidence, generate a report, and document unsupported cases without forcing framework migration.
+
 ## Implementation Notes
 
 If this repo becomes the seed for `agentprobe`, resist moving all code immediately. First add clean boundaries: trace loading, eval evaluation, report generation, and policy summary. Then extract those modules with tests. Extraction should preserve fixtures so behavior remains reproducible.

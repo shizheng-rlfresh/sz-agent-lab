@@ -160,6 +160,14 @@ Use these questions before approving an agentic-system design:
 
 If the design cannot answer these questions, the missing answers are not documentation gaps. They are system-design gaps.
 
+## Review Rubric
+
+Reject a design that equates "uses an LLM" with "is an agentic system," or that presents final-answer quality as the only evidence. That design has not specified the runtime.
+
+Require review when the design has tools or traces but no evals, or evals but no policy. Partial evidence is useful, but the missing artifact should limit rollout scope.
+
+Accept the first version only when the autonomy boundary, tool authority, trace path, eval gate, and rollback or review path are explicit. The model can be simple; the system contract should not be vague.
+
 ## Implementation Notes
 
 When implementing a new agentic feature, create the artifact skeleton first. Define the output schema before writing prompts. Define the trace events before adding tool calls. Define policy before exposing capabilities. Define eval fixtures before declaring the demo successful. This order keeps the system inspectable as it grows.

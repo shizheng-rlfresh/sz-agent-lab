@@ -163,6 +163,14 @@ For local inference, ask:
 
 Do not accept "runs on my machine" as deployment evidence.
 
+## Review Rubric
+
+Reject local-inference claims based only on a short successful generation. That proves installation, not workload suitability.
+
+Require review when local inference works but bypasses the shared schema, trace, eval, or report path. A separate local demo is not an agent strategy.
+
+Accept the optional path when dependencies are explicit, model metadata is traced, fixture evals run unchanged, representative prompt sizes are measured, and fallback behavior is defined.
+
 ## Implementation Notes
 
 Keep local inference behind an optional adapter. The deterministic runtime should not import MLX at module import time. Optional dependencies should be installed explicitly. The adapter should return the same structured output as the deterministic strategy or fail with a clear unavailable status.

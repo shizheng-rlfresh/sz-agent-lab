@@ -170,6 +170,14 @@ For every proposed tool, ask:
 
 If a tool cannot be described this way, it is not ready to expose to an agent.
 
+## Review Rubric
+
+Reject tools that expose broad authority without a narrow contract: arbitrary shell, unrestricted filesystem reads, unbounded output, or mutation without approval.
+
+Require review when a tool is read-only but returns large or ambiguous output. Read-only does not mean risk-free if the output can flood context or confuse downstream evals.
+
+Accept a tool when policy checks happen before execution, outputs are bounded and structured, ordering is deterministic, and abuse-case tests cover the boundary.
+
 ## Implementation Notes
 
 Add tools in three steps. First, write policy tests for what the tool must not do. Second, write behavior tests for deterministic successful output. Third, add trace coverage so the runtime can reconstruct calls. Only after those steps should a model be allowed to select the tool.

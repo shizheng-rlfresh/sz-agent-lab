@@ -136,6 +136,14 @@ For guardrails and policy, ask:
 
 The safest policy is one whose failure mode is visible in tests, traces, and reports.
 
+## Review Rubric
+
+Reject policy designs that rely on prompt wording as the enforcement boundary. The runtime must constrain tools even when model behavior is wrong.
+
+Require review when policy exists but is not serialized, tested at abuse boundaries, or represented in reports. Invisible policy is hard to audit.
+
+Accept the policy when it fails closed, records violations, distinguishes read/write/shell authority, supports approval semantics for risky actions, and is visible in trace and report artifacts.
+
 ## Implementation Notes
 
 A production implementation should load policy from a versioned file rather than hard-coding defaults. That file should be reviewed like source code. Changes to `allow_shell`, write permissions, network access, or allowed roots should be obvious in diff review.

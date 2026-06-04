@@ -168,6 +168,14 @@ For the agent runtime, ask:
 
 The diagnosis step can evolve from rules to models, but these runtime questions should remain stable.
 
+## Review Rubric
+
+Reject an agent runtime that returns prose only, mutates the repository in the default path, or hides tool selection from traces.
+
+Require review when output is structured but confidence, failure categories, or low-evidence behavior are undefined. A schema without failure semantics is only half a contract.
+
+Accept the runtime when strategy choice is isolated, output schema is stable, policy is recorded, tool calls are traced, evals check evidence, and no mutation happens without an explicit feature and gate.
+
 ## Implementation Notes
 
 The next implementation step would be to isolate diagnosis behind a function or strategy object. The deterministic strategy would remain the default. An LLM strategy could be optional and would have to return the same schema. Tests would run against the deterministic strategy; integration tests could exercise the LLM strategy only when credentials are explicitly available.
