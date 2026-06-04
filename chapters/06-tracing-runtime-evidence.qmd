@@ -112,6 +112,12 @@ For tracing, ask:
 
 A trace schema should be designed from incident questions backward.
 
+## Implementation Notes
+
+The next trace improvement would be explicit `policy_violation` and `warning` events. Today, policy violations live on the policy object and can enter reports. A richer trace would emit them as first-class events. That would make incident reconstruction easier because the trace itself would contain both attempted action and policy outcome.
+
+Another useful improvement is artifact linking: report path, eval report path, and trace path should reference each other.
+
 ## Evidence and References
 
 Tracing concepts are grounded in OpenAI Agents SDK tracing and OpenTelemetry GenAI conventions [@openai_agents_tracing; @otel_genai]. Local behavior is verified by `tests/test_tracer.py`.

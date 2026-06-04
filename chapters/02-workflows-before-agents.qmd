@@ -146,6 +146,12 @@ Before replacing a workflow with an agent, ask:
 
 An agent proposal should identify the first dynamic decision, not simply assert that the whole task is dynamic.
 
+## Implementation Notes
+
+Keep the workflow callable even after the agent exists. It can run in CI as a smoke test. It can provide fallback behavior when model access is unavailable. It can produce diagnostic artifacts when the agent fails. Removing the baseline too early makes future regressions harder to localize.
+
+If the workflow and agent share tools, the tool tests become more valuable. A bug in `read_file` affects both paths. A policy regression affects both paths. Shared deterministic components are leverage.
+
 ## Evidence and References
 
 The workflow/agent distinction is cited from Anthropic's engineering guidance [@anthropic_effective_agents]. The local evidence is the `workflow_baseline` output.

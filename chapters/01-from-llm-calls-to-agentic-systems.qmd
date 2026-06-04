@@ -134,6 +134,12 @@ Use these questions before approving an agentic-system design:
 
 If the design cannot answer these questions, the missing answers are not documentation gaps. They are system-design gaps.
 
+## Implementation Notes
+
+When implementing a new agentic feature, create the artifact skeleton first. Define the output schema before writing prompts. Define the trace events before adding tool calls. Define policy before exposing capabilities. Define eval fixtures before declaring the demo successful. This order keeps the system inspectable as it grows.
+
+In practice, the implementation order should feel conservative: workflow, tests, tools, policy, trace, eval, report, then model behavior. The model enters a system that already knows how to observe itself.
+
 ## Evidence and References
 
 Agent/workflow distinctions are grounded in Anthropic and OpenAI documentation [@anthropic_effective_agents; @openai_agents_sdk]. The repo behavior is grounded in the command above and its generated JSON.

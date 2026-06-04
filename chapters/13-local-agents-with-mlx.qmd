@@ -137,6 +137,12 @@ For local inference, ask:
 
 Do not accept "runs on my machine" as deployment evidence.
 
+## Implementation Notes
+
+Keep local inference behind an optional adapter. The deterministic runtime should not import MLX at module import time. Optional dependencies should be installed explicitly. The adapter should return the same structured output as the deterministic strategy or fail with a clear unavailable status.
+
+This lets the repo support local experiments without making every reader install local-inference tooling.
+
 ## Evidence and References
 
 MLX and MLX-LM claims cite their project documentation [@mlx_docs; @mlx_lm_docs]. KV-cache context uses Hugging Face documentation [@huggingface_kv_cache].

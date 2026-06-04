@@ -129,6 +129,12 @@ For untrusted tool output, ask:
 
 Prompt-injection review should include both security and task-performance questions.
 
+## Implementation Notes
+
+A useful next implementation step is suspicious-content tracing. When the runtime sees phrases such as "ignore previous instructions," it can emit a `warning` event. That warning should not block the read by itself; reading adversarial content may be necessary. It should make the risk visible in the trace and report.
+
+This preserves controlled observation while improving review evidence.
+
 ## Evidence and References
 
 Prompt-injection risk framing is grounded in OWASP [@owasp_llm_top10]. The local fixture and eval demonstrate the narrower claim made in this chapter.

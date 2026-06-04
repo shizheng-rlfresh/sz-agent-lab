@@ -110,6 +110,12 @@ For guardrails and policy, ask:
 
 The safest policy is one whose failure mode is visible in tests, traces, and reports.
 
+## Implementation Notes
+
+A production implementation should load policy from a versioned file rather than hard-coding defaults. That file should be reviewed like source code. Changes to `allow_shell`, write permissions, network access, or allowed roots should be obvious in diff review.
+
+The local object model is still useful: it defines the fields a file-based policy would need.
+
 ## Evidence and References
 
 Security risk categories are grounded in OWASP [@owasp_llm_top10]. Local enforcement is tested in `tests/test_policy.py`.

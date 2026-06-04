@@ -135,6 +135,12 @@ For production readiness, ask:
 
 Readiness is a living system, not a slide.
 
+## Implementation Notes
+
+The next readiness improvement is to encode deployment status as data. Instead of prose-only `human review required`, define a status enum and reason list. Reports can still render prose, but CI can read the enum.
+
+The enum should be conservative. Missing evidence should not become success by default.
+
 ## Evidence and References
 
 Risk-management framing cites NIST AI RMF [@nist_ai_rmf]. Local readiness behavior is repo evidence from the generated report.

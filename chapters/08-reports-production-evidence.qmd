@@ -123,6 +123,12 @@ For reports, ask:
 
 A report should be designed around decisions. Otherwise it becomes a formatted log dump.
 
+## Implementation Notes
+
+The next report improvement is dual output: Markdown for humans and JSON for automation. The Markdown report should remain readable. The JSON report should contain stable fields for CI or release tooling. Both should derive from the same internal data model so they cannot disagree.
+
+Once a report has a machine-readable status, it can become a real gate.
+
 ## Evidence and References
 
 Report behavior is local evidence from `reports/sample_production_report.md` and `tests/test_report.py`. Risk-gating language is aligned with the measurement and management posture in NIST AI RMF [@nist_ai_rmf].

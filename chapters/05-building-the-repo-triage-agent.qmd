@@ -142,6 +142,12 @@ For the agent runtime, ask:
 
 The diagnosis step can evolve from rules to models, but these runtime questions should remain stable.
 
+## Implementation Notes
+
+The next implementation step would be to isolate diagnosis behind a function or strategy object. The deterministic strategy would remain the default. An LLM strategy could be optional and would have to return the same schema. Tests would run against the deterministic strategy; integration tests could exercise the LLM strategy only when credentials are explicitly available.
+
+This keeps the core repo deterministic while leaving a clean extension point.
+
 ## Evidence and References
 
 The agent architecture is repo evidence. The idea that agent SDKs can coordinate tools, guardrails, handoffs, and traces is supported by OpenAI's Agents SDK docs [@openai_agents_sdk].

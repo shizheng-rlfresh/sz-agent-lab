@@ -123,6 +123,12 @@ For each state surface, ask:
 
 This review often reveals that a proposed "memory" feature is actually several different systems: retrieval, summarization, persistence, consent, deletion, and prompt assembly.
 
+## Implementation Notes
+
+If you add memory later, do not put it directly into prompts. Add a retrieval boundary. Add metadata. Add a trust label. Add tests showing that unrelated or malicious memory is not injected into privileged instructions. Add a deletion path. Add a trace event that records which memory entries were used.
+
+Treat memory retrieval like a tool call. It observes a state surface and returns untrusted or partially trusted content.
+
 ## Evidence and References
 
 The state taxonomy is design judgment. The trace shape is repo evidence and aligns with tracing concepts described by OpenAI Agents SDK docs [@openai_agents_tracing].

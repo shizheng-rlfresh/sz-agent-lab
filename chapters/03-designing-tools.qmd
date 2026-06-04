@@ -144,6 +144,12 @@ For every proposed tool, ask:
 
 If a tool cannot be described this way, it is not ready to expose to an agent.
 
+## Implementation Notes
+
+Add tools in three steps. First, write policy tests for what the tool must not do. Second, write behavior tests for deterministic successful output. Third, add trace coverage so the runtime can reconstruct calls. Only after those steps should a model be allowed to select the tool.
+
+For high-risk tools, add a dry-run mode before execution mode. The dry-run output should be structured enough for approval and evals.
+
 ## Evidence and References
 
 Security framing is grounded in OWASP's LLM risk taxonomy [@owasp_llm_top10]. Tool behavior is grounded in `tests/test_tools.py` and `tests/test_policy.py`.

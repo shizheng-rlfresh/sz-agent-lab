@@ -135,6 +135,12 @@ For the capstone project, ask:
 
 A focused capstone should make the book's evidence standard reusable.
 
+## Implementation Notes
+
+If this repo becomes the seed for `agentprobe`, resist moving all code immediately. First add clean boundaries: trace loading, eval evaluation, report generation, and policy summary. Then extract those modules with tests. Extraction should preserve fixtures so behavior remains reproducible.
+
+Good extraction is boring. It should make the current repo simpler while creating a reusable package.
+
 ## Evidence and References
 
 The project framing is author interpretation. The technical pieces are repo evidence. Tracing and risk-management references are OpenAI Agents SDK tracing, OpenTelemetry, and NIST AI RMF [@openai_agents_tracing; @otel_genai; @nist_ai_rmf].

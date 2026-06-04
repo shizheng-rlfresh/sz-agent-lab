@@ -123,6 +123,12 @@ For context and cost, ask:
 
 Context growth is not just a model concern. It is an application architecture concern.
 
+## Implementation Notes
+
+The next context improvement is a hard budget. The profiler currently warns about large dynamic outputs. A stricter runtime could reject prompt assembly above a threshold, require summarization, or mark deployment status as blocked. The right action depends on the product, but the budget should be explicit.
+
+Budget enforcement should happen before the model call, not after a costly failed run.
+
 ## Evidence and References
 
 KV-cache and inference framing are grounded in Hugging Face documentation and the PagedAttention paper [@huggingface_kv_cache; @pagedattention]. The token estimator is explicitly a local approximation.

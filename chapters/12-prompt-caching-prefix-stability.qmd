@@ -129,6 +129,12 @@ For prompt caching, ask:
 
 Cacheability should be reviewed alongside instruction hierarchy and untrusted-content placement.
 
+## Implementation Notes
+
+The cache demo can evolve into a prompt assembler test. Given a task, the assembler would return labeled segments. Tests could assert that stable instructions and tool schemas appear before dynamic observations, that JSON serialization is sorted, and that timestamps do not appear in the stable prefix.
+
+This turns prompt optimization into testable software behavior.
+
 ## Evidence and References
 
 OpenAI and vLLM documentation support the prefix-match framing [@openai_prompt_caching; @vllm_prefix_caching]. The local demo supports the cache-breaker analysis.

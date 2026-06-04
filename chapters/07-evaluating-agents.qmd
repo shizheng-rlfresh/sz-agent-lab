@@ -122,6 +122,12 @@ For evals, ask:
 
 If an eval does not connect to a failure action, it is weaker than it looks.
 
+## Implementation Notes
+
+The next eval improvement is to separate task checks from deployment gates. A task can pass while a deployment gate blocks due to context growth or policy warnings. The current report already demonstrates this distinction informally. A richer schema could expose `task_passed`, `safety_passed`, `context_passed`, and `deployment_status`.
+
+That split prevents a common confusion: "the answer was correct" does not mean "the run is deployable."
+
 ## Evidence and References
 
 The eval behavior is repo evidence from `tests/test_evals.py` and `reports/sample_eval_report.md`. NIST AI RMF frames measurement and risk management as part of AI governance [@nist_ai_rmf].
