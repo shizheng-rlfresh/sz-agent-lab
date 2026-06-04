@@ -56,6 +56,10 @@ Reports should be concise enough to read and specific enough to act on. A hundre
 
 For production, add links rather than copying everything. Link to raw traces, eval task definitions, policy versions, and artifact hashes. A report is the table of contents for evidence.
 
+## Case Study Step
+
+The sample production report is deliberately not all green. The evals pass, but the report still requires human review because large dynamic context appears. That is the desired lesson. Production evidence should be capable of saying, "the task succeeded, but rollout still needs review."
+
 ## The Lab
 
 ```bash

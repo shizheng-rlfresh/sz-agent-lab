@@ -52,6 +52,12 @@ When you review an agentic-system proposal, ask the proposer to draw the system 
 
 Then ask which parts are deterministic. Most production systems have more deterministic structure than their demos suggest. Authentication, data fetching, policy, validation, trace writing, report generation, and rollout checks should not depend on model creativity. The model can be central to interpretation, summarization, ranking, or planning, but the runtime should still own the contracts around it.
 
+## Running Case Study
+
+The book uses one small case study repeatedly: a repo triage system. In a real company, this might inspect pull requests, failing tests, logs, or issue reports. In this lab, it inspects toy repositories. The simplification is intentional. The point is to show that even a tiny agent-shaped system already needs boundaries.
+
+`buggy_calc` gives the system a benign diagnosis task. `prompt_injection_repo` gives it untrusted content. `noisy_logs_repo` gives it context pressure. Together they form a compact failure matrix: task correctness, safety, and infrastructure cost.
+
 ## The Lab
 
 Run the deterministic baseline:

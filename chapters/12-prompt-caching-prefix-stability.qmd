@@ -54,6 +54,10 @@ Personalization and cacheability often pull in opposite directions. User-specifi
 
 This matters for agentic systems because tool schemas can be long and stable. If they appear after dynamic content, the system may waste an optimization opportunity. If they appear before dynamic content, they can remain in the stable prefix when provider behavior supports that.
 
+## Case Study Step
+
+The repo triage prompt would likely have stable instructions and stable tool schemas. The repository content, user request, and trace-derived observations are dynamic. The cache demo teaches the layout principle before the book introduces any provider-specific integration.
+
 ## The Lab
 
 ```bash

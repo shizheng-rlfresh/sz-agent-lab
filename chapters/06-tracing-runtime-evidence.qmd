@@ -47,6 +47,10 @@ Trace completeness is contextual. A local teaching repo can use a handful of eve
 
 If the trace cannot answer those questions, add fields before the next incident. Do not wait for the final observability architecture; improve the evidence contract incrementally.
 
+## Case Study Step
+
+The `buggy_calc` trace proves that the agent inspected `calculator.py` and `test_calculator.py` through policy-controlled tools. The trace does not prove the diagnosis is correct; the eval handles a different slice of evidence. This separation is useful. Trace answers "what happened?" Eval answers "did the observed behavior satisfy the check?"
+
 ## The Lab
 
 ```bash

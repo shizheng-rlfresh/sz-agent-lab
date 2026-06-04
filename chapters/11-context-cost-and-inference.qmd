@@ -46,6 +46,10 @@ Summarization is not automatically better than raw context. It can remove the ev
 
 For logs, a better strategy may be extraction rather than summarization: error lines, time windows, unique stack traces, or sampled clusters. The local lab does not implement those strategies, but it creates the warning that should trigger them.
 
+## Case Study Step
+
+`noisy_logs_repo` is not a security fixture. It is an infrastructure fixture. It demonstrates that an agent can be safe and correct while still creating a context problem. This is why the report can require human review even when evals pass.
+
 ## The Lab
 
 ```bash

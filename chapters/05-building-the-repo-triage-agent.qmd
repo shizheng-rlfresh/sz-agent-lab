@@ -61,6 +61,12 @@ The deterministic diagnosis rule is intentionally replaceable. A model-backed ve
 
 That replacement boundary is useful. If the LLM version fails an eval that the deterministic version passes, the failure is not in tools, policy, or report generation. It is in model selection, prompt design, file selection, or output control. Good architecture narrows the search space for failures.
 
+## Case Study Step
+
+On `buggy_calc`, the agent reads the same evidence surfaced by the workflow and emits the diagnosis as structured JSON. That is the first moment the system becomes useful as an artifact producer rather than only an inspector. The output can be fed into evals, reports, or future pull-request comments.
+
+The case study remains deterministic because the book is still teaching runtime shape. Once the runtime is solid, a model can be introduced as one replaceable decision component.
+
 ## The Lab
 
 ```bash

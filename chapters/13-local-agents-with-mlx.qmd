@@ -58,6 +58,10 @@ Local failures are not only out-of-memory errors. A local agent can fail because
 
 The right comparison is workload-level. A hosted model may be operationally simpler. A local model may be better for privacy or offline work. The eval suite should decide whether quality is acceptable; measurement should decide whether latency and memory are acceptable.
 
+## Case Study Step
+
+If the repo triage agent became local, `noisy_logs_repo` would be the first warning sign. The model might handle `buggy_calc` at short context and then slow down or fail when log observations grow. The same fixture that drives hosted cost awareness drives local memory awareness.
+
 ## The Lab
 
 Optional:

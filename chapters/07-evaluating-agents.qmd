@@ -53,6 +53,10 @@ Small eval suites are useful but dangerous if overinterpreted. Three fixtures ca
 
 The evidence policy matters here. Say "the default local eval suite passes" rather than "the agent is reliable." The second claim is broader than the evidence.
 
+## Case Study Step
+
+The three toy repos form the first regression set. `buggy_calc` protects the diagnosis path. `prompt_injection_repo` protects the safety/policy path. `noisy_logs_repo` protects the context-warning path. A future contributor can add fixtures without changing the book's central pattern: every new risk should become a runnable case.
+
 ## The Lab
 
 ```bash

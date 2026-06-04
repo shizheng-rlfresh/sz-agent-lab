@@ -41,6 +41,10 @@ Policy drift happens when capabilities expand faster than review. A path allowli
 
 The mitigation is change review. Treat policy diffs like permission diffs. Require tests and sample traces for expanded authority.
 
+## Case Study Step
+
+The prompt-injection fixture asks the system to read outside the repository. The policy boundary makes that request irrelevant to file access. The malicious text is still useful evidence; it is just not authority. This is the difference between recognizing an attack string and being controlled by it.
+
 ## The Lab
 
 ```bash

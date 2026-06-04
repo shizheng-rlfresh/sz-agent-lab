@@ -62,6 +62,12 @@ Useful comparison dimensions include:
 
 This is where many agent demos become weaker under scrutiny. The agent may produce richer prose, but if it is slower, less grounded, harder to debug, and not measurably better, the deterministic path deserves priority.
 
+## Case Study Step
+
+For `buggy_calc`, the deterministic workflow does not need to "understand" the repo. It only needs to expose the evidence surface. It proves that `calculator.py`, `test_calculator.py`, and `README.md` are visible under policy and that the division contract appears in the fixture.
+
+That baseline gives the agent chapter a concrete question: can an agent-shaped runtime turn the same evidence into a structured diagnosis without losing traceability?
+
 ## The Lab
 
 ```bash

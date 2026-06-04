@@ -36,6 +36,10 @@ When an agent quotes untrusted content, the quote should be evidence, not instru
 
 In production, retrieved content should carry metadata: source, trust level, retrieval method, timestamp, and transformations. Without metadata, the model sees text and the reviewer sees ambiguity.
 
+## Case Study Step
+
+The prompt-injection eval checks that the system surfaces the suspicious content without violating policy. That is a small but important distinction. A system that refuses to read any untrusted content cannot triage real repositories. A system that reads untrusted content without labels and policy is too exposed. The useful middle is controlled observation.
+
 ## The Lab
 
 ```bash

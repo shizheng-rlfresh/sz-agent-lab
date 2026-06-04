@@ -55,6 +55,10 @@ Do not start with a dashboard. Do not start with a multi-agent orchestrator. Do 
 
 The strongest v0 is boring and inspectable. It should run locally, accept fixture traces, produce deterministic reports, and make failure cases easy to add.
 
+## Case Study Step
+
+The case study already contains seed artifacts for `agentprobe`: a trace, eval results, policy configuration, context summary, and production report. The capstone is not speculative. It is the act of extracting the book's evidence pattern into a focused tool.
+
 ## The Lab
 
 ```bash

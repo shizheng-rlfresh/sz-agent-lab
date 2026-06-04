@@ -50,6 +50,12 @@ Prompt context is a lossy interface between the runtime and the model. It has li
 
 For example, the trace can store exact tool calls. The report can summarize context growth. The eval can record pass/fail checks. The prompt may contain only the subset needed for the next inference. This separation lets the system be debuggable even when the prompt is compressed.
 
+## Case Study Step
+
+In the triage case study, the same file content has multiple roles. As a tool result, it is raw observation. As a trace event, its size and source become operational evidence. As a finding, a selected excerpt becomes diagnostic evidence. As an eval condition, the filename or keyword becomes a measurable requirement.
+
+The system gets cleaner when each role is explicit. The file content does not magically become memory just because the runtime read it.
+
 ## The Lab
 
 ```bash

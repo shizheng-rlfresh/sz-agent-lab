@@ -59,6 +59,10 @@ After a bad run, the incident review should ask:
 
 If the current artifacts cannot answer those questions, the readiness work is incomplete.
 
+## Case Study Step
+
+The current sample report is not a production approval. It is a review packet. It says that deterministic evals pass, policy violations are absent, and context growth still requires human review. That is a more useful state than a binary "works" or "does not work."
+
 ## The Lab
 
 ```bash

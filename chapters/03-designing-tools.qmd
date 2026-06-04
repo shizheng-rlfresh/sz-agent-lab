@@ -50,6 +50,10 @@ Before exposing a tool to an agent, write down its abuse case. For `read_file`, 
 
 The tool contract should make those abuse cases testable. A test should fail when traversal succeeds, when output caps are missing, or when shell execution is enabled without explicit policy. The local tests are small because the tools are small; production tools need proportionally stronger tests.
 
+## Case Study Step
+
+The repo triage system only needs read tools. That design choice removes whole classes of risk from the first version. There is no `write_file`, no `delete_file`, no shell, and no network call. That constraint may look limiting, but it clarifies the lesson: once read-only tools are safe and observable, mutation can be designed deliberately instead of accidentally.
+
 ## The Lab
 
 ```bash
