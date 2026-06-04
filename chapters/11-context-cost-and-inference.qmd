@@ -84,6 +84,12 @@ The antidote is prompt inventory. Treat prompt segments like code dependencies: 
 python -m agentic_systems_lab.context
 ```
 
+## Reading the Lab Output
+
+The context output separates `cacheable_tokens` from `dynamic_tokens`. In the demo, the dynamic segment dominates because repeated log text is included. The key warning is `large_outputs`: it identifies the segment that should trigger summarization, extraction, indexing, or review.
+
+Do not treat the token estimate as billing truth. Treat it as an alarm that the context shape deserves inspection.
+
 ## Code Walkthrough
 
 `ContextTracker` records segments with `name`, `chars`, `tokens`, and `cacheable`. It reports cumulative growth, cacheable tokens, dynamic tokens, and large dynamic outputs.

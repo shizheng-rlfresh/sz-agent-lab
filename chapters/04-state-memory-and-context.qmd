@@ -84,6 +84,12 @@ The local lab does not need memory because each run is self-contained. That abse
 python -m agentic_systems_lab.agent
 ```
 
+## Reading the Lab Output
+
+The command prints the final structured result. The state lesson appears when you compare that result with the generated trace. The final JSON is the answer artifact. The trace is the runtime evidence. The files are source observations. The eval report is measurement. They are related, but they are not interchangeable.
+
+When adapting the pattern, resist the urge to store the final answer as memory by default. First decide what should be remembered, why it should persist, and how it can be corrected.
+
 ## Code Walkthrough
 
 `run_repo_triage` records `context_observation` events after reading files. It does not persist those observations as memory. It writes trace events and returns a structured final result.

@@ -87,6 +87,12 @@ Good tool design makes the safe path easy and the risky path explicit.
 python -m agentic_systems_lab.tools
 ```
 
+## Reading the Lab Output
+
+The command prints visible files under `buggy_calc`. The output is intentionally plain. Tool output should be boring when the task is boring. A file-listing tool should not infer importance, rewrite paths, or include local absolute paths unless the contract says so.
+
+The stronger evidence lives in the tests. `tests/test_tools.py` verifies deterministic ordering, capped reads, structured grep matches, and path blocking. For a tool boundary, tests are more convincing than a pretty demo.
+
 ## Code Walkthrough
 
 The important boundary is not the filesystem call. It is policy resolution:

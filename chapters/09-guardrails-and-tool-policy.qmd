@@ -71,6 +71,12 @@ For example, approving a file write should show the path, diff, test status, and
 python -m agentic_systems_lab.policy
 ```
 
+## Reading the Lab Output
+
+The policy JSON is a capability summary. `read_only: true` means write helpers should be blocked. `allow_shell: false` means shell execution should be blocked. `allowed_roots` defines the observation boundary. `max_file_chars` defines the default output cap.
+
+If this output changes, the system's authority changed. Treat that as a security-relevant diff.
+
 ## Code Walkthrough
 
 `resolve_path` permits only paths under allowed roots. `check_write` blocks mutation under read-only mode. `check_shell` blocks shell execution unless explicitly enabled.

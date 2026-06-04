@@ -84,6 +84,12 @@ The sample report is intentionally one page. A production report could have sect
 python -m agentic_systems_lab.report
 ```
 
+## Reading the Lab Output
+
+The report command prints the path of the generated Markdown report. Open the report rather than relying on the command line. The report's value is in combining signals: trace summary, eval results, policy warnings, context growth, and deployment recommendation.
+
+The sample recommendation requires human review because large dynamic context appears. That is not a failure of the report. It is the report doing its job.
+
 ## Code Walkthrough
 
 `generate_report` accepts trace summary, eval results, context summary, and policy violations. It creates Markdown sections and derives a deployment recommendation. This is intentionally simple so the reader can alter the gate logic.

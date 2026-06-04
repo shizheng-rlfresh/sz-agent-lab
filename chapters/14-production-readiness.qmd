@@ -96,6 +96,12 @@ The report should therefore be regenerated as part of change review. If the repo
 python -m agentic_systems_lab.report
 ```
 
+## Reading the Lab Output
+
+The command writes the report path. The report's deployment recommendation should be read as a gate, not a suggestion. If the status requires human review, the reviewer should inspect why. In the current sample, the reason is large dynamic context.
+
+A production version should make that status machine-readable and tie it to ownership.
+
 ## Code Walkthrough
 
 The report generator produces a deployment recommendation. It requires human review when evals fail, policy violations exist, or large dynamic outputs appear.

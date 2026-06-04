@@ -91,6 +91,12 @@ This review also catches safety problems. Untrusted content that appears before 
 python -m agentic_systems_lab.context --cache-demo
 ```
 
+## Reading the Lab Output
+
+The cache demo reports `first_changed_segment`, `shared_prefix_tokens`, and `cache_breakers`. If `first_changed_segment` is `timestamp`, the prompt layout has placed volatile content before reusable content. That is the simplest possible cache-breaker example.
+
+The recommendation list should be read as prompt-layout guidance, not as a provider guarantee.
+
 ## Code Walkthrough
 
 `analyze_prompt_cache_layouts` compares two segment lists. It reports candidate tokens, shared prefix tokens, first changed segment, dynamic tokens, cache breakers, and recommendations.

@@ -88,6 +88,12 @@ Run the deterministic baseline:
 python scripts/run_all_examples.py --example workflow_baseline
 ```
 
+## Reading the Lab Output
+
+Do not read the baseline output as a user-facing answer. Read it as evidence inventory. The `files` array says which repository files were visible. The `division_mentions` array says where the workflow found relevant text. That is enough to establish what the runtime could observe before any diagnosis step exists.
+
+This is the first habit of the book: separate observation from interpretation. Observation says "these lines exist." Interpretation says "there is a contract mismatch." The deterministic baseline intentionally stops before interpretation so the later agent result can be compared against it.
+
 ## Code Walkthrough
 
 The baseline uses `list_files` and `grep` against `data/toy_repos/buggy_calc`. There is no LLM and no autonomy. That is the point: the first artifact is a control path that can be inspected and tested.

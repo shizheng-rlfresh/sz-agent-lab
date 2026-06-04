@@ -98,6 +98,12 @@ In practice, this is also how you keep code review sane. Reviewers can inspect o
 python scripts/run_all_examples.py --example workflow_baseline
 ```
 
+## Reading the Lab Output
+
+The baseline returns a small JSON object. The important field is not only the list of matches; it is the absence of hidden behavior. There is no model call, no implicit memory, no tool choice, and no mutation. If the output is wrong, the search space for debugging is small.
+
+This makes the workflow a useful test harness. When the agent is introduced later, you can ask whether it preserved the same evidence while adding diagnosis. If the agent misses `test_calculator.py`, the workflow proves the file was available.
+
 ## Code Walkthrough
 
 `run_workflow_baseline` in `scripts/run_all_examples.py` creates a `ToolPolicy`, lists files under `buggy_calc`, and greps for `divide|division`. The policy still matters even though there is no agent. A deterministic workflow can still leak data if its tools are unsafe.

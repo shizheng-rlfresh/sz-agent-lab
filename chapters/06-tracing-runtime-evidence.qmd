@@ -72,6 +72,12 @@ python -m agentic_systems_lab.tracer
 python -m agentic_systems_lab.agent
 ```
 
+## Reading the Lab Output
+
+The tracer demo prints event counts. The agent run creates a richer trace. The most important habit is to inspect sequence, not only counts. A normal triage run should start, record policy, call tools, record context observations, and finish. If the sequence is broken, the final answer should be treated cautiously.
+
+The trace summary is a compression. When debugging a real failure, open the JSONL trace itself.
+
 ## Code Walkthrough
 
 `TraceLogger.log_event` validates event type and appends JSON to a trace file. `TraceLogger.timed_tool_call` wraps a function, records success, and writes latency in milliseconds.

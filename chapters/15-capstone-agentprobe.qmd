@@ -97,6 +97,12 @@ The first user of `agentprobe` should be this repository. If it cannot improve t
 python scripts/run_all_examples.py
 ```
 
+## Reading the Lab Output
+
+The example runner prints all core artifacts in one JSON object: workflow evidence, agent result, trace summary, evals, and context summary. That output is essentially the seed data model for `agentprobe`. The capstone question is: how would you package this evidence pattern so another project can use it?
+
+The answer should start with trace and report contracts, not a dashboard.
+
 ## Code Walkthrough
 
 The capstone seed already exists: trace logger, eval runner, context profiler, policy object, and report generator. A real `agentprobe` would generalize those APIs beyond toy repos.

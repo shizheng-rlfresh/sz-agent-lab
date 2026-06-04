@@ -83,6 +83,12 @@ The report should make this distinction eventually. A production eval system oft
 python -m agentic_systems_lab.evals
 ```
 
+## Reading the Lab Output
+
+The eval command prints a list of task results. Each result is a set of checks, not a single grade. A failure in `schema_ok` means the output contract broke. A failure in `expected_file_inspected` means grounding is weak. A nonzero `hallucinated_file_count` means the result referenced files outside the allowed set.
+
+This diagnostic shape matters. A useful eval should tell the engineer what to fix next.
+
 ## Code Walkthrough
 
 `EvalTask` names a fixture repo, expected file, expected keyword, and allowed files. `evaluate_result` computes booleans and counts, then derives `passed`. The default suite covers `buggy_calc`, `prompt_injection_repo`, and `noisy_logs_repo`.
