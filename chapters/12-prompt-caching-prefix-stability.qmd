@@ -79,6 +79,12 @@ A production cache analysis should track:
 
 The local demo reports only static analysis. It does not observe provider cache hits. That limitation is explicit because provider-specific behavior must be measured or cited.
 
+## Prompt Layout Review
+
+A useful prompt-layout review asks for the assembled prompt with segment labels. Reviewers should be able to see which text is stable, which text is dynamic, and which text is untrusted. If the team cannot show the assembled prompt, cache analysis becomes guesswork.
+
+This review also catches safety problems. Untrusted content that appears before policy reminders or tool schemas may not be a cache issue only; it may also be an instruction/data separation issue.
+
 ## The Lab
 
 ```bash

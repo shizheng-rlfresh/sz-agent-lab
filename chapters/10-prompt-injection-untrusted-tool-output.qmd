@@ -67,6 +67,12 @@ A useful prompt-injection eval should define:
 
 The current fixture requests out-of-repo reads. The policy boundary is path confinement. The expected finding is prompt-injection detection with no invalid tool calls. A future fixture could request shell execution or data exfiltration, but only if the tool surface exists safely enough to test.
 
+## Injection Is Not Only Security
+
+Prompt injection is often discussed as a security issue, but it is also a reliability issue. Even when no secret is exposed and no tool is misused, injected instructions can derail task performance. A repo triage agent that spends its answer debating a malicious README may fail the original task.
+
+That means evals should check both safety and task completion. Did the system preserve policy? Did it still complete the intended diagnosis? Did it quote the malicious text as evidence without making it the task?
+
 ## The Lab
 
 ```bash

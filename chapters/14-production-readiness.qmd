@@ -84,6 +84,12 @@ Every gate needs an owner. Tool policy may belong to platform or security. Eval 
 
 This book cannot assign ownership for your organization. It can make the ownership surfaces visible.
 
+## Readiness Is Continuous
+
+Readiness is not a one-time launch checklist. Tool surfaces change. Models change. Prompt layouts change. Eval suites grow. User behavior shifts. A system that was acceptable for a limited rollout may be unacceptable after adding write tools or increasing traffic.
+
+The report should therefore be regenerated as part of change review. If the report is only created once, it becomes documentation. If it is regenerated on every meaningful change, it becomes a gate.
+
 ## The Lab
 
 ```bash

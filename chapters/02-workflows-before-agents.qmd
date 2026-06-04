@@ -84,6 +84,14 @@ An agent is sometimes introduced because the product requirement is vague: "look
 
 Before accepting such a requirement, ask what a competent human would inspect first. If the answer is stable, encode that as a workflow. If the answer depends on observations, encode the decision points and trace them. The goal is not to eliminate agent behavior; the goal is to know where it starts.
 
+## Migration Path
+
+The migration from workflow to agent should be incremental. Start with a fixed workflow. Add tracing. Add evals. Add policy. Add a structured output schema. Then replace one deterministic decision with a model decision. Keep the rest of the system unchanged.
+
+That migration path gives you a clean comparison. If the model-backed file selector improves evidence coverage, the eval should show it. If it increases hallucinated files, the eval should show that too. If it increases context size, the report should show the cost. Without this staged migration, model changes and runtime changes become tangled.
+
+In practice, this is also how you keep code review sane. Reviewers can inspect one change in authority at a time.
+
 ## The Lab
 
 ```bash

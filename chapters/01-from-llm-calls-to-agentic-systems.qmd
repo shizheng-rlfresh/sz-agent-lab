@@ -72,6 +72,14 @@ The reader is expected to bring engineering judgment. The book will not explain 
 
 The payoff is speed. A technical reader should be able to map each chapter to a concrete artifact and then adapt the pattern to a real system.
 
+## Common Maturity Trap
+
+A team can appear to advance by adding a stronger model while leaving the system boundary unchanged. That may improve some answers, but it does not add observability, evals, or policy. In the vocabulary of this book, that is model improvement, not system maturity.
+
+System maturity shows up when failures become easier to analyze. If a run is bad, can the team say which files were inspected? Can it say whether the model saw untrusted instructions? Can it identify the first cache-breaking segment? Can it reproduce the eval result? Can it explain why a deployment gate blocked? Those questions define the difference between a powerful demo and a supportable system.
+
+This is why the book treats "agentic" as an engineering burden rather than a badge. Dynamic behavior can be valuable, but it makes evidence more important, not less.
+
 ## The Lab
 
 Run the deterministic baseline:

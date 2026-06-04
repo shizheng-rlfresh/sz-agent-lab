@@ -73,6 +73,14 @@ A useful pattern is two-phase operation:
 
 For example, a repo agent might propose a patch but not apply it. A deployment agent might propose a rollback but require human approval. A support agent might draft a reply but not send it. The runtime can still be agentic while the dangerous side effect remains gated.
 
+## Tool Granularity
+
+Tool granularity is a design decision. A very broad tool is flexible but hard to govern. A very narrow tool is safe but may force the agent into too many calls. The right granularity depends on risk, latency, context, and audit needs.
+
+For file systems, `read_file` and `grep` are narrow enough to test. For databases, a tool like `run_sql` may be too broad unless it is read-only, query-limited, and approval-gated. A safer alternative might expose specific analytical queries. For deployment systems, a generic API caller is too broad; a `get_deployment_status` tool and a separate `request_rollback_approval` tool are easier to review.
+
+Good tool design makes the safe path easy and the risky path explicit.
+
 ## The Lab
 
 ```bash

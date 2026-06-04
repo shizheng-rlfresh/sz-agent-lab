@@ -70,6 +70,14 @@ Context selection should be explicit enough to test. A policy might say: include
 
 The local repo does not implement a full prompt assembler, but the `ContextTracker` points in that direction. It gives every segment a name and a cacheability flag. That is the minimum structure needed to ask whether context is growing safely.
 
+## Memory Is a Product Feature
+
+Memory should not be added as a generic enhancement. It is a product feature with user expectations and failure modes. What should be remembered? Who can inspect or delete it? Can it cross projects or tenants? Does it expire? How is prompt injection removed? How does a user correct it?
+
+For a staff-level design, require a memory specification before adding durable memory. If the team cannot answer ownership, retention, correction, and trust questions, keep memory out of the system. Use traces and reports for operational evidence instead.
+
+The local lab does not need memory because each run is self-contained. That absence keeps the first set of boundaries easier to understand.
+
 ## The Lab
 
 ```bash

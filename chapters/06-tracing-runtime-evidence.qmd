@@ -59,6 +59,12 @@ Also avoid traces that are too noisy to inspect. If every internal helper call b
 
 As systems mature, trace granularity can increase. The first requirement is not completeness in the abstract. It is enough evidence for the failures you expect to debug.
 
+## Redaction and Sampling
+
+Production traces often need redaction and sampling. Redaction protects sensitive content. Sampling controls cost and volume. Both can weaken evidence if applied carelessly. If a trace redacts all tool arguments, it may no longer prove which file was read. If sampling drops failed runs, incident review becomes distorted.
+
+The local repo avoids that complexity by running small examples locally. A production design should define which fields are always retained, which fields are redacted, and which runs are never sampled away. Failed or policy-violating runs usually deserve stronger retention than routine successes.
+
 ## The Lab
 
 ```bash

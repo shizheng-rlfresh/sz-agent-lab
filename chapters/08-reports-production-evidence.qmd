@@ -72,6 +72,12 @@ A report should avoid vague labels. Useful statuses include:
 
 The local report currently uses human-review language rather than a formal enum. A production version should make the status machine explicit. The status should be machine-readable, but the report should also explain why.
 
+## Report Consumers
+
+Different readers need different report views. A developer wants failing checks and trace links. A tech lead wants deployment status and ownership. A security reviewer wants policy violations and risky tools. An ML engineer wants context growth, model behavior, and eval coverage. An incident reviewer wants reproducibility.
+
+The sample report is intentionally one page. A production report could have sections or output formats for different consumers while preserving one underlying evidence model.
+
 ## The Lab
 
 ```bash

@@ -74,6 +74,21 @@ Local deployment adds its own operational surface: model downloads, artifact pin
 
 The optional status of this chapter is therefore not a lack of seriousness. It is an architectural separation: learn the runtime first, then measure local inference as a deployment variant.
 
+## Local Agent Checklist
+
+Before committing to local inference, gather:
+
+- task eval pass rate,
+- representative prompt lengths,
+- peak memory measurements,
+- time-to-first-token measurements,
+- throughput under expected concurrency,
+- model artifact provenance,
+- update and rollback plan,
+- fallback path when local inference fails.
+
+Without this checklist, local deployment is a preference rather than an engineering decision.
+
 ## The Lab
 
 Optional:

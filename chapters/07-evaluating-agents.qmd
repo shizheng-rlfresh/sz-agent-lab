@@ -71,6 +71,12 @@ A useful maintenance loop is:
 
 The local suite is small enough to inspect by hand. That is a feature for a learning repo. In a real system, the same principles apply at larger scale.
 
+## What to Do With Failing Evals
+
+A failing eval is not automatically bad news. It is information. The important question is whether the failure is expected, newly introduced, or obsolete. Expected failures may document known gaps. Newly introduced failures may block release. Obsolete failures should be removed only with an explanation.
+
+The report should make this distinction eventually. A production eval system often needs metadata such as owner, severity, fixture source, expected status, and release-blocking flag. The local eval schema is simpler, but it prepares the reader to ask for that metadata.
+
 ## The Lab
 
 ```bash

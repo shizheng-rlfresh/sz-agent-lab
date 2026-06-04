@@ -59,6 +59,12 @@ Policy tests are not only correctness tests. They are security regression tests.
 
 The local tests cover a small surface: path confinement, read-only blocking, shell blocking, and output caps. That is enough for this repo's capability set. A richer tool set should grow the policy tests before exposing new authority.
 
+## Human Approval UX
+
+Human approval is only useful if the human receives the right evidence. "Allow this action?" is weak. A useful approval prompt includes action type, target resource, proposed diff or command, evidence summary, policy reason, and rollback path.
+
+For example, approving a file write should show the path, diff, test status, and why the agent wants the change. Approving shell should show the exact command, working directory, environment assumptions, and risk. If the approver cannot understand the action, the approval flow is cosmetic.
+
 ## The Lab
 
 ```bash

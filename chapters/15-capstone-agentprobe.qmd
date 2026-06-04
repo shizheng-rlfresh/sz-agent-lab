@@ -78,6 +78,19 @@ The first release should make a narrow claim:
 
 That claim is testable. It avoids broad statements about agent reliability. It also aligns with the evidence standard of this book.
 
+## Capstone Evaluation
+
+Evaluate the capstone like the book evaluates the agent:
+
+- Does it parse valid traces?
+- Does it reject malformed traces?
+- Does it identify missing required events?
+- Does it summarize policy warnings?
+- Does it preserve deterministic output?
+- Does it produce a report that can be reviewed by a human?
+
+The first user of `agentprobe` should be this repository. If it cannot improve this lab's evidence story, it is not ready to generalize.
+
 ## The Lab
 
 ```bash

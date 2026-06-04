@@ -72,6 +72,12 @@ A single "latency" number hides several phases:
 
 The local trace records tool latency only. That is not enough for a production latency model, but it establishes the habit of phase separation. If a future model call is slow, the team should know whether the time is spent reading files, assembling context, prefill, decoding, or validation.
 
+## Context Debt
+
+Context debt accumulates when teams keep adding instructions, examples, retrieved snippets, and tool outputs without removing or structuring old content. The prompt gets longer, less legible, and harder to cache. The model may receive conflicting guidance. Costs rise slowly enough that no single change looks responsible.
+
+The antidote is prompt inventory. Treat prompt segments like code dependencies: name them, version them, justify them, and remove them when they no longer pay for their tokens.
+
 ## The Lab
 
 ```bash

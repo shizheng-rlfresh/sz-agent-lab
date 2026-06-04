@@ -88,6 +88,12 @@ The deterministic agent returns a confidence value, but the value is a rule conf
 
 For this lab, confidence is used only as a structured field. It should not be interpreted as a reliable probability. A production version would need calibration data or would need to replace confidence with more concrete status fields such as `requires_human_review`, `evidence_complete`, or `diagnosis_blocked`.
 
+## Implementation Review
+
+When reviewing the agent implementation, separate runtime code from diagnosis code. Runtime code should enforce policy, trace tools, and validate output. Diagnosis code can be deterministic rules, model calls, or a hybrid. Mixing those layers makes it harder to replace model behavior without weakening the runtime.
+
+The current implementation is small enough that the separation is conceptual rather than architectural. In a larger system, you might make the diagnosis step an interface. The deterministic implementation becomes one strategy, the LLM-backed implementation another, and tests can run both against the same fixtures.
+
 ## The Lab
 
 ```bash
