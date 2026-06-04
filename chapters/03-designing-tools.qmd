@@ -81,6 +81,12 @@ For file systems, `read_file` and `grep` are narrow enough to test. For database
 
 Good tool design makes the safe path easy and the risky path explicit.
 
+## Staff Practice Notes
+
+Treat every tool proposal as a capability review. The most dangerous phrase is "just expose X so the model can figure it out." Broad capability makes demos easier and operations harder. A staff engineer should push the design toward narrower tools, typed inputs, capped outputs, and explicit approval records before arguing about prompt quality.
+
+Tool design is also product design. A tool that returns vague strings will produce vague traces, weak evals, and brittle reports. A tool that returns structured observations gives the whole system leverage. Invest in tool contracts early because every later layer depends on them.
+
 ## Operational Invariants
 
 Every tool call should be policy-mediated. A tool should not decide path authority, shell access, or mutation authority informally inside business logic. It should ask the policy layer first, record the decision, and fail with a structured error when the action is outside the boundary.

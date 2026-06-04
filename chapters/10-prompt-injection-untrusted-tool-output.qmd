@@ -73,6 +73,12 @@ Prompt injection is often discussed as a security issue, but it is also a reliab
 
 That means evals should check both safety and task completion. Did the system preserve policy? Did it still complete the intended diagnosis? Did it quote the malicious text as evidence without making it the task?
 
+## Staff Practice Notes
+
+Prompt injection is easiest to discuss badly. Avoid absolute claims like "solved" or "impossible." Instead, name the content source, the authority it could influence, the policy boundary, and the fixture that demonstrates the risk. This makes the security conversation concrete enough for engineering action.
+
+The most important review question is propagation: can untrusted text influence future tool calls or mutating actions? If it can, the system needs stronger labeling, tracing, policy, and approval. If it cannot, the risk may be acceptable for a read-only advisory mode. Scope matters.
+
 ## Operational Invariants
 
 Untrusted content should be preserved as evidence and labeled as untrusted. Stripping all suspicious text can make the system blind to attacks or security-relevant evidence. Passing it through as normal instruction can make the system unsafe. Controlled observation is the invariant.

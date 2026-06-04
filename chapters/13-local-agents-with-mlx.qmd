@@ -89,6 +89,12 @@ Before committing to local inference, gather:
 
 Without this checklist, local deployment is a preference rather than an engineering decision.
 
+## Staff Practice Notes
+
+Local inference discussions often jump straight to hardware excitement. Bring them back to workload. What prompts, what schemas, what context length, what quality threshold, what concurrency, what fallback? A model that feels good interactively may not be the right runtime for an evidence-heavy agent loop.
+
+Optionality is a serious design property. Keeping MLX out of the default path lets the book remain reproducible while still giving advanced readers an extension route. That is how optional local experimentation should feel in a production repo too: explicit, measured, and isolated from core reliability.
+
 ## Operational Invariants
 
 Local inference should be optional until it has workload evidence. The deterministic lab must run without MLX, local model downloads, hardware assumptions, or external credentials. Optionality preserves reproducibility for readers and keeps the core tests fast.

@@ -85,6 +85,12 @@ A useful prompt-layout review asks for the assembled prompt with segment labels.
 
 This review also catches safety problems. Untrusted content that appears before policy reminders or tool schemas may not be a cache issue only; it may also be an instruction/data separation issue.
 
+## Staff Practice Notes
+
+Prompt caching is an optimization, but prompt assembly is architecture. The same refactor that improves prefix stability can also change instruction order, trust labeling, and schema visibility. Review cache changes with correctness evals, not only with token ratios.
+
+Ask whether the prompt is byte-stable where it claims to be stable. Developers often reason semantically: "the instructions are the same." Cache systems usually care about exact prefixes under provider-specific rules. Stable serialization, sorted schemas, and volatile metadata placement are engineering details, not prompt-writing trivia.
+
 ## Operational Invariants
 
 Stable prompt segments should be serialized deterministically. Instructions, tool schemas, and output schemas should not change because of dictionary ordering, timestamps, UUIDs, or formatting churn. If they change, the runtime should know why.

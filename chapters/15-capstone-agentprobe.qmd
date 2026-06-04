@@ -91,6 +91,12 @@ Evaluate the capstone like the book evaluates the agent:
 
 The first user of `agentprobe` should be this repository. If it cannot improve this lab's evidence story, it is not ready to generalize.
 
+## Staff Practice Notes
+
+The capstone is tempting to overbuild because the domain is broad. Resist that. A narrow evidence tool can be more valuable than a broad agent framework because it fits into existing systems. The first release should make one run more reviewable.
+
+Think like an external adopter. They already have orchestration, prompts, and tools. They may not want yours. But they do need to know whether a run had enough evidence, whether evals passed, whether policy was visible, and whether context risk exists. That is the opening.
+
 ## Operational Invariants
 
 The first public contract should be narrow enough to test completely. Trace input, schema validation, eval summary, policy summary, context warning, and report output are enough for a first release. Orchestration, UI, hosted services, and model adapters can wait.

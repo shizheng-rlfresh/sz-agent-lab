@@ -80,6 +80,12 @@ System maturity shows up when failures become easier to analyze. If a run is bad
 
 This is why the book treats "agentic" as an engineering burden rather than a badge. Dynamic behavior can be valuable, but it makes evidence more important, not less.
 
+## Staff Practice Notes
+
+In staff-level review, insist on vocabulary that predicts engineering work. "Agent" should imply runtime decisions, tools, state, evidence, and gates. If the term only means "LLM call with a longer prompt," the design review should say so. Precise vocabulary protects roadmaps because it stops teams from smuggling infrastructure work into a feature estimate.
+
+Also separate product value from architectural novelty. A model call may be enough for a low-risk drafting feature. A workflow may be enough for a known compliance check. An agent may be justified for runtime evidence selection. Multi-agent systems may be justified for separable roles or independent review. The right abstraction is the smallest one that makes the product behavior measurable and supportable.
+
 ## Operational Invariants
 
 The first invariant is artifact continuity. A useful agentic system should leave behind enough structured evidence for another engineer to reconstruct the run without relying on the operator's memory. That evidence does not have to be elaborate at the beginning, but it must be deliberate: input, policy, tool calls, context observations, output schema, eval result, and report status.

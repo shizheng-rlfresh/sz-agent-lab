@@ -90,6 +90,12 @@ Readiness is not a one-time launch checklist. Tool surfaces change. Models chang
 
 The report should therefore be regenerated as part of change review. If the report is only created once, it becomes documentation. If it is regenerated on every meaningful change, it becomes a gate.
 
+## Staff Practice Notes
+
+Production readiness is not a mood. It is a set of gates with owners, artifacts, and rollback paths. If the conversation relies on confidence, ask for the report. If the report cannot answer the question, add a gate or narrow the rollout.
+
+A staff engineer should distinguish "ready for local use," "ready for shadow mode," "ready for advisory comments," and "ready for mutation." These are different claims. Most systems should progress through them deliberately, and each transition should be supported by fresh evidence.
+
 ## Operational Invariants
 
 Readiness status should be conservative. Missing trace, missing eval, missing policy, missing report, or unbounded context should not silently become "ready." The system can still be useful locally, but deployment authority should match evidence.

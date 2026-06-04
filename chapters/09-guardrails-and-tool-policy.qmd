@@ -65,6 +65,12 @@ Human approval is only useful if the human receives the right evidence. "Allow t
 
 For example, approving a file write should show the path, diff, test status, and why the agent wants the change. Approving shell should show the exact command, working directory, environment assumptions, and risk. If the approver cannot understand the action, the approval flow is cosmetic.
 
+## Staff Practice Notes
+
+When reviewing guardrails, ask which controls still work if the model ignores them. Prompt guidance is useful, but it is not the same as a runtime boundary. A staff engineer should be comfortable saying that a prompt-only guardrail is not sufficient for a tool with real authority.
+
+Policy should also be reviewed for expansion pressure. Teams often add broad authority while debugging and forget to remove it. Serializing policy into traces and reports makes that drift visible. Treat authority changes as code changes with tests, owners, and rollback.
+
 ## Operational Invariants
 
 Policy should fail closed. If the runtime cannot prove that a path is inside an allowed root, a command is permitted, or a write has approval, the action should not proceed. A blocked action with evidence is a healthy outcome; an ambiguous action that succeeds is not.

@@ -92,6 +92,12 @@ That migration path gives you a clean comparison. If the model-backed file selec
 
 In practice, this is also how you keep code review sane. Reviewers can inspect one change in authority at a time.
 
+## Staff Practice Notes
+
+When a team proposes an agent, ask them to write the workflow version in the same meeting. This is not a trick. It reveals whether the task is underspecified, whether autonomy is actually needed, and whether the team has a baseline for comparison. If the workflow is impossible to describe, the product requirement may be unclear. If the workflow is easy and sufficient, the agent may be unnecessary.
+
+Do not confuse deterministic with simplistic. Many production workflows are sophisticated: retrieval, ranking, validation, routing, human approval, and model calls can all exist in a fixed path. The question is whether the path is chosen before execution. That distinction matters for testing, cost prediction, and incident response.
+
 ## Operational Invariants
 
 The workflow baseline should remain executable after the agent path exists. This is not nostalgia for simpler code; it is an operational control. The baseline gives CI a fast smoke test, gives incident response a fallback, and gives evals a comparison target when model behavior changes.

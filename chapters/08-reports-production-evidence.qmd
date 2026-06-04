@@ -78,6 +78,12 @@ Different readers need different report views. A developer wants failing checks 
 
 The sample report is intentionally one page. A production report could have sections or output formats for different consumers while preserving one underlying evidence model.
 
+## Staff Practice Notes
+
+A report is a decision interface. If it does not change what a reviewer can approve, block, or investigate, it is probably just formatted logging. Start with the decision vocabulary, then decide which evidence must appear for each decision.
+
+Reports also discipline teams against demo optimism. A system can pass task evals and still require review because context is too large, policy changed, or traces are incomplete. That is not bureaucratic caution; it is the distinction between task behavior and deployment behavior.
+
 ## Operational Invariants
 
 A report should derive from artifacts rather than reinterpreting behavior from scratch. Trace summaries, eval results, policy records, and context profiles should feed the report. If the report has its own independent logic for deciding what happened, it can drift from the evidence it claims to summarize.

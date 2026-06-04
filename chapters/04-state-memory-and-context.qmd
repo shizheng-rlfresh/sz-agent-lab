@@ -78,6 +78,12 @@ For a staff-level design, require a memory specification before adding durable m
 
 The local lab does not need memory because each run is self-contained. That absence keeps the first set of boundaries easier to understand.
 
+## Staff Practice Notes
+
+Memory is often proposed as a product feature before it is understood as a state system. Ask what should be remembered, who can see it, how it expires, how it is corrected, and whether it is evidence or preference. If those questions sound premature, the memory feature is probably being treated as magic storage for model convenience.
+
+For context, ask the opposite question: what should not enter the prompt? Staff-level systems usually fail from over-inclusion before they fail from under-inclusion. Raw logs, stale summaries, untrusted documents, and irrelevant files all feel useful until they degrade cost, latency, grounding, or safety. Prompt context should be assembled with the same care as an API request.
+
 ## Operational Invariants
 
 State must be labeled before it is used. The runtime should know whether a piece of text is user instruction, developer instruction, current file evidence, retrieved memory, tool output, trace summary, or report prose. Labels are not bureaucracy; they determine which content can influence future actions.

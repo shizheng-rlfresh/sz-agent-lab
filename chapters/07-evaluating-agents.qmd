@@ -77,6 +77,12 @@ A failing eval is not automatically bad news. It is information. The important q
 
 The report should make this distinction eventually. A production eval system often needs metadata such as owner, severity, fixture source, expected status, and release-blocking flag. The local eval schema is simpler, but it prepares the reader to ask for that metadata.
 
+## Staff Practice Notes
+
+For agent evals, the first question is not "what score did we get?" It is "what behavior would this eval catch?" A small eval that catches a real grounding regression is more valuable than a large score that no one knows how to act on. Tie every eval to a failure mode and an owner.
+
+Keep eval failures socially useful. If a failure only says "bad answer," engineers will debate the model. If it says "expected file not inspected" or "invalid tool call occurred," engineers know where to look. Good eval design reduces blame and increases repair speed.
+
 ## Operational Invariants
 
 Every eval should encode a failure mode, not just a desired answer. `buggy_calc` encodes behavioral mismatch, `prompt_injection_repo` encodes untrusted-content handling, and `noisy_logs_repo` encodes context pressure. That mapping is what makes failures actionable.

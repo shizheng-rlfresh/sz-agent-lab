@@ -94,6 +94,12 @@ When reviewing the agent implementation, separate runtime code from diagnosis co
 
 The current implementation is small enough that the separation is conceptual rather than architectural. In a larger system, you might make the diagnosis step an interface. The deterministic implementation becomes one strategy, the LLM-backed implementation another, and tests can run both against the same fixtures.
 
+## Staff Practice Notes
+
+The first useful agent in a repo should be boring. It should inspect a small fixture, produce a typed result, write a trace, pass evals, and avoid mutation. That may feel underpowered, but it creates the harness for every serious model experiment that follows.
+
+When replacing deterministic diagnosis with a model, resist rewriting the runtime around the model's preferred shape. Keep the model behind an adapter. Validate output. Preserve trace and eval semantics. If the model is good, it will survive those constraints. If it cannot, the failure is useful evidence.
+
 ## Operational Invariants
 
 The agent output schema should not depend on the diagnosis strategy. A deterministic rule, hosted model, local model, or human-in-the-loop strategy can vary internally, but the runtime should still emit the same structured fields. This lets evals and reports remain stable while experimentation happens behind a narrow boundary.

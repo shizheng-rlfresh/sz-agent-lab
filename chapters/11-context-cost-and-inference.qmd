@@ -78,6 +78,12 @@ Context debt accumulates when teams keep adding instructions, examples, retrieve
 
 The antidote is prompt inventory. Treat prompt segments like code dependencies: name them, version them, justify them, and remove them when they no longer pay for their tokens.
 
+## Staff Practice Notes
+
+Context budgeting is where ML systems judgment meets product economics. A model with a large context window can still be too slow, too expensive, or too noisy for the product path. Ask about the distribution, not the maximum: typical prompt size, tail prompt size, retry rate, and warning rate.
+
+Be precise about estimates. A crude token estimator is useful for architecture review if it is labeled as crude. It becomes misleading only when presented as billing truth or provider-tokenizer output. The mature habit is to start with approximate alarms, then replace them with measured counters where the decision requires precision.
+
 ## Operational Invariants
 
 Prompt assembly should have a budget before model invocation. The system should know whether it is about to exceed maximum prompt size, dynamic context share, or raw-output policy. Waiting for the model request to fail is slower, more expensive, and less explainable.

@@ -65,6 +65,12 @@ Production traces often need redaction and sampling. Redaction protects sensitiv
 
 The local repo avoids that complexity by running small examples locally. A production design should define which fields are always retained, which fields are redacted, and which runs are never sampled away. Failed or policy-violating runs usually deserve stronger retention than routine successes.
 
+## Staff Practice Notes
+
+Tracing should be designed from the questions you will ask during an incident. "Why did it answer that?", "What did it read?", "Which policy was active?", "Did validation fail?", and "Was context dominated by logs?" are better schema drivers than generic completeness. If the trace cannot answer those questions, more logging volume will not fix it.
+
+At the same time, avoid trace maximalism. Raw prompts, full tool outputs, and unbounded logs can create security and retention problems. A mature trace is selective: enough structure to reconstruct decisions, enough redaction to be safe, and enough artifact references to inspect raw evidence when authorized.
+
 ## Operational Invariants
 
 Every trace event should be attributable to exactly one run. The run ID is the join key across trace, eval, report, and incident notes. If artifacts cannot be joined, the system cannot reconstruct behavior reliably after the fact.
