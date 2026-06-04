@@ -32,6 +32,29 @@ The output schema is:
 }
 ```
 
+## Runtime Walkthrough
+
+The deterministic agent has six stages.
+
+First, it records `agent_start`. This creates a run boundary. Second, it records the active `ToolPolicy`, which tells a reviewer what the run was allowed to do. Third, it lists files and reads selected files through traced tool calls. Fourth, it records context observations with estimated token counts. Fifth, it applies deterministic diagnosis rules. Sixth, it records `agent_finish` and returns structured JSON.
+
+Nothing in that sequence requires an LLM. That is the point. The runtime contract can be inspected independently from model behavior. A later model-backed implementation can replace the deterministic diagnosis stage, but it should not remove policy, tracing, evals, or output structure.
+
+## Why Structured Output Comes Early
+
+Structured output is not just for downstream convenience. It defines what evals can check. If the agent returns a paragraph, the eval has to parse prose or rely on a judge. If the agent returns `files_inspected`, the eval can check grounding. If it returns `findings[*].file`, the eval can count hallucinated files. If it returns confidence, the runtime can later define thresholds.
+
+The schema in this repo is small, but it encodes important questions:
+
+- What is the summary?
+- Which files were inspected?
+- What finding was made?
+- What evidence supports it?
+- How confident is the system?
+- What should happen next?
+
+Those fields are enough for deterministic tests and a production report.
+
 ## The Lab
 
 ```bash
@@ -53,6 +76,10 @@ An LLM-backed version could inspect irrelevant files, hallucinate filenames, ign
 ## Production Translation
 
 Before deploying an LLM version, the deterministic skeleton should already have tools, policy, tracing, evals, context accounting, and report generation. Model quality is not a substitute for runtime evidence.
+
+The production version would need more layers: timeout handling, retries, structured validation, model refusal handling, policy violation events, artifact retention, and human review for uncertain diagnoses. But those layers should extend the skeleton rather than replace it.
+
+One useful design review question is: if the model decision were wrong, would the system have enough evidence to show why? In this lab, the trace shows files read, policy, context observations, and finish status. The eval shows whether required evidence appeared. That is the minimum shape of a debuggable run.
 
 ## Evidence and References
 

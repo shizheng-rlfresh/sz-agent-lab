@@ -20,6 +20,32 @@ build -> tool access -> state/context -> trace -> eval -> policy -> report -> de
 
 This is an author interpretation, not a vendor definition: the model is not the system. The system is the model plus runtime, tools, state, traces, evals, policies, and rollout controls.
 
+## A More Precise Vocabulary
+
+The distinction matters because teams often use "agent" to describe very different things. A single prompt submitted through a chat interface is a model interaction. A batch job that sends fixed prompts over a dataset is a workflow with model calls. A service that lets a model choose from tools is an agent-shaped runtime, but it is not automatically production-shaped. A multi-agent system introduces multiple runtimes or roles that coordinate, hand off, debate, route, or specialize. Each step adds a new failure surface.
+
+This book treats autonomy as a design variable, not as a maturity level. More autonomy can be useful when the task path cannot be known in advance, but it also means the runtime must record more evidence. If a system can decide which file to inspect, then the trace should show the selected file. If it can call tools, the policy should define what tools are allowed. If it can accumulate context, the context profiler should show whether that context is bounded. If it can make a recommendation, the eval should say what would make the recommendation acceptable.
+
+The local lab intentionally begins with a toy repository. That keeps the observation surface small enough for inspection. The lesson is not that real systems are toy-sized. The lesson is that a production-shaped system can be studied only when the boundaries are visible.
+
+## Boundary Map
+
+Think of an agentic system as a set of nested contracts:
+
+```text
+user/task contract
+runtime contract
+tool contract
+state contract
+trace contract
+eval contract
+deployment contract
+```
+
+The user/task contract defines what the system is trying to do. The runtime contract defines how execution proceeds. The tool contract defines what capabilities exist. The state contract defines what is authoritative and what is merely context. The trace contract defines what evidence is saved. The eval contract defines what success means. The deployment contract defines what is allowed to ship.
+
+When a system fails, the useful question is not immediately "Did the model fail?" The useful question is: which contract failed? If the agent read the wrong file, the failure may be file selection. If it found the right evidence but returned malformed JSON, the failure may be output validation. If it attempted to read outside the repo, the policy should catch it. If the answer looks right but no trace exists, the failure is observability.
+
 ## The Lab
 
 Run the deterministic baseline:
@@ -49,6 +75,10 @@ Before deployment, a team needs explicit answers to five questions:
 - Which artifacts measure success?
 - Which failure modes are bounded?
 - What rollback or review path exists?
+
+For a staff-level review, those questions should become artifacts. "The agent is safe" is too broad. "The read-only file tools are confined to `data/toy_repos`, path traversal is tested, shell is disabled, and policy violations are reported" is reviewable. "The agent works" is weak. "The `buggy_calc`, `prompt_injection_repo`, and `noisy_logs_repo` evals pass, while the report still requires human review due to large dynamic context" is stronger.
+
+The book repeatedly uses this pattern: make the claim narrower, tie it to an artifact, and identify what would falsify it.
 
 ## Evidence and References
 

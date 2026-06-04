@@ -21,6 +21,29 @@ Agent discussions often collapse "memory," "state," and "context" into one word.
 
 This table is author interpretation. The repo enforces part of it: traces and eval reports are artifacts, while tool output is bounded before it can become context.
 
+## Authority Is Not the Same as Availability
+
+Information can be available without being authoritative. A README can be read by a tool, but it is not allowed to override system policy. A model can produce a summary, but the summary is not a durable fact unless some process accepts it. A trace can show that a file was read, but it does not prove the diagnosis is correct. An eval can say a check passed, but it only proves the check it actually implements.
+
+This distinction is central to agentic systems because the prompt often mixes many categories of text: task instructions, tool schemas, retrieved snippets, previous model outputs, summaries, and policy reminders. If the runtime does not preserve labels, the model sees a flat stream of tokens. The system owner still needs to know which tokens are instructions, which are observations, and which are untrusted content.
+
+## Context Assembly as a State Transition
+
+Prompt context should be treated as an assembled artifact. It is not simply "the conversation." It is the result of decisions:
+
+- which instructions are stable,
+- which tool schemas are included,
+- which observations are selected,
+- which memory is retrieved,
+- which content is summarized,
+- which budget is enforced.
+
+The local `ContextTracker` makes a small part of that transition visible. It records segment names, token estimates, cacheability, cumulative growth, and large dynamic outputs. The estimator is crude, but the state model is useful: every added segment changes the next inference request.
+
+## Trust Labels
+
+In an LLM-backed version, the runtime should label tool output. A file from `prompt_injection_repo` should be framed as untrusted repository content, not as an instruction. A trace event should be stored outside the prompt unless deliberately summarized. An eval result should normally inform deployment, not model reasoning.
+
 ## The Lab
 
 ```bash
@@ -42,6 +65,8 @@ If prompt text is treated as authoritative state, a system can confuse instructi
 ## Production Translation
 
 Production systems need ownership rules for state. Durable facts should live in durable stores. Runtime evidence should live in traces. Prompt context should be assembled intentionally and capped.
+
+Long-term memory deserves special caution. A memory store can become a persistence layer for stale summaries, injected instructions, or cross-user leakage if ownership and retrieval rules are weak. This book does not implement long-term memory; that omission is intentional. The local system first teaches state labeling and bounded context before adding a durable memory surface.
 
 ## Evidence and References
 

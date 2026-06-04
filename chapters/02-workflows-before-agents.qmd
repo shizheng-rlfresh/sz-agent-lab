@@ -18,6 +18,34 @@ A workflow has a known path. The workflow in this repo:
 
 It does not infer intent, choose tools dynamically, or decide when to stop. That makes it easy to test and easy to falsify.
 
+## Why the Baseline Should Be Boring
+
+A good baseline should feel almost disappointing. It should not be clever. It should not depend on hidden model behavior. It should make the task boundary so explicit that failure is easy to localize.
+
+For the `buggy_calc` fixture, the deterministic workflow cannot write a rich bug report. It can list files and show where division-related text appears. That is enough to establish the evidence surface. The next chapter can then ask whether a tool-using runtime has a safe enough tool boundary. The agent chapter can ask whether structured diagnosis adds value. The eval chapter can ask whether the diagnosis is measurable.
+
+This staged approach prevents a common error: using an LLM to blur requirements that have not been specified. If a system owner does not know what evidence is required, adding a model does not solve that problem. It usually makes the uncertainty harder to see.
+
+## Decision Boundary
+
+Use a workflow when:
+
+- the control path is known,
+- the relevant data sources are known,
+- the output schema is known,
+- failures can be enumerated,
+- deterministic tests can cover the behavior.
+
+Consider an agent-shaped runtime when:
+
+- the relevant data source is unknown at runtime,
+- the next tool depends on an observation,
+- the task requires iterative narrowing,
+- the stopping condition depends on evidence,
+- the value of dynamic selection outweighs the cost of variance.
+
+These are design heuristics, not laws. The point is to make the autonomy decision explicit.
+
 ## The Lab
 
 ```bash
@@ -47,6 +75,10 @@ Overbuilding a known path as an agent makes the system harder to test, harder to
 ## Production Translation
 
 In production, deterministic paths are easier to review, cache, monitor, and roll back. Agentic behavior should be introduced where the task contains genuine runtime uncertainty.
+
+The production version of this lesson is architectural restraint. A fixed workflow can still be sophisticated: it can use retrieval, ranking, model calls, validators, typed schemas, and human review. The distinction is not "simple versus advanced." The distinction is whether the path is known before execution.
+
+When reviewing an agent proposal, ask for the deterministic baseline. If no one can describe it, the team may be using "agent" as a placeholder for unclear product behavior. If the baseline is strong, the agent should be evaluated against it rather than against an empty demo.
 
 ## Evidence and References
 

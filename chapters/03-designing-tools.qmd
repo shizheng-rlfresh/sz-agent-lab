@@ -22,6 +22,28 @@ A tool contract should specify:
 
 The lab implements three read-only tools: `list_files`, `read_file`, and `grep`.
 
+## Capability Design
+
+The safest tool is often the narrowest useful tool. A generic shell tool can do almost anything, which means the policy and approval burden is high. A narrowly scoped `grep` tool can search text but cannot mutate state, install packages, contact the network, or execute arbitrary commands. The difference is not implementation convenience; it is capability design.
+
+Tool outputs also shape model behavior. If a tool returns a megabyte of logs, the next model call may be dominated by irrelevant context. If a tool returns unstable ordering, traces and tests churn. If a tool returns ambiguous errors, the runtime may retry incorrectly. The tool contract is therefore part of reliability, cost, and observability.
+
+The repo's tools are intentionally conservative:
+
+- paths must resolve under allowed roots,
+- returned file lists are sorted,
+- reads are capped,
+- shell execution is not a tool,
+- writes are not implemented in the core path.
+
+That is not a statement that every production agent must be read-only. It is a statement that the first learning path should expose capability boundaries before mutation exists.
+
+## Error Contracts
+
+Errors should be explicit enough to support policy and evals. `ToolPolicyError` is raised when a path or capability violates policy. In a larger system, the runtime might convert that exception into a trace event, a user-facing refusal, a human-approval request, or an eval failure.
+
+The important design point is that the error is not just a Python exception. It is evidence that the runtime boundary worked.
+
 ## The Lab
 
 ```bash
@@ -51,6 +73,18 @@ If `read_file` accepted arbitrary paths, a malicious or confused agent could rea
 ## Production Translation
 
 Treat every tool as a production capability. If a tool can send email, delete files, run shell commands, or call internal services, it needs an authorization model, trace evidence, approval gates, and rollback semantics.
+
+For a staff review, require a tool inventory. For each tool, ask:
+
+- What resource can it observe or mutate?
+- Is the action idempotent?
+- What is the maximum output size?
+- What identity or tenant boundary applies?
+- What trace fields prove what happened?
+- What approval is needed for destructive actions?
+- What eval catches misuse?
+
+This inventory should exist before an LLM is allowed to call the tool.
 
 ## Evidence and References
 
