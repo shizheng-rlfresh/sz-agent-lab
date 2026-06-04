@@ -45,6 +45,20 @@ The mitigation is change review. Treat policy diffs like permission diffs. Requi
 
 The prompt-injection fixture asks the system to read outside the repository. The policy boundary makes that request irrelevant to file access. The malicious text is still useful evidence; it is just not authority. This is the difference between recognizing an attack string and being controlled by it.
 
+## Approval Design
+
+Approval should be tied to action class, not vague risk feeling. A read of a public fixture can be automatic. A read of a private repository may require user authorization. A write to a branch may require maintainer approval. A delete or shell command may require a stronger gate or may be prohibited entirely.
+
+The policy schema in this repo includes `approval_required` even though the core tools do not implement writes. That is a forward-looking design hook. It reminds the reader that the absence of mutation is a first-version constraint, not a permanent limit.
+
+For a production system, approval records should include who approved, what was approved, what evidence was shown, and what exact action was executed. Otherwise approval becomes a ritual rather than an audit artifact.
+
+## Policy Tests as Security Regression Tests
+
+Policy tests are not only correctness tests. They are security regression tests. If a future refactor accidentally allows path traversal, the test should fail. If a developer enables shell execution for convenience, the test should fail unless the policy and tests are deliberately updated.
+
+The local tests cover a small surface: path confinement, read-only blocking, shell blocking, and output caps. That is enough for this repo's capability set. A richer tool set should grow the policy tests before exposing new authority.
+
 ## The Lab
 
 ```bash

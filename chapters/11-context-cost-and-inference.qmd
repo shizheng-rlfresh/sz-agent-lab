@@ -50,6 +50,28 @@ For logs, a better strategy may be extraction rather than summarization: error l
 
 `noisy_logs_repo` is not a security fixture. It is an infrastructure fixture. It demonstrates that an agent can be safe and correct while still creating a context problem. This is why the report can require human review even when evals pass.
 
+## Cost Is a System Property
+
+Cost is not only model price. It includes retries, tool calls, failed runs, human review, cache misses, storage, tracing, and engineering time. The book focuses on token estimates because they are visible in a small repo, but a production cost model should include the full workflow.
+
+For example, if an agent reads too much and produces an uncertain answer, the organization may pay for a large model call and still require human review. If a deterministic workflow could have produced the same evidence cheaply, the agent did not create net value.
+
+That is why the workflow baseline remains relevant through the infrastructure chapters.
+
+## Latency Decomposition
+
+A single "latency" number hides several phases:
+
+- tool latency,
+- prompt assembly,
+- model prefill,
+- decoding,
+- validation,
+- report generation,
+- human review.
+
+The local trace records tool latency only. That is not enough for a production latency model, but it establishes the habit of phase separation. If a future model call is slow, the team should know whether the time is spent reading files, assembling context, prefill, decoding, or validation.
+
 ## The Lab
 
 ```bash

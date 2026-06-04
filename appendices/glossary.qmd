@@ -83,3 +83,19 @@ A condition that must pass before broader deployment.
 ## Rollback
 
 A defined path for reverting a system, feature, model, tool, or policy change.
+
+## Artifact
+
+A durable output used for review or reproduction, such as a trace, eval report, production report, rendered book, fixture repository, or test result.
+
+## Fixture
+
+A small controlled input used to exercise a known behavior or failure mode.
+
+## Dynamic Segment
+
+A prompt or context segment that changes across runs, such as user request, retrieval output, memory, timestamp, UUID, or tool observation.
+
+## Stable Prefix
+
+The leading portion of a prompt that is expected to remain byte-stable across requests when prompt caching is desired.

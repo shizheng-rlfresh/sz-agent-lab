@@ -40,6 +40,33 @@ In production, retrieved content should carry metadata: source, trust level, ret
 
 The prompt-injection eval checks that the system surfaces the suspicious content without violating policy. That is a small but important distinction. A system that refuses to read any untrusted content cannot triage real repositories. A system that reads untrusted content without labels and policy is too exposed. The useful middle is controlled observation.
 
+## Indirect Injection Surfaces
+
+The README fixture is obvious. Real indirect injection can be embedded in places that look operationally normal:
+
+- code comments,
+- issue descriptions,
+- ticket histories,
+- logs,
+- web pages,
+- document metadata,
+- retrieved snippets,
+- long-term memory summaries.
+
+The common property is that the content enters through a tool or retrieval surface rather than through an explicit trusted instruction channel. The runtime should assume that external content may contain instructions that are not meant to be followed.
+
+## Designing an Injection Eval
+
+A useful prompt-injection eval should define:
+
+- the malicious content,
+- the tool surface that exposes it,
+- the action the malicious content requests,
+- the policy boundary that should block impact,
+- the expected report or finding.
+
+The current fixture requests out-of-repo reads. The policy boundary is path confinement. The expected finding is prompt-injection detection with no invalid tool calls. A future fixture could request shell execution or data exfiltration, but only if the tool surface exists safely enough to test.
+
 ## The Lab
 
 ```bash

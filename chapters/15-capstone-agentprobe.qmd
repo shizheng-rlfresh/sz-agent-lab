@@ -59,6 +59,25 @@ The strongest v0 is boring and inspectable. It should run locally, accept fixtur
 
 The case study already contains seed artifacts for `agentprobe`: a trace, eval results, policy configuration, context summary, and production report. The capstone is not speculative. It is the act of extracting the book's evidence pattern into a focused tool.
 
+## A Minimal Interface
+
+An `agentprobe` command-line interface might begin like this:
+
+```bash
+agentprobe inspect traces/run.jsonl --eval evals/buggy_calc.json --policy policy.yaml
+agentprobe report traces/run.jsonl --out report.md
+```
+
+The first command would validate the run artifact. The second would produce a report. That is enough for a useful first release if the fixtures are good and the failure messages are precise.
+
+## Measurable Claim
+
+The first release should make a narrow claim:
+
+> Given a JSONL trace and a deterministic eval specification, `agentprobe` produces a reproducible report that identifies missing evidence, failed evals, policy violations, and context warnings.
+
+That claim is testable. It avoids broad statements about agent reliability. It also aligns with the evidence standard of this book.
+
 ## The Lab
 
 ```bash

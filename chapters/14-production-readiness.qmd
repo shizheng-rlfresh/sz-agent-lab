@@ -63,6 +63,27 @@ If the current artifacts cannot answer those questions, the readiness work is in
 
 The current sample report is not a production approval. It is a review packet. It says that deterministic evals pass, policy violations are absent, and context growth still requires human review. That is a more useful state than a binary "works" or "does not work."
 
+## Readiness Matrix
+
+A practical readiness review can use a matrix:
+
+| Area | Evidence | Local Artifact |
+|---|---|---|
+| Tools | path and shell policy | `ToolPolicy`, tests |
+| Observability | run reconstruction | JSONL trace |
+| Evals | deterministic gates | eval report |
+| Context | growth and warnings | context summary |
+| Safety | prompt-injection fixture | eval and policy |
+| Deployment | review status | production report |
+
+The matrix is incomplete for real deployment, but it is enough to structure a review. Missing cells are not failures; they are work items.
+
+## Ownership
+
+Every gate needs an owner. Tool policy may belong to platform or security. Eval fixtures may belong to the product/runtime team. Context budgets may belong to ML infrastructure. Deployment approval may belong to an engineering lead. If ownership is unclear, failures become meetings instead of actions.
+
+This book cannot assign ownership for your organization. It can make the ownership surfaces visible.
+
 ## The Lab
 
 ```bash

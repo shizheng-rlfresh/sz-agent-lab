@@ -58,6 +58,27 @@ This matters for agentic systems because tool schemas can be long and stable. If
 
 The repo triage prompt would likely have stable instructions and stable tool schemas. The repository content, user request, and trace-derived observations are dynamic. The cache demo teaches the layout principle before the book introduces any provider-specific integration.
 
+## Deterministic Serialization
+
+Prompt caches are sensitive to exact text. That makes serialization choices important. JSON key ordering, whitespace, generated IDs, timestamps, and nondeterministic collection ordering can all alter the prefix.
+
+The local cache demo uses deterministic JSON serialization for tool schema content. That is a tiny implementation detail with broad implications. If your runtime serializes tool schemas from an unordered source, the prompt may look semantically equivalent while failing to share a prefix.
+
+The design rule is simple: make stable content stable in bytes, not just stable in meaning.
+
+## Cache Metrics
+
+A production cache analysis should track:
+
+- stable prefix tokens,
+- dynamic tokens,
+- first changed segment,
+- cache-hit rate where provider data is available,
+- latency difference between cache hit and miss,
+- cost difference where pricing applies.
+
+The local demo reports only static analysis. It does not observe provider cache hits. That limitation is explicit because provider-specific behavior must be measured or cited.
+
 ## The Lab
 
 ```bash

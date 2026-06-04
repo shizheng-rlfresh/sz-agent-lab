@@ -62,6 +62,18 @@ The right comparison is workload-level. A hosted model may be operationally simp
 
 If the repo triage agent became local, `noisy_logs_repo` would be the first warning sign. The model might handle `buggy_calc` at short context and then slow down or fail when log observations grow. The same fixture that drives hosted cost awareness drives local memory awareness.
 
+## Quality Is Part of Feasibility
+
+Local feasibility is not only "can the model run?" It is "can the model run well enough for the task?" A small quantized model may be fast and private but miss subtle evidence. A larger hosted model may be more capable but more expensive or less appropriate for sensitive data. The eval suite should make that tradeoff visible.
+
+A local experiment should therefore run the same task fixtures as the core repo. If the local model cannot pass `buggy_calc`, it is not ready for the triage path. If it passes `buggy_calc` but fails prompt-injection handling, the runtime or prompt needs work. If it passes both but cannot handle noisy context, the context strategy needs work.
+
+## Operational Surface
+
+Local deployment adds its own operational surface: model downloads, artifact pinning, quantization choices, hardware availability, thermal behavior, and update process. Those concerns are outside the deterministic core repo, but they are part of the production decision.
+
+The optional status of this chapter is therefore not a lack of seriousness. It is an architectural separation: learn the runtime first, then measure local inference as a deployment variant.
+
 ## The Lab
 
 Optional:
