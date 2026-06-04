@@ -78,6 +78,14 @@ For a staff-level design, require a memory specification before adding durable m
 
 The local lab does not need memory because each run is self-contained. That absence keeps the first set of boundaries easier to understand.
 
+## Operational Invariants
+
+State must be labeled before it is used. The runtime should know whether a piece of text is user instruction, developer instruction, current file evidence, retrieved memory, tool output, trace summary, or report prose. Labels are not bureaucracy; they determine which content can influence future actions.
+
+State must have freshness semantics when it persists across runs. A memory record without source commit, creation time, evidence references, and invalidation policy is a liability. It may still be useful as a hint, but it should not silently override current observations.
+
+State should have different storage destinations for different purposes. Prompt context is optimized for model behavior. Trace data is optimized for reconstruction. Reports are optimized for review. Durable memory is optimized for reuse. Collapsing those surfaces into one text blob makes the system simpler to prototype and harder to trust.
+
 ## The Lab
 
 ```bash

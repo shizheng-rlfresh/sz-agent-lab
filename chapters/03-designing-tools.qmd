@@ -81,6 +81,14 @@ For file systems, `read_file` and `grep` are narrow enough to test. For database
 
 Good tool design makes the safe path easy and the risky path explicit.
 
+## Operational Invariants
+
+Every tool call should be policy-mediated. A tool should not decide path authority, shell access, or mutation authority informally inside business logic. It should ask the policy layer first, record the decision, and fail with a structured error when the action is outside the boundary.
+
+Every tool output should be bounded. Bounded output is a safety property and an inference property. It protects against accidental context floods, adversarial large files, and unstable report artifacts. A model that truly needs more data should request a narrower follow-up observation, not receive unbounded content by default.
+
+Every tool should be deterministic unless nondeterminism is the feature. File listings should be sorted. Grep results should be ordered. Error shapes should be stable. Determinism makes tests useful and makes reports diffable. When a tool must call an external or nondeterministic service, the trace should record the parameters that explain variance.
+
 ## The Lab
 
 ```bash

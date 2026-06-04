@@ -78,6 +78,14 @@ Context debt accumulates when teams keep adding instructions, examples, retrieve
 
 The antidote is prompt inventory. Treat prompt segments like code dependencies: name them, version them, justify them, and remove them when they no longer pay for their tokens.
 
+## Operational Invariants
+
+Prompt assembly should have a budget before model invocation. The system should know whether it is about to exceed maximum prompt size, dynamic context share, or raw-output policy. Waiting for the model request to fail is slower, more expensive, and less explainable.
+
+Large observations should be transformed intentionally. The right transformation may be truncation, summarization, indexing, sampling, or a narrower tool query. The wrong transformation is silently dropping evidence or blindly stuffing logs into context. The trace should record what happened.
+
+Cost analysis should be workload-shaped. Average prompt size, tail prompt size, tool-call count, retry rate, cacheability, and review frequency all matter. A single token estimate is useful for a lab; a production system needs distributions and gates.
+
 ## The Lab
 
 ```bash

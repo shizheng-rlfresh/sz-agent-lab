@@ -73,6 +73,14 @@ Prompt injection is often discussed as a security issue, but it is also a reliab
 
 That means evals should check both safety and task completion. Did the system preserve policy? Did it still complete the intended diagnosis? Did it quote the malicious text as evidence without making it the task?
 
+## Operational Invariants
+
+Untrusted content should be preserved as evidence and labeled as untrusted. Stripping all suspicious text can make the system blind to attacks or security-relevant evidence. Passing it through as normal instruction can make the system unsafe. Controlled observation is the invariant.
+
+Follow-on actions should be constrained independently of model interpretation. If malicious content requests an out-of-root read, the policy should block it even if the model attempts it. If malicious content asks for a write, approval and mutation policy should still apply. The model's ability to ignore the attack is useful but not sufficient.
+
+Injection fixtures should test the system boundary, not just the prompt wording. A good fixture proves that suspicious content was observed, labeled, and confined. It should fail if policy violations appear or if the final answer invents unsupported evidence.
+
 ## The Lab
 
 ```bash

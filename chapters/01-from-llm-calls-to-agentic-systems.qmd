@@ -80,6 +80,14 @@ System maturity shows up when failures become easier to analyze. If a run is bad
 
 This is why the book treats "agentic" as an engineering burden rather than a badge. Dynamic behavior can be valuable, but it makes evidence more important, not less.
 
+## Operational Invariants
+
+The first invariant is artifact continuity. A useful agentic system should leave behind enough structured evidence for another engineer to reconstruct the run without relying on the operator's memory. That evidence does not have to be elaborate at the beginning, but it must be deliberate: input, policy, tool calls, context observations, output schema, eval result, and report status.
+
+The second invariant is authority separation. The component that produces language should not be the component that silently grants capabilities. Tools, policies, approvals, and deployment gates live outside the model. This separation is what lets the system remain reviewable when the model output is fluent, incomplete, or wrong.
+
+The third invariant is falsifiability. Every important claim about the system should have a way to fail. If the claim is "the system inspected the relevant files," an eval should fail when it does not. If the claim is "the system stayed inside policy," a violation count or trace event should expose the contrary. A system that cannot be falsified cannot be operated rigorously.
+
 ## The Lab
 
 Run the deterministic baseline:

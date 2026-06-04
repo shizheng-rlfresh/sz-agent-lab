@@ -65,6 +65,14 @@ Human approval is only useful if the human receives the right evidence. "Allow t
 
 For example, approving a file write should show the path, diff, test status, and why the agent wants the change. Approving shell should show the exact command, working directory, environment assumptions, and risk. If the approver cannot understand the action, the approval flow is cosmetic.
 
+## Operational Invariants
+
+Policy should fail closed. If the runtime cannot prove that a path is inside an allowed root, a command is permitted, or a write has approval, the action should not proceed. A blocked action with evidence is a healthy outcome; an ambiguous action that succeeds is not.
+
+Policy should be serializable. The active policy for a run should appear in traces and reports so reviewers can compare behavior across environments. Without serialization, "the policy was enabled" becomes a claim rather than evidence.
+
+Policy should be tested at the boundary, not only through happy-path tools. Traversal attempts, blocked writes, blocked shell calls, and output caps are the tests that prove authority is constrained. A policy suite that only tests allowed behavior is incomplete.
+
 ## The Lab
 
 ```bash

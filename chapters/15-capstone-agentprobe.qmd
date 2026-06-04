@@ -91,6 +91,14 @@ Evaluate the capstone like the book evaluates the agent:
 
 The first user of `agentprobe` should be this repository. If it cannot improve this lab's evidence story, it is not ready to generalize.
 
+## Operational Invariants
+
+The first public contract should be narrow enough to test completely. Trace input, schema validation, eval summary, policy summary, context warning, and report output are enough for a first release. Orchestration, UI, hosted services, and model adapters can wait.
+
+The capstone should accept external artifacts without forcing framework migration. A user should be able to bring one trace from another agent framework, map required fields, and receive a useful evidence report. That is the portable value of the book.
+
+The project should preserve fixture-driven development. Every new feature should have a small trace, eval, or policy fixture that demonstrates the behavior. Without fixtures, `agentprobe` would become another impressive but hard-to-review demo.
+
 ## The Lab
 
 ```bash

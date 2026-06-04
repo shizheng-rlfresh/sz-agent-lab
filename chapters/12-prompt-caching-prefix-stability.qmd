@@ -85,6 +85,14 @@ A useful prompt-layout review asks for the assembled prompt with segment labels.
 
 This review also catches safety problems. Untrusted content that appears before policy reminders or tool schemas may not be a cache issue only; it may also be an instruction/data separation issue.
 
+## Operational Invariants
+
+Stable prompt segments should be serialized deterministically. Instructions, tool schemas, and output schemas should not change because of dictionary ordering, timestamps, UUIDs, or formatting churn. If they change, the runtime should know why.
+
+Dynamic prompt segments should appear after stable segments when cacheability matters. User request, retrieval output, tool observations, memories, and timestamps are often necessary, but they should not break the reusable prefix unless the product intentionally trades cacheability for another requirement.
+
+Cache-oriented refactors should be guarded by correctness evals. Moving content around can change instruction priority or trust labeling. A better cache ratio is not a win if the prompt becomes less safe or less accurate.
+
 ## The Lab
 
 ```bash

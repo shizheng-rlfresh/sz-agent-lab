@@ -92,6 +92,14 @@ That migration path gives you a clean comparison. If the model-backed file selec
 
 In practice, this is also how you keep code review sane. Reviewers can inspect one change in authority at a time.
 
+## Operational Invariants
+
+The workflow baseline should remain executable after the agent path exists. This is not nostalgia for simpler code; it is an operational control. The baseline gives CI a fast smoke test, gives incident response a fallback, and gives evals a comparison target when model behavior changes.
+
+The agent path should name the dynamic decision it owns. "Use a model" is not specific enough. The model might select files, rank evidence, choose tools, decide whether to escalate, or summarize findings. Each dynamic decision has different failure modes and different eval requirements. If the team cannot name the decision, it cannot measure whether autonomy helped.
+
+The workflow and agent should share deterministic infrastructure where possible: tools, policy, trace writer, schema validation, fixture repos, and report generation. Shared infrastructure makes differences easier to interpret. If both paths fail, inspect shared components. If only the agent fails, inspect the dynamic decision boundary.
+
 ## The Lab
 
 ```bash

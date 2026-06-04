@@ -89,6 +89,14 @@ Before committing to local inference, gather:
 
 Without this checklist, local deployment is a preference rather than an engineering decision.
 
+## Operational Invariants
+
+Local inference should be optional until it has workload evidence. The deterministic lab must run without MLX, local model downloads, hardware assumptions, or external credentials. Optionality preserves reproducibility for readers and keeps the core tests fast.
+
+Local and hosted strategies should satisfy the same schema. If the local path returns a different result shape, evals and reports become strategy-specific and comparison becomes weaker. The adapter boundary should normalize output or fail clearly.
+
+Local measurement should use representative prompts. A one-line generation proves basic installation, not agent readiness. The relevant measurement includes tool schemas, evidence snippets, output schema constraints, context length, and fixture-level eval results.
+
 ## The Lab
 
 Optional:

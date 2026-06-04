@@ -94,6 +94,14 @@ When reviewing the agent implementation, separate runtime code from diagnosis co
 
 The current implementation is small enough that the separation is conceptual rather than architectural. In a larger system, you might make the diagnosis step an interface. The deterministic implementation becomes one strategy, the LLM-backed implementation another, and tests can run both against the same fixtures.
 
+## Operational Invariants
+
+The agent output schema should not depend on the diagnosis strategy. A deterministic rule, hosted model, local model, or human-in-the-loop strategy can vary internally, but the runtime should still emit the same structured fields. This lets evals and reports remain stable while experimentation happens behind a narrow boundary.
+
+The agent should record enough evidence to explain both success and failure. A successful diagnosis should show inspected files and evidence. A failure should show whether the issue was policy, missing files, malformed output, low confidence, or context budget. Silent fallback from one failure type to another makes incident review harder.
+
+The agent should not mutate the target repo in the core path. Read-only behavior keeps the lab reproducible and keeps the first contract narrow. If mutation is added later, it should arrive through proposed patches, approvals, post-action verification, and rollback artifacts.
+
 ## The Lab
 
 ```bash

@@ -90,6 +90,14 @@ Readiness is not a one-time launch checklist. Tool surfaces change. Models chang
 
 The report should therefore be regenerated as part of change review. If the report is only created once, it becomes documentation. If it is regenerated on every meaningful change, it becomes a gate.
 
+## Operational Invariants
+
+Readiness status should be conservative. Missing trace, missing eval, missing policy, missing report, or unbounded context should not silently become "ready." The system can still be useful locally, but deployment authority should match evidence.
+
+Readiness should be scoped by rollout mode. Local advisory use, shadow mode, automatic comments, and mutating actions have different gates. A system can be ready for one mode and blocked for another. Treating readiness as a single global boolean hides that distinction.
+
+Readiness should include rollback. If the team cannot disable a tool, revert a prompt, switch to a workflow fallback, or stop user-visible automation, the system is not production-ready even if it passes task evals.
+
 ## The Lab
 
 ```bash

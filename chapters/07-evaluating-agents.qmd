@@ -77,6 +77,14 @@ A failing eval is not automatically bad news. It is information. The important q
 
 The report should make this distinction eventually. A production eval system often needs metadata such as owner, severity, fixture source, expected status, and release-blocking flag. The local eval schema is simpler, but it prepares the reader to ask for that metadata.
 
+## Operational Invariants
+
+Every eval should encode a failure mode, not just a desired answer. `buggy_calc` encodes behavioral mismatch, `prompt_injection_repo` encodes untrusted-content handling, and `noisy_logs_repo` encodes context pressure. That mapping is what makes failures actionable.
+
+Every eval should separate answer quality from process quality when the process matters. A correct final sentence can still fail if required evidence was not inspected or if the answer names unsupported files. Process checks are essential for agentic systems because tool use is part of the behavior being deployed.
+
+Every critical eval should have an owner and a failure action. A red test without an owner becomes background noise. A warning without a failure action becomes decoration. Release gates should say which failures block, which require human review, and which are informational.
+
 ## The Lab
 
 ```bash

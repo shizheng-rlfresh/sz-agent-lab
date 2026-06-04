@@ -65,6 +65,14 @@ Production traces often need redaction and sampling. Redaction protects sensitiv
 
 The local repo avoids that complexity by running small examples locally. A production design should define which fields are always retained, which fields are redacted, and which runs are never sampled away. Failed or policy-violating runs usually deserve stronger retention than routine successes.
 
+## Operational Invariants
+
+Every trace event should be attributable to exactly one run. The run ID is the join key across trace, eval, report, and incident notes. If artifacts cannot be joined, the system cannot reconstruct behavior reliably after the fact.
+
+Every risky boundary should emit evidence. Policy activation, tool calls, context growth, output validation, and finish status are the minimum local boundaries in this repo. A production system may add model calls, retries, approvals, redaction state, and artifact hashes. The principle is the same: the trace should show where authority, data, or control flow changed.
+
+Every trace schema should be reviewable by humans and consumable by tools. JSONL is plain enough for local inspection and structured enough for automated summaries. If the trace becomes too verbose for humans and too irregular for machines, it is no longer serving either audience well.
+
 ## The Lab
 
 ```bash
