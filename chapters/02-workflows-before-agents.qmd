@@ -132,6 +132,20 @@ The production version of this lesson is architectural restraint. A fixed workfl
 
 When reviewing an agent proposal, ask for the deterministic baseline. If no one can describe it, the team may be using "agent" as a placeholder for unclear product behavior. If the baseline is strong, the agent should be evaluated against it rather than against an empty demo.
 
+## Design Review Questions
+
+Before replacing a workflow with an agent, ask:
+
+- What exact workflow exists today?
+- Which step fails because the path is unknown?
+- What new decision will the model make?
+- What evidence proves that decision was better?
+- What variance does the model introduce?
+- What deterministic fallback remains?
+- How will cost and latency compare to the workflow?
+
+An agent proposal should identify the first dynamic decision, not simply assert that the whole task is dynamic.
+
 ## Evidence and References
 
 The workflow/agent distinction is cited from Anthropic's engineering guidance [@anthropic_effective_agents]. The local evidence is the `workflow_baseline` output.

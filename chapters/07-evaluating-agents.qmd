@@ -107,6 +107,21 @@ Deployment should be gated by eval results. For higher-risk systems, determinist
 
 An eval gate should specify what happens on failure. Does deployment block? Does the run require human review? Does a failure open an issue? Does it page an owner? Without an action, an eval is just a report. The local `passed` field is intentionally simple, but the production question is organizational: who owns the failed gate?
 
+## Design Review Questions
+
+For evals, ask:
+
+- What failure mode does each fixture represent?
+- Which checks are deterministic?
+- Which checks require human or model judgment?
+- Which failures block release?
+- Which failures require review but not blocking?
+- Who owns fixture updates?
+- How are real incidents converted into evals?
+- How do evals compare agent behavior to a workflow baseline?
+
+If an eval does not connect to a failure action, it is weaker than it looks.
+
 ## Evidence and References
 
 The eval behavior is repo evidence from `tests/test_evals.py` and `reports/sample_eval_report.md`. NIST AI RMF frames measurement and risk management as part of AI governance [@nist_ai_rmf].

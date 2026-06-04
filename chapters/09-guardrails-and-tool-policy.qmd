@@ -95,6 +95,21 @@ Production guardrails should include policy enforcement, not just model instruct
 
 Approval is not binary. A low-risk read may be automatic. A write may require user confirmation. A delete may require maintainer approval. A network call may require tenant-aware egress policy. The local policy schema is small, but it is designed so those distinctions can be added rather than bolted on later.
 
+## Design Review Questions
+
+For guardrails and policy, ask:
+
+- Which controls are prompt guidance?
+- Which controls are runtime enforcement?
+- What capability does each tool expose?
+- What policy blocks unintended authority?
+- What violation is logged?
+- What approval flow exists for risky actions?
+- What policy changes require security review?
+- What test fails if the boundary weakens?
+
+The safest policy is one whose failure mode is visible in tests, traces, and reports.
+
 ## Evidence and References
 
 Security risk categories are grounded in OWASP [@owasp_llm_top10]. Local enforcement is tested in `tests/test_policy.py`.

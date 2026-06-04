@@ -108,6 +108,21 @@ Production systems need ownership rules for state. Durable facts should live in 
 
 Long-term memory deserves special caution. A memory store can become a persistence layer for stale summaries, injected instructions, or cross-user leakage if ownership and retrieval rules are weak. This book does not implement long-term memory; that omission is intentional. The local system first teaches state labeling and bounded context before adding a durable memory surface.
 
+## Design Review Questions
+
+For each state surface, ask:
+
+- Who owns it?
+- Is it durable?
+- Can it be corrected?
+- Can it cross users, tenants, repositories, or sessions?
+- Is it trusted as instruction, evidence, or untrusted observation?
+- Does it enter prompt context?
+- Is it stored in traces or reports?
+- What retention policy applies?
+
+This review often reveals that a proposed "memory" feature is actually several different systems: retrieval, summarization, persistence, consent, deletion, and prompt assembly.
+
 ## Evidence and References
 
 The state taxonomy is design judgment. The trace shape is repo evidence and aligns with tracing concepts described by OpenAI Agents SDK docs [@openai_agents_tracing].

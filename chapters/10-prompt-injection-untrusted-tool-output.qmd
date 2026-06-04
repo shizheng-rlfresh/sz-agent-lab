@@ -114,6 +114,21 @@ In production, add defense in layers:
 
 No single layer should be described as solving prompt injection. The defensible claim is that each layer reduces a specific part of the risk.
 
+## Design Review Questions
+
+For untrusted tool output, ask:
+
+- What content sources can enter the prompt?
+- Which sources are trusted as instruction?
+- Which sources are observations only?
+- How is untrusted content labeled?
+- What policy limits the impact of malicious instructions?
+- What eval fixture demonstrates the risk?
+- What trace evidence shows the malicious content was handled as data?
+- What human review is required for suspicious outputs?
+
+Prompt-injection review should include both security and task-performance questions.
+
 ## Evidence and References
 
 Prompt-injection risk framing is grounded in OWASP [@owasp_llm_top10]. The local fixture and eval demonstrate the narrower claim made in this chapter.

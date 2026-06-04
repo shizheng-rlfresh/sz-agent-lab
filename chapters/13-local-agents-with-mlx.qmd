@@ -122,6 +122,21 @@ Choose local inference when locality, offline execution, or predictable spend ma
 
 Hybrid designs are also possible. A deterministic local workflow can prefilter, summarize, or redact content before a hosted model call. A local model can handle low-risk tasks while a hosted model handles harder cases. The right design depends on evals, latency, cost, privacy, and operations.
 
+## Design Review Questions
+
+For local inference, ask:
+
+- What workload is moving local?
+- What eval proves quality is sufficient?
+- What context length is representative?
+- What memory measurement was taken?
+- What latency measurement was taken?
+- What model artifact and quantization are pinned?
+- What fallback exists when local inference fails?
+- What operational team owns updates?
+
+Do not accept "runs on my machine" as deployment evidence.
+
 ## Evidence and References
 
 MLX and MLX-LM claims cite their project documentation [@mlx_docs; @mlx_lm_docs]. KV-cache context uses Hugging Face documentation [@huggingface_kv_cache].

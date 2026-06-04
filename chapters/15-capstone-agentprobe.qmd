@@ -121,6 +121,20 @@ The reusable value is not "another agent." The reusable value is evidence around
 
 The capstone also creates an article path. A strong article does not need to claim that agent frameworks are bad or that one tool is best. It can make a narrower claim: agent demos become more useful when every run produces trace, eval, policy, and context evidence.
 
+## Design Review Questions
+
+For the capstone project, ask:
+
+- What is the smallest useful contract?
+- What input artifacts are supported?
+- What output artifacts are generated?
+- What failure cases are included as fixtures?
+- What claim can the first release prove?
+- What is deliberately out of scope?
+- How does the tool improve this repo first?
+
+A focused capstone should make the book's evidence standard reusable.
+
 ## Evidence and References
 
 The project framing is author interpretation. The technical pieces are repo evidence. Tracing and risk-management references are OpenAI Agents SDK tracing, OpenTelemetry, and NIST AI RMF [@openai_agents_tracing; @otel_genai; @nist_ai_rmf].

@@ -126,6 +126,22 @@ The production version would need more layers: timeout handling, retries, struct
 
 One useful design review question is: if the model decision were wrong, would the system have enough evidence to show why? In this lab, the trace shows files read, policy, context observations, and finish status. The eval shows whether required evidence appeared. That is the minimum shape of a debuggable run.
 
+## Design Review Questions
+
+For the agent runtime, ask:
+
+- What starts the run?
+- What policy is active?
+- Which tools can be called?
+- What selects files or evidence?
+- What output schema is required?
+- What happens on malformed output?
+- What happens on low confidence?
+- What trace fields prove the run path?
+- What evals gate the result?
+
+The diagnosis step can evolve from rules to models, but these runtime questions should remain stable.
+
 ## Evidence and References
 
 The agent architecture is repo evidence. The idea that agent SDKs can coordinate tools, guardrails, handoffs, and traces is supported by OpenAI's Agents SDK docs [@openai_agents_sdk].

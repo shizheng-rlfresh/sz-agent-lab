@@ -120,6 +120,21 @@ For a real deployment, add ownership, monitoring, incident templates, escalation
 
 The stopping point is deliberate. A local deterministic lab can teach the shape of readiness without pretending to solve auth, tenancy, secrets, compliance, or SRE operations. Those belong to the production environment.
 
+## Design Review Questions
+
+For production readiness, ask:
+
+- What gates block deployment?
+- What warnings require human review?
+- What artifacts prove each gate?
+- Who owns each gate?
+- What changed since the last passing report?
+- What rollback path exists?
+- What incident questions cannot yet be answered?
+- What monitoring is needed after rollout?
+
+Readiness is a living system, not a slide.
+
 ## Evidence and References
 
 Risk-management framing cites NIST AI RMF [@nist_ai_rmf]. Local readiness behavior is repo evidence from the generated report.

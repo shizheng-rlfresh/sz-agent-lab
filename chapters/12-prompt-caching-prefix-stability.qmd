@@ -115,6 +115,20 @@ Prompt layout is infrastructure design. In a production agent, stable instructio
 
 Do not optimize blindly. A cache-friendly layout that confuses instruction priority is not a win. Correctness comes first, then observability, then optimization. The local cache demo is a diagnostic tool, not a promise of provider savings.
 
+## Design Review Questions
+
+For prompt caching, ask:
+
+- Which prompt segments are byte-stable?
+- Which segments are dynamic?
+- Where do timestamps and IDs appear?
+- Are tool schemas serialized deterministically?
+- What is the first changed segment across similar requests?
+- Is cache behavior documented by the provider or measured locally?
+- What correctness risk would a layout change introduce?
+
+Cacheability should be reviewed alongside instruction hierarchy and untrusted-content placement.
+
 ## Evidence and References
 
 OpenAI and vLLM documentation support the prefix-match framing [@openai_prompt_caching; @vllm_prefix_caching]. The local demo supports the cache-breaker analysis.

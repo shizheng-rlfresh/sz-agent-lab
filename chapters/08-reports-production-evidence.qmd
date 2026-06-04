@@ -108,6 +108,21 @@ Reports can become pull-request comments, release artifacts, incident attachment
 
 A mature version would include run environment, code version, model version, policy version, eval suite version, and artifact hashes. Those are omitted here to keep the lab inspectable, but they are necessary for serious release review.
 
+## Design Review Questions
+
+For reports, ask:
+
+- Who is the primary reader?
+- What decision should the report support?
+- What raw artifacts does it summarize?
+- What artifacts does it link to?
+- What status vocabulary does it use?
+- What makes the report invalid?
+- Which warnings require human review?
+- Which failures block deployment?
+
+A report should be designed around decisions. Otherwise it becomes a formatted log dump.
+
 ## Evidence and References
 
 Report behavior is local evidence from `reports/sample_production_report.md` and `tests/test_report.py`. Risk-gating language is aligned with the measurement and management posture in NIST AI RMF [@nist_ai_rmf].

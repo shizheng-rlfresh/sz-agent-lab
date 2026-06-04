@@ -129,6 +129,21 @@ For a staff review, require a tool inventory. For each tool, ask:
 
 This inventory should exist before an LLM is allowed to call the tool.
 
+## Design Review Questions
+
+For every proposed tool, ask:
+
+- What is the narrowest useful capability?
+- Is the tool read-only, mutating, or externally side-effectful?
+- What input validation applies?
+- What output cap applies?
+- What error contract does the runtime receive?
+- What trace fields are recorded?
+- What abuse case does the test suite cover?
+- What approval is required before execution?
+
+If a tool cannot be described this way, it is not ready to expose to an agent.
+
 ## Evidence and References
 
 Security framing is grounded in OWASP's LLM risk taxonomy [@owasp_llm_top10]. Tool behavior is grounded in `tests/test_tools.py` and `tests/test_policy.py`.

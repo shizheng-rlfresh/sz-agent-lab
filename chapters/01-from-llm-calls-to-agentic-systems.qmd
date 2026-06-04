@@ -120,6 +120,20 @@ For a staff-level review, those questions should become artifacts. "The agent is
 
 The book repeatedly uses this pattern: make the claim narrower, tie it to an artifact, and identify what would falsify it.
 
+## Design Review Questions
+
+Use these questions before approving an agentic-system design:
+
+- Which decisions are deterministic, and which decisions are delegated to a model?
+- What capabilities can the runtime access?
+- What state is durable, and what state is prompt-only?
+- What trace evidence proves the path taken?
+- What evals would fail if the model gave a plausible but unsupported answer?
+- What policy prevents the system from exceeding its intended authority?
+- What deployment gate blocks rollout when evidence is missing?
+
+If the design cannot answer these questions, the missing answers are not documentation gaps. They are system-design gaps.
+
 ## Evidence and References
 
 Agent/workflow distinctions are grounded in Anthropic and OpenAI documentation [@anthropic_effective_agents; @openai_agents_sdk]. The repo behavior is grounded in the command above and its generated JSON.
