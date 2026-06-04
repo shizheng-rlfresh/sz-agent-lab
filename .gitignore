@@ -5,3 +5,4 @@ __pycache__/
 _book/
 .quarto/
 traces/
+src/*.egg-info/
