@@ -4,6 +4,8 @@ A hands-on Quarto book and deterministic Python lab for learning how to build, t
 
 This repository is written for a highly technical reader. It assumes you can read Python, reason about ML systems tradeoffs, and move quickly from a small fixture to the production boundary it represents.
 
+The current book is organized as 15 chapters plus technical appendices. Its evidence standard is explicit: non-trivial claims should be backed by primary sources, reproducible repo artifacts, or clearly labeled author interpretation.
+
 ## What You Will Learn
 
 - Workflows vs agents, with deterministic control flow before autonomy.
@@ -12,6 +14,7 @@ This repository is written for a highly technical reader. It assumes you can rea
 - Deterministic evals before model-judge evals.
 - Guardrails and tool policy as runtime safety infrastructure.
 - Context growth, rough token accounting, and cacheability.
+- Prompt/prefix cache stability.
 - Local inference constraints: model size, context length, KV cache, memory pressure.
 - Production-readiness gates for agentic systems.
 
@@ -45,8 +48,9 @@ quarto render
 5. Run deterministic evals and inspect failure dimensions.
 6. Review tool policy behavior against path traversal and shell access.
 7. Profile context growth with the noisy log fixture.
-8. Generate the production report and identify missing rollout gates.
-9. Use the project-idea scorecard to choose a sharper OSS follow-up.
+8. Run the prompt-cache layout demo.
+9. Generate the production report and identify missing rollout gates.
+10. Use the capstone scorecard to choose a sharper OSS follow-up.
 
 ## Commands
 
@@ -57,6 +61,7 @@ python -m agentic_systems_lab.tracer
 python -m agentic_systems_lab.agent
 python -m agentic_systems_lab.evals
 python -m agentic_systems_lab.context
+python -m agentic_systems_lab.context --cache-demo
 python -m agentic_systems_lab.report
 python scripts/run_all_examples.py
 ```
@@ -67,7 +72,8 @@ python scripts/run_all_examples.py
 - `data/toy_repos/`: small repos that encode concrete failure modes.
 - `tests/`: behavior contracts for the core runtime.
 - `reports/`: sample trace, eval, and production-readiness artifacts.
-- `chapters/`: Quarto book chapters that map to code.
+- `chapters/`: 15 Quarto book chapters that map concepts to code and artifacts.
+- `appendices/`: glossary, command reference, schemas, policy reference, and evidence policy.
 - `examples/`: command-oriented entry points for the learning path.
 
 ## Design Constraints
@@ -80,7 +86,7 @@ python scripts/run_all_examples.py
 
 ## Roadmap
 
-- Add richer eval task sets for prompt injection and noisy-context runs.
+- Add richer eval task sets beyond the current three toy failure modes.
 - Add OpenTelemetry-shaped trace export.
 - Add optional hosted-model and MLX adapters behind explicit feature gates.
 - Split the strongest follow-up into a focused OSS project: `agentprobe`, `cachepilot`, `agentfit-mlx`, or `toolguard`.

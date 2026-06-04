@@ -3,3 +3,11 @@
 This book is a technical lab for building, tracing, evaluating, hardening, and reasoning about agentic AI systems.
 
 The core path is deterministic and local. Optional hosted-model or MLX extensions are deliberately separated from the baseline so the operational contracts are visible before model variability enters the system.
+
+The book's claim discipline is part of the design. Non-trivial factual, vendor-specific, performance, and safety claims are tied to primary sources, local runnable artifacts, or labeled interpretation. The goal is not to make agentic systems sound simple. The goal is to make their boundaries inspectable.
+
+The practical arc is:
+
+```text
+workflow -> tools -> state -> agent runtime -> trace -> eval -> report -> policy -> context -> deployment gate
+```
