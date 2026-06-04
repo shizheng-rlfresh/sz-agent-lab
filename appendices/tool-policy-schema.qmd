@@ -1,3 +1,32 @@
 # Tool Policy Schema
 
-Placeholder tool policy schema.
+`ToolPolicy` is the runtime boundary for local tools.
+
+## Fields
+
+| Field | Default | Meaning |
+|---|---|---|
+| `allowed_roots` | `data/toy_repos` | roots tools may access |
+| `read_only` | `true` | blocks mutation helpers |
+| `allow_shell` | `false` | blocks shell execution |
+| `max_file_chars` | `8000` | caps read output |
+| `approval_required` | write/shell/delete | actions requiring approval |
+| `violations` | empty list | recorded policy violations |
+
+## Methods
+
+- `resolve_path(path)`: returns a resolved path or raises `ToolPolicyError`.
+- `check_write(action)`: blocks writes under read-only mode.
+- `check_shell(command)`: blocks shell execution unless allowed.
+- `cap_text(text, max_chars)`: caps output and appends a truncation marker.
+- `to_dict()`: serializes policy for traces and reports.
+
+## Violation Reasons
+
+- `path_outside_allowed_roots`
+- `write_blocked_read_only`
+- `shell_blocked`
+
+## Production Notes
+
+This policy is intentionally local and small. A production system would also need identity, tenant boundaries, secrets policy, network egress policy, approval workflow, and audit retention.

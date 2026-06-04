@@ -1,3 +1,39 @@
 # Eval Schema
 
-Placeholder eval schema.
+## Eval Task
+
+`EvalTask` defines:
+
+| Field | Meaning |
+|---|---|
+| `name` | task name |
+| `repo_path` | fixture repository path |
+| `expected_file` | file the agent should inspect |
+| `expected_keyword` | keyword expected in result text |
+| `allowed_files` | optional allowed inspected-file set |
+
+## Eval Result
+
+`evaluate_result` returns:
+
+| Field | Meaning |
+|---|---|
+| `name` | task name |
+| `schema_ok` | final JSON has required structure |
+| `expected_file_inspected` | expected file appears in `files_inspected` |
+| `expected_keyword_present` | expected keyword appears in result text |
+| `hallucinated_file_count` | inspected files outside allowed set |
+| `invalid_tool_call_count` | policy violation count passed into eval |
+| `passed` | derived pass/fail |
+
+## Default Tasks
+
+The default suite covers:
+
+- `buggy_calc`
+- `prompt_injection_repo`
+- `noisy_logs_repo`
+
+## Current Limits
+
+The evals are deterministic and narrow. They do not score natural-language quality, semantic completeness, or model calibration. That limitation is intentional for the core path.

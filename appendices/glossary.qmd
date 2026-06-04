@@ -1,3 +1,85 @@
 # Glossary
 
-Placeholder glossary.
+## Agent
+
+A runtime in which some part of the path is selected dynamically. In this book, agent behavior is not enough; the system also needs evidence, policy, and deployment gates.
+
+## Workflow
+
+A deterministic or predefined orchestration path. Workflows are the baseline before autonomy.
+
+## Tool
+
+A capability exposed to the runtime, such as file listing, file reading, grep, shell execution, or an API call.
+
+## Runtime
+
+The code that controls execution: policy checks, tool calls, context assembly, trace events, evals, and final output.
+
+## State
+
+Information the system uses or produces. State may be prompt context, tool output, durable storage, trace evidence, eval results, or memory.
+
+## Memory
+
+Information retained across turns or runs. Memory may be durable, summarized, retrieved, or prompt-injected; it is not automatically authoritative.
+
+## Trace
+
+A record of runtime events for a run. This repo writes JSONL traces.
+
+## Span
+
+An operation within a trace in tracing systems. This repo uses events rather than full span objects.
+
+## Metric
+
+A numeric signal such as tool-call count, failed tool calls, latency, token estimate, or eval pass rate.
+
+## Eval
+
+A repeatable check of output or process behavior.
+
+## Guardrail
+
+A constraint intended to reduce unsafe or undesired behavior. In this repo, guardrails are implemented as runtime policy and eval checks.
+
+## Policy
+
+Executable rules that constrain tools, paths, shell access, output size, and mutation.
+
+## Prompt Injection
+
+An attack or failure mode where instructions embedded in user or tool-provided content attempt to alter model behavior. See OWASP's LLM application risks [@owasp_llm_top10].
+
+## Context Window
+
+The maximum prompt and generated token span a model can handle for a request.
+
+## Prompt Cache / Prefix Cache
+
+An optimization that reuses work for repeated prompt prefixes. Provider behavior is specific; see OpenAI prompt caching and vLLM automatic prefix caching [@openai_prompt_caching; @vllm_prefix_caching].
+
+## KV Cache
+
+Cached key/value tensors used during autoregressive generation to avoid recomputing prior-token attention state [@huggingface_kv_cache].
+
+## TTFT
+
+Time to first token. It is often affected by prompt prefill, scheduling, model size, and caching.
+
+## Token Budget
+
+A limit on prompt and/or completion tokens for a task or deployment.
+
+## Human-in-the-Loop
+
+A review or approval step before risky actions or deployment decisions.
+
+## Rollout Gate
+
+A condition that must pass before broader deployment.
+
+## Rollback
+
+A defined path for reverting a system, feature, model, tool, or policy change.

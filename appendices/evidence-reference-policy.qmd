@@ -1,3 +1,62 @@
 # Evidence and Reference Policy
 
-Placeholder evidence policy.
+## Citation Standard
+
+Every non-trivial factual, technical, vendor-specific, performance-related, or safety-related statement in this book should be backed by one of:
+
+1. **Documented fact**: cite an authoritative source.
+2. **Repo-observed behavior**: cite a runnable command and expected output.
+3. **Author interpretation**: label it as interpretation or design judgment.
+4. **Hypothesis**: label it as a hypothesis.
+5. **Measurement**: include method, environment, and limitations.
+
+## Preferred Source Hierarchy
+
+1. Primary documentation from the technology owner.
+2. Peer-reviewed or widely cited research papers.
+3. Official engineering blogs from reputable organizations.
+4. Well-maintained open-source documentation.
+5. Secondary explainers only when clearly labeled.
+
+## Examples of Supported Claims
+
+- "The local eval suite checks `buggy_calc`, `prompt_injection_repo`, and `noisy_logs_repo`." Supported by `python -m agentic_systems_lab.evals`.
+- "OpenAI prompt caching depends on exact prefix matches." Supported by OpenAI prompt caching docs [@openai_prompt_caching].
+- "KV-cache memory is an inference concern." Supported by Hugging Face documentation and PagedAttention [@huggingface_kv_cache; @pagedattention].
+
+## Prohibited Patterns
+
+Avoid:
+
+```text
+Everyone knows...
+It is obvious that...
+Agents always...
+This dramatically improves...
+Modern systems require...
+```
+
+unless the claim is narrowed and supported.
+
+## Preferred Patterns
+
+Use:
+
+```text
+In this lab...
+In this implementation...
+Under this assumption...
+Provider documentation states...
+The cited paper reports...
+Our local measurement shows...
+A reasonable design interpretation is...
+```
+
+## Local Measurement Rules
+
+When reporting measurements:
+
+- name the command,
+- record hardware or runtime when relevant,
+- distinguish estimates from exact counts,
+- do not generalize from one local run to all deployments.

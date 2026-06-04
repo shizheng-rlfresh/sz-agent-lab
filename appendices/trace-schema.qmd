@@ -1,3 +1,76 @@
 # Trace Schema
 
-Placeholder trace schema.
+The trace format is JSONL. Each line is one event.
+
+## Common Fields
+
+| Field | Required | Meaning |
+|---|---:|---|
+| `run_id` | yes | stable identifier for one run |
+| `type` | yes | event type |
+| `timestamp` | yes | UTC timestamp |
+
+## Event Types
+
+## `agent_start`
+
+Required interpretation: the runtime has started a run.
+
+Common fields:
+
+- `goal`
+- `repo_path`
+
+## `policy_check`
+
+Required interpretation: the active policy was recorded.
+
+Common fields:
+
+- `policy`
+
+## `tool_call`
+
+Required interpretation: a tool was invoked.
+
+Common fields:
+
+- `tool`
+- `args`
+- `success`
+- `latency_ms`
+
+## `context_observation`
+
+Required interpretation: a tool observation was considered for context.
+
+Common fields:
+
+- `source`
+- `estimated_tokens`
+- `chars`
+
+## `eval_check`
+
+Required interpretation: an eval check was performed.
+
+The current implementation reserves this event type but does not emit it in the default runner.
+
+## `agent_finish`
+
+Required interpretation: the run finished.
+
+Common fields:
+
+- `success`
+- `finding_count`
+
+## Planned Event Types
+
+The expansion plan discusses future `policy_violation` and `warning` events. They are not emitted by the current code. Treat that as a planned extension, not current behavior.
+
+## Example
+
+```json
+{"run_id":"run_buggy_calc_sample","type":"tool_call","tool":"read_file","args":{"path":"data/toy_repos/buggy_calc/calculator.py"},"latency_ms":1.2,"success":true}
+```
