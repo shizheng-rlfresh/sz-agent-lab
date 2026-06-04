@@ -177,6 +177,12 @@ Keep local inference behind an optional adapter. The deterministic runtime shoul
 
 This lets the repo support local experiments without making every reader install local-inference tooling.
 
+## Extension Path
+
+Add an optional `mlx` extra only after the deterministic strategy boundary exists. The adapter should not import MLX at package import time. It should fail with a clear unavailable status when dependencies, model files, or hardware assumptions are missing.
+
+The first local experiment should run the same fixtures and emit the same output schema. Record model metadata, prompt length, latency, and qualitative failure category. A local path that cannot satisfy the shared schema belongs in an experiment, not in the core lab.
+
 ## Worked Scenario: Local Triage Experiment
 
 A reasonable local experiment would run the same three fixtures with a local model. The output must use the same schema. The eval suite must be unchanged. The trace should record model metadata and prompt size. The report should include latency and memory notes if measured.

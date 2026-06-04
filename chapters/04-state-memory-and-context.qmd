@@ -163,6 +163,12 @@ If you add memory later, do not put it directly into prompts. Add a retrieval bo
 
 Treat memory retrieval like a tool call. It observes a state surface and returns untrusted or partially trusted content.
 
+## Extension Path
+
+A safe memory extension starts as read-only retrieval with provenance. Create a small memory fixture containing source commit, evidence files, summary text, creation time, and freshness policy. Then write an eval where stale memory conflicts with current repository evidence.
+
+The desired behavior is not "never retrieve memory." The desired behavior is "prefer current evidence when memory is stale or unsupported." That is a precise rule the runtime can trace and the eval suite can test.
+
 ## Worked Scenario: A Stale Summary
 
 Imagine the triage bot stores a memory: "The calculator package expects division by zero to return `None`." Later, the project changes its contract and now expects `ZeroDivisionError`. If the agent retrieves the old memory without provenance or freshness checks, it may produce the wrong diagnosis even while reading the current code.

@@ -162,6 +162,12 @@ The next eval improvement is to separate task checks from deployment gates. A ta
 
 That split prevents a common confusion: "the answer was correct" does not mean "the run is deployable."
 
+## Extension Path
+
+Split eval results into categories: schema, grounding, safety, context, and deployment. Keep the existing `passed` field for backward compatibility, but add category-level status so reports can explain why a task is correct but not deployable.
+
+The first new gate should use existing evidence: context warnings from `noisy_logs_repo` and policy violations from the policy object. This avoids inventing a large eval framework while making the deployment decision more precise.
+
 ## Worked Scenario: A Lucky Answer
 
 An agent might output the correct diagnosis for `buggy_calc` without inspecting `test_calculator.py`. A human reading only the final answer might be satisfied. The eval should not be. The expected-file check exists because the process matters.

@@ -163,6 +163,12 @@ The next report improvement is dual output: Markdown for humans and JSON for aut
 
 Once a report has a machine-readable status, it can become a real gate.
 
+## Extension Path
+
+Add a JSON report beside the Markdown report. The Markdown report should remain optimized for humans. The JSON report should expose stable fields for CI: eval statuses, policy warning count, context warning count, artifact paths, deployment status, and reason codes.
+
+Both reports should be generated from the same internal data model. If the Markdown and JSON paths diverge, the system will eventually produce conflicting release evidence. Start by testing the shared data model, then test each rendering.
+
 ## Worked Scenario: Passing Evals, Review Required
 
 The current sample report is intentionally mixed. All evals pass. No policy violations are recorded. Yet the deployment recommendation requires human review because `noisy_logs` creates a large dynamic context segment.

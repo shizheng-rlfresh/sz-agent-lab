@@ -175,6 +175,12 @@ If this repo becomes the seed for `agentprobe`, resist moving all code immediate
 
 Good extraction is boring. It should make the current repo simpler while creating a reusable package.
 
+## Extension Path
+
+The first `agentprobe` extraction should be read-only. Implement trace loading, trace validation, eval summary loading, policy summary loading, context warning loading, and report generation. Do not implement orchestration or model calls in the first release.
+
+Then add one compatibility adapter for an external trace shape. The adapter should map required fields and explicitly report unsupported fields. This gives the project external value while keeping the core evidence contract small.
+
 ## Worked Scenario: First External User
 
 The first external user of `agentprobe` might have a trace from a different agent framework. They do not need a new orchestration system. They need to know whether the trace contains enough evidence to review a run.

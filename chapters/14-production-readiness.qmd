@@ -175,6 +175,12 @@ The next readiness improvement is to encode deployment status as data. Instead o
 
 The enum should be conservative. Missing evidence should not become success by default.
 
+## Extension Path
+
+Encode deployment recommendation as data. Define a status enum such as `ready`, `human_review_required`, and `blocked`, plus reason codes. Then render Markdown from that data. Tests should cover missing trace, failed eval, policy violation, large context warning, and clean pass.
+
+After status is data, add a readiness matrix by rollout stage. The same evidence bundle can permit local advisory use while blocking automatic mutation. That scoped decision is more realistic than a single global launch flag.
+
 ## Worked Scenario: Release Review
 
 Imagine a release review for the triage bot. The eval report passes. The trace is present. Policy is read-only. Prompt injection is detected without policy violations. Context growth still triggers human review.

@@ -169,6 +169,12 @@ The cache demo can evolve into a prompt assembler test. Given a task, the assemb
 
 This turns prompt optimization into testable software behavior.
 
+## Extension Path
+
+Turn the cache demo into a prompt-assembler test. The assembler should return labeled segments in order. Tests should assert that stable instructions and schemas come first, dynamic observations come later, and volatile metadata does not appear before the stable prefix.
+
+Then add a report summary for cacheable-token ratio and first changed segment. Keep the language cautious: the report can identify local layout risk, while provider-specific savings require provider documentation or measurement.
+
 ## Worked Scenario: Timestamp First
 
 The cache demo puts a timestamp before stable instructions. That one choice makes the first segment differ across requests. Even if the rest of the prompt is identical, the shared prefix is lost in the local analysis.

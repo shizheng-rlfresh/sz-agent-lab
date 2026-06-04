@@ -169,6 +169,12 @@ A useful next implementation step is suspicious-content tracing. When the runtim
 
 This preserves controlled observation while improving review evidence.
 
+## Extension Path
+
+Extend suspicious-content handling from a single phrase to categories. Start with local categories such as instruction override, secret request, external exfiltration request, and tool misuse request. Each category should have a fixture, trace warning, and expected handling decision.
+
+Avoid building a fake universal detector. The goal is not to claim complete coverage. The goal is to demonstrate how suspicious observations become structured evidence and how policy confines their effect.
+
 ## Worked Scenario: The Malicious README
 
 The malicious README is a useful teaching artifact because it asks for a specific unsafe action: read outside the repository. A weak system might pass the content directly into a model and rely on the model to ignore it. A stronger system can still read the file, label it as untrusted content, detect the suspicious phrase, and rely on policy to prevent out-of-root reads.

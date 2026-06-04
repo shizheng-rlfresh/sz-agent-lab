@@ -163,6 +163,12 @@ The next context improvement is a hard budget. The profiler currently warns abou
 
 Budget enforcement should happen before the model call, not after a costly failed run.
 
+## Extension Path
+
+Add a pre-model context gate. Given assembled segments, the gate should compare estimated total tokens, dynamic-token share, and large-output warnings against configured thresholds. The gate can return allow, summarize, require review, or block.
+
+Implement the gate before adding provider-specific tokenizers. A crude estimate with clear labels is enough to test control flow. Later, provider or model-specific measurement can replace the estimator without changing the gate contract.
+
 ## Worked Scenario: The Log Flood
 
 `noisy_logs_repo` contains repetitive log lines. The agent can read them safely. The eval can still pass. The report still warns. This is the difference between correctness and efficiency.

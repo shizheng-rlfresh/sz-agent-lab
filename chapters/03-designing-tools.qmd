@@ -184,6 +184,12 @@ Add tools in three steps. First, write policy tests for what the tool must not d
 
 For high-risk tools, add a dry-run mode before execution mode. The dry-run output should be structured enough for approval and evals.
 
+## Extension Path
+
+The natural next tool is not `write_file`; it is `propose_patch`. The tool would accept target path, current content hash, and proposed diff, then return a structured patch artifact without applying it. Tests can validate path confinement, diff shape, hash mismatch behavior, and report rendering.
+
+After `propose_patch` is stable, add an approval record and only then consider an apply step. This sequence preserves the distinction between reasoning, proposing, approving, and mutating. Each boundary can have its own trace event and failure mode.
+
 ## Worked Scenario: Adding a Patch Tool
 
 Assume the repo triage bot should eventually propose fixes. The tempting implementation is a `write_file` tool. The safer design starts with `propose_patch`. That tool returns a diff artifact but does not apply it. The report can include the diff, tests can validate the schema, and a human can approve before mutation.

@@ -182,6 +182,12 @@ The next implementation step would be to isolate diagnosis behind a function or 
 
 This keeps the core repo deterministic while leaving a clean extension point.
 
+## Extension Path
+
+The next implementation slice should isolate diagnosis behind a strategy protocol. Keep the deterministic strategy as default, add a stub strategy that returns a known result, and prove both satisfy the same schema. This creates a testable seam for later model experiments.
+
+Then add strategy metadata to traces and reports. A reviewer should know whether a finding came from deterministic rules, a local model, a hosted model, or a human reviewer. Strategy identity is not just debugging detail; it determines which evals and rollout gates apply.
+
 ## Worked Scenario: Replacing the Diagnosis Rule
 
 Assume you replace `_diagnose` with an LLM call. The rest of the runtime should barely change. The agent still starts a trace. It still records policy. It still calls read-only tools. It still records context observations. It still validates the output schema. It still runs evals.

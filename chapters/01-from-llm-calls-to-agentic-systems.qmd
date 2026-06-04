@@ -174,6 +174,12 @@ When implementing a new agentic feature, create the artifact skeleton first. Def
 
 In practice, the implementation order should feel conservative: workflow, tests, tools, policy, trace, eval, report, then model behavior. The model enters a system that already knows how to observe itself.
 
+## Extension Path
+
+The next extension is not "add a smarter model." It is to make the existing artifact graph stricter. Add a schema version to the final output, add trace completeness checks, and make the production report fail when required artifacts are missing. Those changes deepen the system contract without changing the model surface.
+
+Only after that contract is stable should you add a model-backed diagnosis step. The model should enter as one strategy behind the same schema, tools, policy, traces, and evals. If adding the model requires weakening those artifacts, the system is not ready for the experiment.
+
 ## Worked Scenario: A Pull Request Triage Bot
 
 Imagine the local repo triage agent as a pull request bot. The weak version reads a diff, asks a model for comments, and posts whatever comes back. The stronger version has a workflow baseline, read-only repository tools, path policy, trace events, deterministic evals, context budgeting, and a report. The model may still produce the final diagnosis, but the system around it can be inspected.
