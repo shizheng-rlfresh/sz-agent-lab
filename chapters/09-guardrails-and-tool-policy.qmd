@@ -101,6 +101,8 @@ Production guardrails should include policy enforcement, not just model instruct
 
 Approval is not binary. A low-risk read may be automatic. A write may require user confirmation. A delete may require maintainer approval. A network call may require tenant-aware egress policy. The local policy schema is small, but it is designed so those distinctions can be added rather than bolted on later.
 
+Policy also needs rollout stages. Local development may allow broader inspection than CI. CI may allow fixture roots but no user data. Shadow mode may allow production reads but no writes. Production mutation may require approvals and rate limits. Each stage should serialize its active policy into traces and reports. Otherwise the team cannot tell whether a safe test run and a risky production run actually used the same boundary.
+
 ## Design Review Questions
 
 For guardrails and policy, ask:

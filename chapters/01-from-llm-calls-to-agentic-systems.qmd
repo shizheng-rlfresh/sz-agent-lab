@@ -126,6 +126,8 @@ For a staff-level review, those questions should become artifacts. "The agent is
 
 The book repeatedly uses this pattern: make the claim narrower, tie it to an artifact, and identify what would falsify it.
 
+In a production review, this becomes a contract table. Each system claim should have an owner, artifact, gate, and rollback. "Reads repository files" maps to tool tests and path-policy traces. "Diagnoses division-by-zero mismatches" maps to fixture evals. "Handles prompt injection safely" maps to the injection fixture and violation count. "Is ready for automatic PR comments" maps to deployment status, approval policy, and monitoring. The table does not make the agent good by itself, but it prevents the review from becoming a loose argument about model capability.
+
 ## Design Review Questions
 
 Use these questions before approving an agentic-system design:

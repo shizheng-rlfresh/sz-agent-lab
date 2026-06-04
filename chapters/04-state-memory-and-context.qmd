@@ -114,6 +114,8 @@ Production systems need ownership rules for state. Durable facts should live in 
 
 Long-term memory deserves special caution. A memory store can become a persistence layer for stale summaries, injected instructions, or cross-user leakage if ownership and retrieval rules are weak. This book does not implement long-term memory; that omission is intentional. The local system first teaches state labeling and bounded context before adding a durable memory surface.
 
+In production, state review should be part of privacy, security, and reliability review. Ask which state can cross users, repositories, tenants, or deployment stages. Ask what can be deleted, corrected, or invalidated. Ask whether a retrieved memory is evidence, instruction, or a hint. If the system cannot answer those questions, adding memory will likely increase apparent intelligence while reducing auditability.
+
 ## Design Review Questions
 
 For each state surface, ask:

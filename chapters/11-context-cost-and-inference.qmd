@@ -114,6 +114,8 @@ Context budget is a production constraint. Treat context as a scarce resource al
 
 For hosted models, cost and latency depend on provider pricing, implementation, model, and cache behavior. For local models, memory pressure depends on weights, context length, KV-cache strategy, and runtime overhead. The book avoids exact claims unless a source or local measurement supports them. The operational habit is still clear: measure the actual task, not only the model in isolation.
 
+In production, context budgets should be policy, not preference. Define maximum prompt size, maximum dynamic-output share, maximum raw-log inclusion, and action on overflow. The action might be summarize, retrieve a narrower window, fail fast, or require human review. What matters is that the decision happens before an expensive model call and appears in trace and report artifacts.
+
 ## Design Review Questions
 
 For context and cost, ask:

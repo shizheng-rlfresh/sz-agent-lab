@@ -121,6 +121,8 @@ Prompt layout is infrastructure design. In a production agent, stable instructio
 
 Do not optimize blindly. A cache-friendly layout that confuses instruction priority is not a win. Correctness comes first, then observability, then optimization. The local cache demo is a diagnostic tool, not a promise of provider savings.
 
+For rollout, prompt layout changes should be reviewed like code changes. They can affect instruction priority, context labeling, schema stability, and optimization behavior at the same time. A good change includes prompt-assembler tests, eval results, and a cache-layout diff. The team should know whether it changed semantics, changed only serialization, or changed only dynamic content placement.
+
 ## Design Review Questions
 
 For prompt caching, ask:

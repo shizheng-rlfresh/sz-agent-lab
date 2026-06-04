@@ -128,6 +128,8 @@ Choose local inference when locality, offline execution, or predictable spend ma
 
 Hybrid designs are also possible. A deterministic local workflow can prefilter, summarize, or redact content before a hosted model call. A local model can handle low-risk tasks while a hosted model handles harder cases. The right design depends on evals, latency, cost, privacy, and operations.
 
+In production, local inference needs the same release discipline as hosted inference plus hardware ownership. Pin model artifacts, record quantization, track runtime versions, measure representative prompts, and define fallback. If the local path fails or falls behind quality targets, the system should know whether to fall back to a deterministic workflow, a smaller task, a hosted model, or human review.
+
 ## Design Review Questions
 
 For local inference, ask:

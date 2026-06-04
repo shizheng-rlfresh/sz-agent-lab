@@ -126,6 +126,8 @@ For a real deployment, add ownership, monitoring, incident templates, escalation
 
 The stopping point is deliberate. A local deterministic lab can teach the shape of readiness without pretending to solve auth, tenancy, secrets, compliance, or SRE operations. Those belong to the production environment.
 
+The practical translation is a readiness matrix. Rows are gates: schema, trace, evals, policy, context, report, monitoring, rollback, ownership. Columns are deployment stages: local, CI, shadow, advisory, automatic, mutating. Each cell states required evidence. This matrix prevents a common failure: moving from a local proof of concept directly to user-visible automation without noticing which gates never existed.
+
 ## Design Review Questions
 
 For production readiness, ask:

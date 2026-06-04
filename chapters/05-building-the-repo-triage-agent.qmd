@@ -132,6 +132,8 @@ The production version would need more layers: timeout handling, retries, struct
 
 One useful design review question is: if the model decision were wrong, would the system have enough evidence to show why? In this lab, the trace shows files read, policy, context observations, and finish status. The eval shows whether required evidence appeared. That is the minimum shape of a debuggable run.
 
+A production rollout should separate advisory and mutating modes. In advisory mode, the agent can inspect, diagnose, and generate a report for a human. In mutating mode, it can post comments, open issues, or propose patches. Those modes should not share the same gate. Advisory mode may require schema, trace, and eval evidence. Mutating mode additionally needs approval policy, idempotency, rollback, rate limits, and user-facing error handling.
+
 ## Design Review Questions
 
 For the agent runtime, ask:

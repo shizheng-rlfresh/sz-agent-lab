@@ -113,6 +113,8 @@ Deployment should be gated by eval results. For higher-risk systems, determinist
 
 An eval gate should specify what happens on failure. Does deployment block? Does the run require human review? Does a failure open an issue? Does it page an owner? Without an action, an eval is just a report. The local `passed` field is intentionally simple, but the production question is organizational: who owns the failed gate?
 
+Ownership matters. Every eval should have an owner, fixture source, update policy, and failure action. Otherwise evals decay into stale comfort. When a real incident occurs, convert it into a fixture or explain why it cannot be represented. When a product requirement changes, update expected behavior and preserve the old fixture if it still represents a risk. The eval suite is a living regression surface, not a one-time launch checklist.
+
 ## Design Review Questions
 
 For evals, ask:

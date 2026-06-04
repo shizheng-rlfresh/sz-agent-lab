@@ -114,6 +114,8 @@ Reports can become pull-request comments, release artifacts, incident attachment
 
 A mature version would include run environment, code version, model version, policy version, eval suite version, and artifact hashes. Those are omitted here to keep the lab inspectable, but they are necessary for serious release review.
 
+For deployment, reports should have two audiences. Humans need a concise narrative: what ran, what passed, what warned, what blocks. Automation needs stable fields: status, reason codes, artifact paths, check results, and policy warning counts. Both views should come from the same data model. If the human report and CI gate can disagree, the report has become another source of production ambiguity.
+
 ## Design Review Questions
 
 For reports, ask:

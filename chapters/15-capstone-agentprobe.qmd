@@ -127,6 +127,8 @@ The reusable value is not "another agent." The reusable value is evidence around
 
 The capstone also creates an article path. A strong article does not need to claim that agent frameworks are bad or that one tool is best. It can make a narrower claim: agent demos become more useful when every run produces trace, eval, policy, and context evidence.
 
+For production users, the capstone should be useful even when they keep their existing agent framework. That requirement constrains the design. Accept trace artifacts. Validate schemas. Surface missing evidence. Generate a report. Avoid forcing orchestration migration. The first successful user story is not "rewrite your agent"; it is "bring one run artifact and leave with a reviewable evidence report."
+
 ## Design Review Questions
 
 For the capstone project, ask:

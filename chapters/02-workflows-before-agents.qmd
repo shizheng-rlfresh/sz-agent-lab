@@ -138,6 +138,8 @@ The production version of this lesson is architectural restraint. A fixed workfl
 
 When reviewing an agent proposal, ask for the deterministic baseline. If no one can describe it, the team may be using "agent" as a placeholder for unclear product behavior. If the baseline is strong, the agent should be evaluated against it rather than against an empty demo.
 
+The rollout implication is simple: ship the workflow first when the workflow solves the job. Then run the agent in shadow mode against the same inputs. Compare task success, evidence quality, latency, cost, policy violations, and review burden. Only promote the agent when it wins on a metric that matters to the product. If it merely produces more elaborate prose, keep the workflow and spend engineering effort elsewhere.
+
 ## Design Review Questions
 
 Before replacing a workflow with an agent, ask:

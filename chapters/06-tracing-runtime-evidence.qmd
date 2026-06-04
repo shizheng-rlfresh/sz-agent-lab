@@ -102,6 +102,8 @@ Production systems need telemetry that can be inspected during development and i
 
 In production, trace retention and privacy become first-class concerns. Tool arguments may contain internal paths, customer identifiers, or secrets. Tool outputs may contain proprietary code or user data. A trace strategy therefore needs redaction, retention windows, access controls, and incident procedures. The local repo does not implement those controls; it makes the evidence surface explicit so those questions can be asked.
 
+Operationally, traces need a service-level role. They support debugging, eval triage, release review, abuse investigation, and cost analysis. Those consumers want overlapping but different fields. If the trace is optimized only for local debugging, governance and release gates will ask for missing data later. If the trace logs everything for every consumer, it becomes expensive and risky. The right production trace is a deliberately scoped evidence product.
+
 ## Design Review Questions
 
 For tracing, ask:

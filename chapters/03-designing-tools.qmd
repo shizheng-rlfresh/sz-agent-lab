@@ -135,6 +135,8 @@ For a staff review, require a tool inventory. For each tool, ask:
 
 This inventory should exist before an LLM is allowed to call the tool.
 
+For rollout, treat tool exposure as a change-management event. A new read-only tool might require tests, trace fields, and output caps. A mutating tool should require dry-run mode, approval artifacts, rollback, and post-action verification. A broad tool such as shell, browser, database, or cloud API should be decomposed into narrower actions before it reaches production. The operating principle is least authority with evidence: give the runtime the smallest capability that can solve the task, then record enough evidence to prove how it was used.
+
 ## Design Review Questions
 
 For every proposed tool, ask:

@@ -120,6 +120,8 @@ In production, add defense in layers:
 
 No single layer should be described as solving prompt injection. The defensible claim is that each layer reduces a specific part of the risk.
 
+The rollout implication is to gate features by propagation risk. Reading untrusted content and summarizing it is one risk level. Letting that content influence future tool calls is higher. Letting it influence mutating actions is higher still. A production review should name each propagation path and require policy, trace, and eval evidence before moving to the next level.
+
 ## Design Review Questions
 
 For untrusted tool output, ask:
