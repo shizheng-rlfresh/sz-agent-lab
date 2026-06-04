@@ -1,0 +1,5 @@
+# Agentic Systems Lab
+
+This book is a technical lab for building, tracing, evaluating, hardening, and reasoning about agentic AI systems.
+
+The core path is deterministic and local. Optional hosted-model or MLX extensions are deliberately separated from the baseline so the operational contracts are visible before model variability enters the system.

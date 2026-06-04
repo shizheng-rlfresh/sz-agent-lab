@@ -1,0 +1,28 @@
+project:
+  type: book
+
+book:
+  title: "Agentic Systems Lab"
+  subtitle: "Building, Measuring, and Hardening Agentic AI Systems"
+  author: "Placeholder Author"
+  chapters:
+    - index.qmd
+    - chapters/01-what-is-an-agent.qmd
+    - chapters/02-workflows-vs-agents.qmd
+    - chapters/03-tools-and-state.qmd
+    - chapters/04-building-a-repo-triage-agent.qmd
+    - chapters/05-tracing-and-observability.qmd
+    - chapters/06-evaluating-agents.qmd
+    - chapters/07-guardrails-and-tool-policy.qmd
+    - chapters/08-context-cost-and-inference.qmd
+    - chapters/09-local-agents-with-mlx.qmd
+    - chapters/10-production-readiness.qmd
+    - chapters/11-project-ideas.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    number-sections: true
