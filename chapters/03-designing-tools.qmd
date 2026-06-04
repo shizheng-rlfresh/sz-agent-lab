@@ -113,6 +113,12 @@ return active_policy.cap_text(text, max_chars=max_chars)
 
 The tool does not decide whether a path is safe; `ToolPolicy` does. That separation makes it possible to test path traversal, read-only behavior, and output caps independently.
 
+`list_files` follows the same pattern: resolve the root under policy, walk only permitted paths, and return a sorted relative list. Sorting is a small but important choice. It makes test output deterministic, keeps reports stable, and prevents incidental filesystem ordering from becoming part of the lab behavior.
+
+`grep` returns structured dictionaries instead of raw shell output. That shape matters because later evals and reports can reason about `file`, `line`, and `text` fields. A model may eventually read those results, but the runtime should not depend on prose parsing to understand its own tool output.
+
+Notice what is missing: no shell execution, no glob expansion delegated to a shell, no implicit current-working-directory authority, and no mutation helper. Those omissions are design decisions. The tool layer exposes only the capabilities needed for the lab, so policy remains understandable.
+
 ## Expected Output
 
 The command prints the visible files under `data/toy_repos/buggy_calc`. The ordering is deterministic so tests and traces do not churn.

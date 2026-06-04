@@ -109,6 +109,12 @@ The recommendation list should be read as prompt-layout guidance, not as a provi
 
 `analyze_prompt_cache_layouts` compares two segment lists. It reports candidate tokens, shared prefix tokens, first changed segment, dynamic tokens, cache breakers, and recommendations.
 
+The function treats prompt layout as structured data. Each segment has a name, text, and cacheability label. The comparison walks the layouts until a segment changes, then estimates how much prefix remains reusable under the local approximation. This is intentionally simpler than provider internals, but it captures the engineering habit.
+
+Cache breakers are concrete: timestamp before stable instructions, UUID before tool schemas, randomized JSON, retrieval before stable prefix, or dynamic metadata in the wrong place. Naming the breaker is more useful than only reporting a low ratio because it tells the prompt assembler what to fix.
+
+The recommendation output should remain conservative. The local demo can say "move dynamic content later" or "serialize schemas deterministically." It should not claim a provider-specific latency or cost reduction unless that claim is sourced or measured.
+
 ## Expected Output
 
 The demo identifies `timestamp` as the first changed segment and reports `timestamp_before_static_prefix` as a cache breaker.

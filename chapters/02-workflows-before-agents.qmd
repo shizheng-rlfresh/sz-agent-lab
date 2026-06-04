@@ -116,6 +116,12 @@ This makes the workflow a useful test harness. When the agent is introduced late
 
 `run_workflow_baseline` in `scripts/run_all_examples.py` creates a `ToolPolicy`, lists files under `buggy_calc`, and greps for `divide|division`. The policy still matters even though there is no agent. A deterministic workflow can still leak data if its tools are unsafe.
 
+The function is intentionally procedural. It does not hide control flow behind an abstraction because the chapter is about seeing the fixed path. A reviewer can inspect the order: construct policy, list files, search content, build JSON, and print the artifact. There is no planning step and no hidden state.
+
+This makes the baseline useful in two ways. First, it gives the reader a fast command that should keep working while the rest of the repo grows. Second, it demonstrates that safety boundaries are not exclusive to agents. Any code path that reads files needs confinement and output discipline.
+
+When extending the repo, keep this baseline boring. If it starts accumulating dynamic behavior, it stops being a clean comparison. Add a separate agent path for runtime uncertainty; do not smuggle autonomy into the workflow and then compare the system against itself.
+
 ## Expected Output
 
 The expected file set is stable:

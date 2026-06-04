@@ -90,6 +90,12 @@ The trace summary is a compression. When debugging a real failure, open the JSON
 
 `TraceLogger.log_event` validates event type and appends JSON to a trace file. `TraceLogger.timed_tool_call` wraps a function, records success, and writes latency in milliseconds.
 
+The logger is deliberately small. It does not try to be a full observability platform. It enforces the local schema, writes one JSON object per line, and keeps event construction close to the runtime. This makes traces easy to inspect in tests and easy to explain in the manuscript.
+
+`timed_tool_call` is the most production-shaped helper because it captures both successful and failed operations. Success paths are not enough for incident review. A failed tool call needs tool name, arguments, latency, success state, and error information. Otherwise the trace shows only what worked and hides what the runtime struggled with.
+
+The summarizer reads the JSONL file back and counts events. That round trip matters. It proves the trace is not only writeable but also usable as an artifact. Reports and future gates should consume trace data through structured readers rather than by scraping rendered prose.
+
 ## Expected Output
 
 `python -m agentic_systems_lab.tracer` writes `traces/demo_trace.jsonl` and prints event counts. Running the agent writes a richer trace with policy checks, tool calls, context observations, and finish status.

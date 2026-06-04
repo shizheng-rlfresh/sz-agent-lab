@@ -114,6 +114,12 @@ A production version should make that status machine-readable and tie it to owne
 
 The report generator produces a deployment recommendation. It requires human review when evals fail, policy violations exist, or large dynamic outputs appear.
 
+That rule is intentionally stricter than task success. A system can diagnose `buggy_calc` correctly and still be unready for automatic deployment because a different fixture produces context warnings or because a policy violation appeared. Readiness is a system property across tasks, not a single successful run.
+
+The current implementation expresses recommendation as prose. A production version should encode a status enum and reason list, then render prose from that data. That gives CI a stable gate while giving humans a readable report. It also makes missing evidence easier to treat conservatively.
+
+Readiness logic should be tested with synthetic evidence bundles. One test should pass all gates. One should require human review due to warning. One should block due to failed eval or policy violation. This is the same TDD habit applied to deployment policy.
+
 ## Expected Output
 
 `reports/sample_production_report.md` includes trace summary, all three eval tasks, context growth, production warnings, and `human review required before deployment`.

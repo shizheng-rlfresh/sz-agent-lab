@@ -89,6 +89,12 @@ If this output changes, the system's authority changed. Treat that as a security
 
 `resolve_path` permits only paths under allowed roots. `check_write` blocks mutation under read-only mode. `check_shell` blocks shell execution unless explicitly enabled.
 
+The important implementation detail is that policy methods record violations before raising. This makes denied behavior visible to reports and tests. A blocked action is not just an exception; it is evidence that the runtime boundary was exercised.
+
+`resolve_path` should be called before opening files, not after. `check_write` should be called before constructing side effects. `check_shell` should be called before executing anything. The order is part of the security property. A policy check that happens after partial execution is audit decoration, not enforcement.
+
+The policy object also serializes to a dictionary for traces and reports. That makes active authority inspectable. If a future run broadens roots or enables shell, the artifact diff should show it. Policy that cannot be serialized is harder to review.
+
 ## Expected Output
 
 The command prints JSON with the default allowed root, `read_only: true`, `allow_shell: false`, and approval-required actions.

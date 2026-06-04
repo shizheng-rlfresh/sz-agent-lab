@@ -115,6 +115,12 @@ The answer should start with trace and report contracts, not a dashboard.
 
 The capstone seed already exists: trace logger, eval runner, context profiler, policy object, and report generator. A real `agentprobe` would generalize those APIs beyond toy repos.
 
+The extraction path should start with readers, not writers. Load a trace. Validate required fields. Summarize events. Load eval results. Render a report. These operations make existing agent systems more reviewable without asking users to change orchestration frameworks.
+
+The second boundary is schema normalization. Different frameworks will use different trace shapes, but an evidence tool can define the minimum fields needed for review: run ID, event type, timestamp, tool call, success, latency, policy or capability context, and output validation. Unsupported fields should be reported explicitly rather than guessed.
+
+The third boundary is fixture portability. The toy repos are small, but the pattern transfers: each fixture should encode a failure mode with expected evidence and pass/fail checks. `agentprobe` should ship with fixtures that prove its own claims before it asks users to trust it on their systems.
+
 ## Expected Output
 
 The command regenerates trace, eval, context, and production report artifacts that could become `agentprobe` fixtures.

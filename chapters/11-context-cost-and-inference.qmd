@@ -102,6 +102,12 @@ Do not treat the token estimate as billing truth. Treat it as an alarm that the 
 
 `ContextTracker` records segments with `name`, `chars`, `tokens`, and `cacheable`. It reports cumulative growth, cacheable tokens, dynamic tokens, and large dynamic outputs.
 
+The tracker uses a crude token estimate. That is acceptable because the lab labels it as an estimate and uses it to catch qualitative mistakes. If a chapter needs provider-accurate token counts, it should add a tokenizer-specific measurement and cite the method.
+
+The segment model is more important than the estimator. A prompt is not one blob; it is a sequence of stable instructions, schemas, user request, tool observations, summaries, and dynamic metadata. Once the prompt is segmented, the runtime can reason about cacheability, dynamic-token share, and warning thresholds.
+
+Large-output warnings are intentionally report-facing. They do not necessarily mean the task failed. They mean a deployment reviewer should ask whether raw context should be capped, summarized, indexed, sampled, or blocked. That is a different decision from whether the final answer is correct.
+
 ## Expected Output
 
 The command prints a summary with `total_tokens`, `cacheable_tokens`, `dynamic_tokens`, `steps`, and `large_outputs`.

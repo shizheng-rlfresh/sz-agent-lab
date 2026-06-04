@@ -102,6 +102,12 @@ The sample recommendation requires human review because large dynamic context ap
 
 `generate_report` accepts trace summary, eval results, context summary, and policy violations. It creates Markdown sections and derives a deployment recommendation. This is intentionally simple so the reader can alter the gate logic.
 
+The report generator is a reducer over evidence artifacts. It should not discover new facts by inspecting the repository again. Trace summary says what happened, eval results say what passed, policy violations say what boundary was exercised, and context summary says whether prompt pressure requires review.
+
+The deployment recommendation is conservative on purpose. A run can have passing evals and still require human review because context warnings exist. This is the main lesson of the report chapter: task correctness is not the same thing as deployment readiness.
+
+If you extend the report, prefer adding structured inputs before adding prose. For example, add a `deployment_status` enum and reason list before writing a new paragraph. Human-readable Markdown can then render the structured decision, while CI or release tooling can consume the same fields.
+
 ## Expected Output
 
 `reports/sample_production_report.md` should include all three eval tasks and a deployment recommendation of `human review required before deployment` when the noisy log fixture produces a large dynamic output.

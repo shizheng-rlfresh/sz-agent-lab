@@ -118,6 +118,12 @@ The result is intentionally not a conversational paragraph. A paragraph may be n
 
 `run_repo_triage` first creates `ToolPolicy`, then uses traced tool calls for `list_files` and `read_file`. Diagnosis is rule-based: `buggy_calc` is flagged when implementation returns `a / b` while tests/documentation describe different zero-division behavior.
 
+The orchestration order is the key design. The run starts a trace before tool calls. The active policy is recorded before evidence is gathered. File listing happens before file reads. File reads become context observations. Diagnosis happens after evidence exists. The final result is structured and traceable.
+
+The diagnosis rule is intentionally replaceable. It is not meant to be the clever part of the system. A future LLM strategy could inspect the same evidence and emit the same schema. The rest of the runtime should not care whether the finding came from deterministic pattern matching, a hosted model, a local model, or a human reviewer.
+
+That is the useful boundary for experimentation. If a new strategy improves findings while preserving schema, trace, policy, eval, and report behavior, the experiment is easy to review. If it requires changing every artifact shape, the model experiment is probably coupled too deeply into the runtime.
+
 ## Expected Output
 
 The result should identify `calculator.py` and report a division-by-zero contract mismatch. A trace is written under `traces/`.

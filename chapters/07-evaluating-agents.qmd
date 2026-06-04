@@ -101,6 +101,12 @@ This diagnostic shape matters. A useful eval should tell the engineer what to fi
 
 `EvalTask` names a fixture repo, expected file, expected keyword, and allowed files. `evaluate_result` computes booleans and counts, then derives `passed`. The default suite covers `buggy_calc`, `prompt_injection_repo`, and `noisy_logs_repo`.
 
+The design is intentionally explicit rather than statistical. Each field encodes a contract: the output must have the right schema, the agent must inspect expected evidence, the finding must contain a task-relevant keyword, inspected files must stay within the allowed set, and invalid tool calls must be absent. The pass/fail result is a conjunction of those checks.
+
+This is not enough for broad model evaluation, but it is exactly the right shape for a regression harness. A failed boolean points to a subsystem. Schema failure points to output construction. Missing expected file points to evidence selection. Hallucinated file count points to grounding. Invalid tool call count points to policy.
+
+The default tasks also demonstrate fixture diversity. One fixture is a normal bug diagnosis, one is adversarial content, and one is context pressure. A small suite with different failure surfaces is more useful than three near-identical bug examples.
+
 ## Expected Output
 
 The command prints three passing eval results and writes `reports/sample_eval_report.md`.

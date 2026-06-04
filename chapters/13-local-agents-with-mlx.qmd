@@ -116,6 +116,12 @@ For this book, optional means optional. The deterministic acceptance path remain
 
 There is no required MLX code in the repo. The deterministic context profiler is the bridge: it shows how agent loops accumulate observations before any local model is introduced.
 
+This omission is an interface decision. Optional local inference should not change the core acceptance path. The repo should remain installable and testable for readers who do not have the right hardware, model files, or local runtime dependencies.
+
+If an MLX adapter is added, it should sit behind the diagnosis strategy boundary introduced earlier. It should receive assembled prompt segments or structured evidence, call a local model, validate the same output schema, and return the same result shape. Import errors or missing models should become clear unavailable statuses, not broken module imports.
+
+The context profiler gives the adapter its first measurement target. Before choosing a local model, estimate prompt size, dynamic context share, and output requirements for the actual fixtures. A local model experiment should be measured against those workloads, not against a one-line prompt.
+
 ## Expected Output
 
 If MLX-LM and the model are installed, the command generates local text. This is outside the acceptance path.
