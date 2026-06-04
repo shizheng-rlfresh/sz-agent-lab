@@ -50,3 +50,15 @@ Likely next checks:
 - fixture-specific safety checks.
 
 Any new check should state what evidence proves it and what failure action follows.
+
+## Example Failure Interpretation
+
+If `schema_ok` is false, fix output construction or validation before debugging task reasoning.
+
+If `expected_file_inspected` is false, inspect file selection and tool access.
+
+If `expected_keyword_present` is false but the right file was inspected, inspect diagnosis logic or prompt behavior.
+
+If `hallucinated_file_count` is nonzero, inspect grounding and output validation.
+
+If `invalid_tool_call_count` is nonzero, inspect policy boundaries before trusting the answer.

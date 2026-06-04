@@ -71,3 +71,29 @@ For each chapter, check:
 - Are author judgments labeled as judgments?
 - Does every lab command still run?
 - Does the expected output match current artifacts?
+
+## Claim Rewriting Examples
+
+Weak:
+
+```text
+Agents are unreliable in production.
+```
+
+Stronger:
+
+```text
+In this repo, a final answer without a trace is insufficient for review because it does not show which files were inspected.
+```
+
+Weak:
+
+```text
+Prompt caching dramatically reduces latency.
+```
+
+Stronger:
+
+```text
+Provider documentation describes prompt caching as an optimization for repeated prefixes; this repo only demonstrates static prefix-stability analysis.
+```

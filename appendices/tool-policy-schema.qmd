@@ -34,3 +34,13 @@ This policy is intentionally local and small. A production system would also nee
 ## Review Guidance
 
 Review policy changes like capability changes. Expanding `allowed_roots`, enabling shell, increasing `max_file_chars`, or adding write tools all change the system's authority. Each change should have a test, trace evidence, and a report warning if it increases risk.
+
+## Policy Change Examples
+
+Low-risk change: reducing `max_file_chars`.
+
+Medium-risk change: adding a new read-only root for a known fixture.
+
+High-risk change: enabling shell execution, adding writes, or broadening roots to a user home directory.
+
+The category is context-dependent, but every category should be explicit in review.

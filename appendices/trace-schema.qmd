@@ -73,6 +73,18 @@ The expansion plan discusses future `policy_violation` and `warning` events. The
 
 Trace review should begin with event coverage. A run that has final output but no `tool_call` events cannot support claims about what evidence was inspected. A run that has `tool_call` events but no `policy_check` event cannot show which capabilities were active. A run with context observations but no eval result may be useful for debugging but weak as a release artifact.
 
+## Minimum Useful Trace
+
+For this book's case study, a minimum useful trace includes:
+
+- exactly one `agent_start`,
+- at least one `policy_check`,
+- one or more `tool_call` events,
+- zero or more `context_observation` events,
+- exactly one `agent_finish`.
+
+A stricter production trace might require parent/child span relationships, model metadata, token counts, prompt hashes, retry metadata, and redaction status.
+
 ## Example
 
 ```json

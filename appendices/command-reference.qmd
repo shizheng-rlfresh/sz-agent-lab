@@ -64,3 +64,13 @@ quarto render
 ```
 
 If `python` is not available globally, create and activate a virtual environment first, or use the `.venv/bin/python` form shown above. The command reference describes intended commands; the exact executable path can differ by environment.
+
+## Command Interpretation
+
+`pytest` proves only the behavior covered by tests. It does not prove manuscript quality or source quality.
+
+`python scripts/run_all_examples.py` proves the deterministic lab path still runs and regenerates core reports. It does not prove optional MLX behavior.
+
+`quarto render` proves the book builds. It does not prove every claim is sufficiently sourced.
+
+Use all three together. Treat them as different evidence types.
