@@ -136,6 +136,8 @@ test_calculator.py
 
 The expected matches point to the contract mismatch: documentation and tests mention division-by-zero behavior, while the implementation returns `a / b`.
 
+The output also proves that the workflow has a bounded evidence path. If future code changes make the workflow inspect additional files, omit `test_calculator.py`, or return nondeterministic ordering, the baseline has changed. That change may be justified, but it should be reviewed as a behavior change.
+
 ## Failure Mode
 
 Overbuilding a known path as an agent makes the system harder to test, harder to debug, and harder to cost. This is an author design judgment. The repo demonstrates the alternative: keep the deterministic floor and only add agent-shaped behavior where the runtime boundary is worth studying.

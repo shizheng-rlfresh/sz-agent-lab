@@ -114,6 +114,8 @@ Large-output warnings are intentionally report-facing. They do not necessarily m
 
 The command prints a summary with `total_tokens`, `cacheable_tokens`, `dynamic_tokens`, `steps`, and `large_outputs`.
 
+The `large_outputs` field is the operational signal. Total tokens may be acceptable in a small run while a single dynamic segment is still architecturally risky. Inspect which segment triggered the warning before deciding whether to cap, summarize, index, or approve manually.
+
 ## Failure Mode
 
 `noisy_logs_repo` demonstrates the risk: each tool call is correct, but the observation is large enough to require caps, summarization, indexing, or human review before deployment.

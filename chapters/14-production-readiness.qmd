@@ -126,6 +126,8 @@ Readiness logic should be tested with synthetic evidence bundles. One test shoul
 
 `reports/sample_production_report.md` includes trace summary, all three eval tasks, context growth, production warnings, and `human review required before deployment`.
 
+The expected output is a scoped readiness statement. It does not say the system is useless; it says broader deployment needs review. A staff-level rollout should preserve that nuance rather than forcing all outcomes into pass/fail.
+
 ## Failure Mode
 
 A system with no eval gate, no trace, and no rollback path can work in a demo and still be unsupportable. That is author judgment, but the repo demonstrates the evidence artifacts that reduce ambiguity.

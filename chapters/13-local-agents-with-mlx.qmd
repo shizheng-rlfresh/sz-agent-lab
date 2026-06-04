@@ -128,6 +128,8 @@ The context profiler gives the adapter its first measurement target. Before choo
 
 If MLX-LM and the model are installed, the command generates local text. This is outside the acceptance path.
 
+The expected output for the required repo remains unchanged: tests, examples, and Quarto render pass without MLX. Optional local generation is an extension point. Treat it as a measurement exercise only after the deterministic artifacts are stable.
+
 ## Failure Mode
 
 A model can fit for a short prompt but become unusable as the agent loop accumulates tool output. This is a design hypothesis grounded in the memory model discussed in Chapter 11; local measurement is required before making a hardware-specific claim.

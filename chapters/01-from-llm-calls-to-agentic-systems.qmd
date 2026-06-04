@@ -118,6 +118,8 @@ When this baseline becomes a control group, regressions become easier to interpr
 
 The output should include `README.md`, `calculator.py`, and `test_calculator.py`, plus matches for `divide` or `division`. This is repo-observed behavior, not a claim about agents in general.
 
+This output proves observability, not diagnosis. It shows that the runtime can see the relevant files and lines under policy. It does not prove that a model can reason over them, that the finding is complete, or that deployment is safe. Keeping that proof boundary narrow is the discipline the rest of the book builds on.
+
 ## Failure Mode
 
 A transcript can look successful while the system is not debuggable, measurable, or safe. Without traces, evals, and policy, a team cannot reconstruct which evidence was used or which tool boundary mattered.

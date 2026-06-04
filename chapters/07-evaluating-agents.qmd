@@ -113,6 +113,8 @@ The default tasks also demonstrate fixture diversity. One fixture is a normal bu
 
 The command prints three passing eval results and writes `reports/sample_eval_report.md`.
 
+The passing status should not be read as broad model quality. It means the deterministic agent satisfied the current fixture contracts. The stronger evidence is the per-check breakdown, because that breakdown explains what would fail if grounding, schema, or policy behavior regressed.
+
 ## Failure Mode
 
 An agent can produce plausible text without inspecting the right file. It can also cite a file that does not exist. Those failures are easy to miss in a transcript and easy to catch with deterministic checks.

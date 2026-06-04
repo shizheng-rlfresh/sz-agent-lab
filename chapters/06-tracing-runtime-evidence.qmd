@@ -102,6 +102,8 @@ The summarizer reads the JSONL file back and counts events. That round trip matt
 
 `python -m agentic_systems_lab.tracer` writes `traces/demo_trace.jsonl` and prints event counts. Running the agent writes a richer trace with policy checks, tool calls, context observations, and finish status.
 
+The expected output proves both write path and read path. A trace that can be written but not summarized is not yet a useful artifact. A summary with counts but no underlying JSONL is not enough for incident review. The lab keeps both visible.
+
 ## Failure Mode
 
 Without traces, failures become anecdotal. A team cannot distinguish "the model reasoned badly" from "the wrong file was read," "a policy check failed," or "context was dominated by log noise."

@@ -114,6 +114,8 @@ If you add memory later, do not reuse the context or trace structures blindly. M
 
 The agent returns JSON with `summary`, `files_inspected`, `findings`, and `recommended_next_step`. The trace contains `agent_start`, `policy_check`, `tool_call`, `context_observation`, and `agent_finish`.
 
+The important comparison is between answer and trace. The answer should be concise enough for a user. The trace should be detailed enough for a reviewer. If the answer contains claims not supported by trace events, the output is not reviewable even if it reads well.
+
 ## Failure Mode
 
 If prompt text is treated as authoritative state, a system can confuse instructions with observations. The `prompt_injection_repo` fixture later demonstrates why repository content should be treated as untrusted data.

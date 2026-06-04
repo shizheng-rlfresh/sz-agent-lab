@@ -127,6 +127,8 @@ The third boundary is fixture portability. The toy repos are small, but the patt
 
 The command regenerates trace, eval, context, and production report artifacts that could become `agentprobe` fixtures.
 
+The expected output shows why `agentprobe` should start as evidence tooling. The reusable object is the bundle of artifacts, not the toy diagnosis itself. If a future capstone cannot consume and explain this bundle, it has drifted from the book's core claim.
+
 ## Failure Mode
 
 A capstone that tries to be a full agent framework will lose focus. A useful OSS project should have a narrow contract, test fixtures, and a measurable claim.

@@ -121,6 +121,8 @@ The recommendation output should remain conservative. The local demo can say "mo
 
 The demo identifies `timestamp` as the first changed segment and reports `timestamp_before_static_prefix` as a cache breaker.
 
+The expected output proves the analyzer can identify a local layout defect. It does not prove provider-side cache behavior or savings. The correct next step is prompt-assembly discipline: move volatile metadata after stable instructions and rerun correctness checks.
+
 ## Failure Mode
 
 If a timestamp appears before stable instructions and schemas, the reusable prefix can shift every request. That makes caching less likely even though the semantic prompt looks similar.

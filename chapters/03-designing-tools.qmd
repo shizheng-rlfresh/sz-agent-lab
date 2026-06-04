@@ -125,6 +125,8 @@ Notice what is missing: no shell execution, no glob expansion delegated to a she
 
 The command prints the visible files under `data/toy_repos/buggy_calc`. The ordering is deterministic so tests and traces do not churn.
 
+The absence of absolute paths is part of the expected output. The reader should see repository-relative names, not local machine details. That keeps artifacts portable and avoids teaching downstream code to rely on environment-specific paths.
+
 ## Failure Mode
 
 If `read_file` accepted arbitrary paths, a malicious or confused agent could read outside the repository. If `grep` returned unbounded output, a noisy fixture could inflate context and cost.

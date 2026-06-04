@@ -114,6 +114,8 @@ If you extend the report, prefer adding structured inputs before adding prose. F
 
 `reports/sample_production_report.md` should include all three eval tasks and a deployment recommendation of `human review required before deployment` when the noisy log fixture produces a large dynamic output.
 
+The expected recommendation is intentionally not `ready`. That matters. A report that only celebrates passing task evals would hide context risk. The sample report teaches that deployment recommendations can be conservative even when core task behavior passes.
+
 ## Failure Mode
 
 If a team only stores raw traces, reviewers have to manually reconstruct the run. If a team only stores the final answer, they cannot reconstruct it at all.

@@ -101,6 +101,8 @@ The policy object also serializes to a dictionary for traces and reports. That m
 
 The command prints JSON with the default allowed root, `read_only: true`, `allow_shell: false`, and approval-required actions.
 
+This output is a capability declaration. If `allow_shell` changes to true or `allowed_roots` expands, the runtime's authority changed even if no tool call has used that authority yet. Review policy output before reviewing model behavior.
+
 ## Failure Mode
 
 If path checks are only prompt instructions, malicious or confused model behavior can still request unsafe paths. If shell access is exposed without approval, the blast radius becomes much larger than a read-only file lab.

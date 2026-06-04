@@ -130,6 +130,8 @@ That is the useful boundary for experimentation. If a new strategy improves find
 
 The result should identify `calculator.py` and report a division-by-zero contract mismatch. A trace is written under `traces/`.
 
+The expected finding should include evidence, not only a file name. A useful diagnosis tells the reader why `calculator.py` matters and how the surrounding tests or documentation create the mismatch. A file-only result is weaker because it forces the reviewer to rediscover the argument.
+
 ## Failure Mode
 
 An LLM-backed version could inspect irrelevant files, hallucinate filenames, ignore evidence, over-read context, or emit malformed JSON. Those are not hypothetical claims about all LLMs; they are failure dimensions this repo can evaluate.
