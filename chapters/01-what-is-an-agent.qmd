@@ -1,3 +1,36 @@
 # What Is an Agentic System?
 
-TODO
+## Learning Objective
+
+Define an agentic system in operational terms and separate the model call from the production boundary around it.
+
+## Core Concept
+
+An agentic system is not production-shaped because it calls tools. It becomes production-shaped when the system has explicit tool policy, state boundaries, traces, evals, context control, rollout criteria, and rollback discipline.
+
+For this lab, use the following distinction:
+
+- A workflow has a known control path. It may call models, but orchestration is fixed.
+- An agent chooses part of the path at runtime. Tool selection, intermediate observations, and stopping criteria become part of the system behavior.
+
+The interesting engineering work sits around the model: what the runtime is allowed to read, what it records, how it is evaluated, and how failure is bounded.
+
+## Runnable Command
+
+```bash
+python scripts/run_all_examples.py --example workflow_baseline
+```
+
+## Expected Output
+
+The command lists files from `data/toy_repos/buggy_calc` and reports deterministic matches for division-related text. No model is required.
+
+## Reflection Questions
+
+- Which parts of your current agent designs are actually workflows?
+- What state is authoritative: prompt text, tool output, trace, or durable storage?
+- Which tool calls would require human approval in your production environment?
+
+## References
+
+See @anthropic_effective_agents and @openai_agents_docs.

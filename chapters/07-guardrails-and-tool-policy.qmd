@@ -1,3 +1,37 @@
 # Guardrails and Tool Policy
 
-TODO
+## Learning Objective
+
+Model guardrails as enforceable runtime policy, not prompt instructions.
+
+## Core Concept
+
+Prompt text is not a security boundary. The `prompt_injection_repo` fixture contains text that asks the agent to ignore instructions and read outside the repository. The correct behavior is not to argue with the text; the correct behavior is that tools cannot cross the policy boundary.
+
+`ToolPolicy` enforces:
+
+- allowed roots.
+- read-only mode.
+- maximum file characters.
+- shell disabled by default.
+- violation logging.
+
+## Runnable Command
+
+```bash
+python -m agentic_systems_lab.policy
+```
+
+## Expected Output
+
+The command prints the default policy as JSON, including allowed roots, read-only mode, shell status, and approval-required actions.
+
+## Reflection Questions
+
+- Which controls belong in policy rather than prompt instructions?
+- How would you handle user-approved writes?
+- What violation metadata would you need for auditability?
+
+## References
+
+See @openai_agents_docs.

@@ -1,3 +1,37 @@
 # Workflows Before Agents
 
-TODO
+## Learning Objective
+
+Build a deterministic baseline before introducing runtime autonomy.
+
+## Core Concept
+
+A workflow is the control case for agentic engineering. If the deterministic version solves the task, adding autonomy increases variance without buying capability. If the deterministic version fails because the path is unknown, the trace from that failure gives you the contract an agent must satisfy.
+
+The baseline in this repo inspects a toy repository with fixed steps:
+
+1. List files.
+2. Grep for domain terms.
+3. Return structured observations.
+
+That is deliberately not an agent. It is the floor against which the agent is measured.
+
+## Runnable Command
+
+```bash
+python scripts/run_all_examples.py --example workflow_baseline
+```
+
+## Expected Output
+
+The output contains `README.md`, `calculator.py`, `test_calculator.py`, and grep matches for `divide` or `division`.
+
+## Reflection Questions
+
+- What task uncertainty remains after the fixed workflow?
+- Which branch would need dynamic decision-making?
+- What eval would prove autonomy improved the system rather than adding noise?
+
+## References
+
+See @anthropic_effective_agents.

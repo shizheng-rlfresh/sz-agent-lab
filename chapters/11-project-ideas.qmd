@@ -1,3 +1,45 @@
 # Project Ideas
 
-TODO
+## Learning Objective
+
+Use the lab to choose a focused OSS project rather than a broad agent demo.
+
+## Candidate Projects
+
+| Candidate | Description |
+|---|---|
+| `agentprobe` | Agent tracing, eval, and production-readiness report generator. |
+| `cachepilot` | Prompt-cache breakage analyzer for agent workloads. |
+| `agentfit-mlx` | Apple Silicon local-agent workload profiler. |
+| `toolguard` | Tool policy and approval layer for agent runtimes. |
+
+## Scorecard
+
+| Candidate | Feasible in 1 week | Useful to others | Niche | Measurable | Uses optimization edge | Article-worthy | Total |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| `agentprobe` | 4 | 5 | 3 | 5 | 3 | 5 | 25 |
+| `cachepilot` | 3 | 4 | 4 | 5 | 5 | 5 | 26 |
+| `agentfit-mlx` | 3 | 3 | 5 | 5 | 5 | 4 | 25 |
+| `toolguard` | 4 | 5 | 3 | 4 | 3 | 4 | 23 |
+
+The highest score is not automatically the best choice. Pick the project whose first release has the cleanest falsifiable claim.
+
+## Runnable Command
+
+```bash
+python scripts/run_all_examples.py
+```
+
+## Expected Output
+
+The command regenerates the artifacts that can seed `agentprobe` or `toolguard`: traces, eval results, context warnings, and production reports.
+
+## Reflection Questions
+
+- What is the smallest public artifact that would be useful to another staff-level engineer?
+- Which project can make a measurable claim without fake benchmarks?
+- Which project compounds into a deeper ML systems research direction?
+
+## References
+
+See the full bibliography for agent, tracing, cache, and MLX references.

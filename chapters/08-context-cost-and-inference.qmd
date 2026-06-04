@@ -1,3 +1,35 @@
 # Context, Cost, and Inference Bottlenecks
 
-TODO
+## Learning Objective
+
+Connect tool output and prompt assembly to context growth, cost, latency, and cacheability.
+
+## Core Concept
+
+Agentic systems often grow context through tool observations. More context can increase cost, latency, memory pressure, and error surface. The lab uses a crude estimator, `ceil(chars / 4)`, because the goal is not tokenizer fidelity; the goal is to make growth visible.
+
+The context profiler separates:
+
+- cacheable segments such as stable instructions and tool schemas.
+- dynamic segments such as repository files, logs, and traces.
+- large dynamic outputs that should be capped, summarized, or indexed.
+
+## Runnable Command
+
+```bash
+python -m agentic_systems_lab.context
+```
+
+## Expected Output
+
+The command prints total estimated tokens, cacheable tokens, dynamic tokens, growth by step, and warnings for large dynamic outputs.
+
+## Reflection Questions
+
+- Which prompt segments are stable enough for prefix caching?
+- Which tool outputs should never enter full context?
+- How do context length and KV cache pressure change the local-vs-hosted decision?
+
+## References
+
+See @vllm_prefix_caching and @huggingface_kv_cache.

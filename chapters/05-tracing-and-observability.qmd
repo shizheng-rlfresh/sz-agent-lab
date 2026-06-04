@@ -1,3 +1,38 @@
 # Tracing and Observability
 
-TODO
+## Learning Objective
+
+Treat a successful final answer as insufficient evidence and inspect the run structure.
+
+## Core Concept
+
+Agent traces need to capture the path, not only the final text. This lab writes JSONL events with run IDs and required event types:
+
+- `agent_start`
+- `tool_call`
+- `context_observation`
+- `policy_check`
+- `eval_check`
+- `agent_finish`
+
+The trace is intentionally simple, but the contract is production-shaped: every tool call has success state and latency, and context observations record estimated size.
+
+## Runnable Command
+
+```bash
+python -m agentic_systems_lab.tracer
+```
+
+## Expected Output
+
+The command creates `traces/demo_trace.jsonl` and prints a summary with event counts and tool-call counts.
+
+## Reflection Questions
+
+- Which events are needed for incident review?
+- Which trace fields are safe to persist if tool output may contain secrets?
+- How would you map this schema to OpenTelemetry conventions?
+
+## References
+
+See @openai_agents_tracing and @otel_genai.
