@@ -166,13 +166,22 @@ The workflow/agent distinction is cited from Anthropic's engineering guidance [@
 
 ## Exercises
 
-1. Convert one agent idea into a deterministic workflow.
-2. Identify the first step that cannot be hard-coded cleanly.
-3. Add a success criterion before adding a model decision.
-4. Decide which workflow observations should be traced.
+1. Convert one agent idea into a deterministic workflow. Write the workflow as ordered steps and mark the first step where a model would add value.
+2. Identify the first step that cannot be hard-coded cleanly. Explain whether the uncertainty is about input selection, tool selection, interpretation, prioritization, or action.
+3. Add a success criterion before adding a model decision. The criterion should be measurable from an artifact rather than a human impression.
+4. Decide which workflow observations should be traced. Separate evidence needed for debugging from evidence needed for compliance or release review.
+5. Implement a second workflow baseline for a new fixture repo. Keep it deterministic and add one test that compares expected output to actual output.
+6. Write a regression test that would fail if the agent path stopped matching the workflow baseline on `buggy_calc`.
+7. Design an escalation rule: when should the workflow hand off to an agent, and when should the agent fall back to the workflow?
+8. Estimate the operational cost of the workflow and the agent version in latency, context size, tool calls, and review burden.
 
 ## Checklist
 
 - Use workflows as the control group.
 - Do not add autonomy to hide unclear requirements.
 - Keep policy around deterministic tools too.
+- Preserve the workflow path after the agent path exists.
+- Evaluate the agent against a baseline, not against an empty demo.
+- Require a concrete dynamic decision before accepting agent complexity.
+- Keep shared tools tested independently from orchestration.
+- Make fallback behavior explicit before deployment.

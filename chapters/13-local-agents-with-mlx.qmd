@@ -155,13 +155,22 @@ MLX and MLX-LM claims cite their project documentation [@mlx_docs; @mlx_lm_docs]
 
 ## Exercises
 
-1. Run a short local generation if hardware allows.
-2. Compare short and long prompts qualitatively.
-3. Record memory pressure if available.
-4. Decide whether your target workload is local-friendly.
+1. Run a short local generation if hardware allows. Keep it outside the default test path and record model name, prompt length, latency, and hardware context.
+2. Compare short and long prompts qualitatively. Explain whether failures look like instruction-following limits, context strategy problems, or model capability gaps.
+3. Record memory pressure if available. Treat the measurement as workload-specific rather than a general hardware claim.
+4. Decide whether your target workload is local-friendly. Consider privacy, offline use, latency, throughput, quality, and operational ownership.
+5. Design an optional MLX adapter that returns the same structured schema as the deterministic strategy and fails cleanly when dependencies are missing.
+6. Run the same eval fixtures through a hypothetical local strategy and define how results would be compared to hosted or deterministic baselines.
+7. Write a fallback policy for local inference failure: retry, smaller model, deterministic workflow, hosted model, or human review.
+8. Define the model artifact metadata needed in a trace: model ID, quantization, context length, adapter version, and generation parameters.
 
 ## Checklist
 
 - MLX is optional in this repo.
 - Local feasibility is workload-specific.
 - Do not make hardware claims without measurement.
+- Optional adapters should not import heavy dependencies at module import time.
+- Local output must satisfy the same schema and evals.
+- Model artifacts and generation parameters should be trace metadata.
+- Privacy wins do not eliminate quality and operations risks.
+- Hybrid designs need explicit routing and fallback rules.

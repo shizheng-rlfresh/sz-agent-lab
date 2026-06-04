@@ -154,13 +154,22 @@ Agent/workflow distinctions are grounded in Anthropic and OpenAI documentation [
 
 ## Exercises
 
-1. Classify five systems you know as model calls, workflows, agents, or multi-agent systems.
-2. Identify the first boundary where dynamic decision-making creates value.
-3. Write one deployment gate for a tool-using system.
-4. Name one trace field you would need for incident review.
+1. Classify five systems you know as model calls, workflows, agents, or multi-agent systems. For each classification, name the runtime property that determined your answer: fixed path, dynamic tool selection, shared state, delegation, or multi-party coordination.
+2. Pick one existing model-call feature and sketch the smallest deterministic workflow that could replace it. Include inputs, outputs, validation, and failure handling.
+3. Identify the first boundary where dynamic decision-making creates value. Write the counterargument: why a fixed workflow might still be sufficient.
+4. Write one deployment gate for a tool-using system. Specify the artifact it reads, the condition it checks, and the status it emits when evidence is missing.
+5. Design the minimal trace schema for incident review of a one-step agent. Include at least run identity, input summary, tool calls, output validation, latency, and failure state.
+6. Write an eval case that would fail if the model produced a plausible answer without evidence. State which file, trace event, or output field proves grounding.
+7. Rewrite a vague product request such as "build an agent that reviews repos" into a concrete system contract with supported inputs, unsupported inputs, output schema, and rollout boundary.
+8. Compare the local repo triage system to one production agent you have seen. List which production concerns are absent from the lab and which abstractions still transfer.
 
 ## Checklist
 
 - Do not equate a model call with an agentic system.
 - Start from deterministic behavior where possible.
 - Treat observability and evals as part of the system, not as later polish.
+- Define the output schema before prompt or model selection.
+- Require evidence for every user-facing diagnosis.
+- Make the first autonomy boundary explicit in design review.
+- Keep a deterministic baseline as the control group for experiments.
+- Treat deployment gates as software contracts, not review meeting opinions.

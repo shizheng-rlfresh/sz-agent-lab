@@ -143,13 +143,22 @@ The state taxonomy is design judgment. The trace shape is repo evidence and alig
 
 ## Exercises
 
-1. Identify every state surface in the repo triage agent.
-2. Mark each surface as authoritative or untrusted.
-3. Decide which observations would enter an LLM prompt.
-4. Add a trace field that would improve state auditability.
+1. Identify every state surface in the repo triage agent. Include repository files, policy configuration, traces, eval outputs, reports, and process-local variables.
+2. Mark each surface as authoritative, trusted configuration, untrusted observation, derived evidence, or presentation artifact.
+3. Decide which observations would enter an LLM prompt. For each one, write the label that should accompany it in prompt context.
+4. Add a trace field that would improve state auditability. Explain which incident question the new field answers.
+5. Design a memory record schema for repo summaries. Include source commit, evidence files, creation time, author, freshness policy, and invalidation trigger.
+6. Write a failure scenario where stale memory produces a correct-looking but wrong answer. Then write the eval that would catch it.
+7. Compare context, trace, memory, and report as storage surfaces. Explain which one should be optimized for model performance and which one should be optimized for audit.
+8. Define a retention policy for traces that may contain source code or sensitive logs.
 
 ## Checklist
 
 - Context is not memory.
 - Trace evidence is not prompt context.
 - Tool output is data, not authority.
+- Persistent memory requires provenance and freshness.
+- Reports should summarize state without becoming the source of truth.
+- Untrusted observations should be labeled before entering prompts.
+- State surfaces need owners and retention rules.
+- Current repository evidence should outrank stale summaries.

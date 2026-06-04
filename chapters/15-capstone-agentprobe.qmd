@@ -153,13 +153,22 @@ The project framing is author interpretation. The technical pieces are repo evid
 
 ## Exercises
 
-1. Score all four projects.
-2. Pick one first issue.
-3. Write seven GitHub issues for `agentprobe`.
-4. Draft a technical article title and abstract.
+1. Score all four projects. Use criteria for evidence value, implementation risk, reader benefit, reusability, and ability to ship a narrow first release.
+2. Pick one first issue. Write the acceptance criteria, test plan, artifact output, and explicit non-goals.
+3. Write seven GitHub issues for `agentprobe`. At least three should be about tests or schemas rather than UI or demos.
+4. Draft a technical article title and abstract. Make a narrow evidence-backed claim rather than a broad claim about agents.
+5. Define the first public CLI contract for `agentprobe`. Include inputs, outputs, exit codes, and deterministic sample fixtures.
+6. Map this repo's trace, eval, policy, context, and report modules to extraction boundaries. Identify one boundary that should not be extracted yet.
+7. Design a compatibility layer for traces from a different agent framework. State the required fields and unsupported cases.
+8. Write a release checklist for version `0.1.0`: docs, fixtures, tests, sample reports, provenance of references, and known limitations.
 
 ## Checklist
 
 - Pick a narrow OSS contract.
 - Make the first release measurable.
 - Prefer reusable evidence infrastructure over a broad demo.
+- Preserve deterministic fixtures during extraction.
+- Start with trace and report interoperability before orchestration.
+- Public claims should be supported by local artifacts or primary sources.
+- The capstone should improve this repo before becoming a separate project.
+- First external users should succeed without adopting a new agent framework.

@@ -141,13 +141,22 @@ KV-cache and inference framing are grounded in Hugging Face documentation and th
 
 ## Exercises
 
-1. Add a token budget limit.
-2. Compare capped and uncapped log reads.
-3. Add a report warning for dynamic tokens above a threshold.
-4. Estimate cost per successful eval using a hypothetical price table.
+1. Add a token budget limit. Decide whether the runtime truncates, summarizes, fails fast, or requires human review.
+2. Compare capped and uncapped log reads. Record tool output size, estimated tokens, trace size, and report warning status.
+3. Add a report warning for dynamic tokens above a threshold. Verify that `noisy_logs_repo` triggers it deterministically.
+4. Estimate cost per successful eval using a hypothetical price table. Keep the calculation separate from provider-specific claims unless measured.
+5. Design a pre-model context gate that blocks prompt assembly above a threshold and emits a structured failure.
+6. Replace raw log inclusion with an error-signature summary. Compare evidence quality and token count.
+7. Explain how KV cache, prefix cache, and application-level summarization interact but solve different problems.
+8. Define a context SLO for an agent in shadow mode: maximum tokens, maximum dynamic-output share, and maximum warning rate.
 
 ## Checklist
 
 - Tool output makes context grow.
 - Token estimates are estimates unless measured with the provider tokenizer.
 - Large dynamic output should trigger review.
+- Budget enforcement should happen before the model call.
+- Context warnings can block deployment even when evals pass.
+- Raw logs should be sampled, summarized, or indexed.
+- Cache mechanics do not remove the need for prompt budgeting.
+- Cost analysis should be tied to workload distribution.

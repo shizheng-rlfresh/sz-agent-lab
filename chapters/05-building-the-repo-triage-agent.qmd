@@ -162,13 +162,22 @@ The agent architecture is repo evidence. The idea that agent SDKs can coordinate
 
 ## Exercises
 
-1. Add a second deterministic rule.
-2. Add a fixture repo for a different bug class.
-3. Add a confidence threshold.
-4. Add a failure result schema.
+1. Add a second deterministic diagnosis rule. Start with a failing test that names the expected file, issue, evidence phrase, and confidence.
+2. Add a fixture repo for a different bug class. Keep the fixture small enough that every relevant file can be inspected by a reviewer.
+3. Add a confidence threshold. Define what happens when all findings fall below it and how the report should render that status.
+4. Add a failure result schema. Include failure category, user-visible summary, trace path, and recommended next diagnostic step.
+5. Refactor diagnosis behind a strategy interface. Verify that the deterministic strategy and a stub model strategy return the same output schema.
+6. Add a no-mutation assertion for an agent run. The test should compare fixture file contents before and after execution.
+7. Extend trace creation to record which strategy produced the diagnosis. Keep the field deterministic in committed sample artifacts.
+8. Write the integration test you would require before allowing an optional LLM diagnosis strategy into CI.
 
 ## Checklist
 
 - The first agent is deterministic on purpose.
 - Structured output is part of the runtime contract.
 - Trace and eval behavior are not optional add-ons.
+- Diagnosis strategy can vary; artifacts should not.
+- Fixture repos should encode concrete failure modes.
+- Low confidence needs an explicit runtime outcome.
+- Agent runs should be non-mutating unless mutation is the feature.
+- Optional model paths must not weaken deterministic tests.

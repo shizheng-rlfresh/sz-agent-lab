@@ -130,13 +130,22 @@ Tracing concepts are grounded in OpenAI Agents SDK tracing and OpenTelemetry Gen
 
 ## Exercises
 
-1. Add a warning event type.
-2. Count tool calls per run.
-3. Write a bad trace and identify the missing evidence.
-4. Map one JSONL event to an OpenTelemetry span concept.
+1. Add a warning event type. Write the test first and verify that summaries count warnings separately from failures.
+2. Count tool calls per run. Distinguish attempted, successful, failed, and policy-blocked tool calls.
+3. Write a bad trace and identify the missing evidence. Include at least one missing run ID, one missing success field, and one missing output-validation event.
+4. Map one JSONL event to an OpenTelemetry span concept. State which fields would become span name, attributes, status, and duration.
+5. Add a trace summary check that fails when a run has an agent output but no tool observations.
+6. Design a redaction rule for trace metadata that may contain secrets or proprietary source snippets.
+7. Write an incident-review query: given a run ID, what exact sequence of artifacts should an on-call engineer inspect?
+8. Compare tracing requirements for local development, CI, shadow mode, and production traffic.
 
 ## Checklist
 
 - A transcript is not enough.
 - Tool calls need success and latency fields.
 - Trace data may contain sensitive information and needs retention policy.
+- Every event should be attributable to a run.
+- Successful final answers still need process evidence.
+- Summaries should preserve enough detail for release gates.
+- Redaction policy should be designed before production traces exist.
+- Traces should support both debugging and governance questions.

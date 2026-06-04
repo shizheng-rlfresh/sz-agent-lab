@@ -147,13 +147,22 @@ Prompt-injection risk framing is grounded in OWASP [@owasp_llm_top10]. The local
 
 ## Exercises
 
-1. Add a trace event for suspicious instructions.
-2. Add a second injection phrase.
-3. Write an eval that fails if policy violations appear.
-4. Show why path policy blocks the fixture's requested behavior.
+1. Add a trace event for suspicious instructions. The event should include source file, phrase category, severity, and handling decision.
+2. Add a second injection phrase. Keep the test focused on detection and policy confinement rather than model persuasion.
+3. Write an eval that fails if policy violations appear. Explain why the final answer alone is insufficient for this fixture.
+4. Show why path policy blocks the fixture's requested behavior. Include the attempted path, allowed root, and violation record.
+5. Design a prompt segment format that labels repository content as untrusted observations while preserving enough context for diagnosis.
+6. Add a fixture where malicious content appears in a source file rather than a README. Decide whether the handling should differ.
+7. Write a false-positive case for suspicious phrase detection and define the expected non-blocking behavior.
+8. Create a review checklist for any feature that lets tool output influence future tool calls.
 
 ## Checklist
 
 - Tool output is untrusted data.
 - Policy should limit impact even when the model is confused.
 - Claims about prompt injection need sources or local demonstrations.
+- Detection should improve evidence, not replace enforcement.
+- Suspicious content may still need to be read for diagnosis.
+- Prompt labels should distinguish instructions from observations.
+- Eval fixtures should demonstrate both attack and confinement.
+- Future tool calls are the dangerous propagation point.

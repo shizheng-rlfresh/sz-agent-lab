@@ -153,13 +153,22 @@ Risk-management framing cites NIST AI RMF [@nist_ai_rmf]. Local readiness behavi
 
 ## Exercises
 
-1. Add a cost cap warning.
-2. Add an incident template.
-3. Add a rollback checklist.
-4. Decide which tools require human approval.
+1. Add a cost cap warning. Decide whether the cap is per run, per repository, per day, or per deployment stage.
+2. Add an incident template. Include run ID, trace path, policy decisions, eval status, context warnings, user impact, and rollback state.
+3. Add a rollback checklist. Distinguish disabling the agent, disabling a tool, reverting a prompt, reverting a model, and switching to workflow fallback.
+4. Decide which tools require human approval. Tie each approval requirement to authority, reversibility, and blast radius.
+5. Convert deployment recommendation into a status enum with reason codes. Add tests for pass, human review, and block.
+6. Define a shadow-mode rollout plan with entry criteria, monitoring signals, exit criteria, and owner sign-off.
+7. Write an on-call query list: the first ten questions an incident reviewer should be able to answer from artifacts.
+8. Compare readiness for local advisory use, automatic PR comments, and mutating code changes.
 
 ## Checklist
 
 - Deployment gates should be explicit.
 - Reports should summarize evidence, not replace raw traces.
 - Human review is a valid status.
+- Missing evidence should default to conservative status.
+- Rollout scope is part of readiness.
+- Approval requirements should follow tool authority.
+- Incident review should start from run artifacts.
+- Production ownership must include eval, policy, and observability maintenance.

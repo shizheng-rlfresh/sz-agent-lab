@@ -141,13 +141,22 @@ Report behavior is local evidence from `reports/sample_production_report.md` and
 
 ## Exercises
 
-1. Add a cost-cap warning.
-2. Add a human-approval-required section.
-3. Add a release-blocking status when evals fail.
-4. Convert the Markdown report into JSON.
+1. Add a cost-cap warning. Define the estimated-cost field, threshold, warning message, and test fixture.
+2. Add a human-approval-required section. Make it appear only when a concrete warning category is present.
+3. Add a release-blocking status when evals fail. Verify that the status changes even if the trace and policy sections are present.
+4. Convert the Markdown report into JSON. Keep both renderings backed by the same internal data model.
+5. Add a stable-report regeneration test that fails if committed sample reports drift from deterministic generator output.
+6. Design a report diff for release review. State which fields should be compared across builds and which runtime fields should be ignored.
+7. Add a policy-warning table grouped by tool, violation type, and affected run.
+8. Write a one-page production review using only generated artifacts from this repo.
 
 ## Checklist
 
 - Reports are decision artifacts.
 - A passing eval can still require review.
 - Link summaries back to raw evidence.
+- Human-readable and machine-readable reports should agree.
+- Runtime latency should not churn committed deterministic artifacts.
+- Deployment status should be conservative when evidence is missing.
+- Report sections should map to owner actions.
+- A report should make the release decision reviewable.

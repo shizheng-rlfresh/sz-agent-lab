@@ -130,13 +130,22 @@ Security risk categories are grounded in OWASP [@owasp_llm_top10]. Local enforce
 
 ## Exercises
 
-1. Try to read outside the allowed root.
-2. Add a policy violation report section.
-3. Design an approval flow for `write_file`.
-4. Decide which tools should never be exposed.
+1. Try to read outside the allowed root. Verify the result is recorded as a policy violation with enough metadata for review.
+2. Add a policy violation report section. Group violations by tool, path, decision, and run ID.
+3. Design an approval flow for `write_file`. Include dry run, exact diff, approver identity, expiry, and post-apply verification.
+4. Decide which tools should never be exposed. Explain whether the reason is authority, ambiguity, irreversibility, or auditability.
+5. Write a policy test for a tool that is read-only in one environment and approval-gated in another.
+6. Design a policy record schema that can distinguish denied, allowed, allowed-with-warning, and requires-approval decisions.
+7. Review a broad capability such as shell, browser, database, ticket update, or cloud API. Replace it with the narrowest capability that would satisfy one use case.
+8. Define the operational owner for policy changes and the evidence required before expanding a tool allowlist.
 
 ## Checklist
 
 - Prompt text is not a security boundary.
 - Runtime policy should enforce capability limits.
 - Violations should be logged as evidence.
+- Policy should be evaluated before tool execution.
+- Approval should be an artifact, not a chat message.
+- Environment-specific policy must be explicit.
+- Tool authority should expand only with tests and review.
+- Denied actions are useful evidence and should not disappear.

@@ -140,13 +140,22 @@ The eval behavior is repo evidence from `tests/test_evals.py` and `reports/sampl
 
 ## Exercises
 
-1. Add a failing eval and inspect the report.
-2. Add a context-budget check.
-3. Add an eval for a new fixture repo.
-4. Decide which evals would block deployment.
+1. Add a failing eval and inspect the report. Confirm that the failure is visible in both task-level results and deployment recommendation.
+2. Add a context-budget check. Decide whether exceeding the budget fails the task, blocks deployment, or requires human review.
+3. Add an eval for a new fixture repo. Include expected files, expected keywords, hallucinated-file checks, and invalid-tool-call checks.
+4. Decide which evals would block deployment. Separate correctness, grounding, safety, context, and artifact-generation gates.
+5. Add an eval that catches a lucky answer: correct final issue, missing required evidence file.
+6. Create a small incident-to-eval conversion template. Include incident summary, root cause, fixture construction, expected behavior, and regression owner.
+7. Compare aggregate pass rate to per-risk-category pass rate. Explain which one should appear in a release gate.
+8. Design an eval freshness policy so stale fixtures do not become misleading comfort.
 
 ## Checklist
 
 - A successful demo is not an eval.
 - Evaluate process, not only final text.
 - Make pass/fail criteria explicit.
+- Expected evidence should be part of the eval.
+- Safety checks and correctness checks should be reported separately.
+- Deployment gates should treat missing artifacts as failures.
+- Real incidents should become regression fixtures.
+- Aggregate scores should not hide high-severity failures.

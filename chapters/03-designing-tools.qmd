@@ -164,13 +164,22 @@ Security framing is grounded in OWASP's LLM risk taxonomy [@owasp_llm_top10]. To
 
 ## Exercises
 
-1. Add a blocked traversal test for `../`.
-2. Add a max-output-size test for `grep`.
-3. Design a `write_file` schema but keep it approval-gated.
-4. Define the trace fields required for a tool call.
+1. Add a blocked traversal test for `../`. Verify that the failure is a policy violation rather than an uncaught filesystem exception.
+2. Add a max-output-size test for `grep`. Include enough fixture content to prove the cap is enforced deterministically.
+3. Design a `write_file` schema but keep it approval-gated. Include path, expected current hash, patch or content, approval identity, and dry-run output.
+4. Define the trace fields required for a tool call. Include tool name, normalized arguments, policy decision, output size, latency, success, and error class.
+5. Design a narrow replacement for shell execution that solves one real debugging need without exposing arbitrary commands.
+6. Write an abuse-case test for each tool: traversal for file reads, excessive output for search, and unsupported mutation for policy.
+7. Extend the tool inventory with risk tier, owner, and rollback strategy. Explain what evidence would let you lower or raise the tier.
+8. Review one production tool you have used and rewrite its interface as if an untrusted model could call it.
 
 ## Checklist
 
 - Tools are capabilities, not helpers.
 - Read-only should be the default.
 - Output size is part of the safety contract.
+- Tool errors should be structured and testable.
+- Policy decisions should be traceable per call.
+- Broad tools need stronger approval than narrow tools.
+- Dry-run artifacts should precede mutating capabilities.
+- A model should never receive authority that the runtime cannot audit.
