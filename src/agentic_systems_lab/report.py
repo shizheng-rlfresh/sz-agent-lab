@@ -4,8 +4,11 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from agentic_systems_lab.context import demo_context_summary
-from agentic_systems_lab.evals import run_eval_suite
+from agentic_systems_lab.context import ContextTracker
+from agentic_systems_lab.agent import run_repo_triage
+from agentic_systems_lab.evals import EvalTask, evaluate_result
+from agentic_systems_lab.policy import ToolPolicy
+from agentic_systems_lab.tools import list_files, read_file
 from agentic_systems_lab.tracer import summarize_trace
 
 
@@ -80,14 +83,41 @@ def write_report(report: str, path: str | Path = "reports/sample_production_repo
     return report_path
 
 
+def _sample_context_summary(data_root: Path) -> dict:
+    tracker = ContextTracker(large_output_token_threshold=200)
+    tracker.add_segment("system", "stable triage instructions and tool schemas", cacheable=True)
+    tracker.add_segment(
+        "noisy_logs",
+        read_file(data_root / "noisy_logs_repo" / "logs.txt", max_chars=2400, policy=ToolPolicy(allowed_roots=(data_root,))),
+        cacheable=False,
+    )
+    return tracker.summary()
+
+
 def main() -> None:
     trace_path = Path("traces/buggy_calc_trace.jsonl")
-    eval_results = run_eval_suite()
+    data_root = Path("data/toy_repos")
+    repo_path = Path("data/toy_repos/buggy_calc")
+    policy = ToolPolicy(allowed_roots=(data_root,))
+    agent_result = run_repo_triage(
+        repo_path,
+        trace_path=trace_path,
+        run_id="run_buggy_calc_sample",
+        policy=policy,
+    )
+    task = EvalTask(
+        name="buggy_calc",
+        repo_path=str(repo_path),
+        expected_file="calculator.py",
+        expected_keyword="division",
+        allowed_files=tuple(list_files(repo_path, policy=policy)),
+    )
+    eval_results = [evaluate_result(task, agent_result, invalid_tool_call_count=len(policy.violations))]
     report = generate_report(
-        trace_path=trace_path if trace_path.exists() else None,
+        trace_path=trace_path,
         eval_results=eval_results,
-        context_summary=demo_context_summary(),
-        policy_violations=[],
+        context_summary=_sample_context_summary(data_root),
+        policy_violations=policy.violations,
     )
     path = write_report(report)
     print(path)
