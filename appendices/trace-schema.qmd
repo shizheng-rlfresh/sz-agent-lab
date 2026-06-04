@@ -2,6 +2,8 @@
 
 The trace format is JSONL. Each line is one event.
 
+The schema is intentionally event-oriented rather than framework-specific. A trace should be readable with standard JSON tooling, easy to diff in tests, and simple enough for a reader to inspect manually. Production systems may map these events to OpenTelemetry spans, but the local lab keeps the durable artifact explicit.
+
 ## Common Fields
 
 | Field | Required | Meaning |
@@ -9,6 +11,10 @@ The trace format is JSONL. Each line is one event.
 | `run_id` | yes | stable identifier for one run |
 | `type` | yes | event type |
 | `timestamp` | yes | UTC timestamp |
+
+Recommended additional fields for production use include `schema_version`, `parent_event_id`, `actor`, `environment`, `redaction_status`, and `artifact_refs`. They are not required in the current lab because the point is to keep the core path deterministic and inspectable.
+
+The `run_id` should be the join key across trace events, eval results, reports, policy summaries, and incident notes. If a system cannot join artifacts by run, it cannot reliably reconstruct what happened.
 
 ## Event Types
 
@@ -21,6 +27,13 @@ Common fields:
 - `goal`
 - `repo_path`
 
+Review questions:
+
+- Is the user-visible goal represented without leaking sensitive input?
+- Is the repository or task root explicit enough to reproduce the run?
+- Is there exactly one start event for the run?
+- Does the start event identify the runtime version or strategy when that matters?
+
 ## `policy_check`
 
 Required interpretation: the active policy was recorded.
@@ -28,6 +41,13 @@ Required interpretation: the active policy was recorded.
 Common fields:
 
 - `policy`
+
+Review questions:
+
+- Does the trace show the policy before risky tool calls?
+- Are allowed roots, read-only mode, shell mode, and output caps visible?
+- If a policy changed since the last run, is the change visible in the artifact diff?
+- Can a reviewer tell whether a denied action was impossible or merely not attempted?
 
 ## `tool_call`
 
@@ -40,6 +60,16 @@ Common fields:
 - `success`
 - `latency_ms`
 
+Recommended fields:
+
+- `output_chars`
+- `output_truncated`
+- `policy_decision`
+- `error_type`
+- `artifact_ref`
+
+Tool-call trace entries should avoid storing unbounded content inline. Store summaries, sizes, and artifact references where possible. The trace should answer "what happened?" without becoming an uncontrolled data dump.
+
 ## `context_observation`
 
 Required interpretation: a tool observation was considered for context.
@@ -50,11 +80,15 @@ Common fields:
 - `estimated_tokens`
 - `chars`
 
+Context observations bridge tools and prompt assembly. They should make clear which raw observations were candidates for prompt inclusion, which ones were capped or summarized, and which ones triggered budget warnings. A final answer can be correct while context handling is still unacceptable for deployment.
+
 ## `eval_check`
 
 Required interpretation: an eval check was performed.
 
 The current implementation reserves this event type but does not emit it in the default runner.
+
+If emitted later, an `eval_check` should include task name, check name, observed value, expected value, pass/fail status, and failure action. It should not merely say "eval passed"; the report can summarize that. Trace events should preserve enough structure for debugging a failed check.
 
 ## `agent_finish`
 
@@ -65,13 +99,42 @@ Common fields:
 - `success`
 - `finding_count`
 
+Recommended fields:
+
+- `output_schema_ok`
+- `failure_type`
+- `duration_ms`
+- `artifact_refs`
+- `deployment_recommendation`
+
+The finish event should not be the only evidence-bearing event. If the trace contains start and finish only, it is a lifecycle log, not an agent trace.
+
 ## Planned Event Types
 
 The expansion plan discusses future `policy_violation` and `warning` events. They are not emitted by the current code. Treat that as a planned extension, not current behavior.
 
+Good candidates for future event types:
+
+- `policy_violation`: a denied or approval-required action was observed.
+- `warning`: the runtime detected suspicious content, budget risk, or weak evidence.
+- `prompt_assembly`: labeled prompt segments were assembled.
+- `model_call`: a model request was made, with model metadata and token estimates.
+- `artifact_written`: a durable artifact was created.
+- `human_approval`: an approval decision was recorded.
+
+Adding an event type should come with tests, sample traces, report rendering, and retention guidance. Otherwise the schema grows faster than its evidence value.
+
 ## Review Guidance
 
 Trace review should begin with event coverage. A run that has final output but no `tool_call` events cannot support claims about what evidence was inspected. A run that has `tool_call` events but no `policy_check` event cannot show which capabilities were active. A run with context observations but no eval result may be useful for debugging but weak as a release artifact.
+
+An effective trace review asks three questions:
+
+1. Did the runtime have the authority it claimed to have?
+2. Did it observe the evidence required for its final answer?
+3. Did it preserve enough structured data to debug failures and gate release?
+
+These questions are stricter than reading a transcript. A transcript can show fluent reasoning while hiding missing tool calls, missing policy, or invalid context assembly.
 
 ## Minimum Useful Trace
 
@@ -84,6 +147,19 @@ For this book's case study, a minimum useful trace includes:
 - exactly one `agent_finish`.
 
 A stricter production trace might require parent/child span relationships, model metadata, token counts, prompt hashes, retry metadata, and redaction status.
+
+## Trace Anti-Patterns
+
+Avoid these patterns:
+
+- Logging only the final answer.
+- Logging raw prompts without tool, policy, or validation metadata.
+- Logging tool output with no output-size cap.
+- Reusing run IDs across independent runs.
+- Omitting failure events because the final exception was caught elsewhere.
+- Treating trace retention as an infrastructure detail rather than a product and security decision.
+
+The strongest trace is not the largest trace. The strongest trace is the smallest artifact that can answer the review questions with high confidence.
 
 ## Example
 

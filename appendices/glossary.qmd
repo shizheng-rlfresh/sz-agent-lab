@@ -4,98 +4,172 @@
 
 A runtime in which some part of the path is selected dynamically. In this book, agent behavior is not enough; the system also needs evidence, policy, and deployment gates.
 
+Operational test: if the execution path can be written completely before the request arrives, it is probably a workflow. If the runtime selects tools, evidence, or next steps based on intermediate observations, it is agent-shaped.
+
 ## Workflow
 
 A deterministic or predefined orchestration path. Workflows are the baseline before autonomy.
+
+In this repo, the workflow baseline is useful because it gives the agent something concrete to beat. Without a baseline, an agent demo can look impressive while adding no operational value.
 
 ## Tool
 
 A capability exposed to the runtime, such as file listing, file reading, grep, shell execution, or an API call.
 
+The important property is authority. A tool is not merely a helper function when an autonomous runtime can call it. It becomes part of the system's security and reliability boundary.
+
 ## Runtime
 
 The code that controls execution: policy checks, tool calls, context assembly, trace events, evals, and final output.
+
+The runtime is where engineering discipline lives. Prompt text can request behavior, but runtime code enforces schemas, policy, trace emission, and release gates.
 
 ## State
 
 Information the system uses or produces. State may be prompt context, tool output, durable storage, trace evidence, eval results, or memory.
 
+State surfaces differ in authority. Current source files may be authoritative for code behavior. A retrieved summary may be stale. A report may be derived. A trace may be evidentiary but not suitable for prompt context.
+
 ## Memory
 
 Information retained across turns or runs. Memory may be durable, summarized, retrieved, or prompt-injected; it is not automatically authoritative.
+
+Good memory needs provenance, freshness, and invalidation. A stale summary can be worse than no memory because it gives the system confidence in outdated evidence.
 
 ## Trace
 
 A record of runtime events for a run. This repo writes JSONL traces.
 
+Trace data should answer process questions: which tools ran, under what policy, with what success or failure, and what evidence reached context.
+
 ## Span
 
 An operation within a trace in tracing systems. This repo uses events rather than full span objects.
+
+Spans are useful when integrating with observability platforms. The lab uses simpler events so the evidence file remains legible to a reader.
 
 ## Metric
 
 A numeric signal such as tool-call count, failed tool calls, latency, token estimate, or eval pass rate.
 
+Metrics are useful for trend and gate decisions, but they need interpretation. A low failure rate can still hide a severe policy violation.
+
 ## Eval
 
 A repeatable check of output or process behavior.
+
+In this book, evals are regression checks tied to fixtures and artifacts. They are not substitutes for broad model benchmarks.
 
 ## Guardrail
 
 A constraint intended to reduce unsafe or undesired behavior. In this repo, guardrails are implemented as runtime policy and eval checks.
 
+The word is broad. Prefer naming the actual mechanism: path confinement, read-only mode, schema validation, output cap, approval gate, or eval check.
+
 ## Policy
 
 Executable rules that constrain tools, paths, shell access, output size, and mutation.
+
+Policy is stronger than instruction because it runs outside the model. A policy should fail closed when authority is unclear.
 
 ## Prompt Injection
 
 An attack or failure mode where instructions embedded in user or tool-provided content attempt to alter model behavior. See OWASP's LLM application risks [@owasp_llm_top10].
 
+In this lab, the important lesson is controlled observation: suspicious content can be read as data while policy prevents it from expanding authority.
+
 ## Context Window
 
 The maximum prompt and generated token span a model can handle for a request.
+
+A larger context window is not a reason to pass raw evidence indiscriminately. Context is an application architecture budget.
 
 ## Prompt Cache / Prefix Cache
 
 An optimization that reuses work for repeated prompt prefixes. Provider behavior is specific; see OpenAI prompt caching and vLLM automatic prefix caching [@openai_prompt_caching; @vllm_prefix_caching].
 
+Cacheability depends on stable prefixes. Semantically equivalent text is not necessarily cache-equivalent if bytes or tokenization differ.
+
 ## KV Cache
 
 Cached key/value tensors used during autoregressive generation to avoid recomputing prior-token attention state [@huggingface_kv_cache].
+
+The KV cache is an inference-runtime mechanism. It is related to prompt length and generation cost, but it is not the same as provider prompt caching.
 
 ## TTFT
 
 Time to first token. It is often affected by prompt prefill, scheduling, model size, and caching.
 
+TTFT matters for interactive products and agent loops because every additional planning or tool step can add user-visible delay.
+
 ## Token Budget
 
 A limit on prompt and/or completion tokens for a task or deployment.
+
+Token budgets should be enforced before model calls when possible. Discovering a budget problem after an expensive failed request is weak runtime design.
 
 ## Human-in-the-Loop
 
 A review or approval step before risky actions or deployment decisions.
 
+Human review should have an artifact to inspect. Otherwise it becomes a vague social process rather than a control.
+
 ## Rollout Gate
 
 A condition that must pass before broader deployment.
+
+Examples include eval pass rate, no policy violations, bounded context growth, trace completeness, and human approval for high-risk tools.
 
 ## Rollback
 
 A defined path for reverting a system, feature, model, tool, or policy change.
 
+Rollback may mean disabling an agent, disabling a tool, reverting a prompt, changing routing, or falling back to a deterministic workflow.
+
 ## Artifact
 
 A durable output used for review or reproduction, such as a trace, eval report, production report, rendered book, fixture repository, or test result.
+
+Artifacts are the book's evidence substrate. A claim that cannot point to an artifact or citation should be narrowed.
 
 ## Fixture
 
 A small controlled input used to exercise a known behavior or failure mode.
 
+The best fixtures are small enough to inspect manually and specific enough to produce an unambiguous pass/fail outcome.
+
 ## Dynamic Segment
 
 A prompt or context segment that changes across runs, such as user request, retrieval output, memory, timestamp, UUID, or tool observation.
 
+Dynamic segments are necessary, but they should not appear before stable instructions when prefix stability is a goal.
+
 ## Stable Prefix
 
 The leading portion of a prompt that is expected to remain byte-stable across requests when prompt caching is desired.
+
+Stable prefixes are an optimization surface, not a correctness contract. A system should still behave correctly when no cache is present.
+
+## Evidence Boundary
+
+The line between data the system observed and claims the system makes. A final answer should be traceable back across this boundary to concrete files, tool calls, or measurements.
+
+## Hallucinated File
+
+A file named or claimed by the system that is outside the allowed or observed evidence set. In this repo, evals count hallucinated inspected files when `allowed_files` is configured.
+
+## Invalid Tool Call
+
+A tool call that violates policy or attempts unsupported authority. Invalid tool calls should be recorded even when blocked successfully.
+
+## Shadow Mode
+
+A deployment stage where the system runs alongside production behavior without taking user-visible or mutating action. Shadow mode is useful for collecting traces and eval evidence under real workload distribution.
+
+## Canary
+
+A limited rollout to a small slice of traffic or users. Canary rollout should have explicit entry criteria, monitoring signals, and rollback triggers.
+
+## Schema Version
+
+An explicit version marker for durable data formats. Schema versions become important when traces, eval results, or reports need to remain readable across releases.

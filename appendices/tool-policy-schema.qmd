@@ -2,6 +2,8 @@
 
 `ToolPolicy` is the runtime boundary for local tools.
 
+The policy is deliberately simple, but the design stance is production-shaped: tool authority should be explicit, enforceable, logged, and reviewable. Prompts may describe desired behavior, but policy decides what the runtime can actually do.
+
 ## Fields
 
 | Field | Default | Meaning |
@@ -13,6 +15,15 @@
 | `approval_required` | write/shell/delete | actions requiring approval |
 | `violations` | empty list | recorded policy violations |
 
+Field interpretation:
+
+- `allowed_roots` defines the filesystem authority of file tools. It should be narrow and resolved before use.
+- `read_only` defines whether mutation helpers are allowed. The lab keeps this true.
+- `allow_shell` defines whether arbitrary shell execution is available. The lab keeps this false.
+- `max_file_chars` controls output size and therefore context growth.
+- `approval_required` documents actions that should never happen silently.
+- `violations` is evidence. Denied actions should be visible to trace and report tooling.
+
 ## Methods
 
 - `resolve_path(path)`: returns a resolved path or raises `ToolPolicyError`.
@@ -21,19 +32,49 @@
 - `cap_text(text, max_chars)`: caps output and appends a truncation marker.
 - `to_dict()`: serializes policy for traces and reports.
 
+The method boundary matters because every tool should call policy before performing the sensitive operation. A file reader should resolve and validate the path before opening the file. A write helper should check write authority before constructing side effects. A shell helper should be denied by default before command execution is even attempted.
+
 ## Violation Reasons
 
 - `path_outside_allowed_roots`
 - `write_blocked_read_only`
 - `shell_blocked`
 
+Violation records should be treated as first-class runtime data. A denied attempt can be more informative than a successful run because it proves the policy boundary was exercised. Reports should not hide violations just because the final answer was useful.
+
 ## Production Notes
 
 This policy is intentionally local and small. A production system would also need identity, tenant boundaries, secrets policy, network egress policy, approval workflow, and audit retention.
 
+Additional production policy dimensions commonly include:
+
+- actor identity and role,
+- tenant or workspace boundary,
+- repository or project ownership,
+- secret redaction and secret access,
+- network egress domains,
+- allowed APIs and HTTP methods,
+- rate limits and cost limits,
+- human approval state,
+- environment stage such as local, CI, shadow, canary, or production.
+
+Do not add these dimensions to the lab merely for completeness. Add them when a chapter, fixture, test, or report needs them.
+
 ## Review Guidance
 
 Review policy changes like capability changes. Expanding `allowed_roots`, enabling shell, increasing `max_file_chars`, or adding write tools all change the system's authority. Each change should have a test, trace evidence, and a report warning if it increases risk.
+
+Policy review should ask:
+
+- What new observation or action becomes possible?
+- What abuse path becomes possible?
+- What test proves the intended behavior?
+- What test proves the boundary?
+- What trace event records the decision?
+- What report section makes the risk visible?
+- What rollback restores the previous authority?
+
+If a policy change cannot answer these questions, it should not be bundled into a broad feature commit.
 
 ## Policy Change Examples
 
@@ -44,3 +85,33 @@ Medium-risk change: adding a new read-only root for a known fixture.
 High-risk change: enabling shell execution, adding writes, or broadening roots to a user home directory.
 
 The category is context-dependent, but every category should be explicit in review.
+
+## Approval Semantics
+
+Approval is not the same as permission. Permission is the runtime capability to perform an action. Approval is an artifact that authorizes a specific action under specific conditions. A useful approval record includes:
+
+- action type,
+- target path or external resource,
+- proposed diff or command summary,
+- expected current state,
+- approver identity,
+- timestamp,
+- expiry,
+- reason,
+- post-action verification.
+
+The lab does not implement approvals because all default tools are read-only. If mutating tools are added, approval should be added before execution mode, not after.
+
+## Policy Anti-Patterns
+
+Avoid:
+
+- using prompt instructions as the only boundary,
+- allowing shell as a generic escape hatch,
+- broadening roots to make tests pass,
+- hiding violations from reports,
+- treating output caps as cosmetic,
+- using environment-specific behavior without trace evidence,
+- granting write access before dry-run artifacts exist.
+
+The policy should make dangerous behavior boringly explicit.

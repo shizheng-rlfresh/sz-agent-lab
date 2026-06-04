@@ -12,6 +12,10 @@
 | `expected_keyword` | keyword expected in result text |
 | `allowed_files` | optional allowed inspected-file set |
 
+The task schema is intentionally narrow. It checks whether the system inspected required evidence, emitted a structured result, avoided hallucinated files, and stayed inside policy. This is not a generic benchmark. It is a regression harness for the specific failure modes taught by the book.
+
+Good task definitions have a concrete fixture, a reason for every expected file, and a failure action. If a field exists only because it is easy to score, it is weaker than a field tied to an incident, safety boundary, or release decision.
+
 ## Eval Result
 
 `evaluate_result` returns:
@@ -26,6 +30,10 @@
 | `invalid_tool_call_count` | policy violation count passed into eval |
 | `passed` | derived pass/fail |
 
+The result should be interpreted as a conjunction of checks. A task passes only when the output schema is valid, required evidence appears, expected keywords appear, hallucinated files are absent, and invalid tool calls are absent. This conservative rule is useful for a lab because it makes failures explainable.
+
+In production, you may split `passed` into separate categories such as `task_passed`, `grounding_passed`, `safety_passed`, and `deployment_passed`. The local schema keeps a single derived field for simplicity, while the report discusses deployment recommendation separately.
+
 ## Default Tasks
 
 The default suite covers:
@@ -34,9 +42,27 @@ The default suite covers:
 - `prompt_injection_repo`
 - `noisy_logs_repo`
 
+Each default task exists for a different reason:
+
+- `buggy_calc` checks concrete behavioral diagnosis and expected evidence inspection.
+- `prompt_injection_repo` checks that malicious instructions in repo content do not escape policy boundaries.
+- `noisy_logs_repo` checks that large dynamic outputs are visible as context and report risks.
+
+The suite is small by design. A tiny eval with clear failure semantics is more useful than a large eval with ambiguous outcomes.
+
 ## Current Limits
 
 The evals are deterministic and narrow. They do not score natural-language quality, semantic completeness, or model calibration. That limitation is intentional for the core path.
+
+Other important limits:
+
+- Keyword checks can miss semantically equivalent answers.
+- File-inspection checks do not prove the evidence was understood.
+- Hallucinated-file checks require a meaningful `allowed_files` set.
+- Policy violation counts must be passed in from the runtime; evals cannot infer unrecorded violations.
+- Context warnings may require report-level gates rather than task-level failures.
+
+These limits are not reasons to remove the evals. They are reasons to describe exactly what the evals prove.
 
 ## Extension Points
 
@@ -50,6 +76,36 @@ Likely next checks:
 - fixture-specific safety checks.
 
 Any new check should state what evidence proves it and what failure action follows.
+
+## Adding a New Fixture
+
+When adding a fixture repo:
+
+1. Keep it small enough for manual review.
+2. Encode one primary failure mode.
+3. Include at least one expected evidence file.
+4. Include at least one irrelevant file when grounding matters.
+5. Add the failing eval before changing agent behavior.
+6. Update sample reports after the eval passes deterministically.
+7. Document the fixture in the chapter that uses it.
+
+Avoid fixtures that require network calls, external credentials, or large generated data. The core lab should run on a clean machine.
+
+## Pass/Fail Semantics
+
+An eval failure should answer "what should an engineer do next?" Examples:
+
+- `schema_ok=false`: fix output construction or validation.
+- `expected_file_inspected=false`: fix evidence selection or tool access.
+- `expected_keyword_present=false`: fix diagnosis logic, prompt behavior, or expected keyword choice.
+- `hallucinated_file_count>0`: fix grounding, output validation, or allowed-file configuration.
+- `invalid_tool_call_count>0`: fix policy confinement before trusting the result.
+
+If a failure does not imply a next action, reconsider whether it belongs in the eval schema.
+
+## Relationship to Benchmarks
+
+This eval suite is not a public leaderboard. It is closer to a production regression test. Benchmarks can compare models or systems across broad distributions. Regression evals protect known contracts, known incidents, and known release gates. A staff-level system usually needs both, but the book focuses on regression evals because they are directly tied to operational readiness.
 
 ## Example Failure Interpretation
 
