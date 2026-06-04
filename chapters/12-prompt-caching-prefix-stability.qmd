@@ -1,3 +1,64 @@
 # Prompt Caching and Prefix Stability
 
-Placeholder. This chapter will use the cache demo to analyze prompt layout.
+## Learning Objective
+
+After this chapter, you should be able to identify prompt-layout choices that improve or break prefix cacheability.
+
+## Why This Matters
+
+Provider documentation describes prompt caching as a latency and cost optimization when requests share prompt prefixes. OpenAI's prompt caching guide states that cache hits require exact prefix matches and recommends placing static content before variable content [@openai_prompt_caching]. vLLM documents automatic prefix caching as reuse of KV cache when a new request shares an existing prefix [@vllm_prefix_caching].
+
+## Core Concept
+
+Cache-friendly prompt layout usually looks like:
+
+```text
+stable instructions
+tool schemas
+static examples
+task
+user-specific state
+retrieval
+tool observations
+```
+
+Cache-hostile layout puts timestamps, UUIDs, randomized JSON, retrieval results, or tool observations before stable content.
+
+## The Lab
+
+```bash
+python -m agentic_systems_lab.context --cache-demo
+```
+
+## Code Walkthrough
+
+`analyze_prompt_cache_layouts` compares two segment lists. It reports candidate tokens, shared prefix tokens, first changed segment, dynamic tokens, cache breakers, and recommendations.
+
+## Expected Output
+
+The demo identifies `timestamp` as the first changed segment and reports `timestamp_before_static_prefix` as a cache breaker.
+
+## Failure Mode
+
+If a timestamp appears before stable instructions and schemas, the reusable prefix can shift every request. That makes caching less likely even though the semantic prompt looks similar.
+
+## Production Translation
+
+Prompt layout is infrastructure design. In a production agent, stable instructions, tool schemas, and structured output schemas should be kept stable and early when provider caching behavior makes that useful. Provider-specific claims must be checked against current provider docs.
+
+## Evidence and References
+
+OpenAI and vLLM documentation support the prefix-match framing [@openai_prompt_caching; @vllm_prefix_caching]. The local demo supports the cache-breaker analysis.
+
+## Exercises
+
+1. Add a UUID before tool schemas and inspect the demo.
+2. Compare deterministic and randomized JSON.
+3. Move retrieval after stable instructions.
+4. Add a report field for cacheable token ratio.
+
+## Checklist
+
+- Stable prefixes are an optimization surface.
+- Dynamic content belongs later.
+- Never depend on cache behavior for correctness.

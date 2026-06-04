@@ -1,3 +1,67 @@
 # Capstone: From Toy Agent to AgentProbe
 
-Placeholder. This chapter will turn the lab into focused OSS directions.
+## Learning Objective
+
+After this chapter, you should be able to turn the lab into a focused OSS project with a falsifiable first release.
+
+## Why This Matters
+
+The common failure mode after learning agents is to build a broad demo. The stronger move is to extract one useful system boundary and make it reusable.
+
+## Core Concept
+
+The book suggests four directions:
+
+| Project | Focus |
+|---|---|
+| `agentprobe` | Trace, eval, and production-readiness harness for agent runs |
+| `cachepilot` | Prompt-cache breakage analyzer |
+| `agentfit-mlx` | Local Apple Silicon agent workload profiler |
+| `toolguard` | Tool policy and approval layer |
+
+The strongest continuation of this book is probably `agentprobe`, because it follows the core arc:
+
+```text
+build -> trace -> eval -> report -> deployment gate
+```
+
+This is author judgment, not a market claim.
+
+## The Lab
+
+```bash
+python scripts/run_all_examples.py
+```
+
+## Code Walkthrough
+
+The capstone seed already exists: trace logger, eval runner, context profiler, policy object, and report generator. A real `agentprobe` would generalize those APIs beyond toy repos.
+
+## Expected Output
+
+The command regenerates trace, eval, context, and production report artifacts that could become `agentprobe` fixtures.
+
+## Failure Mode
+
+A capstone that tries to be a full agent framework will lose focus. A useful OSS project should have a narrow contract, test fixtures, and a measurable claim.
+
+## Production Translation
+
+The reusable value is not "another agent." The reusable value is evidence around an agent run: what happened, whether it passed checks, and whether deployment gates should block.
+
+## Evidence and References
+
+The project framing is author interpretation. The technical pieces are repo evidence. Tracing and risk-management references are OpenAI Agents SDK tracing, OpenTelemetry, and NIST AI RMF [@openai_agents_tracing; @otel_genai; @nist_ai_rmf].
+
+## Exercises
+
+1. Score all four projects.
+2. Pick one first issue.
+3. Write seven GitHub issues for `agentprobe`.
+4. Draft a technical article title and abstract.
+
+## Checklist
+
+- Pick a narrow OSS contract.
+- Make the first release measurable.
+- Prefer reusable evidence infrastructure over a broad demo.

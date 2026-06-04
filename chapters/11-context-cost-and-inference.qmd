@@ -1,3 +1,61 @@
 # Context, Cost, and Inference Bottlenecks
 
-Placeholder. This chapter will connect context growth to cost, latency, and KV cache pressure.
+## Learning Objective
+
+After this chapter, you should be able to connect agent tool behavior to prompt growth, cost estimates, latency risk, and KV-cache pressure.
+
+## Why This Matters
+
+Every tool observation can become prompt context. If an agent reads a large log file, the next model call may become slower, more expensive, or impossible under a context budget. Hugging Face documents KV-cache strategies for generation and notes that cache choices trade memory efficiency and latency [@huggingface_kv_cache]. The PagedAttention paper frames KV-cache memory as a serving bottleneck for LLMs [@pagedattention].
+
+## Core Concept
+
+The lab uses approximate formulas:
+
+```text
+estimated_tokens ~= ceil(chars / 4)
+hosted_cost ~= input_tokens * input_price + output_tokens * output_price
+local_memory ~= model_weights + KV_cache(context_length) + runtime_overhead
+total_prompt = stable_instructions + tool_schemas + task + observations + memory
+```
+
+These formulas are estimates. They are not tokenizer-accurate or provider-price-accurate.
+
+## The Lab
+
+```bash
+python -m agentic_systems_lab.context
+```
+
+## Code Walkthrough
+
+`ContextTracker` records segments with `name`, `chars`, `tokens`, and `cacheable`. It reports cumulative growth, cacheable tokens, dynamic tokens, and large dynamic outputs.
+
+## Expected Output
+
+The command prints a summary with `total_tokens`, `cacheable_tokens`, `dynamic_tokens`, `steps`, and `large_outputs`.
+
+## Failure Mode
+
+`noisy_logs_repo` demonstrates the risk: each tool call is correct, but the observation is large enough to require caps, summarization, indexing, or human review before deployment.
+
+## Production Translation
+
+Context budget is a production constraint. Treat context as a scarce resource alongside latency, cost, memory, and reliability.
+
+## Evidence and References
+
+KV-cache and inference framing are grounded in Hugging Face documentation and the PagedAttention paper [@huggingface_kv_cache; @pagedattention]. The token estimator is explicitly a local approximation.
+
+## Exercises
+
+1. Add a token budget limit.
+2. Compare capped and uncapped log reads.
+3. Add a report warning for dynamic tokens above a threshold.
+4. Estimate cost per successful eval using a hypothetical price table.
+
+## Checklist
+
+- Tool output makes context grow.
+- Token estimates are estimates unless measured with the provider tokenizer.
+- Large dynamic output should trigger review.

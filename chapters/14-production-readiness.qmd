@@ -1,3 +1,65 @@
 # Production Readiness
 
-Placeholder. This chapter will define deployment gates for agentic systems.
+## Learning Objective
+
+After this chapter, you should be able to turn a local agent run into deployment gates and review criteria.
+
+## Why This Matters
+
+Production readiness is not a feeling. NIST AI RMF frames AI risk management around governance, mapping, measurement, and management functions [@nist_ai_rmf]. This repo keeps the scope smaller: it creates a local readiness report that links trace, eval, policy, and context signals.
+
+## Core Concept
+
+Deployment gates should cover:
+
+- tool safety,
+- state and durability,
+- observability,
+- evals,
+- guardrails,
+- human approval,
+- secrets,
+- auth,
+- rate limits,
+- cost caps,
+- rollback,
+- incident review.
+
+## The Lab
+
+```bash
+python -m agentic_systems_lab.report
+```
+
+## Code Walkthrough
+
+The report generator produces a deployment recommendation. It requires human review when evals fail, policy violations exist, or large dynamic outputs appear.
+
+## Expected Output
+
+`reports/sample_production_report.md` includes trace summary, all three eval tasks, context growth, production warnings, and `human review required before deployment`.
+
+## Failure Mode
+
+A system with no eval gate, no trace, and no rollback path can work in a demo and still be unsupportable. That is author judgment, but the repo demonstrates the evidence artifacts that reduce ambiguity.
+
+## Production Translation
+
+For a real deployment, add ownership, monitoring, incident templates, escalation policy, data retention, and environment-specific security review. This book intentionally stops before cloud deployment.
+
+## Evidence and References
+
+Risk-management framing cites NIST AI RMF [@nist_ai_rmf]. Local readiness behavior is repo evidence from the generated report.
+
+## Exercises
+
+1. Add a cost cap warning.
+2. Add an incident template.
+3. Add a rollback checklist.
+4. Decide which tools require human approval.
+
+## Checklist
+
+- Deployment gates should be explicit.
+- Reports should summarize evidence, not replace raw traces.
+- Human review is a valid status.
