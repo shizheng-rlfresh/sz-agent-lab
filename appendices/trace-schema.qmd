@@ -69,6 +69,10 @@ Common fields:
 
 The expansion plan discusses future `policy_violation` and `warning` events. They are not emitted by the current code. Treat that as a planned extension, not current behavior.
 
+## Review Guidance
+
+Trace review should begin with event coverage. A run that has final output but no `tool_call` events cannot support claims about what evidence was inspected. A run that has `tool_call` events but no `policy_check` event cannot show which capabilities were active. A run with context observations but no eval result may be useful for debugging but weak as a release artifact.
+
 ## Example
 
 ```json

@@ -24,6 +24,30 @@ tool observations
 
 Cache-hostile layout puts timestamps, UUIDs, randomized JSON, retrieval results, or tool observations before stable content.
 
+## Segment-Level Thinking
+
+Prompt caching is easier to reason about when prompts are assembled from named segments rather than string concatenation. A segment might be `system`, `tool_schemas`, `task`, `memory`, `retrieval`, or `tool_result`. Once the segments are named, the runtime can ask:
+
+- Which segments are stable across requests?
+- Which segments are user-specific?
+- Which segments change every run?
+- Which segments are large?
+- Which segments must appear before model reasoning?
+
+This is not only a performance concern. Segment naming also helps state discipline. The same structure that improves cache analysis makes prompt-injection review and context budgeting easier.
+
+## Cache Breaker Examples
+
+The local demo flags a timestamp before the static prefix. Other common breakers include:
+
+- UUIDs before tool schemas,
+- randomized JSON key ordering,
+- dynamic retrieval before stable instructions,
+- user profile state before reusable system text,
+- tool output mixed into reusable examples.
+
+The fix is usually architectural: assemble stable text first, serialize deterministically, and push volatile content later.
+
 ## The Lab
 
 ```bash
@@ -45,6 +69,8 @@ If a timestamp appears before stable instructions and schemas, the reusable pref
 ## Production Translation
 
 Prompt layout is infrastructure design. In a production agent, stable instructions, tool schemas, and structured output schemas should be kept stable and early when provider caching behavior makes that useful. Provider-specific claims must be checked against current provider docs.
+
+Do not optimize blindly. A cache-friendly layout that confuses instruction priority is not a win. Correctness comes first, then observability, then optimization. The local cache demo is a diagnostic tool, not a promise of provider savings.
 
 ## Evidence and References
 

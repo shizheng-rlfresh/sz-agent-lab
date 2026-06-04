@@ -25,6 +25,25 @@ Deployment gates should cover:
 - rollback,
 - incident review.
 
+## Gate Design
+
+A gate should have four properties:
+
+1. It is measurable.
+2. It has an owner.
+3. It has a failure action.
+4. It is tied to an artifact.
+
+For example, "evals should pass" is incomplete. "The default eval suite must pass in CI; failures block release and page the runtime owner" is a gate. "Context should be reasonable" is vague. "Dynamic context above a threshold sets deployment status to human review required" is a gate.
+
+The current sample report demonstrates the second pattern. Evals pass, but large dynamic context still triggers review.
+
+## Rollback Discipline
+
+Agentic systems can change through prompts, models, tool definitions, policy, retrieval indexes, eval sets, and code. Rollback needs to know which layer changed. A model rollback will not fix an unsafe tool. A prompt rollback will not restore a deleted file. A policy rollback can re-enable a risky capability if not reviewed.
+
+For a production system, version these surfaces separately and record their versions in traces or reports.
+
 ## The Lab
 
 ```bash
@@ -46,6 +65,8 @@ A system with no eval gate, no trace, and no rollback path can work in a demo an
 ## Production Translation
 
 For a real deployment, add ownership, monitoring, incident templates, escalation policy, data retention, and environment-specific security review. This book intentionally stops before cloud deployment.
+
+The stopping point is deliberate. A local deterministic lab can teach the shape of readiness without pretending to solve auth, tenancy, secrets, compliance, or SRE operations. Those belong to the production environment.
 
 ## Evidence and References
 

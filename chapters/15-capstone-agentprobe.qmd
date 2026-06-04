@@ -27,6 +27,28 @@ build -> trace -> eval -> report -> deployment gate
 
 This is author judgment, not a market claim.
 
+## First Release Shape
+
+A focused `agentprobe` v0 could do three things:
+
+1. ingest a trace file,
+2. run deterministic checks,
+3. emit a production-readiness report.
+
+That is enough to be useful. It does not need to be an agent framework, a tracing backend, an eval platform, or a dashboard. The first release should preserve the book's thesis: make agent runs observable, evaluable, bounded, and reviewable.
+
+## Seven Starter Issues
+
+1. Define a trace event schema.
+2. Add a JSONL trace loader.
+3. Add deterministic schema/evidence checks.
+4. Add policy violation summaries.
+5. Add context-growth summaries.
+6. Generate Markdown and JSON reports.
+7. Provide fixture traces and failing examples.
+
+Each issue should include a test and a sample artifact.
+
 ## The Lab
 
 ```bash
@@ -48,6 +70,8 @@ A capstone that tries to be a full agent framework will lose focus. A useful OSS
 ## Production Translation
 
 The reusable value is not "another agent." The reusable value is evidence around an agent run: what happened, whether it passed checks, and whether deployment gates should block.
+
+The capstone also creates an article path. A strong article does not need to claim that agent frameworks are bad or that one tool is best. It can make a narrower claim: agent demos become more useful when every run produces trace, eval, policy, and context evidence.
 
 ## Evidence and References
 

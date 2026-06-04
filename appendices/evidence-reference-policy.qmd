@@ -60,3 +60,14 @@ When reporting measurements:
 - record hardware or runtime when relevant,
 - distinguish estimates from exact counts,
 - do not generalize from one local run to all deployments.
+
+## Editorial Review Checklist
+
+For each chapter, check:
+
+- Are vendor-specific claims cited?
+- Are performance claims cited, measured, or labeled as estimates?
+- Are security claims cited or demonstrated with fixtures?
+- Are author judgments labeled as judgments?
+- Does every lab command still run?
+- Does the expected output match current artifacts?

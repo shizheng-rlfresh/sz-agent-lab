@@ -30,3 +30,7 @@
 ## Production Notes
 
 This policy is intentionally local and small. A production system would also need identity, tenant boundaries, secrets policy, network egress policy, approval workflow, and audit retention.
+
+## Review Guidance
+
+Review policy changes like capability changes. Expanding `allowed_roots`, enabling shell, increasing `max_file_chars`, or adding write tools all change the system's authority. Each change should have a test, trace evidence, and a report warning if it increases risk.

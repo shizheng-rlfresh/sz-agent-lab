@@ -37,3 +37,16 @@ The default suite covers:
 ## Current Limits
 
 The evals are deterministic and narrow. They do not score natural-language quality, semantic completeness, or model calibration. That limitation is intentional for the core path.
+
+## Extension Points
+
+Likely next checks:
+
+- context budget pass/fail,
+- policy violation categories,
+- required trace event coverage,
+- latency threshold,
+- report deployment status,
+- fixture-specific safety checks.
+
+Any new check should state what evidence proves it and what failure action follows.

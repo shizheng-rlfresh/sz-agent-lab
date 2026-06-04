@@ -21,6 +21,25 @@ total_prompt = stable_instructions + tool_schemas + task + observations + memory
 
 These formulas are estimates. They are not tokenizer-accurate or provider-price-accurate.
 
+## Why Context Becomes an Infrastructure Problem
+
+Agentic systems can turn application behavior into infrastructure load. A user asks a question. The runtime reads files. The observations are appended to context. The model call becomes larger. The next step may read more files, and the context grows again. Even if each tool call is correct, the aggregate run may become expensive or slow.
+
+The local `noisy_logs_repo` fixture makes this visible. The log file is not malicious. It is just repetitive and large relative to the task. That is a common production pattern: logs, tickets, pages, and retrieved documents are often useful in small slices and harmful in bulk.
+
+## Budgeting Strategy
+
+A practical agent runtime should define context budgets before deployment:
+
+- maximum chars per tool result,
+- maximum estimated tokens per run,
+- maximum dynamic tokens per model call,
+- maximum number of files or chunks,
+- summarization or retrieval fallback,
+- human review threshold for large outputs.
+
+The repo uses a crude `ceil(chars / 4)` estimator. That estimator should not be used for billing. Its purpose is to make growth visible in tests and reports.
+
 ## The Lab
 
 ```bash
@@ -42,6 +61,8 @@ The command prints a summary with `total_tokens`, `cacheable_tokens`, `dynamic_t
 ## Production Translation
 
 Context budget is a production constraint. Treat context as a scarce resource alongside latency, cost, memory, and reliability.
+
+For hosted models, cost and latency depend on provider pricing, implementation, model, and cache behavior. For local models, memory pressure depends on weights, context length, KV-cache strategy, and runtime overhead. The book avoids exact claims unless a source or local measurement supports them. The operational habit is still clear: measure the actual task, not only the model in isolation.
 
 ## Evidence and References
 

@@ -23,6 +23,35 @@ Local agent feasibility depends on workload shape:
 
 This chapter is optional. The core repo does not require MLX, Apple Silicon, external model downloads, or API keys.
 
+## Workload Shape Before Hardware Preference
+
+Local inference decisions often start with hardware enthusiasm. This book recommends starting with workload shape instead. A repo-triage agent with short files, low concurrency, and sensitive data may be a plausible local candidate. A high-volume customer-support agent with long retrieval context and strict latency SLOs may not be.
+
+Ask:
+
+- How many tokens enter the model per task?
+- How many output tokens are needed?
+- Is the task latency-sensitive?
+- Does quality require a larger hosted model?
+- Is data locality more important than throughput?
+- Can the team operate local model artifacts?
+
+Only after those questions should hardware matter.
+
+## Measurement Plan
+
+A useful local experiment records:
+
+- model name and quantization,
+- prompt length,
+- output length,
+- time to first token,
+- tokens per second,
+- peak memory if available,
+- qualitative pass/fail against the task eval.
+
+Without those fields, "it runs locally" is not enough evidence.
+
 ## The Lab
 
 Optional:
@@ -47,6 +76,8 @@ A model can fit for a short prompt but become unusable as the agent loop accumul
 ## Production Translation
 
 Choose local inference when locality, offline execution, or predictable spend matters more than hosted-model quality and managed operations. Measure the actual workload before committing.
+
+Hybrid designs are also possible. A deterministic local workflow can prefilter, summarize, or redact content before a hosted model call. A local model can handle low-risk tasks while a hosted model handles harder cases. The right design depends on evals, latency, cost, privacy, and operations.
 
 ## Evidence and References
 
