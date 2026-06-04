@@ -1,0 +1,3 @@
+# Trace Schema
+
+Placeholder trace schema.

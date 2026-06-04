@@ -1,0 +1,3 @@
+# Context, Cost, and Inference Bottlenecks
+
+Placeholder. This chapter will connect context growth to cost, latency, and KV cache pressure.

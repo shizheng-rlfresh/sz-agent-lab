@@ -1,0 +1,3 @@
+# Guardrails and Tool Policy
+
+Placeholder. This chapter will make runtime policy explicit.

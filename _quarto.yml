@@ -3,21 +3,44 @@ project:
 
 book:
   title: "Agentic Systems Lab"
-  subtitle: "Building, Measuring, and Hardening Agentic AI Systems"
+  subtitle: "Building, Measuring, and Hardening AI Agents"
   author: "Placeholder Author"
   chapters:
     - index.qmd
-    - chapters/01-what-is-an-agent.qmd
-    - chapters/02-workflows-vs-agents.qmd
-    - chapters/03-tools-and-state.qmd
-    - chapters/04-building-a-repo-triage-agent.qmd
-    - chapters/05-tracing-and-observability.qmd
-    - chapters/06-evaluating-agents.qmd
-    - chapters/07-guardrails-and-tool-policy.qmd
-    - chapters/08-context-cost-and-inference.qmd
-    - chapters/09-local-agents-with-mlx.qmd
-    - chapters/10-production-readiness.qmd
-    - chapters/11-project-ideas.qmd
+    - part: "Part I — Foundations"
+      chapters:
+        - chapters/01-from-llm-calls-to-agentic-systems.qmd
+        - chapters/02-workflows-before-agents.qmd
+    - part: "Part II — Tools, State, and Runtime"
+      chapters:
+        - chapters/03-designing-tools.qmd
+        - chapters/04-state-memory-and-context.qmd
+        - chapters/05-building-the-repo-triage-agent.qmd
+    - part: "Part III — Measurement"
+      chapters:
+        - chapters/06-tracing-runtime-evidence.qmd
+        - chapters/07-evaluating-agents.qmd
+        - chapters/08-reports-production-evidence.qmd
+    - part: "Part IV — Safety and Hardening"
+      chapters:
+        - chapters/09-guardrails-and-tool-policy.qmd
+        - chapters/10-prompt-injection-untrusted-tool-output.qmd
+    - part: "Part V — Infra and Cost"
+      chapters:
+        - chapters/11-context-cost-and-inference.qmd
+        - chapters/12-prompt-caching-prefix-stability.qmd
+        - chapters/13-local-agents-with-mlx.qmd
+    - part: "Part VI — Deployment and Capstone"
+      chapters:
+        - chapters/14-production-readiness.qmd
+        - chapters/15-capstone-agentprobe.qmd
+  appendices:
+    - appendices/glossary.qmd
+    - appendices/command-reference.qmd
+    - appendices/trace-schema.qmd
+    - appendices/eval-schema.qmd
+    - appendices/tool-policy-schema.qmd
+    - appendices/evidence-reference-policy.qmd
 
 bibliography: references.bib
 

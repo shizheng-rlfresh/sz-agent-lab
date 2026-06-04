@@ -1,0 +1,3 @@
+# Prompt Caching and Prefix Stability
+
+Placeholder. This chapter will use the cache demo to analyze prompt layout.

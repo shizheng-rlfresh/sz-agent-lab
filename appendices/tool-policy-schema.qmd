@@ -1,0 +1,3 @@
+# Tool Policy Schema
+
+Placeholder tool policy schema.

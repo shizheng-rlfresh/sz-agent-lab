@@ -1,0 +1,3 @@
+# Local Agents and MLX
+
+Placeholder. This optional chapter will discuss local inference constraints.

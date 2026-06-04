@@ -1,0 +1,3 @@
+# Building the Repo Triage Agent
+
+Placeholder. This chapter will walk through the deterministic agent-shaped runtime.

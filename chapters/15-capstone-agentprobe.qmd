@@ -1,0 +1,3 @@
+# Capstone: From Toy Agent to AgentProbe
+
+Placeholder. This chapter will turn the lab into focused OSS directions.

@@ -1,0 +1,3 @@
+# Tracing: From Transcript to Runtime Evidence
+
+Placeholder. This chapter will connect JSONL traces to inspectable runtime evidence.

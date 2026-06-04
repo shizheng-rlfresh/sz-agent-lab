@@ -1,0 +1,3 @@
+# Prompt Injection and Untrusted Tool Output
+
+Placeholder. This chapter will use `prompt_injection_repo` to discuss untrusted observations.

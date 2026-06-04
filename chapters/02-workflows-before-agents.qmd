@@ -1,0 +1,3 @@
+# Workflows Before Agents
+
+Placeholder. This chapter will establish deterministic workflows as the baseline before autonomy.

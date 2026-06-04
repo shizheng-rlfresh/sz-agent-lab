@@ -1,0 +1,3 @@
+# Reports and Production-Readiness Evidence
+
+Placeholder. This chapter will show how traces, evals, policy, and context become a review artifact.
