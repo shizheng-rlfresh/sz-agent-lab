@@ -60,7 +60,12 @@ def run_all_examples(
     if example in {"all", "repo_triage_agent"}:
         trace_path = traces_root / "buggy_calc_trace.jsonl"
         policy = ToolPolicy(allowed_roots=(data_root,))
-        agent_result = run_repo_triage(data_root / "buggy_calc", trace_path=trace_path, policy=policy)
+        agent_result = run_repo_triage(
+            data_root / "buggy_calc",
+            trace_path=trace_path,
+            run_id="run_buggy_calc_sample",
+            policy=policy,
+        )
         payload["agent"] = agent_result
         payload["trace"] = summarize_trace(trace_path)
         task = EvalTask(
@@ -82,9 +87,11 @@ def run_all_examples(
             policy_violations=policy.violations,
         )
         write_report(report, reports_root / "sample_production_report.md")
+        stable_trace = dict(payload["trace"])
+        stable_trace["total_latency_ms"] = "local_measurement"
         (reports_root / "sample_trace_report.md").write_text(
             "# Trace Report\n\n"
-            f"```json\n{json.dumps(payload['trace'], indent=2)}\n```\n",
+            f"```json\n{json.dumps(stable_trace, indent=2)}\n```\n",
             encoding="utf-8",
         )
 

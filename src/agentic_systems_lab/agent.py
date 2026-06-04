@@ -61,11 +61,13 @@ def run_repo_triage(
     repo_path: str | Path = "data/toy_repos/buggy_calc",
     *,
     trace_path: str | Path | None = None,
+    run_id: str | None = None,
     policy: ToolPolicy | None = None,
 ) -> dict:
     repo = Path(repo_path)
     active_policy = policy or ToolPolicy(allowed_roots=(repo,))
-    trace = TraceLogger(trace_path or _trace_path_for(repo))
+    trace_target = trace_path or _trace_path_for(repo)
+    trace = TraceLogger(trace_target, run_id=run_id) if run_id else TraceLogger(trace_target)
     trace.log_event("agent_start", goal="repo_triage", repo_path=str(repo))
     trace.log_event("policy_check", policy=active_policy.to_dict())
 

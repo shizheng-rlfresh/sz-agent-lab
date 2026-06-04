@@ -33,6 +33,7 @@ class TraceLogger:
     def __post_init__(self) -> None:
         self.path = Path(self.path)
         self.path.parent.mkdir(parents=True, exist_ok=True)
+        self.path.write_text("", encoding="utf-8")
 
     def log_event(self, event_type: str, **fields: object) -> dict:
         if event_type not in REQUIRED_EVENT_TYPES:

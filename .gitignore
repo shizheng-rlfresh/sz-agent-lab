@@ -6,3 +6,6 @@ _book/
 .quarto/
 traces/
 src/*.egg-info/
+
+/.quarto/
+**/*.quarto_ipynb

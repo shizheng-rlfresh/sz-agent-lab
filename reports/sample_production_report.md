@@ -1,7 +1,7 @@
 # Agentic Systems Lab Report
 
 ## Trace Summary
-- run_id: run_fccb6498de5c
+- run_id: run_buggy_calc_sample
 - event_counts: {'agent_start': 1, 'policy_check': 1, 'tool_call': 4, 'context_observation': 3, 'agent_finish': 1}
 - tool_calls: 4
 - failed_tool_calls: 0
