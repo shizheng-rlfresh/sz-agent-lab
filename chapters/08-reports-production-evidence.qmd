@@ -1,3 +1,62 @@
 # Reports and Production-Readiness Evidence
 
-Placeholder. This chapter will show how traces, evals, policy, and context become a review artifact.
+## Learning Objective
+
+After this chapter, you should be able to explain how raw traces, evals, policy warnings, and context growth become a review artifact.
+
+## Why This Matters
+
+Raw JSONL is useful for debugging. It is not enough for a staff engineer deciding whether a system is ready for wider rollout. A report compresses evidence into a decision surface.
+
+## Core Concept
+
+The report generator summarizes:
+
+- trace event counts,
+- tool-call counts,
+- eval pass/fail status,
+- policy warnings,
+- context growth,
+- large-output warnings,
+- deployment recommendation.
+
+The recommendation is intentionally conservative: a large dynamic output can require human review even when evals pass.
+
+## The Lab
+
+```bash
+python -m agentic_systems_lab.report
+```
+
+## Code Walkthrough
+
+`generate_report` accepts trace summary, eval results, context summary, and policy violations. It creates Markdown sections and derives a deployment recommendation. This is intentionally simple so the reader can alter the gate logic.
+
+## Expected Output
+
+`reports/sample_production_report.md` should include all three eval tasks and a deployment recommendation of `human review required before deployment` when the noisy log fixture produces a large dynamic output.
+
+## Failure Mode
+
+If a team only stores raw traces, reviewers have to manually reconstruct the run. If a team only stores the final answer, they cannot reconstruct it at all.
+
+## Production Translation
+
+Reports can become pull-request comments, release artifacts, incident attachments, or deployment gates. In production, the report should link to raw traces and preserve enough metadata to reproduce the run.
+
+## Evidence and References
+
+Report behavior is local evidence from `reports/sample_production_report.md` and `tests/test_report.py`. Risk-gating language is aligned with the measurement and management posture in NIST AI RMF [@nist_ai_rmf].
+
+## Exercises
+
+1. Add a cost-cap warning.
+2. Add a human-approval-required section.
+3. Add a release-blocking status when evals fail.
+4. Convert the Markdown report into JSON.
+
+## Checklist
+
+- Reports are decision artifacts.
+- A passing eval can still require review.
+- Link summaries back to raw evidence.

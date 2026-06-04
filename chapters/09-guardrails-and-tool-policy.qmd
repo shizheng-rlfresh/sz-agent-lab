@@ -1,3 +1,61 @@
 # Guardrails and Tool Policy
 
-Placeholder. This chapter will make runtime policy explicit.
+## Learning Objective
+
+After this chapter, you should be able to distinguish prompt-level guardrails from runtime policy and explain why risky capabilities need enforcement outside the model.
+
+## Why This Matters
+
+Prompt instructions are not a capability boundary. If a tool can read arbitrary paths or execute shell commands, the system has that capability regardless of the prompt. OWASP documents prompt injection and excessive agency among LLM application risks [@owasp_llm_top10]. This lab narrows the lesson: enforce path and shell boundaries in code.
+
+## Core Concept
+
+`ToolPolicy` defines:
+
+- allowed roots,
+- read-only mode,
+- shell disabled by default,
+- maximum file characters,
+- approval-required actions,
+- violation records.
+
+Policy is checked before tools access files or shell-like capabilities.
+
+## The Lab
+
+```bash
+python -m agentic_systems_lab.policy
+```
+
+## Code Walkthrough
+
+`resolve_path` permits only paths under allowed roots. `check_write` blocks mutation under read-only mode. `check_shell` blocks shell execution unless explicitly enabled.
+
+## Expected Output
+
+The command prints JSON with the default allowed root, `read_only: true`, `allow_shell: false`, and approval-required actions.
+
+## Failure Mode
+
+If path checks are only prompt instructions, malicious or confused model behavior can still request unsafe paths. If shell access is exposed without approval, the blast radius becomes much larger than a read-only file lab.
+
+## Production Translation
+
+Production guardrails should include policy enforcement, not just model instructions. Risky tools need explicit approval semantics, audit logs, and narrower capability scopes.
+
+## Evidence and References
+
+Security risk categories are grounded in OWASP [@owasp_llm_top10]. Local enforcement is tested in `tests/test_policy.py`.
+
+## Exercises
+
+1. Try to read outside the allowed root.
+2. Add a policy violation report section.
+3. Design an approval flow for `write_file`.
+4. Decide which tools should never be exposed.
+
+## Checklist
+
+- Prompt text is not a security boundary.
+- Runtime policy should enforce capability limits.
+- Violations should be logged as evidence.

@@ -1,3 +1,62 @@
 # Tracing: From Transcript to Runtime Evidence
 
-Placeholder. This chapter will connect JSONL traces to inspectable runtime evidence.
+## Learning Objective
+
+After this chapter, you should be able to explain why a transcript is weaker than a trace and identify the minimum runtime events needed for an agent run.
+
+## Why This Matters
+
+A final answer does not show the path. It does not show which files were read, which tool call failed, whether policy was checked, or how much context was accumulated. OpenAI's Agents SDK tracing guide describes traces as end-to-end operations composed of spans and notes that tool calls and guardrails are traced by default in that SDK [@openai_agents_tracing]. OpenTelemetry's GenAI semantic conventions provide another source for naming and structuring generative-AI telemetry [@otel_genai].
+
+## Core Concept
+
+This repo uses JSONL events rather than a full tracing backend. The point is to make the evidence visible:
+
+- `agent_start`
+- `policy_check`
+- `tool_call`
+- `context_observation`
+- `eval_check`
+- `agent_finish`
+
+Each event has a `run_id` and timestamp. Tool calls also record latency and success.
+
+## The Lab
+
+```bash
+python -m agentic_systems_lab.tracer
+python -m agentic_systems_lab.agent
+```
+
+## Code Walkthrough
+
+`TraceLogger.log_event` validates event type and appends JSON to a trace file. `TraceLogger.timed_tool_call` wraps a function, records success, and writes latency in milliseconds.
+
+## Expected Output
+
+`python -m agentic_systems_lab.tracer` writes `traces/demo_trace.jsonl` and prints event counts. Running the agent writes a richer trace with policy checks, tool calls, context observations, and finish status.
+
+## Failure Mode
+
+Without traces, failures become anecdotal. A team cannot distinguish "the model reasoned badly" from "the wrong file was read," "a policy check failed," or "context was dominated by log noise."
+
+## Production Translation
+
+Production systems need telemetry that can be inspected during development and incident response. This lab does not claim its JSONL format is enough for every deployment; it is the minimal local artifact that teaches the contract.
+
+## Evidence and References
+
+Tracing concepts are grounded in OpenAI Agents SDK tracing and OpenTelemetry GenAI conventions [@openai_agents_tracing; @otel_genai]. Local behavior is verified by `tests/test_tracer.py`.
+
+## Exercises
+
+1. Add a warning event type.
+2. Count tool calls per run.
+3. Write a bad trace and identify the missing evidence.
+4. Map one JSONL event to an OpenTelemetry span concept.
+
+## Checklist
+
+- A transcript is not enough.
+- Tool calls need success and latency fields.
+- Trace data may contain sensitive information and needs retention policy.

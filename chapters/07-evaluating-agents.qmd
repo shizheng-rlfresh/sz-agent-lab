@@ -1,3 +1,63 @@
 # Evaluating Agents
 
-Placeholder. This chapter will distinguish successful demos from deterministic evals.
+## Learning Objective
+
+After this chapter, you should be able to define deterministic eval checks for process correctness and task success.
+
+## Why This Matters
+
+A demo can succeed once and still be unfit for deployment. The repo's evals intentionally avoid LLM-as-judge in the core path. They check observable properties: schema validity, expected file inspection, expected keywords, hallucinated file references, and invalid tool calls.
+
+## Core Concept
+
+Evaluation should cover both final output and process:
+
+| Eval Dimension | Local Example |
+|---|---|
+| Schema validity | final JSON has required keys |
+| Evidence | expected file inspected |
+| Keyword match | "division" or "prompt-injection" appears |
+| Grounding | inspected files are allowed files |
+| Tool validity | policy violations counted |
+| Context budget | large dynamic outputs flagged by reports |
+
+This is a local design, not a universal eval framework. The value is that every check is falsifiable.
+
+## The Lab
+
+```bash
+python -m agentic_systems_lab.evals
+```
+
+## Code Walkthrough
+
+`EvalTask` names a fixture repo, expected file, expected keyword, and allowed files. `evaluate_result` computes booleans and counts, then derives `passed`. The default suite covers `buggy_calc`, `prompt_injection_repo`, and `noisy_logs_repo`.
+
+## Expected Output
+
+The command prints three passing eval results and writes `reports/sample_eval_report.md`.
+
+## Failure Mode
+
+An agent can produce plausible text without inspecting the right file. It can also cite a file that does not exist. Those failures are easy to miss in a transcript and easy to catch with deterministic checks.
+
+## Production Translation
+
+Deployment should be gated by eval results. For higher-risk systems, deterministic checks should be complemented by model-judge evals, human review, red-team cases, or online monitoring. That broader recommendation is author judgment; the repo only demonstrates the deterministic layer.
+
+## Evidence and References
+
+The eval behavior is repo evidence from `tests/test_evals.py` and `reports/sample_eval_report.md`. NIST AI RMF frames measurement and risk management as part of AI governance [@nist_ai_rmf].
+
+## Exercises
+
+1. Add a failing eval and inspect the report.
+2. Add a context-budget check.
+3. Add an eval for a new fixture repo.
+4. Decide which evals would block deployment.
+
+## Checklist
+
+- A successful demo is not an eval.
+- Evaluate process, not only final text.
+- Make pass/fail criteria explicit.
