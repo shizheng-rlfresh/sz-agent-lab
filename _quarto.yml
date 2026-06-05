@@ -35,6 +35,7 @@ book:
         - chapters/14-production-readiness.qmd
         - chapters/15-capstone-agentprobe.qmd
   appendices:
+    - appendices/further-reading.qmd
     - appendices/glossary.qmd
     - appendices/command-reference.qmd
     - appendices/trace-schema.qmd
