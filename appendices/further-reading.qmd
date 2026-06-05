@@ -1,0 +1,98 @@
+# Prerequisites and Further Reading
+
+This appendix is intentionally outward-pointing. The core book teaches how to
+make an agentic system observable, evaluable, policy-bound, and shippable. It
+deliberately does not survey the full taxonomy of agent techniques, and it does
+not tutorialize any particular framework. Those topics are real, but they are
+prerequisites or companions, not the book's subject.
+
+Two practical reasons keep them out of the core chapters. First, the book's
+value is a narrow thesis: deterministic baseline, evidence, policy, gates.
+Folding in technique surveys and framework walkthroughs would blur that thesis.
+Second, technique and framework material ages at a different rate than the
+engineering discipline here. Frameworks consolidate and rename on short cycles,
+so this appendix favors primary sources and names them as moving targets. When a
+link here disagrees with a vendor's current documentation, trust the vendor.
+
+## Assumed Reader Baseline
+
+The README states the reader is highly technical. Made explicit, the book
+assumes you can already:
+
+- read and write Python and reason about software tradeoffs;
+- use tests, version control, and basic observability;
+- make a single LLM call and a tool/function call, and read the response.
+
+If any of those is shaky, cover it before Chapter 1. The chapters below assume
+the LLM and tool-calling baseline in particular.
+
+## Track A: Agent Techniques (Concepts and Papers)
+
+Read in this order. One line each on what it gives you and which chapter it
+back-fills.
+
+- Anthropic, *Building Effective Agents* [@anthropic_effective_agents]. The best
+  single on-ramp, and aligned with this book: workflows before agents, simplest
+  thing that works. Back-fills Chapters 1–2.
+- Weng, *LLM Powered Autonomous Agents* [@weng_agents]. The canonical overview
+  tying planning, memory, and tool use into one mental model. Read it as a map.
+- ReAct [@react]. Interleaved reasoning and acting; the ancestor of most agent
+  loops. Back-fills the runtime in Chapter 5.
+- Chain-of-Thought [@cot]. The reasoning primitive the later patterns build on.
+- Tree of Thoughts [@tot]. Deliberate search over reasoning steps.
+- Reflexion [@reflexion]. Self-critique plus memory; the "agent improves itself"
+  pattern.
+- RAG [@rag]. Retrieval-augmented generation, the concept the book's context
+  chapters assume you already understand. Back-fills Chapters 4 and 11.
+- MemGPT [@memgpt]. How a persistent memory architecture actually works. Fills
+  the long-term memory gap the book deliberately leaves open in Chapter 4.
+
+## Track B: Framework Grounding
+
+Go deep on one framework, then know what the others are for. Do not survey all
+of them. The goal is to pattern-match this book's abstractions onto code you
+will actually write.
+
+- LangGraph [@langgraph]. The recommended first framework here because it maps
+  most directly onto the book's worldview: explicit graph, durable state,
+  traceable nodes, inspectable control flow. Learning it makes the
+  trace/eval/gate abstractions concrete.
+- Claude Agent SDK [@claude_agent_sdk]. Strong for Anthropic-native production
+  agents with native tool use and memory.
+- LlamaIndex [@llamaindex]. Learn the retrieval slice when you hit the RAG gap;
+  strongest when the agent's main job is reasoning over your indexed data.
+- Microsoft Agent Framework [@ms_agent_framework]. The consolidation of AutoGen
+  and Semantic Kernel; relevant mainly on .NET or enterprise stacks. Note that
+  AutoGen and Semantic Kernel are now in maintenance mode, so learn the
+  successor rather than the predecessors.
+- Hugging Face Agents Course [@hf_agents_course]. Guided hands-on if you prefer
+  a course to docs-spelunking.
+
+## Model-Specific Behavior
+
+The book stays single-model and deterministic by design, so it does not compare
+how different models behave as agents. To feel those differences, read the two
+major providers' tool-use guides side by side and run the same small task
+against each:
+
+- Anthropic tool use [@anthropic_tool_use];
+- OpenAI function calling [@openai_function_calling].
+
+Instruction-following, tool-call reliability, and context utilization differ
+enough between models that an agent design tuned for one can underperform on
+another. Treat that variance as a system property, not a model defect.
+
+## One-Paragraph Reading Path
+
+Read Anthropic's *Building Effective Agents*, then Weng's overview, then skim
+ReAct, Chain-of-Thought, Tree of Thoughts, and Reflexion. Add the RAG paper and
+MemGPT for context and memory. Build one small thing in LangGraph. Read the
+Anthropic and OpenAI tool-use docs side by side. Then read this book to learn
+how to make any of it observable, evaluated, and shippable.
+
+## Takeaways
+
+- These topics are prerequisites and companions, not gaps in the core thesis.
+- Learn agent techniques from primary papers and one strong overview, in order.
+- Go deep on one framework, and prefer current vendor docs over any snapshot.
+- Treat cross-model behavior as a system property you must measure.
