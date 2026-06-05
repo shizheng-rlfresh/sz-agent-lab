@@ -53,3 +53,4 @@ format:
     toc: true
     number-sections: true
     pdf-engine: xelatex
+    include-in-header: pdf/code-blocks.tex

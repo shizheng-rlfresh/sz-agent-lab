@@ -28,3 +28,26 @@ def test_command_reference_documents_book_format_targets() -> None:
     assert "_book/index.html" in command_reference
     assert "_book/Agentic-Systems-Lab.pdf" in command_reference
     assert "TinyTeX" in command_reference
+
+
+def test_pdf_code_block_header_overrides_shaded_width() -> None:
+    quarto_config = (ROOT / "_quarto.yml").read_text()
+    header = ROOT / "pdf" / "code-blocks.tex"
+
+    assert "include-in-header: pdf/code-blocks.tex" in quarto_config
+    assert header.exists()
+
+    header_text = header.read_text()
+    assert r"\renewenvironment{Shaded}" in header_text
+    assert r"\begin{shaded}" in header_text
+    assert r"\begin{snugshade}" not in header_text
+
+
+def test_representative_text_fences_remain_source_blocks() -> None:
+    index = (ROOT / "index.qmd").read_text()
+    chapter = (ROOT / "chapters" / "01-from-llm-calls-to-agentic-systems.qmd").read_text()
+    evidence_policy = (ROOT / "appendices" / "evidence-reference-policy.qmd").read_text()
+
+    assert "```text\nworkflow -> tools -> state -> agent runtime" in index
+    assert "```text\nbuild -> tool access -> state/context" in chapter
+    assert "```text\nIt is considered best practice to..." in evidence_policy
