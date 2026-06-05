@@ -59,12 +59,15 @@ will actually write.
   trace/eval/gate abstractions concrete.
 - Claude Agent SDK [@claude_agent_sdk]. Strong for Anthropic-native production
   agents with native tool use and memory.
+- OpenAI Agents SDK [@openai_agents_sdk]. Useful for OpenAI-native agent apps
+  when your application owns orchestration, tool execution, approvals, state,
+  tracing, and eval loops.
 - LlamaIndex [@llamaindex]. Learn the retrieval slice when you hit the RAG gap;
   strongest when the agent's main job is reasoning over your indexed data.
-- Microsoft Agent Framework [@ms_agent_framework]. The consolidation of AutoGen
-  and Semantic Kernel; relevant mainly on .NET or enterprise stacks. Note that
-  AutoGen and Semantic Kernel are now in maintenance mode, so learn the
-  successor rather than the predecessors.
+- Microsoft Agent Framework [@ms_agent_framework]. Microsoft positions it as
+  the successor/consolidation of AutoGen and Semantic Kernel; relevant mainly on
+  .NET or enterprise stacks. AutoGen is now in maintenance mode [@autogen], so
+  learn the successor rather than the predecessor.
 - Hugging Face Agents Course [@hf_agents_course]. Guided hands-on if you prefer
   a course to docs-spelunking.
 
@@ -76,7 +79,7 @@ major providers' tool-use guides side by side and run the same small task
 against each:
 
 - Anthropic tool use [@anthropic_tool_use];
-- OpenAI function calling [@openai_function_calling].
+- OpenAI tools [@openai_tools].
 
 Instruction-following, tool-call reliability, and context utilization differ
 enough between models that an agent design tuned for one can underperform on
