@@ -61,7 +61,8 @@ def test_readme_uses_local_book_badge() -> None:
     assert "img.shields.io" not in readme
     assert "agent_47_bald_head.png" not in readme
     assert "agent_47_bald_head.png" not in badge
-    assert "agent-badge-head.png" in badge
+    assert "data:image/png;base64," in badge
+    assert "href=\"agent-badge-head.png\"" not in badge
     assert "python -m agentic_systems_lab." not in readme
     assert "make preview" not in readme
     assert "make all" not in readme
