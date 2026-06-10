@@ -61,8 +61,8 @@ bibliography: references.bib
 format:
   html:
     theme:
+      dark: [default, styles/catppuccin-macchiato.scss]
       light: cosmo
-      dark: darkly
     css: styles/html.css
     toc: true
     toc-title: Contents

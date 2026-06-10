@@ -1,0 +1,87 @@
+/*-- scss:defaults --*/
+
+$theme: "catppuccin-macchiato" !default;
+
+$rosewater: #f4dbd6 !default;
+$flamingo: #f0c6c6 !default;
+$pink: #f5bde6 !default;
+$mauve: #c6a0f6 !default;
+$red: #ed8796 !default;
+$maroon: #ee99a0 !default;
+$peach: #f5a97f !default;
+$yellow: #eed49f !default;
+$green: #a6da95 !default;
+$teal: #8bd5ca !default;
+$sky: #91d7e3 !default;
+$sapphire: #7dc4e4 !default;
+$blue: #8aadf4 !default;
+$lavender: #b7bdf8 !default;
+$text: #cad3f5 !default;
+$subtext-1: #b8c0e0 !default;
+$subtext-0: #a5adcb !default;
+$overlay-2: #939ab7 !default;
+$overlay-1: #8087a2 !default;
+$overlay-0: #6e738d !default;
+$surface-2: #5b6078 !default;
+$surface-1: #494d64 !default;
+$surface-0: #363a4f !default;
+$base: #24273a !default;
+$mantle: #1e2030 !default;
+$crust: #181926 !default;
+
+$white: $text !default;
+$gray-100: $text !default;
+$gray-200: $subtext-1 !default;
+$gray-300: $subtext-0 !default;
+$gray-400: $overlay-2 !default;
+$gray-500: $overlay-1 !default;
+$gray-600: $overlay-0 !default;
+$gray-700: $surface-2 !default;
+$gray-800: $surface-1 !default;
+$gray-900: $surface-0 !default;
+$black: $crust !default;
+
+$body-bg: $base !default;
+$body-color: $text !default;
+$primary: $mauve !default;
+$secondary: $surface-2 !default;
+$success: $green !default;
+$info: $sapphire !default;
+$warning: $yellow !default;
+$danger: $red !default;
+$light: $surface-0 !default;
+$dark: $crust !default;
+
+$link-color: $blue !default;
+$link-hover-color: $lavender !default;
+$text-muted: $subtext-0 !default;
+$border-color: $surface-1 !default;
+$component-active-color: $base !default;
+$component-active-bg: $mauve !default;
+
+$card-bg: $surface-0 !default;
+$card-border-color: $surface-1 !default;
+$dropdown-bg: $surface-0 !default;
+$dropdown-color: $text !default;
+$dropdown-link-color: $text !default;
+$dropdown-link-hover-color: $text !default;
+$dropdown-link-hover-bg: $surface-1 !default;
+$popover-bg: $surface-0 !default;
+$popover-border-color: $surface-1 !default;
+
+$table-color: $text !default;
+$table-border-color: $surface-1 !default;
+$table-accent-bg: rgba($surface-1, .25) !default;
+$table-hover-bg: rgba($surface-2, .25) !default;
+
+$input-bg: $surface-0 !default;
+$input-color: $text !default;
+$input-border-color: $surface-1 !default;
+$input-placeholder-color: $overlay-1 !default;
+$input-disabled-bg: $mantle !default;
+
+$code-color: $pink !default;
+$code-bg: $surface-0 !default;
+$pre-color: $text !default;
+
+$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
