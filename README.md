@@ -1,8 +1,8 @@
-[![Agentic Systems Lab badge](assets/agent-47-badge.svg)](https://shizheng-rlfresh.github.io/sz-agent-lab/)
+[![Agentic Systems Lab badge](assets/agent-47-badge.svg)](https://agent-book.zhengqxhs.com/)
 
 A hands-on HTML book and deterministic Python lab for learning how to build, trace, evaluate, harden, and reason about agentic AI systems.
 
-**Read the book:** [https://shizheng-rlfresh.github.io/sz-agent-lab/](https://shizheng-rlfresh.github.io/sz-agent-lab/)
+**Read the book:** [https://agent-book.zhengqxhs.com/](https://agent-book.zhengqxhs.com/)
 
 ## About The Book
 
@@ -62,7 +62,6 @@ For complete build, module, example, troubleshooting, and artifact commands, see
 
 ## Project Links
 
-- HTML book: [https://shizheng-rlfresh.github.io/sz-agent-lab/](https://shizheng-rlfresh.github.io/sz-agent-lab/)
 - Issues and errata: [https://github.com/shizheng-rlfresh/sz-agent-lab/issues](https://github.com/shizheng-rlfresh/sz-agent-lab/issues)
 - Build status: [https://github.com/shizheng-rlfresh/sz-agent-lab/actions/workflows/book.yml](https://github.com/shizheng-rlfresh/sz-agent-lab/actions/workflows/book.yml)
 - License: [MIT](LICENSE)
