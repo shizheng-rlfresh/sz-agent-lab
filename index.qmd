@@ -9,7 +9,9 @@ The book's claim discipline is part of the design. Non-trivial factual, vendor-s
 The practical arc is:
 
 ```text
-workflow -> tools -> state -> agent runtime -> trace -> eval -> report -> policy -> context -> deployment gate
+workflow -> tools -> state -> agent runtime
+  -> trace -> eval -> report -> policy
+  -> context -> deployment gate
 ```
 
 ## Preface
