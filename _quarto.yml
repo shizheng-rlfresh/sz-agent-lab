@@ -1,10 +1,23 @@
 project:
   type: book
+  output-dir: _book
 
 book:
   title: "Agentic Systems Lab"
   subtitle: "Building, Measuring, and Hardening AI Agents"
-  author: "Placeholder Author"
+  author: "Zheng Shi"
+  description: "A hands-on technical book and deterministic Python lab for building, tracing, evaluating, hardening, and reasoning about agentic AI systems."
+  keyword: "AI agents, agentic systems, LLM systems, evals, tracing, tool policy, prompt injection"
+  site-url: "https://shizheng-rlfresh.github.io/sz-agent-lab/"
+  repo-url: "https://github.com/shizheng-rlfresh/sz-agent-lab"
+  repo-actions: [source, issue]
+  page-footer:
+    center: "Copyright 2026 Zheng Shi. Licensed under MIT."
+    right:
+      - text: "Source"
+        href: "https://github.com/shizheng-rlfresh/sz-agent-lab"
+      - text: "Issues"
+        href: "https://github.com/shizheng-rlfresh/sz-agent-lab/issues"
   chapters:
     - index.qmd
     - part: "Part I — Foundations"
@@ -41,17 +54,17 @@ book:
     - appendices/trace-schema.qmd
     - appendices/eval-schema.qmd
     - appendices/tool-policy-schema.qmd
-    - appendices/evidence-reference-policy.qmd
+    # - appendices/evidence-reference-policy.qmd
 
 bibliography: references.bib
 
 format:
   html:
     theme: cosmo
+    css: styles/html.css
     toc: true
+    toc-title: Contents
+    toc-depth: 2
     number-sections: true
-  pdf:
-    toc: true
-    number-sections: true
-    pdf-engine: xelatex
-    include-in-header: pdf/code-blocks.tex
+    number-depth: 1
+    code-copy: true

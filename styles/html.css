@@ -1,0 +1,145 @@
+:root {
+  --asl-accent: #b23a2e;
+  --asl-accent-soft: #f7e8e5;
+  --asl-ink: #1f1f1f;
+  --asl-opener-gap: clamp(5rem, 10vh, 7.5rem);
+}
+
+main.content {
+  line-height: 1.5;
+  padding-bottom: 3rem;
+}
+
+main.content p {
+  margin-top: 0;
+  margin-bottom: 0.85rem;
+}
+
+main.content h1 {
+  color: var(--asl-ink);
+  font-weight: 700;
+  line-height: 1.12;
+  margin-top: 1.2rem;
+  margin-bottom: 1.35rem;
+}
+
+main.content #title-block-header {
+  border-top: 1px solid var(--asl-accent);
+  margin-bottom: var(--asl-opener-gap);
+  padding-top: 0.65rem;
+  text-align: right;
+}
+
+body:has(section#preface) main.content > #title-block-header {
+  border-top: 0;
+  margin-bottom: 2.5rem;
+  padding-top: 0;
+  text-align: left;
+}
+
+section.level1.unnumbered > h1.unnumbered {
+  border-top: 1px solid var(--asl-accent);
+  margin-bottom: var(--asl-opener-gap);
+  padding-top: 0.65rem;
+  text-align: right;
+}
+
+main.content h1 .chapter-number {
+  color: var(--asl-accent);
+  display: block;
+  font-size: 0.48em;
+  line-height: 1.2;
+  margin-bottom: 0.35rem;
+  text-align: right;
+}
+
+main.content h1 .chapter-number::before {
+  content: "Chapter ";
+}
+
+main.content h2 {
+  color: var(--asl-ink);
+  font-weight: 700;
+  line-height: 1.18;
+  margin-top: 1.65rem;
+  margin-bottom: 0.55rem;
+}
+
+main.content h3 {
+  color: var(--asl-ink);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-top: 1.25rem;
+  margin-bottom: 0.4rem;
+}
+
+.asl-term {
+  color: var(--asl-accent);
+  font-weight: 700;
+}
+
+.theorem.definition {
+  background-color: var(--asl-accent-soft);
+  border-left: 0.25rem solid var(--asl-accent);
+  border-radius: 0.25rem;
+  margin: 1.2rem 0;
+  padding: 0.85rem 1rem;
+}
+
+.theorem.definition .theorem-title {
+  color: var(--asl-ink);
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+main.content .theorem.definition p:last-child {
+  margin-bottom: 0;
+}
+
+.callout.asl-design-rule,
+.callout.asl-field-note,
+.callout.asl-production-signal,
+.callout.asl-trap {
+  border-left-color: var(--asl-accent);
+}
+
+.callout.asl-design-rule .callout-title,
+.callout.asl-field-note .callout-title,
+.callout.asl-production-signal .callout-title,
+.callout.asl-trap .callout-title {
+  background-color: var(--asl-accent-soft);
+  color: var(--asl-ink);
+}
+
+.nav-footer,
+.page-navigation {
+  border-top: 1px solid var(--asl-accent);
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  margin-top: 4rem;
+  padding-top: 1.25rem;
+}
+
+.page-navigation .nav-page {
+  min-width: 0;
+}
+
+.page-navigation .nav-page-next {
+  text-align: right;
+}
+
+.page-navigation .pagination-link {
+  align-items: center;
+  display: inline-flex;
+  max-width: 100%;
+}
+
+.page-navigation .nav-page-next .pagination-link {
+  justify-content: flex-end;
+}
+
+.page-navigation .nav-page-text {
+  display: inline-block;
+  max-width: 100%;
+}
