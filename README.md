@@ -4,6 +4,12 @@ A hands-on HTML book and deterministic Python lab for learning how to build, tra
 
 **Read the book:** [https://agent-book.zhengqxhs.com/](https://agent-book.zhengqxhs.com/)
 
+## Start Here
+
+- Read the HTML book: [https://shizheng-rlfresh.github.io/sz-agent-lab/](https://shizheng-rlfresh.github.io/sz-agent-lab/)
+- Run the deterministic lab: `uv sync --extra dev`, `uv run pytest`, and `uv run python scripts/run_all_examples.py`.
+- Inspect the evidence trail: [sample trace report](reports/sample_trace_report.md), [sample eval report](reports/sample_eval_report.md), [sample production report](reports/sample_production_report.md), and [trace artifacts](traces/).
+
 ## About The Book
 
 Agentic Systems Lab is written for technical readers who can read Python, reason about ML systems tradeoffs, and want a practical path from small deterministic fixtures to production-grade agent boundaries.
@@ -11,6 +17,14 @@ Agentic Systems Lab is written for technical readers who can read Python, reason
 The book's thesis is that useful agent systems are not magic loops around an LLM. They are engineered runtimes with explicit tools, state boundaries, trace contracts, evals, guardrails, cost models, and rollout gates.
 
 The style is concrete: each idea is tied to a runnable lab artifact, a command, a schema, or a production-readiness question.
+
+## Why This Exists
+
+Many agent tutorials start with a prompt loop and then add discipline after the behavior becomes hard to inspect. This lab takes the opposite path: deterministic workflows first, then tools, state, traces, evals, guardrails, context budgets, and deployment gates.
+
+The core path requires no API key, hosted model provider, or cloud account. That keeps the runtime contracts visible before model variance enters the system.
+
+The result is an evidence-first way to learn agentic systems: readers can inspect what ran, what was traced, what passed evaluation, and what would need to be true before automation reaches users.
 
 Author: Zheng Shi, <shi.zheng.tfls@gmail.com>
 
@@ -67,6 +81,16 @@ For complete build, module, example, troubleshooting, and artifact commands, see
 - License: [MIT](LICENSE)
 - Contributing: [CONTRIBUTING.md](CONTRIBUTING.md)
 - Command reference: [appendices/command-reference.qmd](appendices/command-reference.qmd)
+
+## Citation
+
+If you cite or share this project, use the repository title, author, public book URL, and the release tag or commit SHA for the version you used:
+
+```text
+Zheng Shi. Agentic Systems Lab: Building, Measuring, and Hardening AI Agents.
+https://shizheng-rlfresh.github.io/sz-agent-lab/
+Version: release tag or commit SHA
+```
 
 ## Roadmap
 
