@@ -12,10 +12,12 @@
   </a>
 </p>
 
+A hands-on HTML book and deterministic Python lab for learning how to build, trace, evaluate, harden, and reason about agentic AI systems.
+
 <hr>
 <br>
 
-A hands-on HTML book and deterministic Python lab for learning how to build, trace, evaluate, harden, and reason about agentic AI systems.
+
 
 📘 **Read the book:** [https://agent-book.zhengqxhs.com/](https://agent-book.zhengqxhs.com/)
 
