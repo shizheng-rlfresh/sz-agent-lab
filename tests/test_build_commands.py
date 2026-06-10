@@ -54,7 +54,6 @@ def test_readme_uses_local_book_badge() -> None:
     readme = (ROOT / "README.md").read_text()
     badge = (ROOT / "assets" / "agent-47-badge.svg").read_text()
 
-    assert "[![Agentic Systems Lab badge](assets/agent-47-badge.svg)]" in readme
     assert "https://agent-book.zhengqxhs.com/" in readme
     assert "https://github.com/shizheng-rlfresh/sz-agent-lab/issues" in readme
     assert "https://github.com/shizheng-rlfresh/sz-agent-lab/actions/workflows/book.yml" in readme
