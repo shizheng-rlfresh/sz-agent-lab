@@ -1,5 +1,6 @@
 project:
   type: book
+  output-dir: _book
 
 book:
   title: "Agentic Systems Lab"
@@ -53,16 +54,17 @@ book:
     - appendices/trace-schema.qmd
     - appendices/eval-schema.qmd
     - appendices/tool-policy-schema.qmd
-    - appendices/evidence-reference-policy.qmd
+    # - appendices/evidence-reference-policy.qmd
 
 bibliography: references.bib
 
 format:
   html:
     theme: cosmo
+    css: styles/html.css
     toc: true
     toc-title: Contents
     toc-depth: 2
     number-sections: true
-    number-depth: 3
+    number-depth: 1
     code-copy: true

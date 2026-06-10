@@ -21,16 +21,25 @@ make html
 ## Book Build Commands
 
 ```bash
+make preview
 make html
+make all
 make book
 make check
+make clean
 ```
 
+`make preview` runs `quarto preview` for local reading while editing.
+
 `make html` runs `quarto render --to html --no-clean` and produces `_book/index.html`.
+
+`make all` renders every supported book format. The supported publication format is currently HTML.
 
 `make book` is an alias for the HTML book render.
 
 `make check` runs tests, deterministic examples, and the HTML book render.
+
+`make clean` removes generated book output and local cache directories.
 
 ## Module Commands
 

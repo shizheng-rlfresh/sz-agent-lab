@@ -1,0 +1,46 @@
+# Chapter Title
+
+Write 2-4 opening paragraphs that orient the reader to the chapter's central problem, why it matters, and what agent-system judgment the chapter will build.
+
+Use the opener to bridge from the previous chapter or from the reader's likely product, evaluation, or runtime context. Keep it concrete enough that the chapter feels practical before the first formal section begins.
+
+Name the core idea once if the chapter introduces a durable concept, for example: [tool authority]{.asl-term}.
+
+Use this native Quarto definition block for durable definitions. The id must start with `#def-`, stay lowercase and hyphenated, and should not include `.callout-*` classes. Refer to it with `@def-...`.
+
+::: {#def-agentic-system name="Agentic system"}
+A concise definition body.
+:::
+
+See @def-agentic-system.
+
+## Roadmap {.unnumbered .unlisted}
+
+- State the first major move in the argument.
+- State the second major move in the argument.
+- State the third major move in the argument.
+- State what the reader should be able to do by the end.
+
+::: {.callout-note .asl-design-rule title="Design rule"}
+Use this block for a principle that should guide a real agent-system design decision.
+:::
+
+::: {.callout-warning .asl-trap title="Trap"}
+Use this block for a common mistake, misleading shortcut, or unsafe agent behavior.
+:::
+
+::: {.callout-tip .asl-field-note title="Field note"}
+Use this block for practical experience, tradeoffs, or implementation judgment.
+:::
+
+::: {.callout-important .asl-production-signal title="Production signal"}
+Use this block when a point is especially relevant to deployment, monitoring, or operational readiness.
+:::
+
+## First Main Section
+
+Start the chapter body here.
+
+## Summary
+
+Close with the chapter's main design lesson and the next decision it enables.

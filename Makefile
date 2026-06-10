@@ -1,15 +1,25 @@
 PYTHON ?= .venv/bin/python
 
-.PHONY: test examples html book check
+.PHONY: preview html all clean test examples book check
+
+preview:
+	quarto preview
+
+html:
+	quarto render --to html --no-clean
+
+all:
+	quarto render --to html --no-clean
+
+clean:
+	rm -rf _book .quarto .pytest_cache
+	find . -name '*_files' -type d -prune -exec rm -rf {} +
 
 test:
 	$(PYTHON) -m pytest
 
 examples:
 	$(PYTHON) scripts/run_all_examples.py
-
-html:
-	quarto render --to html --no-clean
 
 book: html
 

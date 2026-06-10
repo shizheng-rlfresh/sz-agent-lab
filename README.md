@@ -57,9 +57,12 @@ make html
 Book build targets:
 
 ```bash
+make preview # serve the HTML book locally
 make html   # render _book/index.html
+make all    # render all supported book formats, currently HTML
 make book   # render the HTML book
 make check  # run tests, examples, and the HTML book render
+make clean  # remove generated book and cache outputs
 ```
 
 ## Book Contents
