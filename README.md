@@ -1,5 +1,4 @@
 ![Built with human review and Codex assistance](https://img.shields.io/badge/human--reviewed-Codex--assisted-412991?style=flat-square)
-[![Agent Friendly](https://agentfriendlycode.com/api/badge/github/openai/codex.svg)](https://agentfriendlycode.com/repo/118)
 ![Version: v0.1.0](https://img.shields.io/badge/version-v0.1.0-blue?style=flat-square)
 [![Book workflow status](https://github.com/shizheng-rlfresh/sz-agent-lab/actions/workflows/book.yml/badge.svg?branch=main)](https://github.com/shizheng-rlfresh/sz-agent-lab/actions/workflows/book.yml)
 
@@ -17,7 +16,7 @@ uv run pytest
 uv run python scripts/run_all_examples.py
 ```
 
-**🔍 Inspect the evidence trail:** [sample trace report](reports/sample_trace_report.md), [sample eval report](reports/sample_eval_report.md), [sample production report](reports/sample_production_report.md), and [trace artifacts](traces/).
+**🔍 Inspect the evidence trail:** [sample trace report](reports/sample_trace_report.md), [sample eval report](reports/sample_eval_report.md), and [sample production report](reports/sample_production_report.md). Raw trace artifacts are generated under `traces/` after running `uv run python scripts/run_all_examples.py`.
 
 ## About The Book
 
