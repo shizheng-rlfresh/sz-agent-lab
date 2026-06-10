@@ -8,9 +8,9 @@
 body.quarto-dark,
 body[data-bs-theme="dark"],
 :root[data-bs-theme="dark"] {
-  --asl-accent: #f08a76;
-  --asl-accent-soft: #3a201d;
-  --asl-ink: #f4f1ec;
+  --asl-accent: #f5a97f;
+  --asl-accent-soft: #363a4f;
+  --asl-ink: #cad3f5;
 }
 
 main.content {

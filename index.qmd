@@ -1,4 +1,4 @@
-# Agentic Systems Lab
+# Agentic Systems Lab {.unnumbered}
 
 This book is a technical lab for building, tracing, evaluating, hardening, and reasoning about agentic AI systems.
 
