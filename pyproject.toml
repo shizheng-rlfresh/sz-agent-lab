@@ -7,7 +7,7 @@ name = "agentic-systems-lab"
 version = "0.1.0"
 description = "A Quarto book and deterministic Python lab for agentic AI systems."
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 license = { text = "MIT" }
 authors = [{ name = "Zheng Shi", email = "shi.zheng.tfls@gmail.com" }]
 dependencies = []
