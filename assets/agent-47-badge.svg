@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc" width="520" height="96" viewBox="0 0 520 96">
+  <title id="title">Agentic Systems Lab badge</title>
+  <desc id="desc">A black, white, and red badge for Agentic Systems Lab with a cropped head artwork mark.</desc>
+  <defs>
+    <linearGradient id="edge" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#2a2a2a"/>
+      <stop offset="1" stop-color="#080808"/>
+    </linearGradient>
+    <clipPath id="headClip">
+      <rect x="436" y="7" width="78" height="82" rx="5"/>
+    </clipPath>
+  </defs>
+  <rect width="520" height="96" rx="8" fill="#070707"/>
+  <rect x="1" y="1" width="518" height="94" rx="7" fill="url(#edge)" stroke="#2d2d2d" stroke-width="2"/>
+  <rect x="16" y="16" width="92" height="64" rx="4" fill="#111" stroke="#f3f3f3" stroke-opacity="0.22"/>
+  <g fill="#f5f5f5">
+    <rect x="31" y="28" width="3" height="38"/>
+    <rect x="39" y="28" width="6" height="38"/>
+    <rect x="51" y="28" width="2" height="38"/>
+    <rect x="58" y="28" width="8" height="38"/>
+    <rect x="72" y="28" width="3" height="38"/>
+    <rect x="81" y="28" width="5" height="38"/>
+    <rect x="91" y="28" width="2" height="38"/>
+  </g>
+  <circle cx="76" cy="48" r="16" fill="none" stroke="#c1121f" stroke-width="3"/>
+  <path d="M76 30v36M58 48h36" stroke="#c1121f" stroke-width="2" stroke-linecap="square"/>
+  <text x="127" y="43" fill="#f7f7f7" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="0">Agentic Systems Lab</text>
+  <text x="128" y="66" fill="#cfcfcf" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" letter-spacing="0">HTML book and deterministic agent lab</text>
+  <rect x="426" y="24" width="2" height="48" fill="#c1121f"/>
+  <image href="agent-badge-head.png" x="436" y="7" width="78" height="82" preserveAspectRatio="xMidYMid meet" clip-path="url(#headClip)"/>
+</svg>

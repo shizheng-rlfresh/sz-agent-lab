@@ -1,69 +1,33 @@
 # Agentic Systems Lab
 
-[![Book](https://github.com/shizheng-rlfresh/agent-lab/actions/workflows/book.yml/badge.svg)](https://github.com/shizheng-rlfresh/agent-lab/actions/workflows/book.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Agentic Systems Lab badge](assets/agent-47-badge.svg)](https://shizheng-rlfresh.github.io/agent-lab/)
 
-A hands-on Quarto book and deterministic Python lab for learning how to build, trace, evaluate, harden, and reason about agentic AI systems.
+A hands-on HTML book and deterministic Python lab for learning how to build, trace, evaluate, harden, and reason about agentic AI systems.
 
-- Read the book: <https://shizheng-rlfresh.github.io/agent-lab/>
-- Report errata or ask for clarifications: <https://github.com/shizheng-rlfresh/agent-lab/issues>
+**Read the book:** <https://shizheng-rlfresh.github.io/agent-lab/>
+
+## About The Book
+
+Agentic Systems Lab is written for technical readers who can read Python, reason about ML systems tradeoffs, and want a practical path from small deterministic fixtures to production-grade agent boundaries.
+
+The book's thesis is that useful agent systems are not magic loops around an LLM. They are engineered runtimes with explicit tools, state boundaries, trace contracts, evals, guardrails, cost models, and rollout gates.
+
+The style is concrete: each idea is tied to a runnable lab artifact, a command, a schema, or a production-readiness question.
 
 Author: Zheng Shi, <shi.zheng.tfls@gmail.com>
 
-This repository is written for a highly technical reader. It assumes you can read Python, reason about ML systems tradeoffs, and move quickly from a small fixture to the production boundary it represents.
-
-The current book is organized as 15 chapters plus technical appendices. Its evidence standard is explicit: non-trivial claims should be backed by primary sources, reproducible repo artifacts, or clearly labeled author interpretation.
+Errata and clarification requests: <https://github.com/shizheng-rlfresh/agent-lab/issues>
 
 ## What You Will Learn
 
-- Workflows vs agents, with deterministic control flow before autonomy.
-- Tool design, state boundaries, path confinement, and output caps.
-- Trace contracts for agent runs.
-- Deterministic evals before model-judge evals.
-- Guardrails and tool policy as runtime safety infrastructure.
-- Context growth, rough token accounting, and cacheability.
-- Prompt/prefix cache stability.
-- Local inference constraints: model size, context length, KV cache, memory pressure.
-- Production-readiness gates for agentic systems.
-
-## Prerequisites
-
-- Python 3.11 or newer.
-- Quarto for HTML book rendering.
-
-The core examples require no API keys. Optional hosted-model or MLX extensions are deliberately separated from the baseline path.
-
-## Quickstart
-
-On a machine with only `python3` available:
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -e ".[dev]"
-pytest
-python scripts/run_all_examples.py
-make html
-```
-
-With `uv`:
-
-```bash
-uv run --extra dev pytest
-uv run python scripts/run_all_examples.py
-make html
-```
-
-Book build targets:
-
-```bash
-make preview # serve the HTML book locally
-make html   # render _book/index.html
-make all    # render all supported book formats, currently HTML
-make book   # render the HTML book
-make check  # run tests, examples, and the HTML book render
-make clean  # remove generated book and cache outputs
-```
+- How to separate deterministic workflows from agent-shaped runtime decisions.
+- How to design tools, state boundaries, path confinement, and output caps.
+- How to capture traces that explain what an agent actually did.
+- How to write deterministic evals before reaching for model-judge evals.
+- How guardrails and tool policy become runtime safety infrastructure.
+- How context growth, token accounting, and cacheability shape agent cost.
+- How local inference constraints change design choices.
+- How to define production-readiness gates before automation reaches users.
 
 ## Book Contents
 
@@ -85,64 +49,32 @@ make clean  # remove generated book and cache outputs
 
 Technical appendices cover further reading, glossary terms, command references, trace schemas, eval schemas, tool policy schemas, and the evidence/reference policy.
 
-## Learning Path
+## Use The Lab
 
-1. Read Chapter 1 for the operational definition of an agentic system.
-2. Run the workflow baseline to establish the deterministic floor.
-3. Run the repo triage agent and inspect its JSON result.
-4. Inspect the JSONL trace and generated trace report.
-5. Run deterministic evals and inspect failure dimensions.
-6. Review tool policy behavior against path traversal and shell access.
-7. Profile context growth with the noisy log fixture.
-8. Run the prompt-cache layout demo.
-9. Generate the production report and identify missing rollout gates.
-10. Use the capstone scorecard to choose a sharper OSS follow-up.
-
-## Commands
+The core examples require no API keys. To run the baseline checks and render the HTML book locally:
 
 ```bash
-python -m agentic_systems_lab.tools
-python -m agentic_systems_lab.policy
-python -m agentic_systems_lab.tracer
-python -m agentic_systems_lab.agent
-python -m agentic_systems_lab.evals
-python -m agentic_systems_lab.context
-python -m agentic_systems_lab.context --cache-demo
-python -m agentic_systems_lab.report
-python scripts/run_all_examples.py
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e ".[dev]"
+make check
+make html
 ```
 
-## Repository Map
+For complete build, module, example, troubleshooting, and artifact commands, see the [command reference](appendices/command-reference.qmd). For contribution workflow expectations, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
-- `src/agentic_systems_lab/`: deterministic tools, policy, tracer, agent, evals, context profiler, and report generator.
-- `data/toy_repos/`: small repos that encode concrete failure modes.
-- `tests/`: behavior contracts for the core runtime.
-- `reports/`: sample trace, eval, and production-readiness artifacts.
-- `chapters/`: 15 Quarto book chapters that map concepts to code and artifacts.
-- `appendices/`: glossary, command reference, schemas, policy reference, and evidence policy.
-- `examples/`: command-oriented entry points for the learning path.
+## Project Links
 
-## Design Constraints
-
-- Core examples require no API keys.
-- Shell execution is disabled by default.
-- Tools are read-only and path-confined.
-- Numbers are estimates unless explicitly produced by local execution.
-- Optional MLX content is documentation-only in the core path.
-
-## Contributing And Errata
-
-Issues are welcome for typos, broken links, unclear explanations, reproducibility problems, and suggested lab extensions. Please include the chapter or file path, the observed problem, and the smallest reproduction command when relevant.
-
-Substantial changes should preserve the book's evidence standard: non-trivial factual, vendor-specific, performance, and safety claims should be tied to primary sources, reproducible repo artifacts, or clearly labeled author interpretation.
+- HTML book: <https://shizheng-rlfresh.github.io/agent-lab/>
+- Issues and errata: <https://github.com/shizheng-rlfresh/agent-lab/issues>
+- Build status: <https://github.com/shizheng-rlfresh/agent-lab/actions/workflows/book.yml>
+- License: [MIT](LICENSE)
+- Contributing: [CONTRIBUTING.md](CONTRIBUTING.md)
+- Command reference: [appendices/command-reference.qmd](appendices/command-reference.qmd)
 
 ## Roadmap
 
-- Add richer eval task sets beyond the current three toy failure modes.
-- Add OpenTelemetry-shaped trace export.
-- Add optional hosted-model and MLX adapters behind explicit feature gates.
-- Split the strongest follow-up into a focused OSS project: `agentprobe`, `cachepilot`, `agentfit-mlx`, or `toolguard`.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
+- Broaden the lab with richer eval task sets and sharper production evidence.
+- Add trace export examples that map the local schema to common observability shapes.
+- Keep optional hosted-model and local-inference paths clearly separated from the deterministic core.
+- Grow the strongest follow-up into a focused OSS project around agent evaluation, cache stability, local readiness, or tool safety.

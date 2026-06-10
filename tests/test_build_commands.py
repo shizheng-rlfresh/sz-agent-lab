@@ -29,6 +29,8 @@ def test_command_reference_documents_html_book_targets() -> None:
 
     for command in ("make preview", "make html", "make all", "make book", "make check", "make clean"):
         assert command in command_reference
+
+    for command in ("make check", "make html"):
         assert command in readme
 
     assert "_book/index.html" in command_reference
@@ -42,6 +44,31 @@ def test_command_reference_documents_html_book_targets() -> None:
     assert "Agentic-Systems-Lab.pdf" not in readme
     assert "TinyTeX" not in command_reference
     assert "TinyTeX" not in readme
+
+
+def test_readme_uses_local_book_badge() -> None:
+    readme = (ROOT / "README.md").read_text()
+    badge = (ROOT / "assets" / "agent-47-badge.svg").read_text()
+
+    assert "[![Agentic Systems Lab badge](assets/agent-47-badge.svg)]" in readme
+    assert "https://shizheng-rlfresh.github.io/agent-lab/" in readme
+    assert "https://github.com/shizheng-rlfresh/agent-lab/issues" in readme
+    assert "https://github.com/shizheng-rlfresh/agent-lab/actions/workflows/book.yml" in readme
+    assert "[MIT](LICENSE)" in readme
+    assert "[CONTRIBUTING.md](CONTRIBUTING.md)" in readme
+    assert "[appendices/command-reference.qmd](appendices/command-reference.qmd)" in readme
+    assert "actions/workflows/book.yml/badge.svg" not in readme
+    assert "img.shields.io" not in readme
+    assert "agent_47_bald_head.png" not in readme
+    assert "agent_47_bald_head.png" not in badge
+    assert "agent-badge-head.png" in badge
+    assert "python -m agentic_systems_lab." not in readme
+    assert "make preview" not in readme
+    assert "make all" not in readme
+    assert "make clean" not in readme
+    assert "Hitman" not in badge
+    assert ">47<" not in badge
+    assert "Agentic Systems Lab" in badge
 
 
 def test_quarto_config_is_html_only() -> None:
