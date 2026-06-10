@@ -10,7 +10,6 @@ book:
   site-url: "https://shizheng-rlfresh.github.io/agent-lab/"
   repo-url: "https://github.com/shizheng-rlfresh/agent-lab"
   repo-actions: [source, issue]
-  downloads: [pdf]
   page-footer:
     center: "Copyright 2026 Zheng Shi. Licensed under MIT."
     right:
@@ -67,11 +66,3 @@ format:
     number-sections: true
     number-depth: 3
     code-copy: true
-  pdf:
-    toc: true
-    number-sections: true
-    toc-title: Contents
-    toc-depth: 1
-    number-depth: 0
-    pdf-engine: xelatex
-    include-in-header: pdf/code-blocks.tex

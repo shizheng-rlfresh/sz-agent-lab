@@ -1,6 +1,6 @@
 PYTHON ?= .venv/bin/python
 
-.PHONY: test examples html pdf book check
+.PHONY: test examples html book check
 
 test:
 	$(PYTHON) -m pytest
@@ -11,9 +11,6 @@ examples:
 html:
 	quarto render --to html --no-clean
 
-pdf:
-	quarto render --to pdf --no-clean
+book: html
 
-book: html pdf
-
-check: test examples book
+check: test examples html

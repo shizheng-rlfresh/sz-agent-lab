@@ -13,7 +13,6 @@ Describe the change and why it is needed.
 ## Checks
 
 - [ ] `make html`
-- [ ] `make pdf`
 - [ ] `make check`
 - [ ] Not run; reason:
 
@@ -24,4 +23,4 @@ Describe the change and why it is needed.
 
 ## Notes For Review
 
-Mention visual PDF/HTML concerns, screenshots, or follow-up items.
+Mention visual HTML concerns, screenshots, or follow-up items.

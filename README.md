@@ -6,7 +6,6 @@
 A hands-on Quarto book and deterministic Python lab for learning how to build, trace, evaluate, harden, and reason about agentic AI systems.
 
 - Read the book: <https://shizheng-rlfresh.github.io/agent-lab/>
-- Download the PDF: <https://shizheng-rlfresh.github.io/agent-lab/Agentic-Systems-Lab.pdf>
 - Report errata or ask for clarifications: <https://github.com/shizheng-rlfresh/agent-lab/issues>
 
 Author: Zheng Shi, <shi.zheng.tfls@gmail.com>
@@ -31,7 +30,6 @@ The current book is organized as 15 chapters plus technical appendices. Its evid
 
 - Python 3.11 or newer.
 - Quarto for HTML book rendering.
-- TinyTeX or another working LaTeX toolchain for PDF rendering.
 
 The core examples require no API keys. Optional hosted-model or MLX extensions are deliberately separated from the baseline path.
 
@@ -46,7 +44,6 @@ python -m pip install -e ".[dev]"
 pytest
 python scripts/run_all_examples.py
 make html
-make pdf
 ```
 
 With `uv`:
@@ -55,16 +52,14 @@ With `uv`:
 uv run --extra dev pytest
 uv run python scripts/run_all_examples.py
 make html
-make pdf
 ```
 
 Book build targets:
 
 ```bash
 make html   # render _book/index.html
-make pdf    # render _book/Agentic-Systems-Lab.pdf
-make book   # render both HTML and PDF
-make check  # run tests, examples, and both book renders
+make book   # render the HTML book
+make check  # run tests, examples, and the HTML book render
 ```
 
 ## Book Contents

@@ -29,7 +29,6 @@ What happened instead?
 - OS:
 - Python version:
 - Quarto version:
-- PDF toolchain, if relevant:
 
 ## Affected Files Or Chapters
 

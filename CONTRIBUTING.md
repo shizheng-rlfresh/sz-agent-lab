@@ -28,7 +28,7 @@ Run the narrowest relevant checks while editing, then run the full check before 
 make check
 ```
 
-This runs tests, examples, HTML rendering, and PDF rendering. PDF rendering requires Quarto plus a working LaTeX toolchain such as TinyTeX.
+This runs tests, examples, and HTML rendering.
 
 ## Pull Requests
 
@@ -39,4 +39,4 @@ Keep pull requests focused. Include:
 - the checks you ran;
 - screenshots or rendered-page notes for visual book changes when useful.
 
-For manuscript-only edits, at minimum run `make html`. If the edit affects PDF-sensitive structure, citations, code blocks, or book metadata, also run `make pdf`.
+For manuscript-only edits, run `make html`. If the prose references commands, schemas, sample output, or generated reports, also run the corresponding command or test.

@@ -34,7 +34,7 @@ When a chapter mentions a command, run it from the repository root. When a chapt
 
 ## Prerequisites
 
-You should have Python 3.11 or newer. To render the book locally, install Quarto. To render the PDF, use TinyTeX or another working LaTeX toolchain.
+You should have Python 3.11 or newer. To render the book locally, install Quarto.
 
 The deterministic lab path requires no hosted model provider, no cloud account, and no API key. Optional hosted-model or MLX extensions should remain separate from the core path.
 
