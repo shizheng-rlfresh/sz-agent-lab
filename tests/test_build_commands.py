@@ -30,8 +30,12 @@ def test_command_reference_documents_html_book_targets() -> None:
     for command in ("make preview", "make html", "make all", "make book", "make check", "make clean"):
         assert command in command_reference
 
-    for command in ("make check", "make html"):
+    for command in ("uv sync --extra dev", "uv run pytest", "uv run python scripts/run_all_examples.py", "make html"):
         assert command in readme
+
+    assert "python3 -m venv .venv" not in readme
+    assert "source .venv/bin/activate" not in readme
+    assert 'python -m pip install -e ".[dev]"' not in readme
 
     assert "_book/index.html" in command_reference
     assert "make pdf" not in command_reference
@@ -51,9 +55,9 @@ def test_readme_uses_local_book_badge() -> None:
     badge = (ROOT / "assets" / "agent-47-badge.svg").read_text()
 
     assert "[![Agentic Systems Lab badge](assets/agent-47-badge.svg)]" in readme
-    assert "https://shizheng-rlfresh.github.io/agent-lab/" in readme
-    assert "https://github.com/shizheng-rlfresh/agent-lab/issues" in readme
-    assert "https://github.com/shizheng-rlfresh/agent-lab/actions/workflows/book.yml" in readme
+    assert "https://shizheng-rlfresh.github.io/sz-agent-lab/" in readme
+    assert "https://github.com/shizheng-rlfresh/sz-agent-lab/issues" in readme
+    assert "https://github.com/shizheng-rlfresh/sz-agent-lab/actions/workflows/book.yml" in readme
     assert "[MIT](LICENSE)" in readme
     assert "[CONTRIBUTING.md](CONTRIBUTING.md)" in readme
     assert "[appendices/command-reference.qmd](appendices/command-reference.qmd)" in readme

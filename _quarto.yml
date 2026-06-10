@@ -8,16 +8,16 @@ book:
   author: "Zheng Shi"
   description: "A hands-on technical book and deterministic Python lab for building, tracing, evaluating, hardening, and reasoning about agentic AI systems."
   keyword: "AI agents, agentic systems, LLM systems, evals, tracing, tool policy, prompt injection"
-  site-url: "https://shizheng-rlfresh.github.io/agent-lab/"
-  repo-url: "https://github.com/shizheng-rlfresh/agent-lab"
+  site-url: "https://shizheng-rlfresh.github.io/sz-agent-lab/"
+  repo-url: "https://github.com/shizheng-rlfresh/sz-agent-lab"
   repo-actions: [source, issue]
   page-footer:
     center: "Copyright 2026 Zheng Shi. Licensed under MIT."
     right:
       - text: "Source"
-        href: "https://github.com/shizheng-rlfresh/agent-lab"
+        href: "https://github.com/shizheng-rlfresh/sz-agent-lab"
       - text: "Issues"
-        href: "https://github.com/shizheng-rlfresh/agent-lab/issues"
+        href: "https://github.com/shizheng-rlfresh/sz-agent-lab/issues"
   chapters:
     - index.qmd
     - part: "Part I — Foundations"

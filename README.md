@@ -1,10 +1,8 @@
-# Agentic Systems Lab
-
-[![Agentic Systems Lab badge](assets/agent-47-badge.svg)](https://shizheng-rlfresh.github.io/agent-lab/)
+[![Agentic Systems Lab badge](assets/agent-47-badge.svg)](https://shizheng-rlfresh.github.io/sz-agent-lab/)
 
 A hands-on HTML book and deterministic Python lab for learning how to build, trace, evaluate, harden, and reason about agentic AI systems.
 
-**Read the book:** <https://shizheng-rlfresh.github.io/agent-lab/>
+**Read the book:** [https://shizheng-rlfresh.github.io/sz-agent-lab/](https://shizheng-rlfresh.github.io/sz-agent-lab/)
 
 ## About The Book
 
@@ -16,7 +14,7 @@ The style is concrete: each idea is tied to a runnable lab artifact, a command, 
 
 Author: Zheng Shi, <shi.zheng.tfls@gmail.com>
 
-Errata and clarification requests: <https://github.com/shizheng-rlfresh/agent-lab/issues>
+Errata and clarification requests: [https://github.com/shizheng-rlfresh/sz-agent-lab/issues](https://github.com/shizheng-rlfresh/sz-agent-lab/issues)
 
 ## What You Will Learn
 
@@ -51,13 +49,12 @@ Technical appendices cover further reading, glossary terms, command references, 
 
 ## Use The Lab
 
-The core examples require no API keys. To run the baseline checks and render the HTML book locally:
+The core examples require no API keys. With `uv`, run the baseline checks and render the HTML book locally:
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -e ".[dev]"
-make check
+uv sync --extra dev
+uv run pytest
+uv run python scripts/run_all_examples.py
 make html
 ```
 
@@ -65,9 +62,9 @@ For complete build, module, example, troubleshooting, and artifact commands, see
 
 ## Project Links
 
-- HTML book: <https://shizheng-rlfresh.github.io/agent-lab/>
-- Issues and errata: <https://github.com/shizheng-rlfresh/agent-lab/issues>
-- Build status: <https://github.com/shizheng-rlfresh/agent-lab/actions/workflows/book.yml>
+- HTML book: [https://shizheng-rlfresh.github.io/sz-agent-lab/](https://shizheng-rlfresh.github.io/sz-agent-lab/)
+- Issues and errata: [https://github.com/shizheng-rlfresh/sz-agent-lab/issues](https://github.com/shizheng-rlfresh/sz-agent-lab/issues)
+- Build status: [https://github.com/shizheng-rlfresh/sz-agent-lab/actions/workflows/book.yml](https://github.com/shizheng-rlfresh/sz-agent-lab/actions/workflows/book.yml)
 - License: [MIT](LICENSE)
 - Contributing: [CONTRIBUTING.md](CONTRIBUTING.md)
 - Command reference: [appendices/command-reference.qmd](appendices/command-reference.qmd)

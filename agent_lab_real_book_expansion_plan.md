@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This plan turns the current `agent-lab` repository from a working Quarto/code scaffold into a real technical book.
+This plan turns the current `sz-agent-lab` repository from a working Quarto/code scaffold into a real technical book.
 
 The repo already has a strong core idea:
 
