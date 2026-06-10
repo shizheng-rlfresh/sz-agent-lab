@@ -1,3 +1,5 @@
+<br>
+
 <p align="center">
   <a href="https://agent-book.zhengqxhs.com/">
     <img alt="Built with human review and Codex assistance" src="https://img.shields.io/badge/human--reviewed-Codex--assisted-412991?style=flat-square">
@@ -30,6 +32,10 @@ uv run python scripts/run_all_examples.py
 ```
 
 **🔍 Inspect the evidence trail:** [sample trace report](reports/sample_trace_report.md), [sample eval report](reports/sample_eval_report.md), and [sample production report](reports/sample_production_report.md). Raw trace artifacts are generated under `traces/` after running `uv run python scripts/run_all_examples.py`.
+
+<br>
+
+
 
 ## About The Book
 
