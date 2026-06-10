@@ -1,14 +1,23 @@
+![Built with human review and Codex assistance](https://img.shields.io/badge/human--reviewed-Codex--assisted-412991?style=flat-square)
+[![Agent Friendly](https://agentfriendlycode.com/api/badge/github/openai/codex.svg)](https://agentfriendlycode.com/repo/118)
+![Version: v0.1.0](https://img.shields.io/badge/version-v0.1.0-blue?style=flat-square)
+[![Book workflow status](https://github.com/shizheng-rlfresh/sz-agent-lab/actions/workflows/book.yml/badge.svg?branch=main)](https://github.com/shizheng-rlfresh/sz-agent-lab/actions/workflows/book.yml)
+
 [![Agentic Systems Lab badge](assets/agent-47-badge.svg)](https://agent-book.zhengqxhs.com/)
 
 A hands-on HTML book and deterministic Python lab for learning how to build, trace, evaluate, harden, and reason about agentic AI systems.
 
-**Read the book:** [https://agent-book.zhengqxhs.com/](https://agent-book.zhengqxhs.com/)
+📘 **Read the book:** [https://agent-book.zhengqxhs.com/](https://agent-book.zhengqxhs.com/)
 
-## Start Here
+<img src="assets/python.png" alt="Python" width="18" height="18"> **Run the lab:**
 
-- Read the HTML book: [https://shizheng-rlfresh.github.io/sz-agent-lab/](https://shizheng-rlfresh.github.io/sz-agent-lab/)
-- Run the deterministic lab: `uv sync --extra dev`, `uv run pytest`, and `uv run python scripts/run_all_examples.py`.
-- Inspect the evidence trail: [sample trace report](reports/sample_trace_report.md), [sample eval report](reports/sample_eval_report.md), [sample production report](reports/sample_production_report.md), and [trace artifacts](traces/).
+```bash
+uv sync --extra dev
+uv run pytest
+uv run python scripts/run_all_examples.py
+```
+
+**🔍 Inspect the evidence trail:** [sample trace report](reports/sample_trace_report.md), [sample eval report](reports/sample_eval_report.md), [sample production report](reports/sample_production_report.md), and [trace artifacts](traces/).
 
 ## About The Book
 
@@ -88,7 +97,7 @@ If you cite or share this project, use the repository title, author, public book
 
 ```text
 Zheng Shi. Agentic Systems Lab: Building, Measuring, and Hardening AI Agents.
-https://shizheng-rlfresh.github.io/sz-agent-lab/
+https://agent-book.zhengqxhs.com/
 Version: release tag or commit SHA
 ```
 
