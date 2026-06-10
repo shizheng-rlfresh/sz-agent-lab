@@ -1,10 +1,23 @@
-![Built with human review and Codex assistance](https://img.shields.io/badge/human--reviewed-Codex--assisted-412991?style=flat-square)
-![Version: v0.1.0](https://img.shields.io/badge/version-v0.1.0-blue?style=flat-square)
-[![Book workflow status](https://github.com/shizheng-rlfresh/sz-agent-lab/actions/workflows/book.yml/badge.svg?branch=main)](https://github.com/shizheng-rlfresh/sz-agent-lab/actions/workflows/book.yml)
+<br>
 
-[![Agentic Systems Lab badge](assets/agent-47-badge.svg)](https://agent-book.zhengqxhs.com/)
+<p align="center">
+    <img alt="Built with human review and Codex assistance" src="https://img.shields.io/badge/human--reviewed-Codex--assisted-412991?style=flat-square">
+    <img alt="Version: v0.1.0" src="https://img.shields.io/badge/version-v0.1.0-blue?style=flat-square">
+    <img alt="Book workflow status" src="https://github.com/shizheng-rlfresh/sz-agent-lab/actions/workflows/book.yml/badge.svg?branch=main" />
+</p>
+
+<p align="center">
+  <a href="https://agent-book.zhengqxhs.com/">
+    <img alt="Agentic Systems Lab badge" src="assets/agent-47-badge.svg" />
+  </a>
+</p>
 
 A hands-on HTML book and deterministic Python lab for learning how to build, trace, evaluate, harden, and reason about agentic AI systems.
+
+<hr>
+<br>
+
+
 
 📘 **Read the book:** [https://agent-book.zhengqxhs.com/](https://agent-book.zhengqxhs.com/)
 
@@ -17,6 +30,10 @@ uv run python scripts/run_all_examples.py
 ```
 
 **🔍 Inspect the evidence trail:** [sample trace report](reports/sample_trace_report.md), [sample eval report](reports/sample_eval_report.md), and [sample production report](reports/sample_production_report.md). Raw trace artifacts are generated under `traces/` after running `uv run python scripts/run_all_examples.py`.
+
+<br>
+
+
 
 ## About The Book
 
