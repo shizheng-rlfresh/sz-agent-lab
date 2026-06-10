@@ -1,8 +1,19 @@
-![Built with human review and Codex assistance](https://img.shields.io/badge/human--reviewed-Codex--assisted-412991?style=flat-square)
-![Version: v0.1.0](https://img.shields.io/badge/version-v0.1.0-blue?style=flat-square)
-[![Book workflow status](https://github.com/shizheng-rlfresh/sz-agent-lab/actions/workflows/book.yml/badge.svg?branch=main)](https://github.com/shizheng-rlfresh/sz-agent-lab/actions/workflows/book.yml)
+<p align="center">
+  <a href="https://agent-book.zhengqxhs.com/">
+    <img alt="Built with human review and Codex assistance" src="https://img.shields.io/badge/human--reviewed-Codex--assisted-412991?style=flat-square">
+    <img alt="Version: v0.1.0" src="https://img.shields.io/badge/version-v0.1.0-blue?style=flat-square">
+    <img alt="Book workflow status" src="https://github.com/shizheng-rlfresh/sz-agent-lab/actions/workflows/book.yml/badge.svg?branch=main" />
+  </a>
+</p>
 
-[![Agentic Systems Lab badge](assets/agent-47-badge.svg)](https://agent-book.zhengqxhs.com/)
+<p align="center">
+  <a href="https://agent-book.zhengqxhs.com/">
+    <img alt="Agentic Systems Lab badge" src="assets/agent-47-badge.svg" />
+  </a>
+</p>
+
+<hr>
+<br>
 
 A hands-on HTML book and deterministic Python lab for learning how to build, trace, evaluate, harden, and reason about agentic AI systems.
 
