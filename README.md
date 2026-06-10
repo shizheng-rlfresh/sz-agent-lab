@@ -1,8 +1,23 @@
+![Built with human review and Codex assistance](https://img.shields.io/badge/human--reviewed-Codex--assisted-412991?style=flat-square)
+[![Agent Friendly](https://agentfriendlycode.com/api/badge/github/openai/codex.svg)](https://agentfriendlycode.com/repo/118)
+![Version: v0.1.0](https://img.shields.io/badge/version-v0.1.0-blue?style=flat-square)
+[![Book workflow status](https://github.com/shizheng-rlfresh/sz-agent-lab/actions/workflows/book.yml/badge.svg?branch=main)](https://github.com/shizheng-rlfresh/sz-agent-lab/actions/workflows/book.yml)
+
 [![Agentic Systems Lab badge](assets/agent-47-badge.svg)](https://agent-book.zhengqxhs.com/)
 
 A hands-on HTML book and deterministic Python lab for learning how to build, trace, evaluate, harden, and reason about agentic AI systems.
 
-**Read the book:** [https://agent-book.zhengqxhs.com/](https://agent-book.zhengqxhs.com/)
+📘 **Read the book:** [https://agent-book.zhengqxhs.com/](https://agent-book.zhengqxhs.com/)
+
+<img src="assets/python.png" alt="Python" width="18" height="18"> **Run the lab:**
+
+```bash
+uv sync --extra dev
+uv run pytest
+uv run python scripts/run_all_examples.py
+```
+
+**🔍 Inspect the evidence trail:** [sample trace report](reports/sample_trace_report.md), [sample eval report](reports/sample_eval_report.md), [sample production report](reports/sample_production_report.md), and [trace artifacts](traces/).
 
 ## About The Book
 
@@ -11,6 +26,14 @@ Agentic Systems Lab is written for technical readers who can read Python, reason
 The book's thesis is that useful agent systems are not magic loops around an LLM. They are engineered runtimes with explicit tools, state boundaries, trace contracts, evals, guardrails, cost models, and rollout gates.
 
 The style is concrete: each idea is tied to a runnable lab artifact, a command, a schema, or a production-readiness question.
+
+## Why This Exists
+
+Many agent tutorials start with a prompt loop and then add discipline after the behavior becomes hard to inspect. This lab takes the opposite path: deterministic workflows first, then tools, state, traces, evals, guardrails, context budgets, and deployment gates.
+
+The core path requires no API key, hosted model provider, or cloud account. That keeps the runtime contracts visible before model variance enters the system.
+
+The result is an evidence-first way to learn agentic systems: readers can inspect what ran, what was traced, what passed evaluation, and what would need to be true before automation reaches users.
 
 Author: Zheng Shi, <shi.zheng.tfls@gmail.com>
 
@@ -67,6 +90,16 @@ For complete build, module, example, troubleshooting, and artifact commands, see
 - License: [MIT](LICENSE)
 - Contributing: [CONTRIBUTING.md](CONTRIBUTING.md)
 - Command reference: [appendices/command-reference.qmd](appendices/command-reference.qmd)
+
+## Citation
+
+If you cite or share this project, use the repository title, author, public book URL, and the release tag or commit SHA for the version you used:
+
+```text
+Zheng Shi. Agentic Systems Lab: Building, Measuring, and Hardening AI Agents.
+https://agent-book.zhengqxhs.com/
+Version: release tag or commit SHA
+```
 
 ## Roadmap
 

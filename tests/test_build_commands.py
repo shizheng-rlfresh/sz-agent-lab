@@ -61,8 +61,6 @@ def test_readme_uses_local_book_badge() -> None:
     assert "[MIT](LICENSE)" in readme
     assert "[CONTRIBUTING.md](CONTRIBUTING.md)" in readme
     assert "[appendices/command-reference.qmd](appendices/command-reference.qmd)" in readme
-    assert "actions/workflows/book.yml/badge.svg" not in readme
-    assert "img.shields.io" not in readme
     assert "agent_47_bald_head.png" not in readme
     assert "agent_47_bald_head.png" not in badge
     assert "data:image/png;base64," in badge
