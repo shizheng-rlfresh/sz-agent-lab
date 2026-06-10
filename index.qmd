@@ -11,3 +11,39 @@ The practical arc is:
 ```text
 workflow -> tools -> state -> agent runtime -> trace -> eval -> report -> policy -> context -> deployment gate
 ```
+
+## Preface
+
+Agentic systems are often discussed through demos, prompts, and model behavior. This book takes a systems path instead. It starts with deterministic workflows, then adds tools, state, traces, evals, reports, guardrails, context budgeting, and deployment gates before asking what a model-backed agent should be allowed to do.
+
+The goal is not to make every reader build the same agent. The goal is to make the operational boundaries visible enough that a reader can review, modify, and extend the design without losing the evidence trail.
+
+## Intended Audience
+
+This book is written for engineers, ML practitioners, technical leads, and advanced students who can read Python and want a practical way to reason about agentic AI systems beyond a single prompt or chat transcript.
+
+You do not need API keys to complete the core path. The baseline examples are local and deterministic so that tool behavior, traces, evals, and reports can be inspected without model variance.
+
+## How To Use This Book
+
+Read the chapters in order the first time through. Each part builds a layer of the runtime contract. After that, use the appendices as references for commands, schemas, policy fields, glossary terms, and source discipline.
+
+When a chapter mentions a command, run it from the repository root. When a chapter makes a claim about a generated artifact, inspect the corresponding trace, eval result, report, test, or source file.
+
+## Prerequisites
+
+You should have Python 3.11 or newer. To render the book locally, install Quarto. To render the PDF, use TinyTeX or another working LaTeX toolchain.
+
+The deterministic lab path requires no hosted model provider, no cloud account, and no API key. Optional hosted-model or MLX extensions should remain separate from the core path.
+
+## Edition And Contact
+
+This is the public 0.1.0 edition of `Agentic Systems Lab`.
+
+Author: Zheng Shi, <shi.zheng.tfls@gmail.com>.
+
+Use GitHub issues for errata, unclear explanations, reproducibility problems, and suggested extensions. When reporting a problem, include the chapter or file path and the smallest command or artifact that demonstrates the issue.
+
+## Citation And License
+
+The book and lab are released under the MIT License. If you cite or share the project, use the repository title, author, public book URL, and release tag or commit SHA for the version you used.
