@@ -5,6 +5,14 @@
   --asl-opener-gap: clamp(5rem, 10vh, 7.5rem);
 }
 
+body.quarto-dark,
+body[data-bs-theme="dark"],
+:root[data-bs-theme="dark"] {
+  --asl-accent: #f08a76;
+  --asl-accent-soft: #3a201d;
+  --asl-ink: #f4f1ec;
+}
+
 main.content {
   line-height: 1.5;
   padding-bottom: 3rem;
