@@ -1,11 +1,9 @@
 <br>
 
 <p align="center">
-  <a href="https://agent-book.zhengqxhs.com/">
     <img alt="Built with human review and Codex assistance" src="https://img.shields.io/badge/human--reviewed-Codex--assisted-412991?style=flat-square">
     <img alt="Version: v0.1.0" src="https://img.shields.io/badge/version-v0.1.0-blue?style=flat-square">
     <img alt="Book workflow status" src="https://github.com/shizheng-rlfresh/sz-agent-lab/actions/workflows/book.yml/badge.svg?branch=main" />
-  </a>
 </p>
 
 <p align="center">
