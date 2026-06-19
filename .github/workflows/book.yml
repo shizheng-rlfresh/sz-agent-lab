@@ -33,7 +33,7 @@ jobs:
         uses: quarto-dev/quarto-actions/setup@v2
 
       - name: Install dependencies
-        run: uv sync --frozen
+        run: uv sync --locked
 
       - name: Run tests, examples, and HTML book render
         run: make check
