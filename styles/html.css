@@ -13,6 +13,17 @@ body[data-bs-theme="dark"],
   --asl-ink: #cad3f5;
 }
 
+#quarto-sidebar .sidebar-title::after {
+  background-image: url("https://img.shields.io/badge/version-v0.1.1-blue?style=flat-square");
+  background-repeat: no-repeat;
+  background-size: contain;
+  content: "";
+  display: block;
+  height: 20px;
+  margin-top: 0.45rem;
+  width: 82px;
+}
+
 main.content {
   line-height: 1.5;
   padding-bottom: 3rem;
