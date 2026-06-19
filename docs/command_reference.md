@@ -3,77 +3,74 @@
 ## Core Verification
 
 ```bash
-pytest
-python scripts/run_all_examples.py
+uv sync
+uv run pytest
+uv run scripts/run_all_examples.py
 make html
 ```
 
-Run these commands in this order when preparing a release or publishing the HTML book. `pytest` should fail fast on broken runtime behavior. `python scripts/run_all_examples.py` should then prove that deterministic examples still produce trace, eval, and report artifacts. `make html` should run last because manuscript rendering depends on the files and references that the implementation describes.
-
-With the local virtual environment used during development:
-
-```bash
-.venv/bin/pytest
-.venv/bin/python scripts/run_all_examples.py
-make html
-```
+Run these commands in this order when preparing a release or publishing the HTML book.
 
 ## Book Build Commands
 
 ```bash
 make preview
 make html
-make all
+make clean
+make test
+make examples
 make book
 make check
-make clean
+
 ```
 
 `make preview` runs `quarto preview` for local reading while editing.
 
 `make html` runs `quarto render --to html --no-clean` and produces `_book/index.html`.
 
-`make all` renders every supported book format. The supported publication format is currently HTML.
+`make clean` removes generated book output and local cache directories.
+
+`make test` runs the test suite.
+
+`make examples` runs all example scripts.
 
 `make book` is an alias for the HTML book render.
 
 `make check` runs tests, deterministic examples, and the HTML book render.
 
-`make clean` removes generated book output and local cache directories.
-
 ## Module Commands
 
 ```bash
-python -m agentic_systems_lab.tools
-python -m agentic_systems_lab.policy
-python -m agentic_systems_lab.tracer
-python -m agentic_systems_lab.agent
-python -m agentic_systems_lab.evals
-python -m agentic_systems_lab.context
-python -m agentic_systems_lab.context --cache-demo
-python -m agentic_systems_lab.report
+uv run -m agentic_systems_lab.tools
+uv run -m agentic_systems_lab.policy
+uv run -m agentic_systems_lab.tracer
+uv run -m agentic_systems_lab.agent
+uv run -m agentic_systems_lab.evals
+uv run -m agentic_systems_lab.context
+uv run -m agentic_systems_lab.context --cache-demo
+uv run -m agentic_systems_lab.report
 ```
 
 These commands are intentionally small. Each module should be executable on its own so a reader can inspect behavior without running the entire book toolchain.
 
 | Command | Primary Evidence | Expected Use |
 |---|---|---|
-| `python -m agentic_systems_lab.tools` | deterministic file listing, capped read, grep output | inspect read-only tool semantics |
-| `python -m agentic_systems_lab.policy` | serialized default `ToolPolicy` | inspect runtime capability boundary |
-| `python -m agentic_systems_lab.tracer` | sample trace summary | inspect JSONL trace writer and summarizer |
-| `python -m agentic_systems_lab.agent` | structured repo-triage JSON | inspect deterministic agent output |
-| `python -m agentic_systems_lab.evals` | default eval report | inspect pass/fail checks across fixtures |
-| `python -m agentic_systems_lab.context` | context-profile summary | inspect token estimates and warnings |
-| `python -m agentic_systems_lab.context --cache-demo` | prefix-stability comparison | inspect cacheable and dynamic prompt segments |
-| `python -m agentic_systems_lab.report` | production report Markdown | inspect release-review artifact |
+| `uv run -m agentic_systems_lab.tools` | deterministic file listing, capped read, grep output | inspect read-only tool semantics |
+| `uv run -m agentic_systems_lab.policy` | serialized default `ToolPolicy` | inspect runtime capability boundary |
+| `uv run -m agentic_systems_lab.tracer` | sample trace summary | inspect JSONL trace writer and summarizer |
+| `uv run -m agentic_systems_lab.agent` | structured repo-triage JSON | inspect deterministic agent output |
+| `uv run -m agentic_systems_lab.evals` | default eval report | inspect pass/fail checks across fixtures |
+| `uv run -m agentic_systems_lab.context` | context-profile summary | inspect token estimates and warnings |
+| `uv run -m agentic_systems_lab.context --cache-demo` | prefix-stability comparison | inspect cacheable and dynamic prompt segments |
+| `uv run -m agentic_systems_lab.report` | production report Markdown | inspect release-review artifact |
 
 When documenting a chapter command, prefer one of these module commands over an ad hoc script. A public command is part of the book's reproducibility contract.
 
 ## Example Selection
 
 ```bash
-python scripts/run_all_examples.py --example workflow_baseline
-python scripts/run_all_examples.py --example repo_triage_agent
+uv run scripts/run_all_examples.py --example workflow_baseline
+uv run scripts/run_all_examples.py --example repo_triage_agent
 ```
 
 `scripts/run_all_examples.py` supports focused runs for development and full runs for release verification. Focused runs are useful while editing one chapter because they reduce feedback time. Full runs are required before committing changes that touch reports, schemas, fixture repos, or code paths shared by multiple chapters.
@@ -92,87 +89,19 @@ Generated artifacts fall into two categories. Runtime artifacts such as traces c
 
 Review generated reports as evidence summaries, not as replacement sources of truth. A production report should link back to trace, eval, policy, and context artifacts. If a summary and raw artifact disagree, treat that as a report-generation defect.
 
-## Optional MLX Command
+## Optional MLX Command for Local LLM Inference (Working in Progress)
 
 ```bash
-pip install mlx-lm
-mlx_lm.generate --model mlx-community/Llama-3.2-3B-Instruct-4bit --prompt "Explain KV cache in simple terms."
+uv sync --extra apple-silicon
+uv run mlx_lm.generate --model mlx-community/Llama-3.2-3B-Instruct-4bit --prompt "Explain AI Agent in simple terms."
 ```
-
-This command is optional and is not part of the core acceptance path.
 
 Optional local-inference commands should never be required to run `pytest`, `python scripts/run_all_examples.py`, or `quarto render`. A reader without MLX-compatible hardware should still be able to complete the deterministic lab. If executable MLX support is added later, it should be behind an explicit optional dependency and an explicit command that can fail with a clear unavailable status.
 
-## Verification Notes
+## Verification
 
 The repository's final acceptance path should run:
 
 ```bash
-pytest
-python scripts/run_all_examples.py
-make html
+make check
 ```
-
-If `python` is not available globally, create and activate a virtual environment first, or use the `.venv/bin/python` form shown above. The command reference describes intended commands; the exact executable path can differ by environment.
-
-## Command Interpretation
-
-`pytest` proves only the behavior covered by tests. It does not prove manuscript quality or source quality.
-
-`python scripts/run_all_examples.py` proves the deterministic lab path still runs and regenerates core reports. It does not prove optional MLX behavior.
-
-`make html` proves the HTML book builds. It does not prove every claim is sufficiently sourced.
-
-Use all three together. Treat them as different evidence types.
-
-## Failure Triage
-
-When a command fails, diagnose by artifact boundary rather than by guessing:
-
-- If `pytest` fails, inspect the smallest failing test first. A manuscript change should rarely break tests; a code or sample-artifact change might.
-- If `python scripts/run_all_examples.py` fails, identify whether the failure is in a fixture, trace path, eval, or report generation. Re-run with `--example` when available.
-- If `make html` fails, inspect the first `.qmd` file named in the render log. Common failures are malformed fenced code blocks, broken citation keys, or invalid Quarto structure.
-- If a module command fails but the full example runner passes, check whether the module's `main()` function has diverged from reusable library code.
-- If committed reports churn after a runtime change, separate deterministic fields from runtime-local fields such as timestamps and latency.
-
-Do not paper over a failed command by editing expected output first. The correct order is to understand whether behavior changed intentionally, update tests or docs to express that intent, then regenerate artifacts.
-
-## Troubleshooting Matrix
-
-| Symptom | Likely Boundary | First Check |
-|---|---|---|
-| `pytest` fails in `test_tools.py` | tool contract | inspect path policy, ordering, output caps, and grep shape |
-| `pytest` fails in `test_policy.py` | authority boundary | inspect allowed roots, read-only mode, shell blocking, and violation records |
-| `pytest` fails in `test_tracer.py` | trace schema | inspect event names, required fields, JSONL writing, and summary counts |
-| `pytest` fails in `test_evals.py` | eval contract | inspect expected files, keywords, allowed files, and invalid tool counts |
-| sample report changed unexpectedly | report determinism | inspect runtime-local fields, ordering, warning logic, and fixture output |
-| `make html` fails on citation | reference discipline | inspect `references.bib` keys and chapter citation syntax |
-| `make html` fails on structure | manuscript syntax | inspect the first failing `.qmd` and nearby fenced blocks or headings |
-| `run_all_examples.py` fails | artifact pipeline | isolate with `--example`, then inspect fixture, trace, eval, or report stage |
-
-Use the matrix as a routing table, not a substitute for debugging. It helps you start at the right boundary. Once you identify the boundary, prefer the smallest focused command that reproduces the issue.
-
-## Artifact Freshness
-
-When implementation behavior changes, regenerate artifacts in this order:
-
-1. Run focused tests for the changed behavior.
-2. Run the affected module command.
-3. Run `python scripts/run_all_examples.py`.
-4. Inspect report diffs.
-5. Run `make html`.
-
-Do not regenerate reports before tests explain the new behavior. Otherwise sample artifacts can accidentally bless a regression. Reports should follow tested behavior; they should not define it.
-
-## Commit-Level Expectations
-
-For code-facing changes, use a TDD slice:
-
-1. Add or adjust the focused test.
-2. Run the focused test and observe the failure.
-3. Implement the smallest behavior change.
-4. Re-run the focused test.
-5. Run broader checks when shared behavior changed.
-6. Commit only after the relevant checks pass.
-
-For manuscript-only changes, the minimum check is `make html`. If the prose references commands, schemas, sample output, or generated reports, also run the corresponding command or test. A chapter can be editorial, but command claims are still executable claims.

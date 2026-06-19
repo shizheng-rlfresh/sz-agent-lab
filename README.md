@@ -92,7 +92,7 @@ uv run scripts/run_all_examples.py
 make html
 ```
 
-For complete build, module, example, troubleshooting, and artifact commands, see the [command reference](docs/command_reference.qmd). For contribution workflow expectations, see [CONTRIBUTING.md](CONTRIBUTING.md).
+For complete build, module, example, troubleshooting, and artifact commands, see the [command reference](docs/command_reference.md). For contribution workflow expectations, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Project Links
 
