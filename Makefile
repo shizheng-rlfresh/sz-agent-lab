@@ -1,6 +1,6 @@
 PYTHON ?= .venv/bin/python
 
-.PHONY: preview html all clean test examples book check
+.PHONY: preview html clean test examples book check
 
 preview:
 	quarto preview
