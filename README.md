@@ -19,7 +19,7 @@ A hands-on HTML book and deterministic Python lab for learning how to build, tra
 
 📘 **Read the book:** [https://agent-book.zhengqxhs.com/](https://agent-book.zhengqxhs.com/)
 
-<img src="assets/python.png" alt="Python" width="18" height="18"> **Run the lab:**
+`<img src="assets/python.png" alt="Python" width="18" height="18">` **Run the lab:**
 
 ```bash
 uv sync
@@ -90,6 +90,13 @@ uv sync
 uv run pytest
 uv run scripts/run_all_examples.py
 make html
+```
+
+(Working in Progress) MLX for Local Dev on Apple Silicon
+
+```bash
+uv sync --extra apple-silicon # will install mlx-lm as a dev dependency
+uv run mlx_lm.generate --model mlx-community/Llama-3.2-3B-Instruct-4bit --prompt "Explain AI Agent in simple terms."
 ```
 
 For complete build, module, example, troubleshooting, and artifact commands, see the [command reference](docs/command_reference.md). For contribution workflow expectations, see [CONTRIBUTING.md](CONTRIBUTING.md).
