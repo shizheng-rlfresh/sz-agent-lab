@@ -17,23 +17,18 @@ A hands-on HTML book and deterministic Python lab for learning how to build, tra
 <hr>
 <br>
 
-
-
 📘 **Read the book:** [https://agent-book.zhengqxhs.com/](https://agent-book.zhengqxhs.com/)
 
 <img src="assets/python.png" alt="Python" width="18" height="18"> **Run the lab:**
 
 ```bash
-uv sync --extra dev
-uv run pytest
-uv run python scripts/run_all_examples.py
+uv sync
+uv run scripts/run_all_examples.py
 ```
 
-**🔍 Inspect the evidence trail:** [sample trace report](reports/sample_trace_report.md), [sample eval report](reports/sample_eval_report.md), and [sample production report](reports/sample_production_report.md). Raw trace artifacts are generated under `traces/` after running `uv run python scripts/run_all_examples.py`.
+**🔍 Inspect the evidence trail:** [sample trace report](reports/sample_trace_report.md), [sample eval report](reports/sample_eval_report.md), and [sample production report](reports/sample_production_report.md). Raw trace artifacts are generated under `traces/` after running `uv run scripts/run_all_examples.py`.
 
 <br>
-
-
 
 ## About The Book
 
@@ -84,20 +79,27 @@ Errata and clarification requests: [https://github.com/shizheng-rlfresh/sz-agent
 14. Production Readiness
 15. Capstone: From Toy Agent to AgentProbe
 
-Technical appendices cover further reading, glossary terms, command references, trace schemas, eval schemas, tool policy schemas, and the evidence/reference policy.
+Technical appendices cover further reading, trace schemas, eval schemas, tool policy schemas, and glossary terms.
 
-## Use The Lab
+## Development
 
 The core examples require no API keys. With `uv`, run the baseline checks and render the HTML book locally:
 
 ```bash
-uv sync --extra dev
+uv sync
 uv run pytest
-uv run python scripts/run_all_examples.py
+uv run scripts/run_all_examples.py
 make html
 ```
 
-For complete build, module, example, troubleshooting, and artifact commands, see the [command reference](appendices/command-reference.qmd). For contribution workflow expectations, see [CONTRIBUTING.md](CONTRIBUTING.md).
+(Working in Progress) MLX for Local Dev on Apple Silicon
+
+```bash
+uv sync --extra apple-silicon # installs the optional apple-silicon extra (mlx-lm)
+uv run mlx_lm.generate --model mlx-community/Llama-3.2-3B-Instruct-4bit --prompt "Explain AI Agent in simple terms."
+```
+
+For complete build, module, example, troubleshooting, and artifact commands, see the [command reference](docs/command_reference.md). For contribution workflow expectations, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Project Links
 
@@ -105,7 +107,7 @@ For complete build, module, example, troubleshooting, and artifact commands, see
 - Build status: [https://github.com/shizheng-rlfresh/sz-agent-lab/actions/workflows/book.yml](https://github.com/shizheng-rlfresh/sz-agent-lab/actions/workflows/book.yml)
 - License: [MIT](LICENSE)
 - Contributing: [CONTRIBUTING.md](CONTRIBUTING.md)
-- Command reference: [appendices/command-reference.qmd](appendices/command-reference.qmd)
+- Command reference: [command_reference.md](docs/command_reference.md)
 
 ## Citation
 

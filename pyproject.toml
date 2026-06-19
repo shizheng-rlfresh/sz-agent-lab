@@ -13,6 +13,11 @@ authors = [{ name = "Zheng Shi", email = "shi.zheng.tfls@gmail.com" }]
 dependencies = []
 
 [project.optional-dependencies]
+apple-silicon = [
+    "mlx-lm>=0.31.3",
+]
+
+[dependency-groups]
 dev = ["pytest>=8"]
 
 [tool.setuptools.packages.find]
