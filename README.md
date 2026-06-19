@@ -107,7 +107,7 @@ For complete build, module, example, troubleshooting, and artifact commands, see
 - Build status: [https://github.com/shizheng-rlfresh/sz-agent-lab/actions/workflows/book.yml](https://github.com/shizheng-rlfresh/sz-agent-lab/actions/workflows/book.yml)
 - License: [MIT](LICENSE)
 - Contributing: [CONTRIBUTING.md](CONTRIBUTING.md)
-- Command reference: [appendices/command-reference.qmd](appendices/command-reference.qmd)
+- Command reference: [command_reference.md](docs/command_reference.md)
 
 ## Citation
 

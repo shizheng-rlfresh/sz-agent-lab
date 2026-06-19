@@ -11,11 +11,10 @@ def test_makefile_exposes_html_book_targets() -> None:
     assert ".PHONY: preview html all clean test examples book check" in makefile
     assert "\npreview:\n\tquarto preview\n" in makefile
     assert "\nhtml:\n\tquarto render --to html --no-clean\n" in makefile
-    assert "\nall:\n\tquarto render --to html --no-clean\n" in makefile
     assert "\nclean:\n\trm -rf _book .quarto .pytest_cache\n" in makefile
     assert "\tfind . -name '*_files' -type d -prune -exec rm -rf {} +\n" in makefile
-    assert "\ntest:\n\t$(PYTHON) -m pytest\n" in makefile
-    assert "\nexamples:\n\t$(PYTHON) scripts/run_all_examples.py\n" in makefile
+    assert "\ntest:\n\tuv run pytest\n" in makefile
+    assert "\nexamples:\n\tuv run scripts/run_all_examples.py\n" in makefile
     assert "\nbook: html\n" in makefile
     assert "\ncheck: test examples html\n" in makefile
     assert "\npdf:" not in makefile
@@ -24,13 +23,13 @@ def test_makefile_exposes_html_book_targets() -> None:
 
 
 def test_command_reference_documents_html_book_targets() -> None:
-    command_reference = (ROOT / "docs" / "command-reference.qmd").read_text()
+    command_reference = (ROOT / "docs" / "command_reference.md").read_text()
     readme = (ROOT / "README.md").read_text()
 
-    for command in ("make preview", "make html", "make all", "make book", "make check", "make clean"):
+    for command in ("make preview", "make html", "make clean", "make test", "make examples", "make book", "make check"):
         assert command in command_reference
 
-    for command in ("uv sync --extra dev", "uv run pytest", "uv run python scripts/run_all_examples.py", "make html"):
+    for command in ("uv sync", "uv run pytest", "uv run scripts/run_all_examples.py", "make html"):
         assert command in readme
 
     assert "python3 -m venv .venv" not in readme
@@ -59,7 +58,7 @@ def test_readme_uses_local_book_badge() -> None:
     assert "https://github.com/shizheng-rlfresh/sz-agent-lab/actions/workflows/book.yml" in readme
     assert "[MIT](LICENSE)" in readme
     assert "[CONTRIBUTING.md](CONTRIBUTING.md)" in readme
-    assert "[appendices/command-reference.qmd](appendices/command-reference.qmd)" in readme
+    assert "[command_reference.md](docs/command_reference.md)" in readme
     assert "agent_47_bald_head.png" not in readme
     assert "agent_47_bald_head.png" not in badge
     assert "data:image/png;base64," in badge
