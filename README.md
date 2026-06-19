@@ -17,23 +17,18 @@ A hands-on HTML book and deterministic Python lab for learning how to build, tra
 <hr>
 <br>
 
-
-
 📘 **Read the book:** [https://agent-book.zhengqxhs.com/](https://agent-book.zhengqxhs.com/)
 
-<img src="assets/python.png" alt="Python" width="18" height="18"> **Run the lab:**
+`<img src="assets/python.png" alt="Python" width="18" height="18">` **Run the lab:**
 
 ```bash
-uv sync --extra dev
-uv run pytest
-uv run python scripts/run_all_examples.py
+uv sync
+uv run scripts/run_all_examples.py
 ```
 
-**🔍 Inspect the evidence trail:** [sample trace report](reports/sample_trace_report.md), [sample eval report](reports/sample_eval_report.md), and [sample production report](reports/sample_production_report.md). Raw trace artifacts are generated under `traces/` after running `uv run python scripts/run_all_examples.py`.
+**🔍 Inspect the evidence trail:** [sample trace report](reports/sample_trace_report.md), [sample eval report](reports/sample_eval_report.md), and [sample production report](reports/sample_production_report.md). Raw trace artifacts are generated under `traces/` after running `uv run scripts/run_all_examples.py`.
 
 <br>
-
-
 
 ## About The Book
 
