@@ -49,12 +49,10 @@ book:
         - chapters/15-capstone-agentprobe.qmd
   appendices:
     - appendices/further-reading.qmd
-    - appendices/glossary.qmd
-    - appendices/command-reference.qmd
     - appendices/trace-schema.qmd
     - appendices/eval-schema.qmd
     - appendices/tool-policy-schema.qmd
-    # - appendices/evidence-reference-policy.qmd
+    - appendices/glossary.qmd
 
 bibliography: references.bib
 

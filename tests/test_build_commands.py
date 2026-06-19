@@ -24,7 +24,7 @@ def test_makefile_exposes_html_book_targets() -> None:
 
 
 def test_command_reference_documents_html_book_targets() -> None:
-    command_reference = (ROOT / "appendices" / "command-reference.qmd").read_text()
+    command_reference = (ROOT / "docs" / "command-reference.qmd").read_text()
     readme = (ROOT / "README.md").read_text()
 
     for command in ("make preview", "make html", "make all", "make book", "make check", "make clean"):
@@ -103,8 +103,8 @@ def test_adapted_html_template_is_agent_lab_scoped() -> None:
 def test_representative_text_fences_remain_source_blocks() -> None:
     index = (ROOT / "index.qmd").read_text()
     chapter = (ROOT / "chapters" / "01-from-llm-calls-to-agentic-systems.qmd").read_text()
-    evidence_policy = (ROOT / "appendices" / "evidence-reference-policy.qmd").read_text()
+    glossary = (ROOT / "appendices" / "glossary.qmd").read_text()
 
     assert "```text\nworkflow -> tools -> state -> agent runtime" in index
     assert "```text\nbuild -> tool access -> state/context" in chapter
-    assert "```text\nIt is considered best practice to..." in evidence_policy
+    assert "A runtime in which some part of the path is selected dynamically." in glossary
