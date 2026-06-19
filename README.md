@@ -95,7 +95,7 @@ make html
 (Working in Progress) MLX for Local Dev on Apple Silicon
 
 ```bash
-uv sync --extra apple-silicon # will install mlx-lm as a dev dependency
+uv sync --extra apple-silicon # installs the optional apple-silicon extra (mlx-lm)
 uv run mlx_lm.generate --model mlx-community/Llama-3.2-3B-Instruct-4bit --prompt "Explain AI Agent in simple terms."
 ```
 
