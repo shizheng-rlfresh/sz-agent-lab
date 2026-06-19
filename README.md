@@ -79,20 +79,20 @@ Errata and clarification requests: [https://github.com/shizheng-rlfresh/sz-agent
 14. Production Readiness
 15. Capstone: From Toy Agent to AgentProbe
 
-Technical appendices cover further reading, glossary terms, command references, trace schemas, eval schemas, tool policy schemas, and the evidence/reference policy.
+Technical appendices cover further reading, trace schemas, eval schemas, tool policy schemas, and glossary terms.
 
-## Use The Lab
+## Development
 
 The core examples require no API keys. With `uv`, run the baseline checks and render the HTML book locally:
 
 ```bash
-uv sync --extra dev
+uv sync
 uv run pytest
-uv run python scripts/run_all_examples.py
+uv run scripts/run_all_examples.py
 make html
 ```
 
-For complete build, module, example, troubleshooting, and artifact commands, see the [command reference](appendices/command-reference.qmd). For contribution workflow expectations, see [CONTRIBUTING.md](CONTRIBUTING.md).
+For complete build, module, example, troubleshooting, and artifact commands, see the [command reference](docs/command_reference.qmd). For contribution workflow expectations, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Project Links
 
