@@ -19,16 +19,21 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v6
 
-      - name: Set up Python
+      - name: Install Python
         uses: actions/setup-python@v6
         with:
-          python-version: "3.12"
+          python-version-file: ".python-version"
 
-      - name: Set up Quarto
+      - name: Install uv
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+        with:
+          version: "0.11.22"
+
+      - name: Install Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
-      - name: Install package
-        run: uv sync
+      - name: Install dependencies
+        run: uv sync --frozen
 
       - name: Run tests, examples, and HTML book render
         run: make check
