@@ -19,7 +19,7 @@ A hands-on HTML book and deterministic Python lab for learning how to build, tra
 
 📘 **Read the book:** [https://agent-book.zhengqxhs.com/](https://agent-book.zhengqxhs.com/)
 
-`<img src="assets/python.png" alt="Python" width="18" height="18">` **Run the lab:**
+<img src="assets/python.png" alt="Python" width="18" height="18"> **Run the lab:**
 
 ```bash
 uv sync
