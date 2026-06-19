@@ -1,5 +1,3 @@
-PYTHON ?= .venv/bin/python
-
 .PHONY: preview html clean test examples book check
 
 preview:
