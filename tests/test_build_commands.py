@@ -8,7 +8,7 @@ def test_makefile_exposes_html_book_targets() -> None:
     makefile = (ROOT / "Makefile").read_text()
 
     assert "PYTHON ?= .venv/bin/python" in makefile
-    assert ".PHONY: preview html all clean test examples book check" in makefile
+    assert ".PHONY: preview html clean test examples book check" in makefile
     assert "\npreview:\n\tquarto preview\n" in makefile
     assert "\nhtml:\n\tquarto render --to html --no-clean\n" in makefile
     assert "\nclean:\n\trm -rf _book .quarto .pytest_cache\n" in makefile
